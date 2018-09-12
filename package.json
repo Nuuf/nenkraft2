@@ -1,0 +1,48 @@
+{
+  "name": "nenkraft2",
+  "version": "0.0.1",
+  "description": "A small rendering tool",
+  "main": "./dist/nenkraft2.js",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "colors": "^1.3.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.5.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  },
+  "dependencies": {},
+  "scripts": {
+    "build-prod": "webpack --env production --mode production",
+    "build-bundle-fe": "webpack --env bundle-fe --mode production",
+    "build-bundle-be": "webpack --env bundle-be --mode production",
+    "start": "webpack-dev-server --env development --mode development",
+    "clear-dist": "rimraf dist bundle-fe bundle-be",
+    "ce": "npm run clear-dist",
+    "be": "npm run build-prod && npm run build-bundle-be && npm run build-bundle-fe"
+  },
+  "keywords": [
+    "2d",
+    "rendering",
+    "command",
+    "vector",
+    "game",
+    "graphic",
+    "tween",
+    "animation",
+    "collision",
+    "canvas",
+    "web",
+    "webgl",
+    "utilities"
+  ],
+  "author": "nuuf",
+  "license": "MIT"
+}
