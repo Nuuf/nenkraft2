@@ -45,9 +45,11 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
   const radii = r1 + r2;
   const anchor1 = _obj1.anchor;
   const anchor2 = _obj2.anchor;
+  
   PS_pos1.SetV( _obj1.relative );
   PS_pos2.SetV( _obj2.relative );
   PS_delta.Set( PS_pos2.x - PS_pos1.x, PS_pos2.y - PS_pos1.y );
+
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
   if ( anchor1 != undefined ) {
@@ -73,6 +75,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
       const de = Sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
       const rx = -PS_delta.y * de;
       const ry = PS_delta.x * de;
+
       PS_poc1.Set(
         PS_pos1.x + ( PS_delta.x * dm / distance ),
         PS_pos1.y + ( PS_delta.y * dm / distance )
@@ -88,7 +91,9 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
       // as mtv
       PS_pos1.SubtractV( PS_pos2 );
       PS_pos1.Divide( radii, radii );
+
       const mtd = distance - r1 - r2;
+
       _result.poc.SetV( PS_poc1 );
       _result.poc.SetV( PS_poc2 );
       _result.poc.SetV( PS_poc3 );

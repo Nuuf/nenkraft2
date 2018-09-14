@@ -95,12 +95,11 @@ export class Event {
 
     let i = 0;
     let listener;
-    const listeners = this.listeners;
+    const listeners = this.listeners.slice();
     const l = listeners.length;
 
     if ( listeners.length === 0 ) return;
 
-    listeners = listeners.slice();
     this.stopPropagation = false;
     this.target = _target;
     this.data = _data;

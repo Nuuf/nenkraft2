@@ -1,6 +1,8 @@
 require( '../style/default.css' );
 
-console.log( require( '../src/fe.index' ) );
+const nk2 = require( '../src/fe.index' );
+console.log( nk2 );
+nk2.Utilities.PRINT_VERSION();
 
 const tests = [];
 

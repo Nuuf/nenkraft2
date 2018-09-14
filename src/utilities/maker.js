@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Nested, CreateIteratorArgs, ReplaceArgumentWithObjectValue, IsArray } from './utilities';
+import { Nested, CreateIteratorArgs, ReplaceArgumentWithObjectValue, IsArray } from '.';
 
 export class Maker {
 

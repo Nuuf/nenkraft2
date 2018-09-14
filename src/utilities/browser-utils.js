@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { IsObjectEmpty } from './utilities';
+import { IsObjectEmpty } from '.';
 
 export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHeight ) {
 

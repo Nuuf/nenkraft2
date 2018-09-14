@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { IsArray } from './utilities';
+import { IsArray } from '.';
 
 export class Glob {
 

@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { SimplifyAspectRatio } from '../math/math';
+import { SimplifyAspectRatio } from '../math';
 import { Event } from '../event/event';
 
 export class CanvasManager {

@@ -1,11 +1,12 @@
-import { Cipher, Assert, Cache, Glob, Maker, Vector2D } from '../../src/fe.index';
+import { Graphic2D, Path, Geom } from '../../src/fe.index';
+import { RADIAN } from '../../src/math';
 
 export default () => {
 
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
-  button.setAttribute( 'value', 'Utilities' );
+  button.setAttribute( 'value', 'Graphic2D' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -28,37 +29,54 @@ export default () => {
     buttonContainer.style.display = 'none';
     backButton.onclick = Back;
 
-    let A = 'a string';
-    let B = Cipher.CCH1( A, 1 );
-    let C = Cipher.CCH1Decipher( B, 1 );
-    console.log( A, B, C );
+    const rc = c.getContext( '2d' );
+ 
+    {
 
-    // Assert.Assign(); assign to global scope
-    Assert.LOG = true;
+      const path = new Path.AABB2D( 0, 0, 50, 50 );
 
-    Assert( A, 'IST' /* Assert.IS_SAME_TYPE */, 'another string' );
-
-    const item = {
-      id: '1'
-    };
-
-    const cache = new Cache();
-    cache.StoreSafe( item );
-
-    Glob.Assign();
-    Glob.Create( 'newGlob' );
-    window.newGlob.Mark( Glob.FUNCTION, 'newFunction' );
-    window.newGlob.Define( Glob.FUNCTION, 'newFunction', () => {
-
-      console.log( window.newGlob );
+      const g = new Graphic2D( 0, 0, path );
+      g.position.SetSame( 200 );
+  
+      g.Draw( rc );
     
-    } );
-    window.newGlob.Get( Glob.FUNCTION, 'newFunction' )();
+    }
 
-    console.log( new Maker()
-      .Many( 1000 )
-      .Make( Vector2D, '@i(*|10)', '@i(*|5)' )
-      .Mass() );
+    {
+
+      const path = new Path.Circle( 0, 0, 25 );
+
+      const g = new Graphic2D( 0, 0, path );
+      g.position.SetSame( 300 );
+  
+      g.Draw( rc );
+    
+    }
+
+    {
+
+      const path = new Path.Ray2D( 0, 0, 50, 50 );
+
+      const g = new Graphic2D( 0, 0, path );
+      g.position.SetSame( 400 );
+  
+      g.Draw( rc );
+    
+    }
+
+    {
+
+      const path = new Path.Polygon2D();
+      Geom.PolygonConstruction.Butterfly( path, 0, 0, 5000, 50 );
+
+      const g = new Graphic2D( 0, 0, path );
+      g.position.SetSame( 600 );
+
+      g.rotation = RADIAN * 45;
+  
+      g.Draw( rc );
+    
+    }
     
   }
   

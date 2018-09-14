@@ -4,8 +4,10 @@
 
 'use strict';
 
-import { PrecisionRound } from '../math/math';
-import CharacterSets from '../utilities/character-sets';
+import { PrecisionRound } from '../math';
+import CharacterSets from './character-sets';
+
+const VERSION = require( '../../package.json' ).version;
 
 const Random = Math.random;
 
@@ -420,6 +422,25 @@ export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
     }
 
+  }
+
+}
+
+export function PRINT_VERSION ( _server ) {
+
+  if ( !_server ) {
+
+    console.log(
+      '%cnenkraft2 %cversion %c' + VERSION,
+      'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#f0f7da;background-color:#36802d;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#f0f7da;background-color:#77ab59;font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+    );
+  
+  } else {
+
+    console.log( 'nenkraft2 server version ' + VERSION );
+  
   }
 
 }

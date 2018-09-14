@@ -3,7 +3,7 @@
  */
 
 import { Vector2D } from '../../vector/vector2d';
-import { ClosestPointOnLine } from '../../math';
+import { ClosestPointOnLine } from '../..';
 
 const Sqrt = Math.sqrt;
 
@@ -35,10 +35,14 @@ export const CollideRel = function ( _c, _l, _result ) {
   const cshape = _c.shape;
   const lpos = _l.relative;
   const cpos = _c.relative;
+
   PS_s.Set( lshape.s.x + lpos.x, lshape.s.y + lpos.y );
   PS_e.Set( lshape.e.x + lpos.x, lshape.e.y + lpos.y );
+
   const cp = ClosestPointOnLine( PS_s, PS_e, cpos );
+
   PS_delta.Set( cpos.x - cp.x, cpos.y - cp.y );
+
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
   if ( distanceSq < cshape.radiusSquared ) {
@@ -46,6 +50,7 @@ export const CollideRel = function ( _c, _l, _result ) {
     if ( _result ) {
 
       const distance = cshape.radius - Sqrt( distanceSq );
+      
       // as mtv
       PS_delta.Normalize();
       PS_delta.Multiply( distance, distance );

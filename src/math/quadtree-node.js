@@ -276,9 +276,9 @@ PS_pool.Retrieve = function ( _aabb, _level, _objCap, _levelCap ) {
 
 };
 
-PS_pool.Flood( ( _vector ) => {
+PS_pool.Flood( ( _qtn ) => {
 
-  _vector.Set( 0, 0 );
+  _qtn.Set( null, 0, 0, 0 );
 
 }, 500 );
 // <----- Private static

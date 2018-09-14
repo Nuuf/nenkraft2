@@ -4,7 +4,7 @@
 
 'use strict';
 
-import { RandomInteger } from './utilities';
+import { RandomInteger } from '.';
 
 export function CCH1 ( _string, _cci ) {
 

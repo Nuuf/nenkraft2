@@ -75,6 +75,7 @@ export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
   const d1 = _axis.MinMaxDot( _obj1.shape.vertices );
   const d2 = _axis.MinMaxDot( _obj2.shape.vertices );
   const offset = _obj2.relative.SubtractVC( _obj1.relative ).GetDotV( _axis );
+  
   d2.Add( offset, offset );
 
   if ( d1.x > d2.y || d2.x > d1.y ) {
