@@ -6,6 +6,7 @@ export default () => {
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
+
   button.setAttribute( 'value', 'Stage2D' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -21,6 +22,7 @@ export default () => {
   function Run () {
   
     const c = document.createElement( 'canvas' );
+
     document.body.appendChild( c );
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -36,9 +38,8 @@ export default () => {
       y: 0,
       halt: false
     } );
-
     const p = new Circle( 0, 0, 50 );
-    const g = stage.AddChild( new Graphic2D( 0, 0, p ) );
+    const g = stage.AddChild( new Graphic2D( 100, 100, p ) );
 
     stage.onProcess.Add( () => {
 

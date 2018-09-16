@@ -63,12 +63,16 @@ export class AABB2D extends AABB2DGeom {
 
     this.programController = _pc;
     this.LinkStyle();
+
+    return this;
   
   }
 
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
+    
+    return this;
   
   }
 
@@ -85,6 +89,8 @@ export class AABB2D extends AABB2DGeom {
       pc.outline = this.style.stroke.lineWidth + 0.2;
     
     }
+
+    return this;
   
   }
 

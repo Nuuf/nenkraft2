@@ -77,7 +77,7 @@ export class Cache {
   
   }
 
-  Get ( _id ) {
+  GetById ( _id ) {
 
     let i = 0;
     const items = this.items;

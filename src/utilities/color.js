@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Clamp, Base16ToBase10 } from './utilities';
+import { Clamp, Base16ToBase10 } from '.';
 
 const Max = Math.max;
 const Min = Math.min;

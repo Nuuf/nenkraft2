@@ -113,7 +113,18 @@
           "blankLine": "always",
           "prev": "*",
           "next": "block-like"
-        }
+        },
+        {
+          "blankLine": "always",
+          "prev": ["var", "let", "const"],
+          "next": "*"
+        },
+        {
+          "blankLine": "always",
+          "prev": "*",
+          "next": "return"
+        },
+        { "blankLine": "never", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
       ],
       "no-multiple-empty-lines": [
         "error",

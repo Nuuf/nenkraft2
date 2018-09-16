@@ -32,12 +32,12 @@ module.exports = function () {
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader'
             }
-          ]
+          ],
+          exclude: /node_modules/
         },
         {
           test: /\.html$/,
@@ -46,14 +46,23 @@ module.exports = function () {
               loader: 'html-loader',
               options: { 'minimize': true }
             }
-          ]
+          ],
+          exclude: /node_modules/
         },
         {
           test: /\.css$/,
           use: [ 
             MiniCssExtractPlugin.loader,
             'css-loader'
-          ]
+          ],
+          exclude: /node_modules/
+        },
+        {
+          test: /\.shader|txt$/,
+          use: {
+            loader: 'raw-loader'
+          },
+          exclude: /node_modules/
         }
       ]
     },

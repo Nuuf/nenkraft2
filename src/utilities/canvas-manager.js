@@ -13,12 +13,17 @@ export class CanvasManager {
     this.w = _w;
     this.h = _h;
     this.aspectRatio = SimplifyAspectRatio( _w, _h );
-    this.onChance = new Event();
+    this.onChange = new Event();
     this.mode = _mode;
     this.stage = null;
-    this.container = null;
+    this.rootContainer = null;
     this.currentWidth = 0;
     this.currentHeight = 0;
+
+    _canvas.setAttribute( 'width', _w );
+    _canvas.setAttribute( 'height', _h );
+
+    window.addEventListener( 'resize', this.OnWindowResize.bind( this ) );
   
   }
 
@@ -61,6 +66,7 @@ export class CanvasManager {
   Trigger () {
 
     this.OnWindowResize();
+
     return this;
   
   }
@@ -70,6 +76,7 @@ export class CanvasManager {
     this.w = _w;
     this.h = _h;
     this.mode = _mode;
+
     return this;
   
   }
@@ -77,13 +84,15 @@ export class CanvasManager {
   BindStage ( _stage ) {
 
     this.stage = _stage;
+
     return this;
   
   }
 
-  BindContainer ( _container ) {
+  BindRootContainer ( _container ) {
 
-    this.container = _container;
+    this.rootContainer = _container;
+
     return this;
   
   }
@@ -127,9 +136,9 @@ export class CanvasManager {
     
     }
 
-    if ( this.container !== null ) {
+    if ( this.rootContainer !== null ) {
       
-      this.container.scale.Set(
+      this.rootContainer.scale.Set(
         _w / this.w,
         _h / this.h
       );

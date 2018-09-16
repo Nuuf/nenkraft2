@@ -10,6 +10,7 @@ export class Polygon2D extends Polygon2DGeom {
   constructor ( _vertices, _style ) {
 
     super( _vertices );
+    
     this.programController = null;
     this.style = FFSa( _style );
   

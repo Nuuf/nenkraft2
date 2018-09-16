@@ -10,6 +10,7 @@ export class Line2D extends Line2DGeom {
   constructor ( _sx, _sy, _ex, _ey, _style ) {
 
     super( _sx, _sy, _ex, _ey );
+
     this.programController = null;
     this.style = SSa( _style );
   
@@ -25,6 +26,7 @@ export class Line2D extends Line2DGeom {
     _rc.moveTo( s.x, s.y );
     _rc.lineTo( e.x, e.y );
     _rc.closePath();
+    
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
 
     if ( style.stroke.applied === true ) {
@@ -53,12 +55,16 @@ export class Line2D extends Line2DGeom {
 
     this.programController = _pc;
     this.LinkStyle();
+
+    return this;
   
   }
 
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
+
+    return this;
   
   }
 
@@ -72,6 +78,8 @@ export class Line2D extends Line2DGeom {
       pc.color.Normalize();
     
     }
+
+    return this;
   
   }
 

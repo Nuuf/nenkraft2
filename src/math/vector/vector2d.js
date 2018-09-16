@@ -72,7 +72,9 @@ export class Vector2D {
   AbsoluteCopy () {
 
     const vector = this.Copy();
+
     vector.Positive();
+
     return vector;
   
   }
@@ -81,6 +83,8 @@ export class Vector2D {
 
     this.x = _p.x;
     this.y = _p.y;
+
+    return this;
   
   }
 
@@ -88,6 +92,8 @@ export class Vector2D {
 
     this.x = _x;
     this.y = _y;
+
+    return this;
   
   }
 
@@ -95,6 +101,8 @@ export class Vector2D {
 
     this.x = _value;
     this.y = _value;
+
+    return this;
   
   }
 
@@ -107,8 +115,8 @@ export class Vector2D {
   AddVC ( _p ) {
 
     const vector = this.Copy();
-    vector.AddV( _p );
-    return vector;
+
+    return vector.AddV( _p );
   
   }
 
@@ -116,6 +124,8 @@ export class Vector2D {
 
     this.x += _p.x;
     this.y += _p.y;
+
+    return this;
   
   }
 
@@ -123,14 +133,16 @@ export class Vector2D {
 
     this.x += _x;
     this.y += _y;
+
+    return this;
   
   }
 
   SubtractVC ( _p ) {
 
     const vector = this.Copy();
-    vector.SubtractV( _p );
-    return vector;
+
+    return vector.SubtractV( _p );
   
   }
 
@@ -138,6 +150,8 @@ export class Vector2D {
 
     this.x -= _p.x;
     this.y -= _p.y;
+
+    return this;
   
   }
 
@@ -145,21 +159,25 @@ export class Vector2D {
 
     this.x -= _x;
     this.y -= _y;
+
+    return this;
   
   }
 
   MultiplyVC ( _p ) {
 
     const vector = this.Copy();
-    vector.MultiplyV( _p );
-    return vector;
-  
+    
+    return vector.MultiplyV( _p );
+
   }
 
   MultiplyV ( _p ) {
 
     this.x *= _p.x;
     this.y *= _p.y;
+
+    return this;
   
   }
 
@@ -167,14 +185,16 @@ export class Vector2D {
 
     this.x *= _x;
     this.y *= _y;
+
+    return this;
   
   }
 
   DivideVC ( _p ) {
 
     const vector = this.Copy();
-    vector.DivideV( _p );
-    return vector;
+
+    return vector.DivideV( _p );
   
   }
 
@@ -182,6 +202,8 @@ export class Vector2D {
 
     this.x /= _p.x;
     this.y /= _p.y;
+
+    return this;
   
   }
 
@@ -189,13 +211,16 @@ export class Vector2D {
 
     this.x /= _x;
     this.y /= _y;
+
+    return this;
   
   }
 
   Normalize () {
 
     const magnitude = this.GetMagnitude();
-    this.Divide( magnitude, magnitude );
+
+    return this.Divide( magnitude, magnitude );
   
   }
 
@@ -203,6 +228,8 @@ export class Vector2D {
 
     this.x = Abs( this.x );
     this.y = Abs( this.y );
+
+    return this;
   
   }
 
@@ -210,6 +237,8 @@ export class Vector2D {
 
     this.x = -Abs( this.x );
     this.y = -Abs( this.y );
+
+    return this;
   
   }
 
@@ -217,6 +246,8 @@ export class Vector2D {
 
     this.x = -this.x;
     this.y = -this.y;
+
+    return this;
   
   }
 
@@ -226,66 +257,61 @@ export class Vector2D {
     const cosine = Cos( _angle );
     const x = this.x;
     const y = this.y;
+
     this.x = x * cosine - y * sine;
     this.y = x * sine + y * cosine;
+
+    return this;
   
   }
 
   RotateAroundV ( _p, _angle ) {
 
-    this.SubtractV( _p );
-    this.Rotate( _angle );
-    this.AddV( _p );
+    return this.SubtractV( _p ).Rotate( _angle ).AddV( _p );
   
   }
 
   RotateAround ( _x, _y, _angle ) {
 
-    this.SubtractV( _x, _y );
-    this.Rotate( _angle );
-    this.AddV( _x, _y );
+    return this.SubtractV( _x, _y ).Rotate( _angle ).AddV( _x, _y );
   
   }
 
   RotateAbsolute ( _angle ) {
 
-    this.Rotate( _angle - this.GetAngle() );
+    return this.Rotate( _angle - this.GetAngle() );
   
   }
 
   RotateAbsoluteAroundV ( _p, _angle ) {
 
-    this.SubtractV( _p );
-    this.RotateAbsolute( _angle );
-    this.AddV( _p );
+    return this.SubtractV( _p ).RotateAbsolute( _angle ).AddV( _p );
   
   }
 
   RotateAbsoluteAround ( _x, _y, _angle ) {
 
-    this.SubtractV( _x, _y );
-    this.RotateAbsolute( _angle );
-    this.AddV( _x, _y );
+    return this.SubtractV( _x, _y ).RotateAbsolute( _angle ).AddV( _x, _y );
   
   }
 
   PushFromV ( _p, _magnitude ) {
 
     const vector = this.Copy();
-    vector.SubtractV( _p );
-    vector.Normalize();
-    vector.Multiply( _magnitude, _magnitude );
-    this.AddV( vector );
-  
+
+    vector.SubtractV( _p ).Normalize().Multiply( _magnitude, _magnitude );
+
+    return this.AddV( vector );
+
   }
 
   PushFrom ( _x, _y, _magnitude ) {
 
     const vector = this.Copy();
-    vector.SubtractV( _x, _y );
-    vector.Normalize();
-    vector.Multiply( _magnitude, _magnitude );
-    this.AddV( vector );
+
+    vector.SubtractV( _x, _y ).Normalize().Multiply( _magnitude, _magnitude );
+
+    return this.AddV( vector );
   
   }
 
@@ -363,33 +389,25 @@ export class Vector2D {
 
   GetDistanceSquaredV ( _p ) {
 
-    const d = this.Copy();
-    d.SubtractV( _p );
-    return d.GetMagnitudeSquared();
+    return this.Copy().SubtractV( _p ).GetMagnitudeSquared();
   
   }
 
   GetDistanceSquared ( _x, _y ) {
 
-    const d = this.Copy();
-    d.Subtract( _x, _y );
-    return d.GetMagnitudeSquared();
+    return this.Copy().Subtract( _x, _y ).GetMagnitudeSquared();
   
   }
 
   GetDistanceV ( _p ) {
 
-    const d = this.Copy();
-    d.SubtractV( _p );
-    return d.GetMagnitude();
+    return this.Copy().SubtractV( _p ).GetMagnitude();
   
   }
 
   GetDistance ( _x, _y ) {
 
-    const d = this.Copy();
-    d.Subtract( _x, _y );
-    return d.GetMagnitude();
+    return this.Copy().Subtract( _x, _y ).GetMagnitude();
   
   }
 
@@ -419,51 +437,37 @@ export class Vector2D {
 
   GetNormalAV ( _p ) {
 
-    const normal = this.GetPerpendicularCCWV( _p );
-    normal.Normalize();
-    return normal;
+    return this.GetPerpendicularCCWV( _p ).Normalize();
   
   }
 
   GetNormalA ( _x, _y ) {
 
-    const normal = this.GetPerpendicularCCW( _x, _y );
-    normal.Normalize();
-    return normal;
+    return this.GetPerpendicularCCW( _x, _y ).Normalize();
   
   }
 
   GetNormalBV ( _p ) {
 
-    const normal = this.GetPerpendicularCWV( _p );
-    normal.Normalize();
-    return normal;
+    return this.GetPerpendicularCWV( _p ).Normalize();
   
   }
 
   GetNormalB ( _x, _y ) {
 
-    const normal = this.GetPerpendicularCW( _x, _y );
-    normal.Normalize();
-    return normal;
+    return this.GetPerpendicularCW( _x, _y ).Normalize();
   
   }
 
   GetMidpointV ( _p ) {
 
-    const midpoint = this.Copy();
-    midpoint.AddV( _p );
-    midpoint.Divide( 2, 2 );
-    return midpoint;
+    return this.Copy().AddV( _p ).Divide( 2, 2 );
   
   }
 
   GetMidpoint ( _x, _y ) {
 
-    const midpoint = this.Copy();
-    midpoint.Add( _x, _y );
-    midpoint.Multiply( 0.5, 0.5 );
-    return midpoint;
+    return this.Copy().Add( _x, _y ).Multiply( 0.5, 0.5 );
   
   }
 
@@ -482,11 +486,14 @@ export class Vector2D {
   GetProjectionOntoV ( _vector2d ) {
 
     const dot = this.GetDotV( _vector2d );
+
     if ( dot === 0 ) return this.FromPool( 0, 0 );
     const magnitude = _vector2d.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
     const projection = _vector2d.Copy();
+
     projection.Multiply( scale, scale );
+
     return projection;
   
   }
@@ -494,12 +501,16 @@ export class Vector2D {
   GetProjectionOnto ( _x, _y ) {
 
     const projection = this.Copy();
+
     projection.Set( _x, _y );
     const dot = this.GetDotV( projection );
+
     if ( dot === 0 ) return this.FromPool( 0, 0 );
     const magnitude = projection.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
+
     projection.Multiply( scale, scale );
+
     return projection;
   
   }
@@ -508,8 +519,10 @@ export class Vector2D {
 
     const reflection = _vector2d.Copy();
     const dot = this.GetDotV( reflection );
+
     reflection.Multiply( 2, 2 );
     reflection.Multiply( dot, dot );
+
     return this.SubtractVC( reflection );
 
   }
@@ -517,10 +530,13 @@ export class Vector2D {
   GetReflection ( _x, _y ) {
  
     const reflection = this.Copy();
+
     reflection.Set( _x, _y );
     const dot = this.GetDotV( reflection );
+
     reflection.Multiply( 2, 2 );
     reflection.Multiply( dot, dot );
+
     return this.SubtractVC( reflection );
   
   }
@@ -528,6 +544,8 @@ export class Vector2D {
   Store () {
 
     PS_pool.Store( this );
+
+    return this;
   
   }
 
@@ -541,6 +559,8 @@ export class Vector2D {
       _vectors[i].AddV( this );
 
     }
+
+    return this;
   
   }
 
@@ -548,6 +568,8 @@ export class Vector2D {
 
     this.x = this.x | 0;
     this.y = this.y | 0;
+
+    return this;
   
   }
 
@@ -555,6 +577,8 @@ export class Vector2D {
 
     this.x = Ceil( this.x );
     this.y = Ceil( this.y );
+
+    return this;
   
   }
 
@@ -562,6 +586,8 @@ export class Vector2D {
 
     this.x = Round( this.x );
     this.y = Round( this.y );
+
+    return this;
   
   }
 
@@ -593,6 +619,7 @@ export class Vector2D {
     }
 
     result.Set( min, max );
+
     return result;
   
   }
@@ -608,7 +635,9 @@ PS_pool.Retrieve = function ( _x, _y ) {
   this.PreRetrieve();
 
   const vector = this.objects.pop();
+
   vector.Set( _x, _y );
+
   return vector;
 
 };

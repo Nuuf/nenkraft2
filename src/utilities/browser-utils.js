@@ -10,7 +10,7 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
 
   if ( PS_canvas == null ) {
 
-    PS_canvas = document.createElement( 'PS_canvas' );
+    PS_canvas = document.createElement( 'canvas' );
     PS_canvasrc = PS_canvas.getContext( '2d' );
     
   }
@@ -57,9 +57,9 @@ export function ParsedXMLToJSON ( _xml, _deleteWhitespace ) {
   let child;
   let pchild;
   let temp;
-  const o = {};
+  let o = {};
   const children = _xml.childNodes;
-  const l = children.length;
+  let l = children.length;
 
   if ( _xml.nodeType === 1 ) {
 

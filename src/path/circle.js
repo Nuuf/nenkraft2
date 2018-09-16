@@ -11,6 +11,7 @@ export class Circle extends CircleGeom {
   constructor ( _x, _y, _radius, _style ) {
 
     super( _x, _y, _radius );
+    
     this.programController = null;
     this.style = FFSa( _style );
   
@@ -60,12 +61,16 @@ export class Circle extends CircleGeom {
 
     this.programController = _pc;
     this.LinkStyle();
+
+    return this;
   
   }
 
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
+    
+    return this;
   
   }
 
@@ -82,6 +87,8 @@ export class Circle extends CircleGeom {
       pc.outline = this.style.stroke.lineWidth + 0.2;
     
     }
+
+    return this;
   
   }
 
