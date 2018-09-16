@@ -1,5 +1,4 @@
-import { Graphic2D, Path, Geom } from '../../src/fe.index';
-import { RADIAN } from '../../src/math';
+import { CP } from '../../src/fe.index';
 
 export default () => {
 
@@ -7,7 +6,7 @@ export default () => {
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
 
-  button.setAttribute( 'value', 'Graphic2D' );
+  button.setAttribute( 'value', 'CP' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -31,56 +30,24 @@ export default () => {
     buttonContainer.style.display = 'none';
     backButton.onclick = Back;
 
-    const rc = c.getContext( '2d' );
- 
-    {
+    const registry = new CP.Registry();
 
-      const path = new Path.AABB2D( 0, 0, 50, 50 );
-      const g = new Graphic2D( 0, 0, path );
+    registry.AddCommand( new CP.Command( 'myCommand', () => {
 
-      g.position.SetSame( 200 );
-  
-      g.Draw( rc );
-    
-    }
+      console.log( 'hello command' );
 
-    {
+    }, 'this is my command', true, '--' ) );
 
-      const path = new Path.Circle( 0, 0, 25 );
-      const g = new Graphic2D( 0, 0, path );
+    registry.Parse( 'myCommand' );
 
-      g.position.SetSame( 300 );
-  
-      g.Draw( rc );
-    
-    }
+    registry.GetCommandById( 'myCommand' ).AddOption( 'myOption', ( _dataStrs, _data, _staticData ) => {
 
-    {
+      console.log( _dataStrs, _data, _staticData );
+      console.log( 'hello option' );
 
-      const path = new Path.Ray2D( 0, 0, 50, 50 );
-      const g = new Graphic2D( 0, 0, path );
+    }, 'this is my option', 0, true ).filterNull = true;
 
-      g.position.SetSame( 400 );
-  
-      g.Draw( rc );
-    
-    }
-
-    {
-
-      const path = new Path.Polygon2D();
-
-      Geom.PolygonConstruction.Butterfly( path, 0, 0, 5000, 50 );
-
-      const g = new Graphic2D( 0, 0, path );
-
-      g.position.SetSame( 600 );
-
-      g.rotation = RADIAN * 45;
-  
-      g.Draw( rc );
-    
-    }
+    registry.Parse( 'myCommand --myOption someData=1 otherDataaa=helloWorld randomString aa a a' );
     
   }
   

@@ -1,4 +1,4 @@
-import { Stage2D, CanvasManager, Container2D, Sprite, Camera2D, Vector2D } from '../../src/fe.index';
+import { Stage2D, CanvasManager, Container2D, Sprite, Camera2D, Vector2D, Tilesprite } from '../../src/fe.index';
 import { RADIAN } from '../../src/math';
 import { RandomFloat } from '../../src/utilities';
 
@@ -46,6 +46,7 @@ export default () => {
     const root = new Container2D( 0, 0 );
     const camera = new Camera2D( new Vector2D( 10, 100 ), new Sprite( 0, 0, Sprite.DEFAULT_TEXTURE ) );
     const scene = new Container2D( HW, HH );
+    const sprites = [];
 
     stage.AddChild( root );
     root.AddChild( camera );
@@ -62,7 +63,7 @@ export default () => {
     
     {
 
-      let i = 20;
+      let i = 15;
 
       while ( i-- ) {
 
@@ -71,14 +72,31 @@ export default () => {
         sprite.anchor.SetSame( 0.5 );
         sprite.rotation = RandomFloat( -RADIAN * 180, RADIAN * 180 );
         sprite.scale.SetSame( 0.1 * i * 5 );
+        sprites.push( sprite );
       
       }
     
     }
 
+    const tSprite = new Tilesprite( 0, 0, Tilesprite.DEFAULT_TEXTURE );
+
+    tSprite.GeneratePattern( stage.rc, 64 * 10, 64 * 10 );
+
+    scene.AddChild( tSprite );
+
+    console.log( stage );
+
     stage.onProcess.Add( () => {
 
       camera.Process();
+
+      sprites.forEach( ( sprite ) => {
+
+        sprite.rotation += RADIAN;
+      
+      } );
+
+      tSprite.OffsetPattern( 1, 1 );
     
     } );
 

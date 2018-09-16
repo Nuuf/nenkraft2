@@ -37,7 +37,9 @@ export class Matrix2D {
   Copy () {
 
     const matrix = new Matrix2D();
+
     matrix.Set( this.a, this.b, this.c, this.d, this.e, this.f );
+
     return matrix;
   
   }
@@ -50,6 +52,7 @@ export class Matrix2D {
     this.d = _d;
     this.e = _e;
     this.f = _f;
+
     return this;
   
   }
@@ -83,6 +86,7 @@ export class Matrix2D {
     this.d = sskx * b + cskx * d;
     this.e = _x + _px * a + _py * c;
     this.f = _y + _px * b + _py * d;
+
     return this;
   
   }
@@ -135,6 +139,7 @@ export class Matrix2D {
     const a = this.a;
     const c = this.c;
     const e = this.e;
+
     this.a = a * ca - this.b * sa;
     this.b = a * sa + this.b * ca;
     this.c = c * ca - this.d * sa;
@@ -164,7 +169,7 @@ export class Matrix2D {
       
       }
 
-      _transform.skew.Set( 0 );
+      _transform.skew.SetSame( 0 );
     
     } else {
 

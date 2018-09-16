@@ -16,6 +16,7 @@ export const Linear = function ( _time, _startValue, _amplitude, _duration ) {
 export const QuadIn = function ( _time, _startValue, _amplitude, _duration ) {
 
   _time /= _duration;
+
   return _amplitude * _time * _time + _startValue;
   
 };
@@ -23,6 +24,7 @@ export const QuadIn = function ( _time, _startValue, _amplitude, _duration ) {
 export const QuadOut = function ( _time, _startValue, _amplitude, _duration ) {
 
   _time /= _duration;
+
   return -_amplitude * _time * ( _time - 2 ) + _startValue;
   
 };
@@ -32,6 +34,7 @@ export const QuadInOut = function ( _time, _startValue, _amplitude, _duration ) 
   _time /= _duration * 0.5;
   if ( _time < 1 ) return _amplitude * 0.5 * _time * _time + _startValue;
   _time--;
+
   return -_amplitude * 0.5 * ( _time * ( _time - 2 ) - 1 ) + _startValue;
   
 };
@@ -57,6 +60,7 @@ export const SineInOut = function ( _time, _startValue, _amplitude, _duration ) 
 export const CircIn = function ( _time, _startValue, _amplitude, _duration ) {
 
   _time /= _duration;
+
   return -_amplitude * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
   
 };
@@ -65,6 +69,7 @@ export const CircOut = function ( _time, _startValue, _amplitude, _duration ) {
 
   _time /= _duration;
   _time--;
+
   return _amplitude * Sqrt( 1 - _time * _time ) + _startValue;
   
 };
@@ -74,6 +79,7 @@ export const CircInOut = function ( _time, _startValue, _amplitude, _duration ) 
   _time /= _duration * 0.5;
   if ( _time < 1 ) return -_amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
   _time -= 2;
+
   return _amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) + 1 ) + _startValue;
   
 };

@@ -144,7 +144,7 @@ export class Container2D extends CoreEntity2D {
     let childData;
     const children = this.children;
     const l = children.length;
-    var childDataBuffer = [];
+    const childDataBuffer = [];
 
     for ( ; i < l; ++i ) {
 
@@ -194,6 +194,7 @@ export class Container2D extends CoreEntity2D {
 
     this.children.push( _child );
     _child.parent = this;
+
     return _child;
   
   }
@@ -241,6 +242,7 @@ export class Container2D extends CoreEntity2D {
     if ( index !== -1 ) {
 
       _child.parent = null;
+
       return children.fickleSplice( index );
     
     }
@@ -352,6 +354,7 @@ export class Container2D extends CoreEntity2D {
   Detach () {
 
     if ( this.parent !== null ) return this.parent.RemoveChild( this );
+
     return null;
   
   }

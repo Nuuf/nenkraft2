@@ -56,6 +56,7 @@ export class Circle {
   IntersectsCircle ( _circle ) {
 
     const radii = this.radius + _circle.radius;
+
     return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );
   
   }
@@ -70,9 +71,9 @@ export class Circle {
 
     let i = 0;
     let randFunc = RandomFloat;
-    var tl = new Vector2D( this.x - this.radius, this.y - this.radius );
-    var br = new Vector2D( this.x + this.radius, this.y + this.radius );
-    var points = [];
+    const tl = new Vector2D( this.x - this.radius, this.y - this.radius );
+    const br = new Vector2D( this.x + this.radius, this.y + this.radius );
+    const points = [];
 
     _outside = !!_outside;
 

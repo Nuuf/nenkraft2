@@ -34,6 +34,7 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
 
   PS_canvasrc.setTransform( 1, 0, 0, 1, 0, 0 );
   drawable.Draw( PS_canvasrc );
+
   return PS_canvas.toDataURL( 'image/png' );
 
 }
@@ -41,10 +42,12 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
 export function ImageFromDataURL ( _url, _w, _h, _onLoad ) {
 
   const image = new Image();
+
   image.width = _w;
   image.height = _h;
   image.onload = _onLoad;
   image.src = _url;
+
   return image;
 
 }
@@ -159,6 +162,7 @@ export function DownloadAsJSON ( _obj, _fileName ) {
 
   const url = 'data:text/json;charset=utf-8,' + encodeURIComponent( JSON.stringify( _obj ) );
   const a = document.createElement( 'a' );
+
   a.setAttribute( 'href', url );
   a.setAttribute( 'download', _fileName + '.json' );
   a.click();

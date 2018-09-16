@@ -4,7 +4,6 @@
 
 import { Sprite } from './sprite';
 import { Char } from './char';
-import { Container2D } from './container2d';
 
 export class BitmapText extends Sprite {
 

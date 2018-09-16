@@ -73,7 +73,8 @@ export class Sprite extends Container2D {
       ImageFromDataURL(
         GenerateSimpleBase64PNG( () => {
 
-          var path = new Polygon2D();
+          const path = new Polygon2D();
+
           path.AddVertex( new Vector2D( 0, 0 ) );
           path.AddVertex( new Vector2D( 64, 0 ) );
           path.AddVertex( new Vector2D( 64, 64 ) );
@@ -87,6 +88,7 @@ export class Sprite extends Container2D {
           path.AddVertex( new Vector2D( 0, 64 ) );
           path.ComputeBounds();
           path.style.stroke.lineWidth = 3;
+
           return new Graphic2D( 0, 0, path );
         
         } ), 64, 64, _onLoad

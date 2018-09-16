@@ -87,6 +87,7 @@ export class CoreEntity2D {
     }
 
     this.boundsDirty = false;
+
     return this.bounds;
   
   }
