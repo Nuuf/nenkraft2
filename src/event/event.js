@@ -43,6 +43,7 @@ export class Event {
   Add ( _handle, _context, _removeOnNextCall ) {
 
     const listener = new Listener( this, _context, _handle, _removeOnNextCall );
+
     this.listeners.push( listener );
   
   }

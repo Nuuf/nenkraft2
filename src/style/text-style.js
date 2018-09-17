@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { ApplyProperties } from '../utilities';
+import { ApplyProperties } from '../utility';
 import { ALIGN_LEFT, BASELINE_TOP } from './text_conf';
 
 export class TextStyle {

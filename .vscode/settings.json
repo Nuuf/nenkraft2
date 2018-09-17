@@ -3,5 +3,6 @@
       "configFile": "./.eslintrc"
     },
     "eslint.autoFixOnSave": true,
-    "editor.renderWhitespace": "none" 
+    "editor.renderWhitespace": "none",
+    "editor.autoIndent": false
   }

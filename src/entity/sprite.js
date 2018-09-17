@@ -5,13 +5,13 @@
 import { Vector2D } from '../math/vector/vector2d';
 import { Matrix2D } from '../math/matrix/matrix2d';
 import { AABB2D } from '../geom/aabb/aabb2d';
-import { Color } from '../utilities/color';
+import { Color } from '../utility/color';
 import { Container2D } from './container2d';
 import { GLTexture2DProgramController } from '../controller/program-controller/gl-texture2d-program-controller';
 import { DEFAULT } from '../style/gco';
 import { Controller } from '../animator/controller';
 import { BasicTexture2D } from '../texture/basic-texture2d';
-import { ImageFromDataURL, GenerateSimpleBase64PNG } from '../utilities/browser-utils';
+import { ImageFromDataURL, GenerateSimpleBase64PNG } from '../utility/browser-utility';
 import { Polygon2D } from '../path/polygon2d';
 import { Graphic2D } from './graphic2d';
 

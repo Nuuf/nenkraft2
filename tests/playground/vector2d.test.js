@@ -5,6 +5,7 @@ export default () => {
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
+
   button.setAttribute( 'value', 'Vector2D' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -19,6 +20,7 @@ export default () => {
   function Run () {
 
     const c = document.createElement( 'canvas' );
+
     document.body.appendChild( c );
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );

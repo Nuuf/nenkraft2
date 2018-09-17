@@ -4,7 +4,7 @@
 
 import { Vector2D } from '../math/vector/vector2d';
 import { DegreesToRadians } from '../math';
-import { RandomFloat, RandomInteger } from '../utilities';
+import { RandomFloat, RandomInteger } from '../utility';
 
 const PI = Math.PI;
 const Sin = Math.sin;

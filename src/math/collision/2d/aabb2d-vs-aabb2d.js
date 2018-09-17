@@ -27,9 +27,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
   const aabb1 = _obj1.shape;
   const w1 = aabb1.w;
   const h1 = aabb1.h;
-  const anchor1 = _obj1.anchor;
-
-  const aabb2 = _obj2.shape;
+  const anchor1 = _obj1.anchor;  const aabb2 = _obj2.shape;
   const w2 = aabb2.w;
   const h2 = aabb2.h;
   const anchor2 = _obj2.anchor;

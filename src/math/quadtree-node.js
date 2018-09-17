@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Pool } from '../utilities/pool';
+import { Pool } from '../utility/pool';
 
 export class QuadtreeNode {
 
@@ -80,6 +80,7 @@ export class QuadtreeNode {
       if ( marking !== null ) {
 
         nodes[ marking ].Add( _object );
+
         return;
       
       }
@@ -183,6 +184,7 @@ export class QuadtreeNode {
   Dump () {
 
     const nodes = this.nodes;
+
     this.objects.length = 0;
 
     if ( this.hasSplit === true ) {
@@ -251,6 +253,7 @@ export class QuadtreeNode {
     nodes[ PS_TOP_RIGHT ].ConcatNodes( _nodeList );
     nodes[ PS_BOTTOM_LEFT ].ConcatNodes( _nodeList );
     nodes[ PS_BOTTOM_RIGHT ].ConcatNodes( _nodeList );
+    
     return _nodeList;
   
   }
@@ -262,7 +265,6 @@ const PS_TOP_LEFT = 'TL';
 const PS_TOP_RIGHT = 'TR';
 const PS_BOTTOM_LEFT = 'BL';
 const PS_BOTTOM_RIGHT = 'BR';
-
 const PS_pool = new Pool( QuadtreeNode );
 let PS_USE_POOL = true;
 
@@ -271,7 +273,9 @@ PS_pool.Retrieve = function ( _aabb, _level, _objCap, _levelCap ) {
   this.PreRetrieve();
 
   const qtn = this.objects.pop();
+
   qtn.Set( _aabb, _level, _objCap, _levelCap );
+
   return qtn;
 
 };

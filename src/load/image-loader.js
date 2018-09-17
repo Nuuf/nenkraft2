@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Cache } from '../utilities/cache';
+import { Cache } from '../utility/cache';
 import { Event } from '../event/event';
 import { BasicTexture2D } from '../texture/basic-texture2d';
 

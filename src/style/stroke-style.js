@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { ApplyProperties } from '../utilities';
+import { ApplyProperties } from '../utility';
 import { CAP_ROUND, JOIN_ROUND } from './line_conf';
 
 export class StrokeStyle {

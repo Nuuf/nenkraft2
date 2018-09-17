@@ -12,33 +12,43 @@ export function Assert ( _data, _compare, _value, _noSelfAssert ) {
   
       case Assert.IS:
         Is( _data, _value, _compare );
+
         return;
       case Assert.IS_NOT:
         IsNot( _data, _value, _compare );
+
         return;
       case Assert.IS_SAME_TYPE:
         IsSameType( _data, _value, _compare );
+
         return;
       case Assert.IS_NOT_SAME_TYPE:
         IsNotSameType( _data, _value, _compare );
+
         return;
       case Assert.IS_INSTANCE_OF:
         IsInstanceOf( _data, _value, _compare );
+
         return;
       case Assert.IS_NOT_INSTANCE_OF:
         IsNotInstanceOf( _data, _value, _compare );
+
         return;
       case Assert.IS_LESS_THAN:
         IsLessThan( _data, _value, _compare );
+
         return;
       case Assert.IS_GREATER_THAN:
         IsGreaterThan( _data, _value, _compare );
+
         return;
       case Assert.IS_LESS_THAN_OR_EQUAL:
         IsLessThanOrEqual( _data, _value, _compare );
+
         return;
       case Assert.IS_GREATER_THAN_OR_EQUAL:
         IsGreaterThanOrEqual( _data, _value, _compare );
+
         return;
       default:
         throw new Error( 'No comparison: ' + _compare );

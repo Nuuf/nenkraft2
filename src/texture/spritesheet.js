@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Cache } from '../utilities/cache';
+import { Cache } from '../utility/cache';
 import { Frame } from '../animator/frame';
 
 export class Spritesheet {

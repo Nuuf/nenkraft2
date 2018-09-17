@@ -4,7 +4,7 @@
 
 import { GLProgramController } from './gl-program-controller';
 import { CIRCLE } from '../../shader';
-import { Color } from '../../utilities/color';
+import { Color } from '../../utility/color';
 import { TriRectArray } from '../../math';
 
 export class GLCircleProgramController extends GLProgramController {

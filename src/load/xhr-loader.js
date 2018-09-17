@@ -2,9 +2,9 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Cache } from '../utilities/cache';
+import { Cache } from '../utility/cache';
 import { Event } from '../event/event';
-import { XMLToJSON } from '../utilities/browser-utils';
+import { XMLToJSON } from '../utility/browser-utility';
 
 export class XHRLoader {
 

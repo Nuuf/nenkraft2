@@ -90,6 +90,7 @@ export class Animation {
       if ( frames[i].id === _id ) {
     
         if ( _returnIndex === true ) return i;
+
         return frames[i];
         
       }
@@ -101,6 +102,7 @@ export class Animation {
   SetFrameById ( _id ) {
 
     const index = this.GetFrameById( _id, true );
+
     this.SetFrame( index );
   
   }

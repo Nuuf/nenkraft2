@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Pool } from '../../utilities/pool';
+import { Pool } from '../../utility/pool';
 
 const Ceil = Math.ceil;
 const Round = Math.round;

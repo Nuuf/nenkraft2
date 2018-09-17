@@ -86,7 +86,7 @@ export class Manager {
   
   }
 
-  StartMultiple ( _ids ) {
+  StopMultiple ( _ids ) {
     
     _ids = _ids.split( ' ' );
 

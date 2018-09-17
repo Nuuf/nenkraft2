@@ -28,6 +28,7 @@ export class Frame {
     if ( this.timer-- <= 0 ) {
 
       this.Reset();
+
       return true;
       
     }

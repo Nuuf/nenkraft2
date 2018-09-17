@@ -38,6 +38,7 @@ export class GLProgramController {
     const vShader = this.CreateShader( _vs, gl.VERTEX_SHADER );
     const fShader = this.CreateShader( _fs, gl.FRAGMENT_SHADER );
     const program = this.program = gl.createProgram();
+
     gl.attachShader( program, vShader );
     gl.attachShader( program, fShader );
     gl.linkProgram( program );
@@ -45,6 +46,7 @@ export class GLProgramController {
     if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) ) {
 
       const info = gl.getProgramInfoLog( program );
+
       throw new Error( 'Program link failed:' + info );
     
     }
@@ -62,12 +64,14 @@ export class GLProgramController {
 
     const gl = this.gl;
     const shader = gl.createShader( _type );
+
     gl.shaderSource( shader, _script );
     gl.compileShader( shader );
 
     if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
 
       const info = gl.getShaderInfoLog( shader );
+
       throw new Error( 'Shader compilation failed:' + info );
     
     }

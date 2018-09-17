@@ -9,6 +9,7 @@ Array.prototype.indexPop = function ( index ) {
   if ( last > 1 && index <= last && index >= 0 ) {
   
     const temp = this[last];
+
     this[last] = this[index];
     this[index] = temp;
   
@@ -25,6 +26,7 @@ Array.prototype.indexShift = function ( index ) {
   if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
   
     const temp = this[0];
+
     this[0] = this[index];
     this[index] = temp;
 
@@ -39,6 +41,7 @@ Array.prototype.indexShift = function ( index ) {
 Array.prototype.popSplice = function ( index ) {
 
   const l = this.length - 1;
+
   if ( l < 1 ) return;
   const returnee = this[index];
 

@@ -18,6 +18,7 @@ export class Maker {
   Many ( _amount ) {
 
     this.amount = _amount;
+
     return this;
   
   }
@@ -26,6 +27,7 @@ export class Maker {
 
     if ( _reset ) this.orders.length = 0;
     this.orders.push( _object );
+
     return this;
   
   }
@@ -136,6 +138,7 @@ export class Maker {
 
     this.amount = 1;
     this.locked = false;
+
     return this.orders[0];
   
   }
@@ -144,6 +147,7 @@ export class Maker {
 
     this.amount = 1;
     this.locked = false;
+
     return this.orders;
   
   }

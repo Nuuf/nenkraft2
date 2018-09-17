@@ -4,7 +4,7 @@
 
 import { GLProgramController } from './gl-program-controller';
 import { LINE2D } from '../../shader';
-import { Color } from '../../utilities/color';
+import { Color } from '../../utility/color';
 
 export class GLLine2DProgramController extends GLProgramController {
 

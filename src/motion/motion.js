@@ -4,7 +4,7 @@
 
 import * as Ease from '../math/ease';
 import { Event } from '../event/event';
-import { Nested } from '../utilities';
+import { Nested } from '../utility';
 
 export class Motion {
 

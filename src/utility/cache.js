@@ -20,6 +20,7 @@ export class Cache {
     if ( _item == null ) {
 
       console.warn( 'Item is null.' );
+
       return null;
       
     }
@@ -41,11 +42,13 @@ export class Cache {
     if ( valid === false ) {
   
       console.warn( 'Invalid item. Check the item id. The item has not been stored' );
+
       return false;
       
     }
   
     this.items.push( _item );
+
     return true;
 
   }

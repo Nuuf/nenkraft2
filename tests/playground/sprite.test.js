@@ -5,6 +5,7 @@ export default () => {
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
+
   button.setAttribute( 'value', 'Sprite' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -19,6 +20,7 @@ export default () => {
   function Run () {
   
     const c = document.createElement( 'canvas' );
+
     document.body.appendChild( c );
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -28,9 +30,7 @@ export default () => {
     buttonContainer.style.display = 'none';
     backButton.onclick = Back;
 
-    const rc = c.getContext( '2d' );
-
-    const sprite = new Sprite( 100, 100, Sprite.DEFAULT_TEXTURE );
+    const rc = c.getContext( '2d' );    const sprite = new Sprite( 100, 100, Sprite.DEFAULT_TEXTURE );
 
     sprite.Draw( rc );
     

@@ -1,6 +1,6 @@
 {
   "name": "nenkraft2",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A small rendering tool",
   "main": "./dist/nenkraft2.js",
   "devDependencies": {
@@ -29,7 +29,8 @@
     "clear-bundle-be": "rimraf bundle-be",
     "clear-dist": "rimraf dist",
     "ce": "rimraf dist bundle-fe bundle-be",
-    "be": "npm run build-prod && npm run build-bundle-be && npm run build-bundle-fe"
+    "be": "npm run build-prod && npm run build-bundle-be && npm run build-bundle-fe",
+    "lint": "eslint src tests --fix"
   },
   "keywords": [
     "2d",

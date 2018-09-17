@@ -3,7 +3,7 @@
  */
 
 import { CoreEntity2D } from './core-entity2d';
-import { IsArray } from '../utilities';
+import { IsArray } from '../utility';
 
 const Abs = Math.abs;
 
@@ -17,6 +17,7 @@ export class Container2D extends CoreEntity2D {
     this.display = true;
     this.transformShouldUpdate = true;
     this.transformAutomaticUpdate = true;
+    this.motionManager = null;
     //
     this.isBatchParent = false;
     this.childDataBuffer = null;

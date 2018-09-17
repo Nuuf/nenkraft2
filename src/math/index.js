@@ -37,6 +37,7 @@ export function PrecisionRound ( _value, _precision ) {
 
   if ( _precision == null ) return _value;
   const divisor = Pow( 10, _precision );
+
   return Round( divisor * _value ) / divisor;
 
 }
@@ -54,6 +55,7 @@ export function AttractRepel ( _repeller, _attractor, _velocity, _radius, _stren
   if ( distance < _radius * _radius ) {
 
     const theta = delta.GetAngle();
+
     _velocity.Add(
       Cos( theta ) * _strength,
       Sin( theta ) * _strength
@@ -66,6 +68,7 @@ export function AttractRepel ( _repeller, _attractor, _velocity, _radius, _stren
 export function Oscillate ( _time, _from, _to, _amplitude ) {
 
   const delta = ( _to - _from ) * 0.5;
+
   return ( _from + delta ) + ( Sin( DegreesToRadians( _time * _amplitude ) ) * delta );
 
 }
@@ -83,6 +86,7 @@ export function LineLineIntersection ( _startA, _endA, _startB, _endB ) {
   if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
 
     d1.Set( _startA.x + ( t * d1.x ), _startA.y + ( t * d1.y ) );
+
     return d1;
     
   }
@@ -107,6 +111,7 @@ export function ClosestPointOnLine ( _start, _end, _point ) {
   }
 
   delta.Set( _start.x + u * delta.x, _start.y + u * delta.y );
+
   return delta;
 
 }
@@ -141,6 +146,7 @@ export function TriRectArray ( _x, _y, _w, _h, _array ) {
     _array[ 9 ] = _y;
     _array[ 10 ] = _x + _w;
     _array[ 11 ] = _y + _h;
+
     return _array;
       
   }
@@ -159,6 +165,7 @@ export function TriRectArray ( _x, _y, _w, _h, _array ) {
 export function GreatestCommonDivisor ( _x, _y ) {
 
   if ( _y === 0 ) return _x;
+
   return GreatestCommonDivisor( _y, _x % _y );
 
 }
@@ -167,8 +174,10 @@ export function SimplifyAspectRatio ( _x, _y, _array ) {
 
   const gcd = GreatestCommonDivisor( _x, _y );
   const array = _array == null ? [] : _array;
+
   array[0] = _x / gcd;
   array[1] = _y / gcd;
+
   return array;
 
 }
@@ -176,6 +185,7 @@ export function SimplifyAspectRatio ( _x, _y, _array ) {
 export function IntegerNotation ( _value, _roof, _splitter ) {
 
   const vrm = _value % _roof, vrd = _value / _roof;
+
   return Ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
   
 }

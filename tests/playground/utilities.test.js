@@ -5,6 +5,7 @@ export default () => {
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
+
   button.setAttribute( 'value', 'Utilities' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -19,6 +20,7 @@ export default () => {
   function Run () {
   
     const c = document.createElement( 'canvas' );
+
     document.body.appendChild( c );
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -31,6 +33,7 @@ export default () => {
     let A = 'a string';
     let B = Cipher.CCH1( A, 1 );
     let C = Cipher.CCH1Decipher( B, 1 );
+
     console.log( A, B, C );
 
     // Assert.Assign(); assign to global scope
@@ -40,9 +43,8 @@ export default () => {
 
     const item = {
       id: '1'
-    };
+    };    const cache = new Cache();
 
-    const cache = new Cache();
     cache.StoreSafe( item );
 
     Glob.Assign();

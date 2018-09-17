@@ -34,6 +34,7 @@ export class Line2D {
   Stretch ( _magnitude ) {
 
     const hm = _magnitude * 0.5;
+
     this.s.PushFromV( this.e, hm );
     this.e.PushFromV( this.s, hm );
   
@@ -43,6 +44,7 @@ export class Line2D {
 
     _anchorX = _anchorX == undefined ? 0.5 : _anchorX;
     const ap = this.s.Copy();
+
     ap.AddV( this.e );
     ap.Multiply( _anchorX, _anchorY == undefined ? _anchorX : _anchorY );
     this.s.RotateAroundV( ap, _angle );

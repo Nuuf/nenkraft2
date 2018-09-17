@@ -18,7 +18,9 @@ export class Controller {
   CreateAnimation ( _id, _rate ) {
 
     const animation = Animation( this, _id, _rate );
+
     this.animations.push( animation );
+
     return animation;
   
   }

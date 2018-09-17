@@ -27,8 +27,10 @@ export class Color {
   Copy () {
 
     const color = new Color( this.channel[ 0 ], this.channel[ 1 ], this.channel[ 2 ], this.channel[ 3 ] );
+
     color.value = this.value;
     color.currentConversion = this.currentConversion;
+
     return color;
   
   }
@@ -36,6 +38,7 @@ export class Color {
   ComputeValueRGBA () {
 
     this.value = 'rgba('.concat( this.channel.join( ',' ).concat( ')' ) );
+
     return this.value;
   
   }
@@ -43,6 +46,7 @@ export class Color {
   ComputeValueHSLA () {
 
     this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
+
     return this.value;
   
   }
@@ -50,6 +54,7 @@ export class Color {
   ComputeValueHex () {
 
     this.value = '#' + this.channel[ 0 ].toString( 16 ) + this.channel[ 1 ].toString( 16 ) + this.channel[ 2 ].toString( 16 );
+
     return this.value;
   
   }
@@ -114,6 +119,7 @@ export class Color {
 
     _hex = _hex.replace( /#/g, '' );
     let strs = _hex.match( /.{2}/g );
+
     strs = strs.map( Base16ToBase10 );
     if ( strs[ 3 ] == null ) strs[ 3 ] = 1;
     this.SetRGBA( strs[ 0 ], strs[ 1 ], strs[ 2 ], strs[ 3 ] );

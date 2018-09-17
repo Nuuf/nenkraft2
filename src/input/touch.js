@@ -46,6 +46,7 @@ export class Touch {
     this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
+
     return false;
   
   }
@@ -78,6 +79,7 @@ export class Touch {
   CalculatePosition ( _x, _y ) {
 
     const pos = this.position;
+
     pos.Set( _x, _y );
     pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
     pos.SubtractV( this.offset );

@@ -159,6 +159,7 @@ export class Graphic2D extends Container2D {
     if ( this.interactive === false ) return false;
     PS_TP.SetV( _p );
     PS_TP.SubtractV( this.position );
+
     return this.path.IntersectsPoint( PS_TP );
   
   }

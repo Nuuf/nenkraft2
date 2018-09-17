@@ -19,9 +19,11 @@ export const Rectangular = function ( _polygon, _x, _y, _w, _h ) {
   const tr = new Vector2D( _x + _w, _y );
   const br = new Vector2D( _x + _w, _y + _h );
   const bl = new Vector2D( _x, _y + _h );
+
   _polygon.Recreate( [ tl, tr, br, bl ] );
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -31,9 +33,11 @@ export const Isosceles = function ( _polygon, _x, _y, _w, _h ) {
   const tm = new Vector2D( _x, _y );
   const br = new Vector2D( _x + _w * 0.5, _y + _h );
   const bl = new Vector2D( _x - _w * 0.5, _y + _h );
+
   _polygon.Recreate( [ tm, br, bl ] );
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -60,6 +64,7 @@ export const Cyclic = function ( _polygon, _x, _y, _radius, _accuracy ) {
 
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -83,6 +88,7 @@ export const Equilateral = function ( _polygon, _x, _y, _side ) {
   _polygon.Rotate( new Math.RADIAN * -90 );
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -111,6 +117,7 @@ export const Star = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _co
 
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -136,6 +143,7 @@ export const Butterfly = function ( _polygon, _x, _y, _n, _radius ) {
 
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };
@@ -200,6 +208,7 @@ export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _
 
   _polygon.ComputeBounds();
   _polygon.GetNormalsA();
+
   return _polygon;
 
 };

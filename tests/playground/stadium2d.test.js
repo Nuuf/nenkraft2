@@ -1,10 +1,11 @@
-import { Graphic2D, Path, Stadium2D } from '../../src/fe.index';
+import { Stadium2D } from '../../src/fe.index';
 
 export default () => {
 
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
+
   button.setAttribute( 'value', 'Stadium2D' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -12,6 +13,7 @@ export default () => {
   
   let conf = {
     stadium: null
+
   };
   
   function Run () {

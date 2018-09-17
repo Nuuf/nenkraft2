@@ -51,6 +51,7 @@ export class Pool {
       if ( this.class != null ) {
 
         const object = new this.class();
+
         this.Store( object );
         this.floodFunction.call( this.context, object );
       
@@ -73,6 +74,7 @@ export class Pool {
   Clean () {
 
     const amount = this.objects.length;
+
     this.Flush();
     this.Flood( undefined, amount );
   

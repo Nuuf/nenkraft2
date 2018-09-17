@@ -124,6 +124,7 @@ export const ElasticResponse = function ( _obj1, _obj2, _result ) {
   const a1 = v1.GetDotV( PS_n );
   const a2 = v2.GetDotV( PS_n );
   const op = 2 * ( a1 - a2 ) / ( m1 + m2 );
+
   v1.Set(
     v1.x - op * m2 * PS_n.x,
     v1.y - op * m2 * PS_n.y

@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { RandomFloat, RandomInteger } from '../../utilities';
+import { RandomFloat, RandomInteger } from '../../utility';
 import { Vector2D } from '../../math/vector/vector2d';
 import { Line2D } from '../line/line2d';
 import { AABB2D } from '../aabb/aabb2d';
@@ -221,6 +221,7 @@ export class Polygon2D {
     }
 
     centroid.Divide( l, l );
+
     return centroid;
   
   }
@@ -242,6 +243,7 @@ export class Polygon2D {
     }
 
     normals.push( vertices[ l ].GetNormalAV( vertices[ 0 ] ) );
+
     return normals;
   
   }
@@ -263,6 +265,7 @@ export class Polygon2D {
     }
 
     normals.push( vertices[ l ].GetNormalBV( vertices[ 0 ] ) );
+
     return normals;
   
   }
@@ -284,6 +287,7 @@ export class Polygon2D {
     }
 
     perimeterMidPoints.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
+
     return perimeterMidPoints;
   
   }

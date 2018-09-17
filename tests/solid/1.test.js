@@ -1,6 +1,6 @@
 import { Stage2D, CanvasManager, Container2D, Sprite, Camera2D, Vector2D, Tilesprite } from '../../src/fe.index';
 import { RADIAN } from '../../src/math';
-import { RandomFloat } from '../../src/utilities';
+import { RandomFloat } from '../../src/utility';
 
 export default () => {
 
@@ -44,7 +44,7 @@ export default () => {
       halt: false
     } );
     const root = new Container2D( 0, 0 );
-    const camera = new Camera2D( new Vector2D( 10, 100 ), new Sprite( 0, 0, Sprite.DEFAULT_TEXTURE ) );
+    const camera = new Camera2D( new Vector2D( 0, 0 ), new Sprite( 0, 0, Sprite.DEFAULT_TEXTURE ) );
     const scene = new Container2D( HW, HH );
     const sprites = [];
 
@@ -54,7 +54,7 @@ export default () => {
     scene.AddChild( camera.target );
     camera.target.anchor.SetSame( 0.5 );
 
-    const canvasManager = new CanvasManager( c, 1920, 1080, CanvasManager.KEEP_ASPECT_RATIO_FIT );
+    const canvasManager = new CanvasManager( c, W, H, CanvasManager.KEEP_ASPECT_RATIO_FIT );
 
     canvasManager
       .BindStage( stage )
