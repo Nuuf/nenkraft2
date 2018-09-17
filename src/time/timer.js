@@ -8,9 +8,9 @@ const Round = Math.round;
 
 export class Timer {
 
-  constructor () {
+  constructor ( _stopTime ) {
 
-    this.stopTime = null;
+    this.stopTime = Round( _stopTime == null ? 0 : _stopTime );
     this.time = 0;
     this.isRunning = false;
     this.canResume = false;
@@ -31,7 +31,6 @@ export class Timer {
     this.time = 0;
     this.isRunning = false;
     this.canResume = false;
-    this.stopTime = null;
   
   }
 

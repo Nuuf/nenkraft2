@@ -22,7 +22,6 @@ export { Time };
 export { default as CharacterSets } from './utility/character-sets';
 export { Vector2D } from './math/vector/vector2d';
 export { Matrix2D } from './math/matrix/matrix2d';
-export { BaseTransform2D } from './math/transform/base-transform2d';
 export { Transform2D } from './math/transform/transform2d';
 export { QuadtreeNode } from './math/quadtree-node';
 export { Ease }; 

@@ -4,7 +4,7 @@
 
 import { PrecisionRound } from '../../math';
 
-export class Ticker {
+export class ServerTicker {
 
   constructor ( _onProcess, _rate, _halt ) {
 
@@ -109,7 +109,8 @@ export class Ticker {
 }
 
 // Private Static ----->
-const PS_LOG = true;const Log = function () {
+const PS_LOG = true;
+const Log = function () {
 
   if ( PS_LOG === false ) return;
   console.log.apply( null, arguments );

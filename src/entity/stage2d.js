@@ -151,7 +151,7 @@ export class Stage2D extends Container2D {
 
     if ( _gl == null ) _gl = this.gl;
 
-    this.position.Set( 0, 0 );
+    this.position.SetSame( 0 );
     this.scale.Set( 2 / this.w, -2 / this.h );
     this.position.Add( -1, 1 );
     this.position.Add( 

@@ -96,6 +96,8 @@ export class Glob {
 
   static Create ( _id ) {
 
+    const window = window || null;
+
     if ( window == null ) {
 
       if ( global != null ) {

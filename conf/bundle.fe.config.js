@@ -14,7 +14,8 @@ module.exports = function () {
       path: path.resolve( __dirname, '../bundle-fe' ),
       filename: '[name].js',
       library: 'nk2',
-      libraryTarget: 'umd' 
+      libraryTarget: 'umd',
+      globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     externals: {
 
@@ -36,6 +37,13 @@ module.exports = function () {
               loader: 'babel-loader'
             }
           ]
+        },
+        {
+          test: /\.shader|txt$/,
+          use: {
+            loader: 'raw-loader'
+          },
+          exclude: /node_modules/
         }
       ]
     }

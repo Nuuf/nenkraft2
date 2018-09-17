@@ -14,7 +14,8 @@ module.exports = function () {
       path: path.resolve( __dirname, '../bundle-be' ),
       filename: '[name].js',
       library: 'nk2',
-      libraryTarget: 'umd' 
+      libraryTarget: 'umd',
+      globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     externals: {
 

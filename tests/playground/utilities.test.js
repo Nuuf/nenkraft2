@@ -6,7 +6,7 @@ export default () => {
   const button = document.createElement( 'input' );
   const backButton = document.getElementById( 'back-button' );
 
-  button.setAttribute( 'value', 'Utilities' );
+  button.setAttribute( 'value', 'Utility' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -43,7 +43,8 @@ export default () => {
 
     const item = {
       id: '1'
-    };    const cache = new Cache();
+    };
+    const cache = new Cache();
 
     cache.StoreSafe( item );
 

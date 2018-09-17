@@ -2,6 +2,7 @@ var path = require( 'path' );
 var webpack = require( 'webpack' );
 var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 var MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+var CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 var banner = require( '../banner' )();
 
 module.exports = function () {
@@ -33,7 +34,12 @@ module.exports = function () {
         banner: banner,
         raw: true,
         entryOnly: true
-      } )
+      } ),
+      new CopyWebpackPlugin( [ {
+        from: './assets',
+        to: './assets',
+        toType: 'dir'
+      } ] )
     ],
     module: {
       rules: [
@@ -61,6 +67,13 @@ module.exports = function () {
             MiniCssExtractPlugin.loader,
             'css-loader'
           ]
+        },
+        {
+          test: /\.shader|txt$/,
+          use: {
+            loader: 'raw-loader'
+          },
+          exclude: /node_modules/
         }
       ]
     }
