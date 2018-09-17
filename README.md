@@ -1,3 +1,5 @@
+![Nenkraft][logo]
+[logo]: nenkraft-banner.png "nenkraft"
 
 ------
 
@@ -6,13 +8,15 @@
 ### How-to
 ------
 
-[Setup](#setup)
-[Stage2D](#stage2d)
-[Sprite](#sprite)
-[Graphic2D](#graphic2d)
-[Motion](#motion)
-[Stage2D, Camera2D and CanvasManager](#stage2d-camera2d-and-canvasmanager)
-[Collision](#collision)
+1. [Setup](#setup)
+2. [Stage2D](#stage2d)
+3. [Sprite](#sprite)
+4. [Graphic2D](#graphic2d)
+5. [Motion](#motion)
+6. [Stage2D, Camera2D and CanvasManager](#stage2d-camera2d-and-canvasmanager)
+7. [Collision](#collision)
+8. [Stadium](#stadium)
+9. [Particle](#particle)
 
 
 ## Setup
@@ -33,6 +37,11 @@ const conf = {
   y: 0,
   halt: true
 };
+
+// If using
+nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
+    // Done
+} );
 
 ```
 
@@ -174,5 +183,71 @@ if ( result.occured ) {
 } else {
   // No collision
 }
+
+```
+
+## Stadium
+
+```javascript
+
+const stadium = new nk2.Stadium( {
+  width: 600,
+  height: 400,
+  className: 'cssClass',
+  mode: '2d',
+  fill: false,
+  clear: false,
+  rootNode: null
+} );
+
+stadium.CreateStage2D( 'stage1' );
+stadium.CreateStage2D( 'stage2' );
+
+stadium.GetStages( 'stage1', 'stage2' ).forEach( ( stage ) => {
+  // Do something
+} );
+
+```
+
+## Particle
+
+```javascript
+
+const particleData = {
+  texture: nk2.Sprite.DEFAULT_TEXTURE,
+  anchor: { 
+    x: 0.5,
+    y: 0.5
+  },
+  amount: 10,
+  rotation: {
+    min: 0,
+    max: Math.PI * 2
+  },
+  position: {
+    points: [
+      { x: 0, y: 0 }
+    ]
+  },
+  velocity: {
+    x: 0,
+    y: {
+      min: -2,
+      max: 2
+    }
+  },
+  deflate: true
+};
+
+const particleSystem = new nk2.Particle2D.System( 0, 0 );
+
+stage.AddChild( particleSystem );
+
+stage.onProcess.Add( () => {
+
+  particleSystem.Process();
+  particleSystem.Emit( particleData );
+
+} );
 
 ```

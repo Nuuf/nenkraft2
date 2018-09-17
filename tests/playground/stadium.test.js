@@ -1,4 +1,4 @@
-import { Stadium2D } from '../../src/fe.index';
+import { Stadium } from '../../src/fe.index';
 
 export default () => {
 
@@ -21,7 +21,7 @@ export default () => {
     backButton.onclick = Back;
     buttonContainer.style.display = 'none';
 
-    const stadium = conf.stadium = new Stadium2D( {
+    const stadium = conf.stadium = new Stadium( {
       width: 600,
       height: 400,
       className: 'mcnvs',
@@ -29,9 +29,9 @@ export default () => {
       fill: false
     } );
 
-    stadium.CreateStage( 'stage1' );
-    stadium.CreateStage( 'stage2' );
-    stadium.CreateStage( 'stage3' );
+    stadium.CreateStage2D( 'stage1' );
+    stadium.CreateStage2D( 'stage2' );
+    stadium.CreateStage2D( 'stage3' );
     
   }
   

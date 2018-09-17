@@ -41,7 +41,7 @@ export { Path };
 export { CoreEntity2D } from './entity/core-entity2d';
 export { Container2D } from './entity/container2d';
 export { Stage2D } from './entity/stage2d';
-export { Stadium2D } from './entity/stadium2d';
+export { Stadium } from './entity/stadium';
 export { Graphic2D } from './entity/graphic2d';
 export { Sprite } from './entity/sprite';
 export { Tilesprite } from './entity/tilesprite';

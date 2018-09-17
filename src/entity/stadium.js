@@ -5,7 +5,7 @@
 import { Ticker } from '../time/ticker/ticker';
 import { Stage2D } from './stage2d';
 
-export class Stadium2D {
+export class Stadium {
 
   constructor ( _options ) {
 
@@ -29,7 +29,7 @@ export class Stadium2D {
   
   }
 
-  CreateStage ( _options ) {
+  CreateStage2D ( _options ) {
 
     let id;
     const canvas = document.createElement( 'canvas' );

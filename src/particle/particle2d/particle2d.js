@@ -229,7 +229,7 @@ export class Particle2D {
         
         if ( _options.anchor != null ) {
 
-          entity.anchor.SetSame( _options.anchor );
+          entity.anchor.SetV( _options.anchor );
           entity.UpdateTextureTransform();
         
         }

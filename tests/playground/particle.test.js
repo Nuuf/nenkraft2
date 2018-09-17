@@ -63,7 +63,10 @@ export default () => {
     const points = shapePolygon.GenerateRandomPoints( 1000, false, true );
     const pdata = {
       texture: Sprite.DEFAULT_TEXTURE,
-      anchor: 0.5,
+      anchor: { 
+        x: 0.5, 
+        y: 0.5 
+      },
       amount: 5,
       rotation: {
         min: 0,
@@ -109,7 +112,10 @@ export default () => {
     };
     const xdata = {
       texture: Sprite.DEFAULT_TEXTURE,
-      anchor: 0.5,
+      anchor: { 
+        x: 0.5,
+        y: 0.5
+      },
       amount: 23,
       rotation: {
         min: 0,
@@ -143,7 +149,10 @@ export default () => {
 
     const ydata = {
       texture: Sprite.DEFAULT_TEXTURE,
-      anchor: 0.5,
+      anchor: { 
+        x: 0.5,
+        y: 0.5
+      },
       amount: nps.length,
       rotation: {
         min: 0,
