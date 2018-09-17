@@ -1,5 +1,5 @@
-![Nenkraft][logo]
-[logo]: nenkraft-banner.png "nenkraft"
+
+![Nenkraft2][logo]
 
 ------
 
@@ -251,3 +251,6 @@ stage.onProcess.Add( () => {
 } );
 
 ```
+
+
+[logo]: nenkraft2-banner.png "nenkraft2"
