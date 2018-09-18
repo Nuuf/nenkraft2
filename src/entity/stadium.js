@@ -79,17 +79,14 @@ export class Stadium {
     const stages = this.stages;
     const rStages = [];
     const l = stages.length;
-    let stage = stages[i];
 
-    for ( ; i < l; stage = stages[++i] ) {
+    for ( ; i < l; ++i ) {
 
-      stage = stages[i];
+      for ( j = 0; j < arguments.length; ++j ) {
 
-      for ( ; j < arguments.length; ++j ) {
+        if ( stages[i].id === arguments[j] ) {
 
-        if ( stage.id === arguments[j] ) {
-
-          rStages.push( stage );
+          rStages.push( stages[i] );
         
         } 
       

@@ -20,7 +20,13 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
     ] );
     imgloader.Load( [
       { id: 'fontimg', src: './assets/images/font.png' },
-      { id: 'fontNoK', src: './assets/images/fontNoK.png' }
+      { id: 'fontNoK', src: './assets/images/fontNoK.png' },
+      { id: '1to8', src: './assets/images/1to8.png' },
+      { id: '4dots', src: './assets/images/4dots.png' },
+      { id: 'colors', src: './assets/images/colors.png' },
+      { id: 'glass-of-blueberryjuice', src: './assets/images/glass-of-blueberryjuice.png' },
+      { id: 'raindrop', src: './assets/images/raindrop.png' },
+      { id: 'smudge', src: './assets/images/smudge.png' }
     ], true );
     xhrloader.onComplete.Add( function ( event ) {
   
