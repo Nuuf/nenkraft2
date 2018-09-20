@@ -256,5 +256,5 @@ export class BitmapText extends Sprite {
 }
 
 // Private Static ----->
-const PS_ACCESS_BUFFER_ERROR_MSG = 'Cannot access buffer data directly on Container2D!';
+const PS_ACCESS_BUFFER_ERROR_MSG = 'Cannot access buffer data directly on BitmapText!';
 // <----- Private static

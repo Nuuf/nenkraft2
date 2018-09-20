@@ -15,10 +15,15 @@ export class Touch {
     this.offset = new Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
 
-    this.element.addEventListener( 'touchmove', this.OnMove.bind( this ) );
-    this.element.addEventListener( 'touchstart', this.OnStart.bind( this ), { passive: true } );
-    this.element.addEventListener( 'touchend', this.OnEnd.bind( this ) );
-    this.element.addEventListener( 'touchcancel', this.OnCancel.bind( this ) );
+    this.___bound___OnMove = this.OnMove.bind( this );
+    this.___bound___OnStart = this.OnStart.bind( this );
+    this.___bound___OnEnd = this.OnEnd.bind( this ); 
+    this.___bound___OnCancel = this.OnCancel.bind( this );
+
+    this.element.addEventListener( 'touchmove', this.___bound___OnMove );
+    this.element.addEventListener( 'touchstart', this.___bound___OnStart, { passive: true } );
+    this.element.addEventListener( 'touchend', this.___bound___OnEnd );
+    this.element.addEventListener( 'touchcancel', this.___bound___OnCancel );
 
     this.onMove = new Event();
     this.onStart = new Event();
@@ -84,6 +89,15 @@ export class Touch {
     pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
     pos.SubtractV( this.offset );
     pos.DivideV( this.scale );
+  
+  }
+
+  Destroy () {
+
+    this.element.removeEventListener( 'touchmove', this.___bound___OnMove );
+    this.element.removeEventListener( 'touchstart', this.___bound___OnStart );
+    this.element.removeEventListener( 'touchend', this.___bound___OnEnd );
+    this.element.removeEventListener( 'touchcancel', this.___bound___OnCancel );
   
   }
 

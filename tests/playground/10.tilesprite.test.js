@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Container2D', ( conf ) => {
+  CreateTest( 'Tilesprite', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -17,15 +17,15 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const sprite = new nk2.Sprite( HW, HH, nk2.Sprite.DEFAULT_TEXTURE );
+    const rc = c.getContext( '2d' );
+    const sprite = new nk2.Tilesprite( HW, HH, nk2.Tilesprite.DEFAULT_TEXTURE );
 
-    sprite.anchor.SetSame( 0.5 );
+    sprite.GeneratePattern( rc, 64 * 10, 64 * 10 );
 
-    const container = new nk2.Container2D( 0, 0 );
+    sprite.x = HW - sprite.width * 0.5;
+    sprite.y = HH - sprite.height * 0.5;
 
-    container.AddChild( sprite );
-
-    container.Draw( c.getContext( '2d' ) );
+    sprite.Draw( rc );
 
   } );
 

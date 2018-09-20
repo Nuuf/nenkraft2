@@ -61,7 +61,7 @@ stage.onProcess.Add( () => {
 
 ```javascript
 
-const sprite = new nk2.Sprite( 0, 0, nk2.Sprite.DEFAULT_TEXTURE );
+const sprite = new nk2.Sprite( 0, 0 );
 
 stage.AddChild( sprite );
 

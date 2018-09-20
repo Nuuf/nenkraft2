@@ -8,12 +8,12 @@ import { DEFAULT } from '../style/gco';
 
 export class Text extends Container2D {
 
-  constructor ( _x, _y, _text ) {
+  constructor ( _x, _y, _text, _style ) {
 
     super( _x, _y );
     this.text = _text;
-    this.style = SaT();
-    this.maxWidth = 1024;
+    this.style = SaT( _style );
+    this.maxWidth = undefined;
     this.alpha = 1.0;
     this.gco = DEFAULT;
   

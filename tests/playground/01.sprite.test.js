@@ -17,7 +17,7 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const sprite = new nk2.Sprite( HW, HH, nk2.Sprite.DEFAULT_TEXTURE );
+    const sprite = new nk2.Sprite( HW, HH );
 
     sprite.anchor.SetSame( 0.5 );
 

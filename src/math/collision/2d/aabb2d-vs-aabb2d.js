@@ -27,13 +27,14 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
   const aabb1 = _obj1.shape;
   const w1 = aabb1.w;
   const h1 = aabb1.h;
-  const anchor1 = _obj1.anchor;  const aabb2 = _obj2.shape;
+  const anchor1 = _obj1.anchor;
+  const aabb2 = _obj2.shape;
   const w2 = aabb2.w;
   const h2 = aabb2.h;
   const anchor2 = _obj2.anchor;
 
-  PS_tl1.Set( aabb1.tl.x - _obj1.relative.x, aabb1.tl.y - _obj1.relative.y );
-  PS_tl2.Set( aabb2.tl.x - _obj2.relative.x, aabb2.tl.y - _obj2.relative.y );
+  PS_tl1.SetV( aabb1.tl ).SubtractV( _obj1.relative );
+  PS_tl2.SetV( aabb2.tl ).SubtractV( _obj2.relative );
 
   const tl2xw = PS_tl2.x + w1;
   const tl1xw = PS_tl1.x + w2;

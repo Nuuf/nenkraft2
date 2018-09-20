@@ -112,4 +112,20 @@ export class Stadium {
   
   }
 
+  Destroy () {
+
+    let i = 0;
+    const stages = this.stages;
+    const l = stages.length;
+
+    for ( ; i < l; ++i ) {
+
+      stages[i].Destroy();
+
+    }
+
+    this.ticker.Stop();
+
+  }
+
 }

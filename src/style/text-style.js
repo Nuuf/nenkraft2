@@ -10,8 +10,8 @@ export class TextStyle {
   constructor ( _props ) {
 
     this.fillColor = '#36802d';
-    this.strokeColor = '#c9df8a';
-    this.fontSize = 22;
+    this.strokeColor = '#36802d';
+    this.fontSize = 45;
     this.font = null;
     this.fontFamily = 'Arial';
     this.align = ALIGN_LEFT;

@@ -3,6 +3,8 @@
  */
 
 import * as GCO from './gco';
+import * as LineConf from './line_conf';
+import * as TextConf from './text_conf';
 
 import { FillStyle } from './fill-style';
 import { StrokeStyle } from './stroke-style';
@@ -17,6 +19,9 @@ export { TextStyle as Text };
 export { PixelStyle as Pixel };
 
 export { GCO };
+
+export { LineConf };
+export { TextConf };
 
 export const All = function ( _style ) {
 

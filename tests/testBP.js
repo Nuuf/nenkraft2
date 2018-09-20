@@ -34,19 +34,25 @@ export const CreateTest = function ( _id, _callback ) {
 
     if ( conf.stage ) {
 
-      conf.stage.ticker.Stop();
+      conf.stage.Destroy();
     
     }
 
     if ( conf.stadium ) {
-
-      conf.stadium.ticker.Stop();
 
       conf.stadium.stages.forEach( ( stage ) => {
 
         stage.canvas.parentNode.removeChild( stage.canvas );
     
       } );
+
+      conf.stadium.Destroy();
+    
+    }
+
+    if ( conf.canvasManager ) {
+
+      conf.canvasManager.Destroy();
     
     }
 

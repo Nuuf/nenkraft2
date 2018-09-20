@@ -33,6 +33,7 @@ export class Stage2D extends Container2D {
     this.canvasManager = null;
     this.mouse = null;
     this.touch = null;
+    this.ticker = null;
 
     if ( _options.mode === 'WebGL' ) {
 
@@ -211,6 +212,16 @@ export class Stage2D extends Container2D {
     }
   
     this.onProcess.Dispatch( this, _delta );
+  
+  }
+
+  Destroy () {
+
+    this.Dump();
+    this.keyboard.Destroy();
+    this.mouse.Destroy();
+    this.touch.Destroy();
+    if ( this.ticker != null ) this.ticker.Stop();
   
   }
 

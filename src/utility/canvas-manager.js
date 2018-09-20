@@ -23,7 +23,8 @@ export class CanvasManager {
     _canvas.setAttribute( 'width', _w );
     _canvas.setAttribute( 'height', _h );
 
-    window.addEventListener( 'resize', this.OnWindowResize.bind( this ) );
+    this.___bound___OnWindowRsize = this.OnWindowResize.bind( this );
+    window.addEventListener( 'resize', this.___bound___OnWindowRsize );
   
   }
 
@@ -209,6 +210,12 @@ export class CanvasManager {
     }
 
     this.SetCurrent( w, h );
+  
+  }
+
+  Destroy () {
+
+    window.removeEventListener( 'resize', this.___bound___OnWindowRsize );
   
   }
 

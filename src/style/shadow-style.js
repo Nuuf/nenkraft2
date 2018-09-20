@@ -12,7 +12,7 @@ export class ShadowStyle {
     this.blur = 5;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.applied = true;
+    this.applied = false;
     ApplyProperties( this, _props );
 
   }

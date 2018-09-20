@@ -47,6 +47,7 @@ export { Sprite } from './entity/sprite';
 export { Tilesprite } from './entity/tilesprite';
 export { Char } from './entity/char';
 export { BitmapText } from './entity/bitmap-text';
+export { Text } from './entity/text';
 export { Camera2D } from './entity/camera2d';
 export { Shader };
 export { Load };

@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'BitmapText', ( conf ) => {
+  CreateTest( 'Container2D', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -16,6 +16,16 @@ export default () => {
     c.setAttribute( 'height', H );
     c.style.display = 'initial';
     c.style.position = 'absolute';
+
+    const sprite = new nk2.Sprite( HW, HH );
+
+    sprite.anchor.SetSame( 0.5 );
+
+    const container = new nk2.Container2D( 0, 0 );
+
+    container.AddChild( sprite );
+
+    container.Draw( c.getContext( '2d' ) );
 
   } );
 

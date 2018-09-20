@@ -24,9 +24,9 @@ export class Result {
 
   Reset () {
 
-    this.poc.SetSame( 0 );
-    this.poc.SetSame( 0 );
-    this.poc.SetSame( 0 );
+    this.poc.a.SetSame( 0 );
+    this.poc.b.SetSame( 0 );
+    this.poc.c.SetSame( 0 );
     this.mtv.SetSame( 0 );
     this.mtd = 0;
     this.delta.SetSame( 0 );
@@ -48,7 +48,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
   
   PS_pos1.SetV( _obj1.relative );
   PS_pos2.SetV( _obj2.relative );
-  PS_delta.Set( PS_pos2.x - PS_pos1.x, PS_pos2.y - PS_pos1.y );
+  PS_delta.SetV( PS_pos2 ).SubtractV( PS_pos1 );
 
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
@@ -89,14 +89,13 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
         PS_poc1.y - ry
       );
       // as mtv
-      PS_pos1.SubtractV( PS_pos2 );
-      PS_pos1.Divide( radii, radii );
+      PS_pos1.SubtractV( PS_pos2 ).Divide( radii, radii );
 
       const mtd = distance - r1 - r2;
 
-      _result.poc.SetV( PS_poc1 );
-      _result.poc.SetV( PS_poc2 );
-      _result.poc.SetV( PS_poc3 );
+      _result.poc.a.SetV( PS_poc1 );
+      _result.poc.b.SetV( PS_poc2 );
+      _result.poc.c.SetV( PS_poc3 );
       _result.mtv.SetV( PS_pos1 /* as mtv */ );
       _result.mtd = mtd;
       _result.delta.SetV( PS_delta );
@@ -114,8 +113,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
 export const ElasticResponse = function ( _obj1, _obj2, _result ) {
 
-  PS_n.SetV( _result.delta );
-  PS_n.Normalize();
+  PS_n.SetV( _result.delta ).Normalize();
   PS_mtv.SetV( _result.mtv );
   const m1 = _obj1.mass;
   const m2 = _obj2.mass;
@@ -133,8 +131,7 @@ export const ElasticResponse = function ( _obj1, _obj2, _result ) {
     v2.x + op * m1 * PS_n.x,
     v2.y + op * m1 * PS_n.y
   );
-  PS_mtv.Multiply( _result.mtd, _result.mtd );
-  PS_mtv.Divide( 2, 2 );
+  PS_mtv.Multiply( _result.mtd, _result.mtd ).Divide( 2, 2 );
   _obj1.relative.SubtractV( PS_mtv );
   _obj2.relative.AddV( PS_mtv );
 

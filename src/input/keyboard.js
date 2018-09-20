@@ -12,8 +12,11 @@ export class Keyboard {
     this.element.setAttribute( 'tabindex', '1' );
     this.element.focus();
 
-    this.element.addEventListener( 'keydown', this.OnKeyDown.bind( this ) );
-    this.element.addEventListener( 'keyup', this.OnKeyUp.bind( this ) );
+    this.___bound___OnKeyDown = this.OnKeyDown.bind( this );
+    this.___bound___OnKeyUp = this.OnKeyUp.bind( this );
+
+    this.element.addEventListener( 'keydown', this.___bound___OnKeyDown );
+    this.element.addEventListener( 'keyup', this.___bound___OnKeyUp );
 
     this.onDown = new Event();
     this.onUp = new Event();
@@ -33,6 +36,13 @@ export class Keyboard {
     _event.preventDefault();
     _event.stopPropagation();
     this.onUp.Dispatch( this.element, _event );
+  
+  }
+
+  Destroy () {
+
+    this.element.removeEventListener( 'keydown', this.___bound___OnKeyDown );
+    this.element.removeEventListener( 'keyup', this.___bound___OnKeyUp );
   
   }
 

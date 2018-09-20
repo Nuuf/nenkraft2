@@ -15,11 +15,17 @@ export class Mouse {
     this.offset = new Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
 
-    this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
-    this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
-    this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
-    this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
-    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ), { passive: true } );
+    this.___bound___OnMove = this.OnMove.bind( this );
+    this.___bound___OnDown = this.OnDown.bind( this ); 
+    this.___bound___OnUp = this.OnUp.bind( this );
+    this.___bound___OnLeave = this.OnLeave.bind( this );
+    this.___bound___OnWheel = this.OnWheel.bind( this );
+
+    this.element.addEventListener( 'mousemove', this.___bound___OnMove );
+    this.element.addEventListener( 'mousedown', this.___bound___OnDown );
+    this.element.addEventListener( 'mouseup', this.___bound___OnUp );
+    this.element.addEventListener( 'mouseleave', this.___bound___OnLeave );
+    this.element.addEventListener( 'wheel', this.___bound___OnWheel, { passive: true } );
 
     this.onMove = new Event();
     this.onDown = new Event();
@@ -94,6 +100,16 @@ export class Mouse {
     pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
     pos.SubtractV( this.offset );
     pos.DivideV( this.scale );
+  
+  }
+
+  Destroy () {
+
+    this.element.removeEventListener( 'mousemove', this.___bound___OnMove );
+    this.element.removeEventListener( 'mousedown', this.___bound___OnDown );
+    this.element.removeEventListener( 'mouseup', this.___bound___OnUp );
+    this.element.removeEventListener( 'mouseleave', this.___bound___OnLeave );
+    this.element.removeEventListener( 'wheel', this.___bound___OnWheel );
   
   }
 
