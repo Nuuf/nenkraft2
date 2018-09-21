@@ -33,6 +33,8 @@ export default () => {
       .AddChild( rootContainer )
       .AddChild( sprite );
 
+    stage.mouse.AddOffset( camera );
+
     stage.ticker.StartAF();
     stage.onProcess.Add( () => {
 
@@ -42,11 +44,7 @@ export default () => {
 
     stage.mouse.onDown.Add( ( event ) => {
 
-      const newPos = event.data.position
-        .Copy()
-        .SubtractV( camera.position );
-
-      camera.target.position.SetV( newPos );
+      camera.target.position.SetV( event.data.position );
 
     } );
 

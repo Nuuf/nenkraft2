@@ -72,8 +72,8 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
 export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
 
-  const d1 = _axis.MinMaxDot( _obj1.shape.vertices );
-  const d2 = _axis.MinMaxDot( _obj2.shape.vertices );
+  const d1 = _axis.GetMinMaxDot( _obj1.shape.vertices );
+  const d2 = _axis.GetMinMaxDot( _obj2.shape.vertices );
   const offset = _obj2.relative.SubtractVC( _obj1.relative ).GetDotV( _axis );
   
   d2.Add( offset, offset );
@@ -86,13 +86,13 @@ export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
 
   if ( _result != undefined ) {
 
-    const mtd = 0;
+    let mtd = 0;
+    let o1 = 0;
+    let o2 = 0;
     const d1x = d1.x;
     const d1y = d1.y;
     const d2x = d2.x;
     const d2y = d2.y;
-    const o1 = 0;
-    const o2 = 0;
 
     if ( d1x < d2x ) {
 

@@ -14,6 +14,7 @@ export class Mouse {
     this.scale = new Vector2D( 1, 1 );
     this.offset = new Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
+    this.offsets = [];
 
     this.___bound___OnMove = this.OnMove.bind( this );
     this.___bound___OnDown = this.OnDown.bind( this ); 
@@ -71,6 +72,7 @@ export class Mouse {
   OnUp ( _event ) {
 
     _event.stopPropagation();
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onUp.Dispatch( this.element, this.eventData );
   
@@ -79,6 +81,7 @@ export class Mouse {
   OnLeave ( _event ) {
 
     _event.stopPropagation();
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onLeave.Dispatch( this.element, this.eventData );
   
@@ -87,6 +90,7 @@ export class Mouse {
   OnWheel ( _event ) {
 
     _event.stopPropagation();
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onWheel.Dispatch( this.element, this.eventData );
   
@@ -94,13 +98,30 @@ export class Mouse {
 
   CalculatePosition ( _x, _y ) {
 
+    let i = 0;
+    const l = this.offsets.length;
     const pos = this.position;
 
-    pos.Set( _x, _y );
-    pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
-    pos.SubtractV( this.offset );
-    pos.DivideV( this.scale );
+    pos
+      .Set( _x, _y )
+      .Subtract( this.element.offsetLeft, this.element.offsetTop )
+      .SubtractV( this.offset )
+      .DivideV( this.scale );
+
+    for ( ; i < l; ++i ) {
+
+      pos.SubtractV( this.offsets[i] );
+    
+    }
   
+  }
+
+  AddOffset ( _offset ) {
+
+    this.offsets.push( _offset );
+
+    return this;
+
   }
 
   Destroy () {

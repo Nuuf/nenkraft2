@@ -3,10 +3,10 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'CollisionAABB2D', ( conf ) => {
+  CreateTest( 'CollisionCircle', ( conf ) => {
 
-    const W = 1920 * 2;
-    const H = 1080 * 2;
+    const W = 1920 * 3;
+    const H = 1080 * 3;
     const HW = W * 0.5;
     const HH = H * 0.5;
     const c = conf.canvas = document.createElement( 'canvas' );
@@ -23,7 +23,7 @@ export default () => {
       y: 0,
       halt: false
     };
-    const stage = new nk2.Stage2D( options );
+    const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.Container2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
     const scene = new nk2.Container2D( HW, HH );
@@ -36,15 +36,10 @@ export default () => {
       .AddChild( scene );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
-
-    canvasManager
-      .BindStage( stage )
-      .BindRootContainer( root )
-      .Trigger();
-
-    const CollideRel = nk2.Collision.AABB2DvsAABB2D.CollideRel;
-    const result = new nk2.Collision.AABB2DvsAABB2D.Result();
     const bodies = [];
+    const CollideRel = nk2.Collision.CirclevsCircle.CollideRel;
+    const Response = nk2.Collision.CirclevsCircle.ElasticResponse;
+    const result = new nk2.Collision.CirclevsCircle.Result();
 
     {
 
@@ -52,24 +47,35 @@ export default () => {
 
       while ( i-- ) {
 
-        const sprite = new nk2.Sprite( 0, 0 );
+        const mass = nk2.Utility.RandomInteger( 50, 125 );
+        const path = new nk2.Path.Circle( 0, 0, mass );
+        const graphic = new nk2.Graphic2D(
+          nk2.Utility.RandomFloat( -HW, HW ),
+          nk2.Utility.RandomFloat( -HH, HH ),
+          path
+        );
 
-        sprite.anchor.SetSame( 0.5 );
-
-        sprite.data.body = {
-          shape: sprite.shape,
-          relative: sprite.position,
-          anchor: new nk2.Vector2D( 0, 0 ),
-          velocity: new nk2.Vector2D( nk2.Utility.RandomFloat( -15, 15 ), nk2.Utility.RandomFloat( -15, 15 ) )
+        graphic.data.body = {
+          shape: path,
+          relative: graphic.position,
+          mass: mass,
+          velocity: new nk2.Vector2D( nk2.Utility.RandomInteger( -30, 30 ), nk2.Utility.RandomInteger( -30, 30 ) )
         };
 
-        sprite.AttachTo( scene );
+        bodies.push( graphic.data.body );
 
-        bodies.push( sprite.data.body );
+        scene.AddChild( graphic );
 
       }
-    
+
     }
+
+    canvasManager
+      .BindStage( stage )
+      .BindRootContainer( root )
+      .Trigger();
+
+    stage.mouse.AddOffset( scene ).AddOffset( camera );
 
     stage.onProcess.Add( () => {
 
@@ -83,7 +89,7 @@ export default () => {
         let bodyA;
         let bodyB;
 
-        for ( i; i < l;++i ) {
+        for ( ; i < l;++i ) {
 
           bodyA = bodies[i];
 
@@ -91,25 +97,25 @@ export default () => {
 
           if ( bodyA.relative.x > HW ) {
 
-            bodyA.velocity.x = -bodyA.velocity.x;
             bodyA.relative.x = HW;
-          
+            bodyA.velocity.x = -bodyA.velocity.x;
+
           } else if ( bodyA.relative.x < -HW ) {
 
-            bodyA.velocity.x = -bodyA.velocity.x;
             bodyA.relative.x = -HW;
+            bodyA.velocity.x = -bodyA.velocity.x;
           
           }
 
           if ( bodyA.relative.y > HH ) {
 
-            bodyA.velocity.y = -bodyA.velocity.y;
             bodyA.relative.y = HH;
-          
+            bodyA.velocity.y = -bodyA.velocity.y;
+
           } else if ( bodyA.relative.y < -HH ) {
 
-            bodyA.velocity.y = -bodyA.velocity.y;
             bodyA.relative.y = -HH;
+            bodyA.velocity.y = -bodyA.velocity.y;
           
           }
 
@@ -125,30 +131,8 @@ export default () => {
 
               if ( result.occured ) {
 
-                if ( result.mtv.x > 0 ) {
+                Response( bodyA, bodyB, result );
 
-                  bodyA.relative.SubtractV( result.mtv );
-                  bodyB.relative.AddV( result.mtv );
-                
-                } else {
-
-                  bodyB.relative.SubtractV( result.mtv );
-                  bodyA.relative.AddV( result.mtv );
-                
-                }
-
-                if ( result.mtv.x !== 0 ) {
-
-                  bodyA.velocity.x = -bodyA.velocity.x;
-                  bodyB.velocity.x = -bodyB.velocity.x;
-
-                } else if ( result.mtv.y !== 0 ) {
-
-                  bodyA.velocity.y = -bodyA.velocity.y;
-                  bodyB.velocity.y = -bodyB.velocity.y;
-                
-                }
-              
               }
 
             }
@@ -163,11 +147,7 @@ export default () => {
 
     stage.mouse.onDown.Add( ( event ) => {
 
-      camera.target.position.SetV(
-        event.data.position
-          .SubtractVC( scene )
-          .SubtractV( camera.position )
-      );
+      camera.target.position.SetV( event.data.position );
 
     } );
 
