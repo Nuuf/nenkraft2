@@ -22,15 +22,7 @@ export class Polygon2D {
 
     if ( _vertices != null ) {
 
-      if ( _vertices[0] instanceof Vector2D ) {
-
-        this.AddPoints( _vertices );
-
-      } else {
-
-        this.PushPoints( _vertices );
-      
-      }
+      this.AddVertices( _vertices );
     
     }
 
@@ -38,14 +30,12 @@ export class Polygon2D {
 
   Copy () {
 
-    let i = 0;
     const p = new Polygon2D();
     const vertices = this.vertices;
-    const l = vertices.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < vertices.length; ++i ) {
 
-      p.AddPoint( vertices[ i ].Copy() );
+      p.AddVertex( vertices[ i ].Copy() );
     
     }
 
@@ -55,16 +45,14 @@ export class Polygon2D {
 
   ExtractSegments ( _segments ) {
 
-    let i = 0;
     const vertices = this.vertices;
     const l = vertices.length - 1;
-    let vertex = vertices[i];
 
     if ( _segments == null ) _segments = [];
 
-    for ( ; i < l; vertex = vertices[ ++i ] ) {
+    for ( var i = 0; i < l; ++i ) {
 
-      _segments.push( new Line2D( vertex, vertices[ i + 1 ] ) );
+      _segments.push( new Line2D( vertices[i], vertices[ i + 1 ] ) );
     
     }
 
@@ -79,7 +67,6 @@ export class Polygon2D {
     this.ComputeBounds();
     _outside = !!_outside;
 
-    let i = 0;
     let randFunc = RandomFloat;
     const tl = this.aabb.tl;
     const br = this.aabb.br;
@@ -87,7 +74,7 @@ export class Polygon2D {
 
     if ( _int === true ) randFunc = RandomInteger;
 
-    for ( ; i < _amount; ++i ) {
+    for ( var i = 0; i < _amount; ++i ) {
       
       const point = new Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
@@ -113,16 +100,13 @@ export class Polygon2D {
 
   AddVertices ( _vertices ) {
 
-    let i = 0;
-    const l = _vertices.length;
-
     if ( _vertices[0] instanceof Vector2D ) {
 
       this.vertices.push.apply( this.vertices, _vertices );
 
     } else if ( typeof _vertices[0] === 'number' ) {
 
-      for ( ; i < l; i += 2 ) {
+      for ( var i = 0; i < _vertices.length; i += 2 ) {
 
         this.AddVertex( new Vector2D( _vertices[ i ], _vertices[ i + 1 ] ) );
             
@@ -130,7 +114,7 @@ export class Polygon2D {
     
     } else if ( _vertices[0].x != null ) {
 
-      for ( ; i < l; ++i ) {
+      for ( i = 0; i < _vertices.length; ++i ) {
 
         this.AddVertex( new Vector2D( _vertices[ i ].x, _vertices[ i].y ) );
                 
@@ -149,18 +133,16 @@ export class Polygon2D {
 
   ComputeBounds () {
 
-    let i = 0;
     let mix = Infinity;
     let max = -mix;
     let miy = mix;
     let may = -mix;
     let vertex;
     const vertices = this.vertices;
-    const l = vertices.length;
 
     if ( this.aabb === null ) this.aabb = new AABB2D( 0, 0, 0, 0 );
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < vertices.length; ++i ) {
 
       vertex = vertices[ i ];
       if ( vertex.x < mix ) mix = vertex.x;
@@ -194,7 +176,7 @@ export class Polygon2D {
 
     for ( i; i < l; ++i ) {
 
-      vertex = vertex[ i ];
+      vertex = vertices[ i ];
       vertex.RotateAroundV( ap, _angle );
     
     }
@@ -205,22 +187,18 @@ export class Polygon2D {
 
   GetControid () {
 
-    let i = 0;
-    let vertex;
     const vertices = this.vertices;
-    const l = vertices.length;
     const centroid = this.centroid;
 
     centroid.Set( 0, 0 );
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < vertices.length; ++i ) {
 
-      vertex = vertices[ i ];
-      centroid.AddV( vertex );
+      centroid.AddV( vertices[i] );
     
     }
 
-    centroid.Divide( l, l );
+    centroid.Divide( vertices.length, vertices.length );
 
     return centroid;
   
@@ -228,17 +206,15 @@ export class Polygon2D {
 
   GetNormalsA () {
 
-    let i = 0;
     const vertices = this.vertices;
     const l = vertices.length - 1;
     const normals = this.normals;
-    let vertex = vertices[i];
 
     normals.length = 0;
 
-    for ( ; i < l; vertex = vertices[ ++i ] ) {
+    for ( var i = 0; i < l; ++i ) {
 
-      normals.push( vertex.GetNormalAV( vertices[ i + 1 ] ) );
+      normals.push( vertices[i].GetNormalAV( vertices[ i + 1 ] ) );
     
     }
 
@@ -250,17 +226,15 @@ export class Polygon2D {
   
   GetNormalsA () {
 
-    let i = 0;
     const vertices = this.vertices;
     const l = vertices.length - 1;
     const normals = this.normals;
-    let vertex = vertices[i];
 
     normals.length = 0;
 
-    for ( ; i < l; vertex = vertices[ ++i ] ) {
+    for ( var i = 0; i < l; ++i ) {
 
-      normals.push( vertex.GetNormalBV( vertices[ i + 1 ] ) );
+      normals.push( vertices[i].GetNormalBV( vertices[ i + 1 ] ) );
     
     }
 
@@ -272,17 +246,15 @@ export class Polygon2D {
 
   GetPerimeterMidPoints () {
 
-    let i = 0;
     const vertices = this.vertices;
     const l = vertices.length - 1;
     const perimeterMidPoints = this.perimeterMidPoints;
-    let vertex = vertices[i];
 
     perimeterMidPoints.length = 0;
 
-    for ( ; i < l; vertex = vertices[ ++i ] ) {
+    for ( var i = 0; i < l; ++i ) {
 
-      perimeterMidPoints.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
+      perimeterMidPoints.push( vertices[i].GetMidPointV( vertices[ i + 1 ] ) );
     
     }
 
@@ -297,17 +269,14 @@ export class Polygon2D {
     if ( this.dirtyBounds === true ) this.ComputeBounds();
     if ( this.aabb.IntersectsPoint( _p ) === false ) return false;
 
-    let i = 0;
     let vertexi;
     let vertexj;
     let intersects = false;
     const vertices = this.vertices;
-    const l = vertices.length;
     const x = _p.x;
     const y = _p.y;
-    let j = l - 1;
 
-    for ( i = 0, j = l - 1; i < l; j = i++ ) {
+    for ( var i = 0, j = vertices.length - 1; i < vertices.length; j = i++ ) {
 
       vertexi = vertices[ i ];
       vertexj = vertices[ j ];

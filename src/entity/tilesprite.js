@@ -31,19 +31,20 @@ export class Tilesprite extends Sprite {
       ImageFromDataURL(
         GenerateSimpleBase64PNG( () => {
 
-          const path = new Polygon2D();
+          const path = new Polygon2D( [
+            0, 0,
+            64, 0,
+            64, 64,
+            0, 64,
+            0, 0,
+            32, 32,
+            64, 0,
+            32, 32,
+            64, 64,
+            32, 32,
+            0, 64
+          ] );
 
-          path.AddVertex( new Vector2D( 0, 0 ) );
-          path.AddVertex( new Vector2D( 64, 0 ) );
-          path.AddVertex( new Vector2D( 64, 64 ) );
-          path.AddVertex( new Vector2D( 0, 64 ) );
-          path.AddVertex( new Vector2D( 0, 0 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 64, 0 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 64, 64 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 0, 64 ) );
           path.ComputeBounds();
           path.style.fill.color = '#234d20';
           path.style.stroke.lineWidth = 3;

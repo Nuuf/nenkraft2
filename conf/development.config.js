@@ -6,8 +6,8 @@ module.exports = function () {
 
   return {
     entry: {
-      tests: [
-        './tests/index.js'
+      demos: [
+        './demos/index.js'
       ]
     },
     output: {
@@ -21,7 +21,7 @@ module.exports = function () {
       new HtmlWebpackPlugin( {
         template: './src/index.html',
         filename: './index.html',
-        chunks: [ 'tests' ]
+        chunks: [ 'demos' ]
       } ),
       new MiniCssExtractPlugin( {
         filename: '[name].css',

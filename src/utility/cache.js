@@ -82,12 +82,10 @@ export class Cache {
 
   GetById ( _id ) {
 
-    let i = 0;
     const items = this.items;
-    const l = items.length;
-    let item = items[i];
+    let item = items[0];
 
-    for ( ; i < l; item = items[ ++i ] ) {
+    for ( var i = 0; i < items.length; item = items[ ++i ] ) {
 
       if ( item != null ) {
   
@@ -107,12 +105,10 @@ export class Cache {
 
   Contains ( _item, _id ) {
 
-    let i = 0;
     const items = this.items;
-    const l = items.length;
     let item = items[i];
 
-    for ( ; i < l; item = items[ ++i ] ) {
+    for ( var i = 0 ; i < items.length; item = items[ ++i ] ) {
 
       if ( item != null ) {
   

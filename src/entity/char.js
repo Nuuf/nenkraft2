@@ -65,11 +65,9 @@ export class Char extends CoreEntity2D {
 
   ApplyKernings ( _kernings ) {
 
-    let i = 0;
     let attributes;
-    const l = _kernings.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < _kernings.length; ++i ) {
 
       attributes = _kernings[ i ].attributes;
   
@@ -98,11 +96,9 @@ export class Char extends CoreEntity2D {
 
       if ( _prevChar.kernings && _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
 
-        let i = 0;
         const kernings = this.kernings;
-        const l = kernings.length;
 
-        for ( ; i < l; i += 3 ) {
+        for ( var i = 0; i < kernings.length; i += 3 ) {
 
           if ( kernings[ i + 1 ] === _prevChar.id ) {
 

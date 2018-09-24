@@ -54,11 +54,9 @@ export class Line2D {
 
   Cut ( _cuts, _points ) {
 
-    let i = 0;
-
     if ( _points == null ) _points = [];
 
-    for ( ; i < _cuts.length; ++i ) {
+    for ( var i = 0; i < _cuts.length; ++i ) {
 
       _points.push( this.s.GetWeightedAverageV( this.e, _cuts[i] ) );
     

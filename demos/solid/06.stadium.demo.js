@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Stadium', ( conf ) => {
+  CreateDemo( 'Stadium', ( conf ) => {
 
     const W = 600;
     const H = 400;

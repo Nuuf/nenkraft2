@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'CollisionPolygon2D', ( conf ) => {
+  CreateDemo( 'CollisionPolygon2D', ( conf ) => {
 
     const W = 1920;
     const H = 1080;

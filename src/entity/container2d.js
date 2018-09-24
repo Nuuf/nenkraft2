@@ -102,11 +102,9 @@ export class Container2D extends CoreEntity2D {
 
   DrawChildren ( _rc ) {
 
-    let i = 0;
     const children = this.children;
-    const l = children.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0 ; i < children.length; ++i ) {
 
       children[i].Draw( _rc );
     
@@ -116,11 +114,9 @@ export class Container2D extends CoreEntity2D {
 
   GLDrawChildren ( _gl ) {
 
-    let i = 0;
     const children = this.children;
-    const l = children.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < children.length; ++i ) {
 
       children[i].GLDraw( _gl );
     
@@ -140,14 +136,12 @@ export class Container2D extends CoreEntity2D {
 
   ComputeBatchBuffer ( _getBufferData ) {
 
-    let i = 0;
     let child;
     let childData;
     const children = this.children;
-    const l = children.length;
     const childDataBuffer = [];
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < children.length; ++i ) {
 
       child = children[ i ];
 
@@ -202,7 +196,6 @@ export class Container2D extends CoreEntity2D {
 
   AddChildren () {
 
-    let i = 0;
     let children = arguments;
 
     if ( IsArray( children[ 0 ] ) ) {
@@ -211,9 +204,7 @@ export class Container2D extends CoreEntity2D {
     
     }
 
-    const l = children.length;
-
-    for ( ; i < l; ++i ) {
+    for ( var i = 0 ; i < children.length; ++i ) {
 
       this.AddChild( children[ i ] );
     
@@ -252,7 +243,6 @@ export class Container2D extends CoreEntity2D {
 
   RemoveChildren () {
 
-    let i = 0;
     let aChildren = arguments;
     let child;
     let index;
@@ -265,9 +255,8 @@ export class Container2D extends CoreEntity2D {
 
     const children = this.children;
     const rChildren = [];
-    const l = aChildren.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < aChildren.length; ++i ) {
 
       child = aChildren[ i ];
       index = children.indexOf( child );
@@ -325,11 +314,9 @@ export class Container2D extends CoreEntity2D {
 
   Dump () {
 
-    let i = 0;
     const children = this.children;
-    const l = children.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < children.length; ++i ) {
 
       children[i].parent = null;
 
@@ -362,17 +349,15 @@ export class Container2D extends CoreEntity2D {
 
   GetChildClosestTo ( _object, _filter ) {
 
-    let i = 0;
     let child;
     let distance = Infinity;
     let tempDistance;
     let closestChild;
     const children = this.children;
-    const l = children.length;
 
     if ( children.length !== 0 ) {
 
-      for ( ; i < l; ++i ) {
+      for ( var i = 0; i < children.length; ++i ) {
 
         child = children[ i ];
 
@@ -403,17 +388,15 @@ export class Container2D extends CoreEntity2D {
 
   GetChildFurthestFrom ( _object, _filter ) {
 
-    let i = 0;
     let child;
     let distance = 0;
     let tempDistance;
     let closestChild;
     const children = this.children;
-    const l = children.length;
 
     if ( children.length !== 0 ) {
 
-      for ( ; i < l; ++i ) {
+      for ( var i = 0; i < children.length; ++i ) {
 
         child = children[ i ];
 

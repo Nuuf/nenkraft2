@@ -97,14 +97,14 @@ export class SpritesheetLoader {
 
   OnPartXHRLoaded ( _event ) {
 
-    this.tempData = this.xhrLoader.GetData( _event.target.data.id );
+    this.tempData = this.xhrLoader.GetDataById( _event.target.data.id );
     this.OnPartLoaded();
   
   }
 
   OnPartImageLoaded ( _event ) {
 
-    this.tempBasicTexture = this.imageLoader.GetBasicTexture( _event.target.id );
+    this.tempBasicTexture = this.imageLoader.GetBasicTextureById( _event.target.id );
     this.OnPartLoaded();
   
   }

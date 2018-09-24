@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Tilesprite', ( conf ) => {
+  CreateDemo( 'Sprite', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -17,15 +17,11 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const rc = c.getContext( '2d' );
-    const sprite = new nk2.Tilesprite( HW, HH, nk2.Tilesprite.DEFAULT_TEXTURE );
+    const sprite = new nk2.Sprite( HW, HH );
 
-    sprite.GeneratePattern( rc, 64 * 10, 64 * 10 );
+    sprite.anchor.SetSame( 0.5 );
 
-    sprite.x = HW - sprite.width * 0.5;
-    sprite.y = HH - sprite.height * 0.5;
-
-    sprite.Draw( rc );
+    sprite.Draw( c.getContext( '2d' ) );
 
   } );
 

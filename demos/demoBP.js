@@ -1,4 +1,4 @@
-export const CreateTest = function ( _id, _callback ) {
+export const CreateDemo = function ( _id, _callback ) {
 
   const buttonContainer = document.getElementById( 'buttons' );
   const button = document.createElement( 'input' );

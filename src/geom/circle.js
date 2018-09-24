@@ -69,7 +69,6 @@ export class Circle {
 
   GenerateRandomPoints ( _amount, _int, _outside ) {
 
-    let i = 0;
     let randFunc = RandomFloat;
     const tl = new Vector2D( this.x - this.radius, this.y - this.radius );
     const br = new Vector2D( this.x + this.radius, this.y + this.radius );
@@ -79,7 +78,7 @@ export class Circle {
 
     if ( _int === true ) randFunc = RandomInteger;
 
-    for ( ; i < _amount; ++i ) {
+    for ( var i = 0; i < _amount; ++i ) {
       
       const point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
@@ -99,12 +98,11 @@ export class Circle {
 
   GeneratePerimeterPoints ( _amount, _margin ) {
 
-    let i = 0;
     const points = [];
 
     _amount *= _margin;
 
-    for ( ; i < _amount; i += _margin ) {
+    for ( var i = 0; i < _amount; i += _margin ) {
 
       points.push(
         Nenkraft.Vector2D(

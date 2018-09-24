@@ -11,12 +11,14 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
 
     const xhrloader = new nk2.Load.XHRLoader();
     const imgloader = new nk2.Load.ImageLoader();
+    const ssloader = new nk2.Load.SpritesheetLoader();
     let done = 0;
   
     xhrloader.Load( [
       { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
       { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' },
-      { id: 'fontNoK', src: './assets/xhr/fontNoK.xml', type: 'xml' }
+      { id: 'fontNoK', src: './assets/xhr/fontNoK.xml', type: 'xml' },
+      { id: 'particleExplosion', src: './assets/xhr/particle-explosion.json', type: 'json' }
     ] );
     imgloader.Load( [
       { id: 'fontimg', src: './assets/images/font.png' },
@@ -28,6 +30,18 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
       { id: 'raindrop', src: './assets/images/raindrop.png' },
       { id: 'smudge', src: './assets/images/smudge.png' }
     ], true );
+    ssloader.Load( [
+      {
+        id: 'sheet-default',
+        image: {
+          src: './../assets/images/invaders/invaders-sheet.png'
+        },
+        data: {
+          src: './../assets/xhr/invaders.json',
+          type: 'json'
+        }
+      }
+    ] );
     xhrloader.onComplete.Add( function ( event ) {
   
       console.log( event.data );
@@ -43,34 +57,42 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
       Go();
     
     } );
+    ssloader.onComplete.Add( ( event ) => {
+
+      console.log( event.data );
+      done++;
+      Go();
+
+    } );
   
     function Go () {
   
-      if ( done < 2 ) return ;
+      if ( done < 3 ) return ;
   
-      const tests = [];
+      const demos = [];
   
       window.testData = {
         xhrloader: xhrloader,
-        imgloader: imgloader
+        imgloader: imgloader,
+        ssloader: ssloader
       };
   
-      const context = require.context( './', true, /\.(test)$/ );
+      const context = require.context( './', true, /\.(demo)$/ );
       
       context.keys().forEach( ( file ) => {
       
-        tests.push( context( file ) );
+        demos.push( context( file ) );
       
       } );
       
       {
       
         let i = 0;
-        const l = tests.length;
+        const l = demos.length;
       
         for ( ; i < l; ++i ) {
       
-          tests[ i ].default();
+          demos[ i ].default();
             
         }
       

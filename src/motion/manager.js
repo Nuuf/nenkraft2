@@ -61,10 +61,7 @@ export class Manager {
     
     _ids = _ids.split( ' ' );
 
-    let i = 0;
-    const l = _ids.length;
-
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < _ids.length; ++i ) {
 
       this.Start( _ids[ i ] );
     
@@ -90,10 +87,7 @@ export class Manager {
     
     _ids = _ids.split( ' ' );
 
-    let i = 0;
-    const l = _ids.length;
-
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < _ids.length; ++i ) {
 
       this.Stop( _ids[ i ] );
     
@@ -119,10 +113,7 @@ export class Manager {
 
     _ids = _ids.split( ' ' );
 
-    let i = 0;
-    const l = _ids.length;
-
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < _ids.length; ++i ) {
 
       this.Reset( _ids[ i ] );
     
@@ -132,11 +123,9 @@ export class Manager {
 
   Process () {
 
-    let i = 0;
     const motions = this.motions;
-    const l = motions.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < motions.length; ++i ) {
 
       motions[i].Process();
       
@@ -146,11 +135,9 @@ export class Manager {
 
   GetMotionById ( _id ) {
 
-    let i = 0;
     const motions = this.motions;
-    const l = motions.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < motions.length; ++i ) {
 
       if ( motions[i].id === _id ) return motions[i];
       

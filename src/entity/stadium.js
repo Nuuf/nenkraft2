@@ -74,15 +74,12 @@ export class Stadium {
 
   GetStages () {
 
-    let i = 0;
-    let j = 0;
     const stages = this.stages;
     const rStages = [];
-    const l = stages.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < stages.length; ++i ) {
 
-      for ( j = 0; j < arguments.length; ++j ) {
+      for ( var j = 0; j < arguments.length; ++j ) {
 
         if ( stages[i].id === arguments[j] ) {
 
@@ -100,11 +97,9 @@ export class Stadium {
 
   Process ( _delta ) {
 
-    let i = 0;
     const stages = this.stages;
-    const l = stages.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < stages.length; ++i ) {
 
       stages[i].MixedProcess( _delta );
       
@@ -114,11 +109,9 @@ export class Stadium {
 
   Destroy () {
 
-    let i = 0;
     const stages = this.stages;
-    const l = stages.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < stages.length; ++i ) {
 
       stages[i].Destroy();
 

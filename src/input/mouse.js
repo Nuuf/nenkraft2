@@ -50,8 +50,6 @@ export class Mouse {
 
   OnMove ( _event ) {
 
-    _event.preventDefault();
-    _event.stopPropagation();
     this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
@@ -63,6 +61,7 @@ export class Mouse {
   OnDown ( _event ) {
 
     _event.stopPropagation();
+    _event.preventDefault();
     this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onDown.Dispatch( this.element, this.eventData );
@@ -72,6 +71,7 @@ export class Mouse {
   OnUp ( _event ) {
 
     _event.stopPropagation();
+    _event.preventDefault();
     this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onUp.Dispatch( this.element, this.eventData );
@@ -98,8 +98,7 @@ export class Mouse {
 
   CalculatePosition ( _x, _y ) {
 
-    let i = 0;
-    const l = this.offsets.length;
+    const offsets = this.offsets;
     const pos = this.position;
 
     pos
@@ -108,9 +107,9 @@ export class Mouse {
       .SubtractV( this.offset )
       .DivideV( this.scale );
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < offsets.length; ++i ) {
 
-      pos.SubtractV( this.offsets[i] );
+      pos.SubtractV( offsets[i] );
     
     }
   

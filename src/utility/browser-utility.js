@@ -4,7 +4,9 @@
 
 import { IsObjectEmpty } from '.';
 
-export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHeight ) {
+const Ceil = Math.ceil;
+
+export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHeight, _backgroundColor ) {
 
   const drawable = _renderFunction();
 
@@ -15,10 +17,8 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
     
   }
 
-  PS_canvasrc.clearRect( 0, 0, PS_canvas.width, PS_canvas.height );
-
-  PS_canvas.width = drawable.w;
-  PS_canvas.height = drawable.h;
+  PS_canvas.width = Ceil( drawable.w ) ;
+  PS_canvas.height = Ceil( drawable.h );
 
   if ( _forceWidth != null ) {
 
@@ -30,6 +30,17 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
 
     PS_canvas.height = _forceHeight;
     
+  }
+
+  if ( _backgroundColor != null ) {
+
+    PS_canvasrc.fillStyle = _backgroundColor;
+    PS_canvasrc.fillRect( 0, 0, PS_canvas.width, PS_canvas.height );
+
+  } else {
+
+    PS_canvasrc.clearRect( 0, 0, PS_canvas.width, PS_canvas.height );
+  
   }
 
   PS_canvasrc.setTransform( 1, 0, 0, 1, 0, 0 );

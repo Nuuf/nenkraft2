@@ -588,7 +588,7 @@ export class Particle2D {
   SetLifespan ( _value ) {
 
     this.lifespan = 0;
-    this.lifespanTotal = _value;
+    this.lifespanTotal = MinMaxOrValue( _value );
   
   }
 

@@ -18,19 +18,15 @@ export class Polygon2D extends Polygon2DGeom {
 
   Draw ( _rc ) {
 
-    let i = 0;
     const vertices = this.vertices;
     const style = this.style;
-    const l = vertices.length;
-    let vertex = vertices[i];
 
     _rc.beginPath();
-    _rc.moveTo( vertex.x, vertex.y );
+    _rc.moveTo( vertices[0].x, vertices[0].y );
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 1; i < vertices.length; ++i ) {
 
-      vertex = vertices[ i ];
-      _rc.lineTo( vertex.x, vertex.y );
+      _rc.lineTo( vertices[i].x, vertices[i].y );
     
     }
 

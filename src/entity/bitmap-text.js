@@ -100,12 +100,10 @@ export class BitmapText extends Sprite {
 
   DrawText ( _rc ) {
 
-    let i = 0;
     const chars = this.chars;
-    const l = chars.length;
     const image = this.texture.image;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < chars.length; ++i ) {
 
       chars[i].Draw( _rc, image );
     
@@ -115,13 +113,11 @@ export class BitmapText extends Sprite {
 
   GLDrawText () {
 
-    let i = 0;
     const chars = this.chars;
-    const l = chars.length;
 
     if ( this.autoUpdateChars === true ) {
 
-      for ( ; i < l; ++i ) {
+      for ( var i = 0; i < chars.length; ++i ) {
 
         chars[i].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
       
@@ -129,7 +125,7 @@ export class BitmapText extends Sprite {
     
     } else {
 
-      for ( ; i < l; ++i ) {
+      for ( i = 0; i < chars.length; ++i ) {
 
         chars[i].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
       
@@ -141,7 +137,6 @@ export class BitmapText extends Sprite {
 
   ComputeText () {
 
-    let i = 0;
     let kernings;
     let lineNum = 0;
     let newLines = 0;
@@ -154,7 +149,6 @@ export class BitmapText extends Sprite {
     let prevChar;
     const chars = this.chars;
     const text = this.text;
-    const l = text.length;
 
     this.UpdateTransform();
     chars.length = 0;
@@ -165,7 +159,7 @@ export class BitmapText extends Sprite {
     
     }
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < text.length; ++i ) {
 
       const charCode = text.charCodeAt( i );
 
@@ -211,11 +205,9 @@ export class BitmapText extends Sprite {
 
   UpdateChars () {
 
-    let i = 0;
     const chars = this.chars;
-    const l = chars.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < chars.length; ++i ) {
 
       chars[i].UpdateMatrices();
       
@@ -225,11 +217,9 @@ export class BitmapText extends Sprite {
 
   GetCharDataById ( _id ) {
 
-    let i = 0;
     const chars = this.fontData.font.chars.char;
-    const l = chars.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < chars.length; ++i ) {
 
       if ( parseInt( chars[ i ].attributes.id ) === _id ) {
   

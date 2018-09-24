@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'CollisionAABB2D', ( conf ) => {
+  CreateDemo( 'CollisionAABB2D', ( conf ) => {
 
     const W = 1920 / 1;
     const H = 1080 / 1;

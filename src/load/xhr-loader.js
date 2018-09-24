@@ -5,6 +5,7 @@
 import { Cache } from '../utility/cache';
 import { Event } from '../event/event';
 import { XMLToJSON } from '../utility/browser-utility';
+import { DeepClone } from '../utility';
 
 export class XHRLoader {
 
@@ -152,6 +153,12 @@ export class XHRLoader {
 
     return this.dataCache.GetById( _id ).data;
   
+  }
+
+  GetClonedDataById ( _id ) {
+
+    return DeepClone( this.GetDataById( _id ) );
+
   }
 
 }

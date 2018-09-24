@@ -18,16 +18,14 @@ export class Spritesheet {
 
   GenerateFrames () {
 
-    let i = 0;
     let frame;
     let frameData;
     let frameTag;
     const data = this.data;
     const frames = data.frames;
     const frameTags = data.meta.frameTags;
-    const l = frames.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < frames.length; ++i ) {
 
       frame = frames[i];
       frameData = frame.frame;

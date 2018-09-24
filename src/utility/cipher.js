@@ -8,16 +8,14 @@ import { RandomInteger } from '.';
 
 export function CCH1 ( _string, _cci ) {
 
-  let i = 0;
   let char;
   let otn;
   const chars = _string.split( '' );
-  const l = chars.length;
   const output = [];
   
   _cci = _cci === undefined ? 1 : _cci;
 
-  for ( ; i < l; ++i ) {
+  for ( var i = 0; i < chars.length; ++i ) {
 
     char = chars[ i ];
     char = ( char.charCodeAt( 0 ) + _cci ).toString( 2 );
@@ -32,15 +30,13 @@ export function CCH1 ( _string, _cci ) {
 
 export function CCH1Decipher ( _string, _cci ) {
    
-  let i = 0;
   let string;
   const strings = _string.split( ' ' );
-  const l = strings.length;
   const output = [];
 
   _cci = _cci === undefined ? 1 : _cci;
 
-  for ( ; i < l; ++i ) {
+  for ( var i = 0; i < strings.length; ++i ) {
 
     string = strings[ i ];
     string = string.slice( -string.length + 2 );

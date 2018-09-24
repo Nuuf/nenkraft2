@@ -17,7 +17,7 @@ export class Controller {
 
   CreateAnimation ( _id, _rate ) {
 
-    const animation = Animation( this, _id, _rate );
+    const animation = new Animation( this, _id, _rate );
 
     this.animations.push( animation );
 
@@ -34,12 +34,10 @@ export class Controller {
 
   GetAnimationById ( _id ) {
 
-    let i = 0;
     const animations = this.animations;
-    const l = animations.length;
     let animation = animations[i];
 
-    for ( ; i < l; animation = animations[++i] ) {
+    for ( var i = 0; i < animations.length; animation = animations[++i] ) {
 
       if ( animation && animation.id === _id ) return animation;
       
@@ -56,7 +54,7 @@ export class Controller {
     if ( animation !== null ) {
 
       this.currentAnimation = animation;
-      animation.Restart( _frameIndex );
+      animation.Start( _frameIndex );
     
     }
   

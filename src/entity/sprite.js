@@ -73,19 +73,20 @@ export class Sprite extends Container2D {
       ImageFromDataURL(
         GenerateSimpleBase64PNG( () => {
 
-          const path = new Polygon2D();
+          const path = new Polygon2D( [
+            0, 0,
+            64, 0,
+            64, 64,
+            0, 64,
+            0, 0,
+            32, 32,
+            64, 0,
+            32, 32,
+            64, 64,
+            32, 32,
+            0, 64
+          ] );
 
-          path.AddVertex( new Vector2D( 0, 0 ) );
-          path.AddVertex( new Vector2D( 64, 0 ) );
-          path.AddVertex( new Vector2D( 64, 64 ) );
-          path.AddVertex( new Vector2D( 0, 64 ) );
-          path.AddVertex( new Vector2D( 0, 0 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 64, 0 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 64, 64 ) );
-          path.AddVertex( new Vector2D( 32, 32 ) );
-          path.AddVertex( new Vector2D( 0, 64 ) );
           path.ComputeBounds();
           path.style.stroke.lineWidth = 3;
 
@@ -393,12 +394,11 @@ export class Sprite extends Container2D {
       
     }
   
-    let i = 0;
     const animation = this.animationController.CreateAnimation( _data.id, _data.rate );
   
     if ( _data.spritesheet != null ) {
   
-      for ( ; i < _data.frames.length; ++i ) {
+      for ( var i = 0; i < _data.frames.length; ++i ) {
   
         animation.AddFrame( _data.spritesheet.GetFrameById( _data.frames[i] ) );
         

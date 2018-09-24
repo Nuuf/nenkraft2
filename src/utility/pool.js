@@ -40,13 +40,11 @@ export class Pool {
 
   Flood ( _function, _amount, _context ) {
 
-    let i = 0;
-
     if ( _function ) this.floodFunction = _function;
     if ( _amount ) this.floodAmount = _amount;
     if ( _context ) this.context = _context;
 
-    for ( ; i < this.floodAmount; ++i ) {
+    for ( var i = 0; i < this.floodAmount; ++i ) {
 
       if ( this.class != null ) {
 

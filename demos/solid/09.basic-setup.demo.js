@@ -1,12 +1,12 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Camera2D', ( conf ) => {
+  CreateDemo( 'BasicSetup', ( conf ) => {
 
-    const W = window.innerWidth;
-    const H = window.innerHeight;
+    const W = 600;
+    const H = 400;
     const HW = W * 0.5;
     const HH = H * 0.5;
     const c = conf.canvas = document.createElement( 'canvas' );
@@ -19,27 +19,39 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: HW,
-      y: HH,
-      halt: true
+      x: 0,
+      y: 0,
+      halt: false
     };
     const stage = conf.stage = new nk2.Stage2D( options );
+    const root = new nk2.Container2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
-    const rootContainer = new nk2.Container2D( 0, 0 );
+    const scene = new nk2.Container2D( HW, HH );
     const sprite = new nk2.Sprite( 0, 0 );
 
+    camera.force.SetSame( 5 );
+
+    sprite.anchor.SetSame( 0.5 );
+
     stage
+      .AddChild( root )
       .AddChild( camera )
-      .AddChild( rootContainer )
+      .AddChild( scene )
       .AddChild( sprite );
 
-    stage.mouse.AddOffset( camera );
+    const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
 
-    stage.ticker.StartAF();
+    canvasManager
+      .BindStage( stage )
+      .BindRootContainer( root )
+      .Trigger();
+
+    stage.mouse.AddOffset( scene ).AddOffset( camera );
+
     stage.onProcess.Add( () => {
 
       camera.Process();
-
+    
     } );
 
     stage.mouse.onDown.Add( ( event ) => {

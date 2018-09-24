@@ -7,7 +7,8 @@
 import { PrecisionRound } from '../math';
 import CharacterSets from './character-sets';
 
-const VERSION = require( '../../package.json' ).version;const Random = Math.random;
+const VERSION = require( '../../package.json' ).version;
+const Random = Math.random;
 
 export function RandomInteger ( _min, _max ) {
 
@@ -87,10 +88,9 @@ export function FlipACoin ( _x, _y ) {
 
 export function GenerateSequence ( _from, _to, _interval, _precision ) {
 
-  let i = _from;
   const sequence = [];
 
-  for ( ; i < _to; i += _interval ) {
+  for ( var i = 0 ; i < _to; i += _interval ) {
 
     sequence.push( PrecisionRound( i, _precision ) );
     
@@ -128,7 +128,6 @@ export function MinMaxOrValue ( _options, _other ) {
 
 export function UUID ( _length, _parts, _charSetIndex, _separator ) {
 
-  let i = 0;
   let at;
   let ilpdd;
   let id = '';
@@ -140,7 +139,7 @@ export function UUID ( _length, _parts, _charSetIndex, _separator ) {
   _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
   _separator = _separator == null ? '-' : _separator;
 
-  for ( ; i < _length; ++i ) {
+  for ( var i = 0; i < _length; ++i ) {
 
     ilpdd = i / lpd;
 
@@ -233,12 +232,11 @@ export function Nested ( _object, _string, _getObjectHolding, _set, _value, _spl
 
 export function ArrayGetRandom ( _array, _amount ) {
 
-  let i = 0;
   const array = [];
   const control = {};
   const al = _array.length;
 
-  for ( ; i < _amount; ++i ) {
+  for ( var i = 0; i < _amount; ++i ) {
 
     let ix = ( Random() * al ) | 0;
 
@@ -258,11 +256,10 @@ export function ArrayGetRandom ( _array, _amount ) {
 
 export function ArrayShuffle ( _array ) {
 
-  let i = _array.length - 1;
   let temp;
   let random;
 
-  for ( ; i >= 0; --i ) {
+  for ( var i = _array.length - 1; i-- >= 0; ) {
 
     random = ( Random() * i ) | 0;
     temp = _array[ i ];
@@ -331,9 +328,7 @@ export function DeepClone ( _object ) {
 
   if ( ia ) {
 
-    let i = 0;
-
-    for ( ; i < _object.length; ++i ) {
+    for ( var i = 0; i < _object.length; ++i ) {
 
       r[i] = DeepClone( _object[i] );
 
@@ -361,14 +356,13 @@ export function DeepClone ( _object ) {
 
 export function CreateIteratorArgs ( _args, _pre, _post ) {
 
-  let i = 0;
   let arg;
   let mod;
   let val;
   let pipe;
   const ias = [];
 
-  for ( ; i < _args.length; ++i ) {
+  for ( var i = 0; i < _args.length; ++i ) {
 
     arg = _args[i];
 
@@ -410,10 +404,9 @@ export function CreateIteratorArgs ( _args, _pre, _post ) {
 
 export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
-  let i = 0;
   let arg;
 
-  for ( ; i < _args.length; ++i ) {
+  for ( var i = 0; i < _args.length; ++i ) {
 
     arg = _args[i];
 

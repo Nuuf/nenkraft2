@@ -61,15 +61,13 @@ export class Command {
     if ( this.options == null ) this.options = [];
     _priority = _priority == null ? 0 : _priority;
   
-    let i = 0;
     const options = this.options;
-    const l = options.length;
     let option = options[i];
     const opt = new Option( _id, _handle, _info, _priority, _breakIfExecuted );
   
     opt.command = this;
   
-    for ( ; i < l; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[++i] ) {
   
       if ( option.priority <= _priority ) {
   
@@ -91,17 +89,14 @@ export class Command {
   
   HandleData ( _dataStrs, _data ) {
   
-    let i = 0;
     let str;
     let data;
     const ds = this.dataSeparator;
     const dsCopy = this.dsCopy;
 
     dsCopy.push.apply( dsCopy, _dataStrs );
-
-    let l = dsCopy.length;
   
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < dsCopy.length; ++i ) {
   
       str = dsCopy[ i ];
       data = str.split( ds );
@@ -131,11 +126,9 @@ export class Command {
   
     if ( matchingOptionIds == null ) return this.continueToPrime;
   
-    let i = 0;
     let option;
-    const l = matchingOptionIds.length;
     
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < matchingOptionIds.length; ++i ) {
     
       option = this.GetOptionById( matchingOptionIds[ i ] );
       if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
@@ -148,12 +141,10 @@ export class Command {
   
   GetOptionById ( _id ) {
   
-    let i = 0;
     const options = this.options;
-    const l = options.length;
     let option = options[i];
   
-    for ( ; i < l; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[++i] ) {
   
       option = options[ i ];
       if ( option.id.indexOf( _id ) !== -1 ) return option;
@@ -166,12 +157,10 @@ export class Command {
   
   GetAllOptionIds () {
   
-    let i = 0;
     const options = this.options;
-    const l = options.length;
     const allOptionIds = [];
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < options.length; ++i ) {
   
       allOptionIds.push.apply( allOptionIds, options[ i ].id );
       
@@ -187,12 +176,10 @@ export class Command {
   
     if ( allOptionIds == null ) return null;
   
-    let i = 0;
     let ix;
-    const l = allOptionIds.length;
     const optionIds = [];
   
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < allOptionIds.length; ++i ) {
   
       ix = _dataStrs.indexOf( allOptionIds[ i ] );
   
@@ -210,13 +197,11 @@ export class Command {
   
   GenerateInfoString () {
   
-    let i = 0;
     let str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
     const options = this.options;
-    const l = options.length;
     let option = options[i];
   
-    for ( ; i < l; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[++i] ) {
   
       option = options[ i ];
       str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';

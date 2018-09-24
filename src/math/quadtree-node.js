@@ -161,19 +161,19 @@ export class QuadtreeNode {
     const nodes = this.nodes;
     const aabb = this.aabb;
 
-    nodes[ PS_TOP_LEFT ] = this.FromStore(
+    nodes[ PS_TOP_LEFT ] = this.FromPool(
       aabb.GetQuadrant( PS_TOP_LEFT ),
       nl, oc, lc
     );
-    nodes[ PS_TOP_RIGHT ] = this.FromStore(
+    nodes[ PS_TOP_RIGHT ] = this.FromPool(
       aabb.GetQuadrant( PS_TOP_RIGHT ),
       nl, oc, lc
     );
-    nodes[ PS_BOTTOM_LEFT ] = this.FromStore(
+    nodes[ PS_BOTTOM_LEFT ] = this.FromPool(
       aabb.GetQuadrant( PS_BOTTOM_LEFT ),
       nl, oc, lc
     );
-    nodes[ PS_BOTTOM_RIGHT ] = this.FromStore(
+    nodes[ PS_BOTTOM_RIGHT ] = this.FromPool(
       aabb.GetQuadrant( PS_BOTTOM_RIGHT ),
       nl, oc, lc
     );

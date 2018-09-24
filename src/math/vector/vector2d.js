@@ -551,10 +551,7 @@ export class Vector2D {
 
   AddTo ( _vectors ) {
 
-    let i = 0;
-    const l = _vectors.length;
-
-    for ( ; i < l; ++i ) {
+    for ( var i = 0 ; i < _vectors.length; ++i ) {
 
       _vectors[i].AddV( this );
 
@@ -596,11 +593,9 @@ export class Vector2D {
     let min = Infinity;
     let max = -min;
     let dot = 0;
-    let i = 0;
-    const l = _vectors.length;
     const result = this.Copy();
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < _vectors.length; ++i ) {
 
       dot = _vectors[ i ].GetDotV( this );
 

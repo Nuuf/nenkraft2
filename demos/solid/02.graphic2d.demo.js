@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Container2D', ( conf ) => {
+  CreateDemo( 'Graphic2D', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -17,15 +17,10 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const sprite = new nk2.Sprite( HW, HH );
+    const path = new nk2.Path.Circle( 0, 0, 50 );
+    const graphic = new nk2.Graphic2D( HW, HH, path );
 
-    sprite.anchor.SetSame( 0.5 );
-
-    const container = new nk2.Container2D( 0, 0 );
-
-    container.AddChild( sprite );
-
-    container.Draw( c.getContext( '2d' ) );
+    graphic.Draw( c.getContext( '2d' ) );
 
   } );
 

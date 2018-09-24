@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Stage2D', ( conf ) => {
+  CreateDemo( 'Tilesprite', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -17,21 +17,15 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const options = {
-      canvas: c,
-      x: HW,
-      y: HH,
-      halt: true
-    };
-    const stage = conf.stage = new nk2.Stage2D( options );
+    const rc = c.getContext( '2d' );
+    const sprite = new nk2.Tilesprite( HW, HH, nk2.Tilesprite.DEFAULT_TEXTURE );
 
-    stage.ticker.StartAF();
-    stage.onProcess.Add( () => {
+    sprite.GeneratePattern( rc, 64 * 10, 64 * 10 );
 
-      console.log( 'tick' );
-      stage.onProcess.Dump();
+    sprite.x = HW - sprite.width * 0.5;
+    sprite.y = HH - sprite.height * 0.5;
 
-    } );
+    sprite.Draw( rc );
 
   } );
 

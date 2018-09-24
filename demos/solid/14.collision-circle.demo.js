@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'CollisionCircle', ( conf ) => {
+  CreateDemo( 'CollisionCircle', ( conf ) => {
 
     const W = 1920 * 3;
     const H = 1080 * 3;

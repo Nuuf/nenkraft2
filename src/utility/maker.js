@@ -34,7 +34,6 @@ export class Maker {
 
   Make ( _class ) {
 
-    let i = 0;
     const l = this.amount;
     const ias = CreateIteratorArgs( arguments, '@', 'i' );
 
@@ -45,7 +44,7 @@ export class Maker {
     this.orders.length = 0;
     this.classUsed = _class;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < l; ++i ) {
 
       PS_IteratorArgsLookup( arguments, ias, i );
 
@@ -61,7 +60,6 @@ export class Maker {
 
   Call ( _function, _args, _prop ) {
 
-    let i = 0;
     let context;
     let f;
     let args;
@@ -80,7 +78,7 @@ export class Maker {
 
     }
 
-    for ( ; i < orders.length; order = orders[++i] ) {
+    for ( var i = 0; i < orders.length; order = orders[++i] ) {
 
       if ( isArray === true ) {
 
@@ -113,20 +111,18 @@ export class Maker {
 
   Cast ( _key, _value ) {
 
-    let i = 0;
     const orders = this.orders;
     const isString = typeof _value === 'string';
-    let order = orders[i];
 
-    for ( ; i < orders.length; order = orders[++i] ) {
+    for ( var i = 0 ; i < orders.length; ++i ) {
 
       if ( isString === true && _value[0] === '$' ) {
 
-        _value = Nested( order, _value );
+        _value = Nested( orders[i], _value );
       
       }
   
-      Nested( order, _key, false, true, _value );
+      Nested( orders[i], _key, false, true, _value );
     
     }
 
@@ -157,13 +153,11 @@ export class Maker {
 // Private Static ----->
 const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
 
-  let i = 0;
   let ia = _ias[i];
-  const l = _ias.length;
 
   if ( _ias != null ) {
 
-    for ( ; i < l; ia = _ias[++i] ) {
+    for ( var i = 0; i < _ias.length; ia = _ias[++i] ) {
   
       if ( ia.iteratorIndex !== -1 ) {
   

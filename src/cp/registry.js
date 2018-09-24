@@ -41,21 +41,14 @@ export class Registry {
 
   GetCommandById ( _id ) {
 
-    let i = 0;
-    let j;
-    let jl;
     const commands = this.commands;
-    const l = commands.length;
     let command = commands[i];
 
-    for ( ; i < l; command = commands[++i] ) {
+    for ( var i = 0; i < commands.length; command = commands[++i] ) {
 
       if ( command ) {
 
-        j = 0;
-        jl = command.id.length;
-
-        for ( ; j < jl; ++j ) {
+        for ( var j = 0; j < command.id.length; ++j ) {
 
           if ( command.id[ j ] === _id ) return command;
         

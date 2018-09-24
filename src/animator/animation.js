@@ -23,6 +23,8 @@ export class Animation {
     this.timer = 0;
     this.reverse = false;
     this.overrideFrameRate = false;
+    this.loop = false;
+    this.autoFrame = true;
     if ( _rate != null ) this.rate = _rate;
   
   }
@@ -46,15 +48,14 @@ export class Animation {
   
   }
 
-  GenerateFrame ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
+  GenerateFrames ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
 
-    let i = 0;
     let rate;
     const columns = _imageWidth / _imageHeight;
 
     _data = _data == null ? {} : _data;
 
-    for ( ; i < _amount; ++i ) {
+    for ( var i = 0; i < _amount; ++i ) {
 
       rate = _data[ i ];
       this.CreateFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
@@ -81,11 +82,9 @@ export class Animation {
 
   GetFrameById ( _id, _returnIndex ) {
 
-    let i = 0;
     const frames = this.frames;
-    const l = frames.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < frames.length; ++i ) {
 
       if ( frames[i].id === _id ) {
     
@@ -107,8 +106,25 @@ export class Animation {
   
   }
 
-  Start () {
+  Start ( _index ) {
+    
+    if ( _index == null && this.autoFrame ) {
 
+      if ( this.reverse ) {
+
+        _index = this.frames.length - 1;
+      
+      } else {
+
+        _index = 0;
+      
+      }
+    
+    }
+
+    this.SetFrame( _index );
+    this.ResetAllFrames();
+    this.timer = this.rate;
     this.playing = true;
     this.onStart.Dispatch();
   
@@ -150,24 +166,61 @@ export class Animation {
     const frames = this.frames;
     const fsl = frames.length;
 
-    if ( this.reverse === false ) ++this.currentFrameIndex;
-    else --this.currentFrameIndex;
+    if ( this.reverse === false ) {
+
+      ++this.currentFrameIndex;
+    
+    }
+    else {
+
+      --this.currentFrameIndex;
+    
+    }
 
     if ( this.currentFrameIndex >= fsl ) {
 
-      this.currentFrameIndex = 0;
+      if ( this.loop === true ) {
+
+        this.currentFrameIndex = 0;
+      
+      } else {
+
+        this.currentFrameIndex = fsl - 1;
+      
+      }
+
       done = true;
         
     } else if ( this.currentFrameIndex < 0 ) {
 
-      this.currentFrameIndex = fsl - 1;
+      if ( this.loop === true ) {
+
+        this.currentFrameIndex = fsl - 1;
+      
+      } else {
+
+        this.currentFrameIndex = 0;
+      
+      }
+
       done = true;
     
     }
-
+    
     this.currentFrame = frames[ this.currentFrameIndex ];
     this.currentFrame.Apply( this.sprite );
-    if ( done === true ) this.onEnd.Dispatch();
+
+    if ( done === true ) {
+
+      this.onEnd.Dispatch();
+
+      if ( this.loop === false ) {
+
+        this.Stop();
+      
+      }
+    
+    }
   
   }
 
@@ -177,15 +230,6 @@ export class Animation {
     this.currentFrame = null;
     this.playing = false;
     this.currentFrameIndex = 0;
-    this.timer = this.rate;
-  
-  }
-
-  Restart ( _index ) {
-
-    this.SetFrame( _index );
-    this.ResetAllFrames();
-    this.Start();
     this.timer = this.rate;
   
   }
@@ -201,11 +245,9 @@ export class Animation {
 
   ResetAllFrames () {
 
-    let i = 0;
     const frames = this.frames;
-    const l = frames.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < frames.length; ++i ) {
 
       frames[i].Reset();
       

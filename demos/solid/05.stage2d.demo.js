@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'Sprite', ( conf ) => {
+  CreateDemo( 'Stage2D', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -17,11 +17,21 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const sprite = new nk2.Sprite( HW, HH );
+    const options = {
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: true
+    };
+    const stage = conf.stage = new nk2.Stage2D( options );
 
-    sprite.anchor.SetSame( 0.5 );
+    stage.ticker.StartAF();
+    stage.onProcess.Add( () => {
 
-    sprite.Draw( c.getContext( '2d' ) );
+      console.log( 'tick' );
+      stage.onProcess.Dump();
+
+    } );
 
   } );
 

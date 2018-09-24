@@ -118,11 +118,9 @@ export function ClosestPointOnLine ( _start, _end, _point ) {
 
 export function LikeASquareGrid ( _points, _w, _marginX, _marginY ) {
 
-  let i = 0;
-  const l = _points.length;
   const columns = ( _w / _marginX ) | 0;
  
-  for ( ; i < l; ++i ) {
+  for ( var i = 0 ; i < _points.length; ++i ) {
 
     _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
       

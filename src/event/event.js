@@ -17,14 +17,12 @@ export class Event {
 
   GetListenerIndex ( _handle, _context ) {
 
-    let i = 0;
     let listener;
     const listeners = this.listeners;
-    const l = listeners.length;
 
     if ( listeners.length === 0 ) return -1;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < listeners.length; ++i ) {
 
       listener = listeners[ i ];
 
@@ -62,16 +60,14 @@ export class Event {
 
   Dump ( _context ) {
 
-    let i = 0;
     let listener;
     const listeners = this.listeners;
-    const l = listeners.length;
 
     if ( listeners.length === 0 ) return;
 
     if ( _context !== undefined ) {
 
-      for ( ; i < l; ++i ) {
+      for ( var i = 0; i < listeners.length; ++i ) {
 
         listener = listeners[ i ];
 
@@ -94,10 +90,7 @@ export class Event {
 
   Dispatch ( _target, _data ) {
 
-    let i = 0;
-    let listener;
     const listeners = this.listeners.slice();
-    const l = listeners.length;
 
     if ( listeners.length === 0 ) return;
 
@@ -105,10 +98,9 @@ export class Event {
     this.target = _target;
     this.data = _data;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < listeners.length; ++i ) {
 
-      listener = listeners[ i ];
-      listener.Execute( this );
+      listeners[i].Execute( this );
       if ( this.stopPropagation === true ) break;
     
     }

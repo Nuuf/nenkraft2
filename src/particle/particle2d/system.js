@@ -27,11 +27,9 @@ export class System extends Container2D {
 
   HandleParticles () {
 
-    let i = 0;
     const particles = this.particles;
-    const l = particles.length;
 
-    for ( ; i < l; ++i ) {
+    for ( var i = 0; i < particles.length; ++i ) {
 
       particles[ i ].Process();
     
@@ -41,12 +39,10 @@ export class System extends Container2D {
 
   HandleParticleDeletion () {
 
-    let i = 0;
     const particles = this.particles;
-    const l = particles.length;
     let particle = particles[i];
 
-    for ( ; i < l; particle = particles[++i] ) {
+    for ( var i = 0; i < particles.length; particle = particles[++i] ) {
 
       if ( particle ) {
 
@@ -57,7 +53,7 @@ export class System extends Container2D {
         }
       
       }
-    
+  
     }
 
     this.deletionTimer.Start();

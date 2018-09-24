@@ -1,9 +1,9 @@
-import { CreateTest } from '../testBP';
+import { CreateDemo } from '../demoBP';
 import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateTest( 'BasicSetup', ( conf ) => {
+  CreateDemo( 'Animation', ( conf ) => {
 
     const W = 600;
     const H = 400;
@@ -27,17 +27,13 @@ export default () => {
     const root = new nk2.Container2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
     const scene = new nk2.Container2D( HW, HH );
-    const sprite = new nk2.Sprite( 0, 0 );
 
     camera.force.SetSame( 5 );
-
-    sprite.anchor.SetSame( 0.5 );
 
     stage
       .AddChild( root )
       .AddChild( camera )
-      .AddChild( scene )
-      .AddChild( sprite );
+      .AddChild( scene );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
 
@@ -46,11 +42,40 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
+    const sprite = new nk2.Sprite( 0, 0, window.testData.imgloader.GetBasicTextureById( '1to8' ) );
+
+    sprite.anchor.SetSame( 0.5 );
+
+    scene.AddChild( sprite );
+
+    const ac = sprite.animationController = new nk2.Animator.Controller( sprite );
+    const animation = ac.CreateAnimation( 'play', 25 );
+
+    sprite.width = 64;
+    sprite.height = 64;
+
+    animation.GenerateFrames( 64, 64, 512, 64, 8, {
+      '5': 10,
+      '3': 8,
+      '1': 6
+    } );
+
+    animation.reverse = true;
+    animation.loop = true;
+    animation.Start();
+
+    animation.onEnd.Add( () => {
+
+      console.log( 'end' );
+    
+    } );
+
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 
     stage.onProcess.Add( () => {
 
       camera.Process();
+      animation.Process();
     
     } );
 
