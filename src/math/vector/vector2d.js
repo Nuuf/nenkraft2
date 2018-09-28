@@ -417,7 +417,7 @@ export class Vector2D {
   
   }
 
-  GetPerpendicularCCWV ( _x, _y ) {
+  GetPerpendicularCCW ( _x, _y ) {
 
     return this.FromPool( -( _y - this.y ), _x - this.x );
   
@@ -488,6 +488,7 @@ export class Vector2D {
     const dot = this.GetDotV( _vector2d );
 
     if ( dot === 0 ) return this.FromPool( 0, 0 );
+
     const magnitude = _vector2d.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
     const projection = _vector2d.Copy();
@@ -503,9 +504,11 @@ export class Vector2D {
     const projection = this.Copy();
 
     projection.Set( _x, _y );
+
     const dot = this.GetDotV( projection );
 
     if ( dot === 0 ) return this.FromPool( 0, 0 );
+
     const magnitude = projection.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
 
@@ -520,8 +523,7 @@ export class Vector2D {
     const reflection = _vector2d.Copy();
     const dot = this.GetDotV( reflection );
 
-    reflection.Multiply( 2, 2 );
-    reflection.Multiply( dot, dot );
+    reflection.Multiply( 2, 2 ).Multiply( dot, dot );
 
     return this.SubtractVC( reflection );
 
@@ -532,10 +534,10 @@ export class Vector2D {
     const reflection = this.Copy();
 
     reflection.Set( _x, _y );
+
     const dot = this.GetDotV( reflection );
 
-    reflection.Multiply( 2, 2 );
-    reflection.Multiply( dot, dot );
+    reflection.Multiply( 2, 2 ).Multiply( dot, dot );
 
     return this.SubtractVC( reflection );
   

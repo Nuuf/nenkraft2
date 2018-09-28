@@ -20,8 +20,8 @@ export class Result {
 
   Reset () {
 
-    this.mtv.Set( 0, 0 );
-    this.cp.Set( 0, 0 );
+    this.mtv.SetSame( 0 );
+    this.cp.SetSame( 0 );
     this.sOrE = 0;
     this.occured = false;
   
@@ -52,8 +52,7 @@ export const CollideRel = function ( _c, _l, _result ) {
       const distance = cshape.radius - Sqrt( distanceSq );
       
       // as mtv
-      PS_delta.Normalize();
-      PS_delta.Multiply( distance, distance );
+      PS_delta.Normalize().Multiply( distance, distance );
       _result.mtv.SetV( PS_delta );
       _result.cp.SetV( cp );
       _result.occured = true;
@@ -64,7 +63,7 @@ export const CollideRel = function ( _c, _l, _result ) {
         
       } else if ( cp === PS_e ) {
 
-        _result.sOrE = 2;
+        _result.sOrE = -1;
         
       }
       

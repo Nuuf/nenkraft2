@@ -18,6 +18,7 @@ import * as Particle from './particle';
 import * as Texture from './texture';
 import * as Animator from './animator';
 import * as Debug from './debug';
+
 export { Math };
 export { Assert } from './utility/assert';
 export { Pool } from './utility/pool';
