@@ -11,7 +11,7 @@ module.exports = function () {
       ]
     },
     output: {
-      path: path.resolve( __dirname, '../bundle-fe' ),
+      path: path.resolve( __dirname, '../bundle-fe/dist' ),
       filename: '[name].js',
       library: 'nk2',
       libraryTarget: 'umd',

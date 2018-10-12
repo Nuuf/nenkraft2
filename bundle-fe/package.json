@@ -1,0 +1,26 @@
+{
+  "name": "@nuuf/nk2-frontend",
+  "version": "1.0.1",
+  "description": "A small rendering tool",
+  "main": "./dist/nk2.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "scripts": {},
+  "keywords": [
+    "2d",
+    "rendering",
+    "command",
+    "vector",
+    "game",
+    "graphic",
+    "tween",
+    "animation",
+    "collision",
+    "canvas",
+    "web",
+    "webgl",
+    "utilities"
+  ],
+  "author": "nuuf",
+  "license": "MIT"
+}
