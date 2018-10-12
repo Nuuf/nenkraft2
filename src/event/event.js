@@ -63,8 +63,6 @@ export class Event {
     let listener;
     const listeners = this.listeners;
 
-    if ( listeners.length === 0 ) return;
-
     if ( _context !== undefined ) {
 
       for ( var i = 0; i < listeners.length; ++i ) {
@@ -73,7 +71,7 @@ export class Event {
 
         if ( listener.context === _context ) {
 
-          this.listeners.fickleSplice( i );
+          listeners.splice( i );
         
         }
       
@@ -82,7 +80,7 @@ export class Event {
     }
     else {
 
-      this.listeners.length = 0;
+      listeners.length = 0;
     
     }
   
@@ -100,7 +98,7 @@ export class Event {
 
     for ( var i = 0; i < listeners.length; ++i ) {
 
-      listeners[i].Execute( this );
+      listeners[ i ].Execute( this );
       if ( this.stopPropagation === true ) break;
     
     }

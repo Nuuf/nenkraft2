@@ -8,6 +8,7 @@ import { AABB2D } from '../geom/aabb/aabb2d';
 import { Color } from '../utility/color';
 import { Container2D } from './container2d';
 import { GLTexture2DProgramController } from '../controller/program-controller/gl-texture2d-program-controller';
+import { GLDynamicTexture2DProgramController } from '../controller/program-controller';
 import { DEFAULT } from '../style/gco';
 import { Controller } from '../animator/controller';
 import { BasicTexture2D } from '../texture/basic-texture2d';
@@ -38,13 +39,19 @@ export class Sprite extends Container2D {
 
       this.programController = _texture;
 
+      this.SetTexture( _texture.originalTexture );
+    
+    } else if ( _texture instanceof GLDynamicTexture2DProgramController ) {
+
+      this.programController = _texture;
+
       if ( _unitId != null ) {
 
-        this.SetTexture( _texture['originalTexture' + _unitId] );
+        this.SetTexture( _texture.originalTextures[ _unitId ] );
       
       } else {
 
-        this.SetTexture( _texture.originalTexture0 );
+        this.SetTexture( _texture.originalTextures[ 0 ] );
       
       }
     
@@ -132,13 +139,13 @@ export class Sprite extends Container2D {
 
   get alpha () {
 
-    return this.tint.channel[3];
+    return this.tint.channel[ 3 ];
   
   }
 
   set alpha ( _value ) {
 
-    this.tint.channel[3] = _value;
+    this.tint.channel[ 3 ] = _value;
   
   }
 
@@ -164,7 +171,7 @@ export class Sprite extends Container2D {
         const br = clip.br;
         const anchor = this.anchor;
 
-        _rc.globalAlpha = this.tint.channel[3];
+        _rc.globalAlpha = this.tint.channel[ 3 ];
         _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
           this.texture.image,
@@ -319,16 +326,13 @@ export class Sprite extends Container2D {
 
   UpdateTextureTransform () {
 
-    const tscaleX = this.w / this.texture.fw;
-    const tscaleY = this.h / this.texture.fh;
-
     this.textureTranslation.TranslateTo(
       -this.w * this.anchor.x,
       -this.h * this.anchor.y
     );
     this.textureTransformation.TranslateTo(
-      tscaleX * this.clip.tl.x / this.w,
-      tscaleY * this.clip.tl.y / this.h
+      this.w / this.texture.fw * this.clip.tl.x / this.w,
+      this.h / this.texture.fh * this.clip.tl.y / this.h
     );
   
   }
@@ -400,7 +404,7 @@ export class Sprite extends Container2D {
   
       for ( var i = 0; i < _data.frames.length; ++i ) {
   
-        animation.AddFrame( _data.spritesheet.GetFrameById( _data.frames[i] ) );
+        animation.AddFrame( _data.spritesheet.GetFrameById( _data.frames[ i ] ) );
         
       }
       
@@ -410,21 +414,22 @@ export class Sprite extends Container2D {
   
   }
 
-  IntersectsPoint ( _vector2d ) {
+  IntersectsPoint ( _p ) {
 
     if ( this.interactive === false ) return false;
 
-    const cv = _vector2d.SubtractVC( this.position );
+    PS_TP.SetV( _p );
+    PS_TP.SubtractV( this.position );
+    PS_TP.Add( this.width * this.anchor.x, this.height * this.anchor.y );
 
-    cv.Add( this.width * this.anchor.x, this.height * this.anchor.y );
-
-    return this.shape.IntersectsPoint( cv );
+    return this.shape.IntersectsPoint( PS_TP );
   
   }
 
 }
 
 // Private Static ----->
+const PS_TP = new Vector2D( 0, 0 );
 let PS_DEFAULT_TEXTURE = null;
 let PS_DEFAULT_TEXTURE_BUILT = false;
 // <----- Private static

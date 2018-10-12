@@ -47,10 +47,10 @@ export class GLLine2DProgramController extends GLProgramController {
     vertices[ 2 ] = _e.x;
     vertices[ 3 ] = _e.y;
 
-    if ( this !== super.LAST_USED_CONTROLLER ) {
+    if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
-      super.LAST_USED_CONTROLLER = this;
+      GLProgramController.LAST_USED_CONTROLLER = this;
     
     }
 

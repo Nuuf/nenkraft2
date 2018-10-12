@@ -42,9 +42,9 @@ export class Registry {
   GetCommandById ( _id ) {
 
     const commands = this.commands;
-    let command = commands[i];
+    let command = commands[ 0 ];
 
-    for ( var i = 0; i < commands.length; command = commands[++i] ) {
+    for ( var i = 0; i < commands.length; command = commands[ ++i ] ) {
 
       if ( command ) {
 

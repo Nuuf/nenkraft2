@@ -22,11 +22,11 @@ export class Polygon2D extends Polygon2DGeom {
     const style = this.style;
 
     _rc.beginPath();
-    _rc.moveTo( vertices[0].x, vertices[0].y );
+    _rc.moveTo( vertices[ 0 ].x, vertices[ 0 ].y );
 
     for ( var i = 1; i < vertices.length; ++i ) {
 
-      _rc.lineTo( vertices[i].x, vertices[i].y );
+      _rc.lineTo( vertices[ i ].x, vertices[ i ].y );
     
     }
 

@@ -60,7 +60,7 @@ export class CanvasManager {
 
   OnWindowResize () {
 
-    this[this.mode]();
+    this[ this.mode ]();
   
   }
 
@@ -157,7 +157,7 @@ export class CanvasManager {
   KeepAspectRatio () {
 
     const w = window.innerWidth;
-    const h = w / this.aspectRatio[0] * this.aspectRatio[1];
+    const h = w / this.aspectRatio[ 0 ] * this.aspectRatio[ 1 ];
 
     this.SetCurrent( w, h );
   
@@ -174,7 +174,7 @@ export class CanvasManager {
       
     }
 
-    h = w / this.aspectRatio[0] * this.aspectRatio[1];
+    h = w / this.aspectRatio[ 0 ] * this.aspectRatio[ 1 ];
 
     this.SetCurrent( w, h );
   
@@ -191,7 +191,7 @@ export class CanvasManager {
       
     }
 
-    h = w / this.aspectRatio[0] * this.aspectRatio[1];
+    h = w / this.aspectRatio[ 0 ] * this.aspectRatio[ 1 ];
       
     this.SetCurrent( w, h );
   
@@ -200,12 +200,12 @@ export class CanvasManager {
   KeepAspectRatioFIT () {
 
     let w = window.innerWidth;
-    let h = w / this.aspectRatio[0] * this.aspectRatio[1];
+    let h = w / this.aspectRatio[ 0 ] * this.aspectRatio[ 1 ];
 
     if ( h >= window.innerHeight ) {
 
       h = window.innerHeight;
-      w = h / this.aspectRatio[1] * this.aspectRatio[0];
+      w = h / this.aspectRatio[ 1 ] * this.aspectRatio[ 0 ];
     
     }
 

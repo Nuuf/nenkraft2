@@ -97,6 +97,10 @@ export class Color {
   
   }
 
+  ConvertToHEX () {
+
+  }
+
   SetRGB ( _r, _g, _b, _noCompute ) {
 
     this.channel[ 0 ] = Clamp( _r, PS_MIN_VAL, PS_MAX_VAL );

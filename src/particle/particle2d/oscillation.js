@@ -22,9 +22,9 @@ export class Oscillation {
 
   CreateOscillatingObject ( _key, _from, _to, _amplitude ) {
 
-    if ( this[_key] !== null ) throw new Error( 'Invalid key' );
+    if ( this[ _key ] !== null ) throw new Error( 'Invalid key' );
 
-    this[_key] = {
+    this[ _key ] = {
       from: _from,
       to: _to,
       amplitude: _amplitude,
@@ -35,7 +35,7 @@ export class Oscillation {
 
   SetOscillatingObject ( _key, _from, _to, _amplitude ) {
 
-    const obj = this[_key];
+    const obj = this[ _key ];
 
     if ( obj == null ) {
 
@@ -52,9 +52,9 @@ export class Oscillation {
 
   Nullify ( _key ) {
 
-    if ( this[_key] != null ) {
+    if ( this[ _key ] != null ) {
 
-      this[_key].active = false;
+      this[ _key ].active = false;
     
     }
   

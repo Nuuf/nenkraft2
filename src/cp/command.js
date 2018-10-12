@@ -6,7 +6,7 @@ import { Option } from './option';
 
 export class Command {
 
-  constructor ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
+  constructor ( _id, _handle, _info, _continueToPrime, _filterNull, _optionPrefix ) {
   
     this.id = _id.split( ' ' );
     this.handle = _handle;
@@ -20,17 +20,18 @@ export class Command {
     this.allOptionIds = null;
     this.fullInfo = null;
     this.continueToPrime = !!_continueToPrime;
-    this.filterNull = false;
+    this.filterNull = !!_filterNull;
+    this.jsonPrefix = '(JSON)';
     
   }
   
-  get OPTION_PREFIX () {
+  static get OPTION_PREFIX () {
   
     return PS_OPTION_PREFIX;
     
   }
   
-  set OPTION_PREFIX ( _value ) {
+  static set OPTION_PREFIX ( _value ) {
   
     PS_OPTION_PREFIX = _value;
     
@@ -62,12 +63,12 @@ export class Command {
     _priority = _priority == null ? 0 : _priority;
   
     const options = this.options;
-    let option = options[i];
+    let option = options[ 0 ];
     const opt = new Option( _id, _handle, _info, _priority, _breakIfExecuted );
   
     opt.command = this;
   
-    for ( var i = 0; i < options.length; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[ ++i ] ) {
   
       if ( option.priority <= _priority ) {
   
@@ -89,22 +90,33 @@ export class Command {
   
   HandleData ( _dataStrs, _data ) {
   
-    let str;
     let data;
     const ds = this.dataSeparator;
     const dsCopy = this.dsCopy;
+    const jsonPrefix = this.jsonPrefix;
+    const jsonPrefixL = jsonPrefix.length;
 
     dsCopy.push.apply( dsCopy, _dataStrs );
+
+    let str = dsCopy[ 0 ];
   
-    for ( var i = 0; i < dsCopy.length; ++i ) {
+    for ( var i = 0; i < dsCopy.length; str = dsCopy[ ++i ] ) {
   
-      str = dsCopy[ i ];
       data = str.split( ds );
   
       if ( data.length === 2 ) {
 
-        _dataStrs[i] = null;
-        _data[ data[ 0 ] ] = data[ 1 ];
+        _dataStrs[ i ] = null;
+
+        if ( data[ 0 ].substring( 0, jsonPrefixL ) === jsonPrefix ) {
+
+          _data[ data[ 0 ].substring( jsonPrefixL ) ] = JSON.parse( data[ 1 ] );
+
+        } else {
+
+          _data[ data[ 0 ] ] = data[ 1 ];
+        
+        }
         
       }
       
@@ -142,11 +154,10 @@ export class Command {
   GetOptionById ( _id ) {
   
     const options = this.options;
-    let option = options[i];
+    let option = options[ 0 ];
   
-    for ( var i = 0; i < options.length; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[ ++i ] ) {
   
-      option = options[ i ];
       if ( option.id.indexOf( _id ) !== -1 ) return option;
         
     }
@@ -199,11 +210,10 @@ export class Command {
   
     let str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
     const options = this.options;
-    let option = options[i];
+    let option = options[ 0 ];
   
-    for ( var i = 0; i < options.length; option = options[++i] ) {
+    for ( var i = 0; i < options.length; option = options[ ++i ] ) {
   
-      option = options[ i ];
       str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';
       
     }
@@ -215,7 +225,7 @@ export class Command {
 }
   
 // Private Static ----->
-const PS_OPTION_PREFIX = '';
+let PS_OPTION_PREFIX = '';
 const PS_FilterNullElements = function ( _element ) {
 
   return _element != null;

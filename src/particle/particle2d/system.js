@@ -40,9 +40,9 @@ export class System extends Container2D {
   HandleParticleDeletion () {
 
     const particles = this.particles;
-    let particle = particles[i];
+    let particle = particles[ i ];
 
-    for ( var i = 0; i < particles.length; particle = particles[++i] ) {
+    for ( var i = 0; i < particles.length; particle = particles[ ++i ] ) {
 
       if ( particle ) {
 

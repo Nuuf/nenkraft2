@@ -127,7 +127,7 @@ export class Manager {
 
     for ( var i = 0; i < motions.length; ++i ) {
 
-      motions[i].Process();
+      motions[ i ].Process();
       
     }
   
@@ -139,7 +139,7 @@ export class Manager {
 
     for ( var i = 0; i < motions.length; ++i ) {
 
-      if ( motions[i].id === _id ) return motions[i];
+      if ( motions[ i ].id === _id ) return motions[ i ];
       
     }
   

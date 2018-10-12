@@ -3,6 +3,7 @@ require( '../style/default.css' );
 const nk2 = require( '../src/fe.index' );
 
 console.log( nk2 );
+
 nk2.Utility.PRINT_VERSION();
 
 nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {

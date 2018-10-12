@@ -76,8 +76,8 @@ export const Equilateral = function ( _polygon, _x, _y, _side ) {
   const theta = 2.0943951023931953;
 
   _polygon.Recreate( [] );
-  x = Cos( 0 ) * _side;
-  y = Sin( 0 ) * _side;
+  x = _side;
+  y = 0;
   _polygon.AddVertex( new Vector2D( _x + x, _y + y ) );
   x = Cos( theta ) * _side;
   y = Sin( theta ) * _side;
@@ -154,6 +154,35 @@ Butterfly.C = {
   _3: 4,
   _4: 12,
   _5: 5
+};
+
+export const Rose = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loops ) {
+
+  let i = 0;
+  let x;
+  let y;
+  let theta;
+  let r;
+  const l = _accuracy;
+  const angle = PI * 2 / l * _loops;
+
+  _polygon.Recreate( [] );
+
+  for ( i; i < l; ++i ) {
+
+    theta = angle * i;
+    r = Cos( _k * theta ) * _radius;
+    x = Cos( theta ) * r;
+    y = Sin( theta ) * r;
+    _polygon.AddVertex( new Vector2D( _x + x, _y + y ) );
+    
+  }
+
+  _polygon.ComputeBounds();
+  _polygon.GetNormalsA();
+
+  return _polygon;
+
 };
 
 export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _n1, _n2, _n3 ) {

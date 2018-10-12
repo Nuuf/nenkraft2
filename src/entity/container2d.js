@@ -106,7 +106,7 @@ export class Container2D extends CoreEntity2D {
 
     for ( var i = 0 ; i < children.length; ++i ) {
 
-      children[i].Draw( _rc );
+      children[ i ].Draw( _rc );
     
     }
   
@@ -118,7 +118,7 @@ export class Container2D extends CoreEntity2D {
 
     for ( var i = 0; i < children.length; ++i ) {
 
-      children[i].GLDraw( _gl );
+      children[ i ].GLDraw( _gl );
     
     }
   
@@ -289,10 +289,10 @@ export class Container2D extends CoreEntity2D {
 
         }
 
-        const sibling = pChildren[_index];
+        const sibling = pChildren[ _index ];
 
-        pChildren[_index] = this;
-        pChildren[index] = sibling; 
+        pChildren[ _index ] = this;
+        pChildren[ index ] = sibling; 
 
       }
 
@@ -318,7 +318,7 @@ export class Container2D extends CoreEntity2D {
 
     for ( var i = 0; i < children.length; ++i ) {
 
-      children[i].parent = null;
+      children[ i ].parent = null;
 
     }
 

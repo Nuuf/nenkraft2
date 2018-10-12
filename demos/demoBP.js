@@ -12,7 +12,8 @@ export const CreateDemo = function ( _id, _callback ) {
   let conf = {
     canvas: null,
     stage: null,
-    stadium: null
+    stadium: null,
+    ticker: null
   };
 
   function Run () {
@@ -53,6 +54,12 @@ export const CreateDemo = function ( _id, _callback ) {
     if ( conf.canvasManager ) {
 
       conf.canvasManager.Destroy();
+    
+    }
+
+    if ( conf.ticker ) {
+
+      conf.ticker.Stop();
     
     }
 

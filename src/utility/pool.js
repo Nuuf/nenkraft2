@@ -4,13 +4,13 @@
 
 export class Pool {
 
-  constructor ( _class ) {
+  constructor () {
 
-    this.class = _class;
     this.objects = [];
     this.floodFunction = null;
     this.floodAmount = null;
     this.context = null;
+    this.arguments = null;
 
   }
 
@@ -46,18 +46,7 @@ export class Pool {
 
     for ( var i = 0; i < this.floodAmount; ++i ) {
 
-      if ( this.class != null ) {
-
-        const object = new this.class();
-
-        this.Store( object );
-        this.floodFunction.call( this.context, object );
-      
-      } else {
-
-        this.Store( this.floodFunction.call( this.context ) );
-      
-      }
+      this.Store( this.floodFunction.call( this.context ) );
 
     }
   

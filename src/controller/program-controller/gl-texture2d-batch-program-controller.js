@@ -20,10 +20,12 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
   
   }
 
-  BindBasicTexture ( _texture ) {
+  BindBasicTexture ( _texture, _param ) {
 
     const gl = this.gl;
     const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
+
+    _param = _param != null ? _param : gl.LINEAR;
 
     this.aia = gl.getExtension( 'ANGLE_instanced_arrays' );
     this.originalTexture = _texture;
@@ -34,10 +36,10 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
     essence.push.apply( essence, TriRectArray( 0, 0, 1, 1 ) );
 
     gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, _param );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, _param );
     gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
@@ -66,7 +68,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
     const attributes = this.attributes;
     const uniforms = this.uniforms;
 
-    if ( this !== super.LAST_USED_CONTROLLER ) {
+    if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
       gl.activeTexture( gl.TEXTURE0 );
@@ -79,7 +81,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
       gl.enableVertexAttribArray( attributes.aTexCoord );
       gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
       aia.vertexAttribDivisorANGLE( attributes.aTexCoord, 0 );
-      super.LAST_USED_CONTROLLER = this;
+      GLProgramController.LAST_USED_CONTROLLER = this;
     
     }
 

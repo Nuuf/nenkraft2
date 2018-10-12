@@ -103,7 +103,7 @@ export default () => {
 
       for ( var i = 0; i < circles.length; ++i ) {
 
-        circle = circles[i];
+        circle = circles[ i ];
 
         circle.relative.AddV( circle.velocity );
 
@@ -137,7 +137,7 @@ export default () => {
 
         for ( var j = 0; j < lines.length; ++j ) {
 
-          line = lines[j];
+          line = lines[ j ];
 
           result.Reset();
 

@@ -3,6 +3,8 @@
 */
 
 @vertex@
+precision mediump float;
+
 attribute vec2 aPosition;
 attribute vec2 aTexCoord;
 
@@ -30,6 +32,12 @@ void main() {
 @vertex-end@
 
 @fragment@
+#if __VERSION__ < 130
+#define TEX texture2D
+#else
+#define TEX texture
+#endif
+
 precision mediump float;
 
 uniform sampler2D uImage;
@@ -37,6 +45,6 @@ uniform sampler2D uImage;
 varying vec2 vTexCoord;
 
 void main() {
-  gl_FragColor = texture2D( uImage, vTexCoord );
+  gl_FragColor = TEX( uImage, vTexCoord );
 }
 @fragment-end@

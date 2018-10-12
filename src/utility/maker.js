@@ -67,10 +67,7 @@ export class Maker {
     const orders = this.orders;
     const isArray = IsArray( _args );
     const isString = typeof _function === 'string';
-    let order = orders[i];
-
-    isArray = Array.isArray( _args );
-    isString = typeof _function === 'string';
+    let order = orders[ 0 ];
 
     if ( isArray === true ) {
 
@@ -78,7 +75,7 @@ export class Maker {
 
     }
 
-    for ( var i = 0; i < orders.length; order = orders[++i] ) {
+    for ( var i = 0; i < orders.length; order = orders[ ++i ] ) {
 
       if ( isArray === true ) {
 
@@ -90,9 +87,20 @@ export class Maker {
       
       }
 
-      if ( isString === false ) {
+      if ( isString === false && _prop != null ) {
+
+        if ( _prop[ 0 ] === '$' ) {
+
+          _prop = _prop.slice( 1 );
+          console.warn( 'No need for \'$\' on property arguments' );
+        
+        }
 
         Nested( order, _prop, false, true, _function.apply( null, args ) );
+
+      } else if ( isString === false ) {
+
+        _function.apply( null, args );
 
       } else {
 
@@ -116,13 +124,13 @@ export class Maker {
 
     for ( var i = 0 ; i < orders.length; ++i ) {
 
-      if ( isString === true && _value[0] === '$' ) {
+      if ( isString === true && _value[ 0 ] === '$' ) {
 
-        _value = Nested( orders[i], _value );
+        _value = Nested( orders[ i ], _value );
       
       }
   
-      Nested( orders[i], _key, false, true, _value );
+      Nested( orders[ i ], _key, false, true, _value );
     
     }
 
@@ -135,7 +143,7 @@ export class Maker {
     this.amount = 1;
     this.locked = false;
 
-    return this.orders[0];
+    return this.orders[ 0 ];
   
   }
 
@@ -148,16 +156,27 @@ export class Maker {
   
   }
 
+  Ship ( _mass ) {
+
+    this.amount = 1;
+    this.locked = false;
+    
+    const returns = _mass === true ? this.orders.slice() : this.orders[ 0 ];
+
+    this.orders.length = 0;
+
+    return returns;
+
+  }
+
 }
 
 // Private Static ----->
 const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
 
-  let ia = _ias[i];
-
   if ( _ias != null ) {
 
-    for ( var i = 0; i < _ias.length; ia = _ias[++i] ) {
+    for ( var i = 0, ia = _ias[ i ]; i < _ias.length; ia = _ias[ ++i ] ) {
   
       if ( ia.iteratorIndex !== -1 ) {
   
@@ -166,16 +185,19 @@ const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
           switch ( ia.mod ) {
   
             case '+':
-              _args[ia.iteratorIndex] = _index + parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index + parseInt( ia.val );
               break;
             case '*':
-              _args[ia.iteratorIndex] = _index * parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index * parseInt( ia.val );
               break;
             case '-':
-              _args[ia.iteratorIndex] = _index - parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index - parseInt( ia.val );
               break;
             case '/':
-              _args[ia.iteratorIndex] = _index / parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index / parseInt( ia.val );
+              break;
+            case '%':
+              _args[ ia.iteratorIndex ] = _index % parseInt( ia.val );
               break;
             default:
               throw new Error( 'Bad mod!' );
@@ -184,7 +206,7 @@ const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
             
         } else {
   
-          _args[ia.iteratorIndex] = _index;
+          _args[ ia.iteratorIndex ] = _index;
           
         }
   

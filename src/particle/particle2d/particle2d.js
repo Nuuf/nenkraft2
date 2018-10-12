@@ -33,13 +33,13 @@ export class Particle2D {
   
   }
 
-  static get USE_POOl () {
+  static get USE_POOL () {
 
     return PS_USE_POOL;
   
   }
 
-  static set USE_POOl ( _value ) {
+  static set USE_POOL ( _value ) {
 
     PS_USE_POOL = !!_value;
   
@@ -242,7 +242,7 @@ export class Particle2D {
 
       if ( _options.frames != null ) {
 
-        _options.frames[RandomInteger( 0, _options.frames.length - 1 )].Apply( entity );
+        _options.frames[ RandomInteger( 0, _options.frames.length - 1 ) ].Apply( entity );
         entity.scale.SetSame( 1 );
         entity.UpdateTextureTransform();
       
@@ -541,7 +541,7 @@ export class Particle2D {
           
           }
 
-          _vector.SetV( _object.points[_index % _object.moduloWrapper] );
+          _vector.SetV( _object.points[ _index % _object.moduloWrapper ] );
 
         } else {
 
@@ -598,7 +598,7 @@ export class Particle2D {
 
     if ( _unitId != null ) {
 
-      entity.SetTexture( entity.programController['originalTexture' + _unitId] );
+      entity.SetTexture( entity.programController[ 'originalTexture' + _unitId ] );
     
     }
 
@@ -636,7 +636,7 @@ export class Particle2D {
 }
 
 // Private Static ----->
-const PS_pool = new Pool( Vector2D );
+const PS_pool = new Pool();
 let PS_USE_POOL = true;
 
 PS_pool.Retrieve = function ( _options, _index ) {
@@ -651,5 +651,9 @@ PS_pool.Retrieve = function ( _options, _index ) {
 
 };
 
-PS_pool.Flood( () => {}, 1000 );
+PS_pool.Flood( () => {
+
+  return new Particle2D();
+
+}, 1000 );
 // <----- Private static

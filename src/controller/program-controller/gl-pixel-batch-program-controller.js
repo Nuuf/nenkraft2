@@ -35,9 +35,10 @@ export class GLPixelBatchProgramController extends GLProgramController {
     const gl = this.gl;
     const attributes = this.attributes;
 
-    if ( super.LAST_USED_CONTROLLER !== this ) {
+    if ( GLProgramController.LAST_USED_CONTROLLER !== this ) {
 
       gl.useProgram( this.program );
+      GLProgramController.LAST_USED_CONTROLLER = this;
     
     }
 
@@ -67,7 +68,6 @@ export class GLPixelBatchProgramController extends GLProgramController {
     gl.vertexAttribPointer( attributes.aPointSize, 1, gl.FLOAT, false, 64, 60 );
     gl.drawArrays( gl.POINTS, 0, _numElements );
     this.previousNumberOfElements = _numElements;
-    super.LAST_USED_CONTROLLER = this;
   
   }
 

@@ -40,6 +40,14 @@ export function IsArray ( _value ) {
 
 }
 
+export function ThisOrThat ( _this, _that ) {
+
+  if ( Random() > 0.5 ) return _this;
+
+  return _that;
+
+}
+
 export function Sign ( _value, _1If0 ) {
 
   if ( _value === 0 ) {
@@ -102,7 +110,7 @@ export function GenerateSequence ( _from, _to, _interval, _precision ) {
 
 export function RandomInArray ( _array ) {
 
-  return _array[RandomInteger( 0, _array.length - 1 )];
+  return _array[ RandomInteger( 0, _array.length - 1 ) ];
 
 }
 
@@ -116,9 +124,9 @@ export function MinMaxOrValue ( _options, _other ) {
   
     return RandomInArray( _options.values );
   
-  } else if ( _other != null && _options[_other].length > 0 ) {
+  } else if ( _other != null && _options[ _other ].length > 0 ) {
   
-    return RandomInArray( _options[_other] );
+    return RandomInArray( _options[ _other ] );
   
   }
   
@@ -132,7 +140,7 @@ export function UUID ( _length, _parts, _charSetIndex, _separator ) {
   let ilpdd;
   let id = '';
   const lpd = ( _length / _parts );
-  const charset = CharacterSets[ _charSetIndex];
+  const charset = CharacterSets[ _charSetIndex ];
 
   _length = _length == null ? 32 : _length;
   _parts = _parts == null ? 4 : _parts;
@@ -330,7 +338,7 @@ export function DeepClone ( _object ) {
 
     for ( var i = 0; i < _object.length; ++i ) {
 
-      r[i] = DeepClone( _object[i] );
+      r[ i ] = DeepClone( _object[ i ] );
 
     }
 
@@ -342,7 +350,7 @@ export function DeepClone ( _object ) {
 
       if ( _object.hasOwnProperty( key ) ) {
 
-        r[key] = DeepClone( _object[key] );
+        r[ key ] = DeepClone( _object[ key ] );
 
       }
 
@@ -364,7 +372,7 @@ export function CreateIteratorArgs ( _args, _pre, _post ) {
 
   for ( var i = 0; i < _args.length; ++i ) {
 
-    arg = _args[i];
+    arg = _args[ i ];
 
     if ( typeof arg === 'string' ) {
 
@@ -408,13 +416,13 @@ export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
   for ( var i = 0; i < _args.length; ++i ) {
 
-    arg = _args[i];
+    arg = _args[ i ];
 
     if ( typeof arg === 'string' ) {
 
       if ( arg.indexOf( _pre ) === 0 ) {
 
-        _args[i] = Nested( _object, arg.slice( _pre.length ) );
+        _args[ i ] = Nested( _object, arg.slice( _pre.length ) );
 
       }
 

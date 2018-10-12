@@ -35,9 +35,9 @@ export class Controller {
   GetAnimationById ( _id ) {
 
     const animations = this.animations;
-    let animation = animations[i];
+    let animation = animations[ i ];
 
-    for ( var i = 0; i < animations.length; animation = animations[++i] ) {
+    for ( var i = 0; i < animations.length; animation = animations[ ++i ] ) {
 
       if ( animation && animation.id === _id ) return animation;
       

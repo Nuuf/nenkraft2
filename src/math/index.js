@@ -83,6 +83,8 @@ export function LineLineIntersection ( _startA, _endA, _startB, _endB ) {
   const s = ( -d1.y * abx + d1.x * aby ) / l;
   const t = ( d2.x * aby - d2.y * abx ) / l;
 
+  d2.Store();
+
   if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
 
     d1.Set( _startA.x + ( t * d1.x ), _startA.y + ( t * d1.y ) );
@@ -173,8 +175,8 @@ export function SimplifyAspectRatio ( _x, _y, _array ) {
   const gcd = GreatestCommonDivisor( _x, _y );
   const array = _array == null ? [] : _array;
 
-  array[0] = _x / gcd;
-  array[1] = _y / gcd;
+  array[ 0 ] = _x / gcd;
+  array[ 1 ] = _y / gcd;
 
   return array;
 

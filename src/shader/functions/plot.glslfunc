@@ -1,0 +1,8 @@
+float plot( float axis, float percent, float prec ){
+
+  return (
+    smoothstep( percent - prec, percent, axis ) -
+    smoothstep( percent, percent + prec, axis )
+  );
+
+}

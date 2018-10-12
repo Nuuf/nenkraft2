@@ -73,10 +73,10 @@ export default () => {
 
       while ( i-- ) {
 
-        if ( scene.children[i].IntersectsPoint( p ) ) {
+        if ( scene.children[ i ].IntersectsPoint( p ) ) {
 
           dragStart.SetV( p );
-          dragger = scene.children[i];
+          dragger = scene.children[ i ];
           dragOffset.SetV( dragger.position );
 
           event.stopPropagation = true;

@@ -52,7 +52,7 @@ export class Polygon2D {
 
     for ( var i = 0; i < l; ++i ) {
 
-      _segments.push( new Line2D( vertices[i], vertices[ i + 1 ] ) );
+      _segments.push( new Line2D( vertices[ i ], vertices[ i + 1 ] ) );
     
     }
 
@@ -100,11 +100,11 @@ export class Polygon2D {
 
   AddVertices ( _vertices ) {
 
-    if ( _vertices[0] instanceof Vector2D ) {
+    if ( _vertices[ 0 ] instanceof Vector2D ) {
 
       this.vertices.push.apply( this.vertices, _vertices );
 
-    } else if ( typeof _vertices[0] === 'number' ) {
+    } else if ( typeof _vertices[ 0 ] === 'number' ) {
 
       for ( var i = 0; i < _vertices.length; i += 2 ) {
 
@@ -112,11 +112,11 @@ export class Polygon2D {
             
       }
     
-    } else if ( _vertices[0].x != null ) {
+    } else if ( _vertices[ 0 ].x != null ) {
 
       for ( i = 0; i < _vertices.length; ++i ) {
 
-        this.AddVertex( new Vector2D( _vertices[ i ].x, _vertices[ i].y ) );
+        this.AddVertex( new Vector2D( _vertices[ i ].x, _vertices[ i ].y ) );
                 
       }
     
@@ -194,7 +194,7 @@ export class Polygon2D {
 
     for ( var i = 0; i < vertices.length; ++i ) {
 
-      centroid.AddV( vertices[i] );
+      centroid.AddV( vertices[ i ] );
     
     }
 
@@ -214,7 +214,7 @@ export class Polygon2D {
 
     for ( var i = 0; i < l; ++i ) {
 
-      normals.push( vertices[i].GetNormalAV( vertices[ i + 1 ] ) );
+      normals.push( vertices[ i ].GetNormalAV( vertices[ i + 1 ] ) );
     
     }
 
@@ -234,7 +234,7 @@ export class Polygon2D {
 
     for ( var i = 0; i < l; ++i ) {
 
-      normals.push( vertices[i].GetNormalBV( vertices[ i + 1 ] ) );
+      normals.push( vertices[ i ].GetNormalBV( vertices[ i + 1 ] ) );
     
     }
 
@@ -254,7 +254,7 @@ export class Polygon2D {
 
     for ( var i = 0; i < l; ++i ) {
 
-      perimeterMidPoints.push( vertices[i].GetMidPointV( vertices[ i + 1 ] ) );
+      perimeterMidPoints.push( vertices[ i ].GetMidPointV( vertices[ i + 1 ] ) );
     
     }
 

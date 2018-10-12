@@ -52,10 +52,10 @@ export class GLRectangleProgramController extends GLProgramController {
 
     TriRectArray( _x, _y, _w, _h, vertices );
 
-    if ( this !== super.LAST_USED_CONTROLLER ) {
+    if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
-      super.LAST_USED_CONTROLLER = this;
+      GLProgramController.LAST_USED_CONTROLLER = this;
     
     }
 

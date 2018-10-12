@@ -3,6 +3,8 @@
 */
 
 @vertex@
+precision mediump float;
+
 attribute vec3 aProjection1;
 attribute vec3 aProjection2;
 attribute vec3 aProjection3;

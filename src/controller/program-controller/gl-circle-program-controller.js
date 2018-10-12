@@ -52,10 +52,10 @@ export class GLCircleProgramController extends GLProgramController {
     
     TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
 
-    if ( this !== super.LAST_USED_CONTROLLER ) {
+    if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
-      super.LAST_USED_CONTROLLER = this;
+      GLProgramController.LAST_USED_CONTROLLER = this;
     
     }
 

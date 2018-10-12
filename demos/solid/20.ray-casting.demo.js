@@ -114,7 +114,7 @@ export default () => {
       let j = 0;
       let k = 0;
       let kk = 0;
-      let ray = rays[i];
+      let ray = rays[ i ];
       let polygon;
       let vertexA;
       let vertexB;
@@ -123,12 +123,12 @@ export default () => {
       const pl = polygons.length;
       let pvl = 0;
 
-      for ( ; i < rl; ray = rays[++i] ) {
+      for ( ; i < rl; ray = rays[ ++i ] ) {
 
         j = 0;
-        polygon = polygons[j];
+        polygon = polygons[ j ];
 
-        for ( ; j < pl; polygon = polygons[++j] ) {
+        for ( ; j < pl; polygon = polygons[ ++j ] ) {
 
           k = 0;
           pvl = polygon.path.vertices.length;
@@ -136,8 +136,8 @@ export default () => {
 
           for ( ; k < pvl; kk = k++ ) {
 
-            vertexA = polygon.path.vertices[k];
-            vertexB = polygon.path.vertices[kk];
+            vertexA = polygon.path.vertices[ k ];
+            vertexB = polygon.path.vertices[ kk ];
             contactPoint = nk2.Math.LineLineIntersection(
               ray.path.s,
               ray.path.e,
@@ -147,7 +147,10 @@ export default () => {
 
             if ( contactPoint ) {
 
-              rays[i].path.e.SetV( contactPoint );
+              rays[ i ].path.e.SetV( contactPoint );
+
+              contactPoint.Store();
+              contactPoint = null;
 
             }
 

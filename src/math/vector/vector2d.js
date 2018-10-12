@@ -35,7 +35,7 @@ export class Vector2D {
 
   static set USE_POOL ( _value ) {
 
-    PS_USE_POOL = _value;
+    PS_USE_POOL = !!_value;
   
   }
 
@@ -555,7 +555,7 @@ export class Vector2D {
 
     for ( var i = 0 ; i < _vectors.length; ++i ) {
 
-      _vectors[i].AddV( this );
+      _vectors[ i ].AddV( this );
 
     }
 
@@ -624,24 +624,20 @@ export class Vector2D {
 }
 
 // Private Static ----->
-const PS_pool = new Pool( Vector2D );
+const PS_pool = new Pool();
 let PS_USE_POOL = true;
 
 PS_pool.Retrieve = function ( _x, _y ) {
 
   this.PreRetrieve();
 
-  const vector = this.objects.pop();
-
-  vector.Set( _x, _y );
-
-  return vector;
+  return this.objects.pop().Set( _x, _y );
 
 };
 
-PS_pool.Flood( ( _vector2d ) => {
+PS_pool.Flood( () => {
 
-  _vector2d.Set( 0, 0 );
+  return new Vector2D( 0, 0 );
 
 }, 1000 );
 // <----- Private static

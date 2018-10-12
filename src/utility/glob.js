@@ -102,9 +102,9 @@ export class Glob {
 
       if ( global != null ) {
   
-        if ( global[_id] !== undefined ) throw new Error( 'global.' + _id + ' already exists!' );
+        if ( global[ _id ] !== undefined ) throw new Error( 'global.' + _id + ' already exists!' );
   
-        global[_id] = new Glob();
+        global[ _id ] = new Glob();
         
       } else {
   
@@ -114,9 +114,9 @@ export class Glob {
   
     } else {
   
-      if ( window[_id] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
+      if ( window[ _id ] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
   
-      window[_id] = new Glob();
+      window[ _id ] = new Glob();
       
     }
   
@@ -134,15 +134,15 @@ export class Glob {
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
     if ( typeof _id !== 'string' ) throw new Error( 'Id needs to be a string!' );
 
-    if ( this[_type] == null ) throw new Error( 'Type does not exist' );
+    if ( this[ _type ] == null ) throw new Error( 'Type does not exist' );
 
     if ( _type === PS_CONSTANT || _type === PS_COMPONENT ) {
 
-      if ( this[_type][_id] !== undefined ) throw new Error( 'Constants cannot be reassigned!' );
+      if ( this[ _type ][ _id ] !== undefined ) throw new Error( 'Constants cannot be reassigned!' );
 
     }
 
-    this[_type][_id] = null;
+    this[ _type ][ _id ] = null;
   
   }
 
@@ -151,15 +151,15 @@ export class Glob {
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
     if ( typeof _id !== 'string' ) throw new Error( 'Id needs to be a string!' );
 
-    if ( this[_type] == null ) throw new Error( 'Type does not exist' );
+    if ( this[ _type ] == null ) throw new Error( 'Type does not exist' );
 
     if ( Glob.AllowGetNullUndefined === false ) {
 
-      if ( this[_type][_id] == null ) throw new Error( 'Null or undefined!' );
+      if ( this[ _type ][ _id ] == null ) throw new Error( 'Null or undefined!' );
     
     }
 
-    return this[_type][_id];
+    return this[ _type ][ _id ];
   
   }
 
@@ -173,23 +173,23 @@ export class Glob {
       case PS_FUNCTION:
         if ( typeof _value !== 'function' ) throw new Error( 'Needs to be a function!' );
   
-        if ( this.functions[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.functions[ _id ] !== null ) throw new Error( 'No mark!' );
   
-        this.functions[_id] = _value;
+        this.functions[ _id ] = _value;
         break;
 
       case PS_VALUE: 
         if ( _value instanceof Object ) throw new Error( 'Objects are not allowed!' );
   
-        if ( this.values[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.values[ _id ] !== null ) throw new Error( 'No mark!' );
 
-        this.values[_id] = _value;
+        this.values[ _id ] = _value;
         break;
 
       case PS_CONSTANT:
         if ( _value instanceof Object ) throw new Error( 'Objects are not allowed!' );
   
-        if ( this.constants[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.constants[ _id ] !== null ) throw new Error( 'No mark!' );
 
         Object.defineProperty( this.constants, _id, {
           writable: false,
@@ -201,7 +201,7 @@ export class Glob {
       case PS_COMPONENT:
         if ( typeof _value !== 'function' ) throw new Error( 'Needs to be a function!' );
   
-        if ( this.components[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.components[ _id ] !== null ) throw new Error( 'No mark!' );
 
         Object.defineProperty( this.components, _id, {
           writable: false,
@@ -214,17 +214,17 @@ export class Glob {
         if ( typeof _value !== 'object' ) throw new Error( 'Needs to be an object' );
         if ( IsArray( _value ) === true ) throw new Error( 'Arrays are not allowed!' );
   
-        if ( this.objects[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.objects[ _id ] !== null ) throw new Error( 'No mark!' );
 
-        this.objects[_id] = _value;
+        this.objects[ _id ] = _value;
         break;
 
       case PS_LIST:
         if ( IsArray( _value ) === false ) throw new Error( 'Needs to be an array!' );
 
-        if ( this.lists[_id] !== null ) throw new Error( 'No mark!' );
+        if ( this.lists[ _id ] !== null ) throw new Error( 'No mark!' );
 
-        this.lists[_id] = _value;
+        this.lists[ _id ] = _value;
         break;
 
       default:

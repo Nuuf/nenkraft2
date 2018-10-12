@@ -64,10 +64,10 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
     if ( _result != undefined ) {
 
-      PS_tvs[0].Set( PS_tl1.x - tl2xw, 0 );
-      PS_tvs[1].Set( tl1xw - PS_tl2.x, 0 );
-      PS_tvs[2].Set( 0, PS_tl1.y - br2yh );
-      PS_tvs[3].Set( 0, br1yh - PS_tl2.y );
+      PS_tvs[ 0 ].Set( PS_tl1.x - tl2xw, 0 );
+      PS_tvs[ 1 ].Set( tl1xw - PS_tl2.x, 0 );
+      PS_tvs[ 2 ].Set( 0, PS_tl1.y - br2yh );
+      PS_tvs[ 3 ].Set( 0, br1yh - PS_tl2.y );
       PS_tvs.sort( Vector2D.SortMinMag );
       _result.mtv.SetV( PS_tvs[ 0 ] );
       _result.occured = true;

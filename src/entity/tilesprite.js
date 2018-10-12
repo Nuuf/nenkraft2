@@ -46,7 +46,7 @@ export class Tilesprite extends Sprite {
           ] );
 
           path.ComputeBounds();
-          path.style.fill.color = '#234d20';
+        
           path.style.stroke.lineWidth = 3;
 
           return new Graphic2D( 0, 0, path );
@@ -82,7 +82,7 @@ export class Tilesprite extends Sprite {
 
       if ( this.display === true && this.pattern !== null ) {
 
-        _rc.globalAlpha = this.tint.channel[3];
+        _rc.globalAlpha = this.tint.channel[ 3 ];
         _rc.globalCompositeOperation = this.gco;
         _rc.fillStyle = this.pattern;
         _rc.beginPath();

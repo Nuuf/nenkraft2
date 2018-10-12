@@ -86,11 +86,11 @@ export class Animation {
 
     for ( var i = 0; i < frames.length; ++i ) {
 
-      if ( frames[i].id === _id ) {
+      if ( frames[ i ].id === _id ) {
     
         if ( _returnIndex === true ) return i;
 
-        return frames[i];
+        return frames[ i ];
         
       }
       
@@ -249,7 +249,7 @@ export class Animation {
 
     for ( var i = 0; i < frames.length; ++i ) {
 
-      frames[i].Reset();
+      frames[ i ].Reset();
       
     }
   

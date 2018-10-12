@@ -21,7 +21,7 @@ export class Touch {
     this.___bound___OnCancel = this.OnCancel.bind( this );
 
     this.element.addEventListener( 'touchmove', this.___bound___OnMove );
-    this.element.addEventListener( 'touchstart', this.___bound___OnStart, { passive: true } );
+    this.element.addEventListener( 'touchstart', this.___bound___OnStart );
     this.element.addEventListener( 'touchend', this.___bound___OnEnd );
     this.element.addEventListener( 'touchcancel', this.___bound___OnCancel );
 
@@ -58,6 +58,7 @@ export class Touch {
 
   OnStart ( _event ) {
 
+    _event.preventDefault();
     _event.stopPropagation();
     this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
     this.eventData.native = _event;

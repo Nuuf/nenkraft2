@@ -91,7 +91,7 @@ export default () => {
 
         for ( ; i < l;++i ) {
 
-          bodyA = bodies[i];
+          bodyA = bodies[ i ];
 
           bodyA.relative.AddV( bodyA.velocity );
 
@@ -121,7 +121,7 @@ export default () => {
 
           for ( j = 0; j < l; ++j ) {
 
-            bodyB = bodies[j];
+            bodyB = bodies[ j ];
 
             if ( bodyA !== bodyB ) {
 

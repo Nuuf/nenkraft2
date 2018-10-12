@@ -81,9 +81,9 @@ export class Stadium {
 
       for ( var j = 0; j < arguments.length; ++j ) {
 
-        if ( stages[i].id === arguments[j] ) {
+        if ( stages[ i ].id === arguments[ j ] ) {
 
-          rStages.push( stages[i] );
+          rStages.push( stages[ i ] );
         
         } 
       
@@ -101,7 +101,7 @@ export class Stadium {
 
     for ( var i = 0; i < stages.length; ++i ) {
 
-      stages[i].MixedProcess( _delta );
+      stages[ i ].MixedProcess( _delta );
       
     }
   
@@ -113,7 +113,7 @@ export class Stadium {
 
     for ( var i = 0; i < stages.length; ++i ) {
 
-      stages[i].Destroy();
+      stages[ i ].Destroy();
 
     }
 

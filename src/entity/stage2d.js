@@ -35,16 +35,27 @@ export class Stage2D extends Container2D {
     this.touch = null;
     this.ticker = null;
 
-    if ( _options.mode === 'WebGL' ) {
+    if ( _options.mode != null && _options.mode.toLowerCase() === 'webgl' ) {
 
       this.gl = _options.canvas.getContext( 'webgl', {
         antialias: _options.antialias,
+        powerPreference: _options.powerPreference,
         preserveDrawingBuffer: true
       } );
 
-      if ( this.gl == null ) {
+      if ( this.gl != null ) {
+
+        console.log( '%cWebGL!', 'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
+      
+      } else {
 
         this.gl = _options.canvas.getContext( 'experimental-webgl' );
+
+        if ( this.gl != null ) {
+
+          console.warn( 'Experimental WebGL!' );
+        
+        }
       
       }
 
@@ -73,6 +84,8 @@ export class Stage2D extends Container2D {
     } else {
 
       this.rc = _options.canvas.getContext( '2d' );
+
+      console.log( '%cCanvas 2D!', 'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
 
       if ( _options.noTicker !== true ) {
 

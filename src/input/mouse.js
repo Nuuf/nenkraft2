@@ -109,7 +109,7 @@ export class Mouse {
 
     for ( var i = 0; i < offsets.length; ++i ) {
 
-      pos.SubtractV( offsets[i] );
+      pos.SubtractV( offsets[ i ] );
     
     }
   

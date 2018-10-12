@@ -14,7 +14,7 @@ export class GLProgramController {
 
     if ( _gl != null && _shader != null ) {
 
-      this.Init( _shader.v, _shader.f );
+      this.Init( _shader.vertex, _shader.fragment );
     
     }
   

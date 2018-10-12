@@ -105,7 +105,7 @@ export class BitmapText extends Sprite {
 
     for ( var i = 0; i < chars.length; ++i ) {
 
-      chars[i].Draw( _rc, image );
+      chars[ i ].Draw( _rc, image );
     
     }
   
@@ -119,7 +119,7 @@ export class BitmapText extends Sprite {
 
       for ( var i = 0; i < chars.length; ++i ) {
 
-        chars[i].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
+        chars[ i ].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -127,7 +127,7 @@ export class BitmapText extends Sprite {
 
       for ( i = 0; i < chars.length; ++i ) {
 
-        chars[i].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
+        chars[ i ].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -209,7 +209,7 @@ export class BitmapText extends Sprite {
 
     for ( var i = 0; i < chars.length; ++i ) {
 
-      chars[i].UpdateMatrices();
+      chars[ i ].UpdateMatrices();
       
     }
   

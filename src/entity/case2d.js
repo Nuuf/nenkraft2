@@ -52,7 +52,7 @@ export class Case2D extends CoreEntity2D {
 
     for ( var i = 0 ; i < children.length; ++i ) {
 
-      children[i].Render();
+      children[ i ].Render();
     
     }
   
@@ -170,10 +170,10 @@ export class Case2D extends CoreEntity2D {
 
         }
 
-        const sibling = pChildren[_index];
+        const sibling = pChildren[ _index ];
 
-        pChildren[_index] = this;
-        pChildren[index] = sibling; 
+        pChildren[ _index ] = this;
+        pChildren[ index ] = sibling; 
 
       }
 
@@ -199,7 +199,7 @@ export class Case2D extends CoreEntity2D {
 
     for ( var i = 0; i < children.length; ++i ) {
 
-      children[i].parent = null;
+      children[ i ].parent = null;
 
     }
 
@@ -230,17 +230,15 @@ export class Case2D extends CoreEntity2D {
 
   GetChildClosestTo ( _object, _filter ) {
 
-    let child;
     let distance = Infinity;
     let tempDistance;
     let closestChild;
     const children = this.children;
+    let child = children[ 0 ];
 
     if ( children.length !== 0 ) {
 
-      for ( var i = 0 ; i < children.length; ++i ) {
-
-        child = children[ i ];
+      for ( var i = 0 ; i < children.length; child = children[ ++i ] ) {
 
         if ( _filter !== undefined ) {
 
@@ -269,17 +267,15 @@ export class Case2D extends CoreEntity2D {
 
   GetChildFurthestFrom ( _object, _filter ) {
 
-    let child;
     let distance = 0;
     let tempDistance;
     let closestChild;
     const children = this.children;
+    let child = children[ 0 ];
 
     if ( children.length !== 0 ) {
 
-      for ( var i = 0; i < children.length; ++i ) {
-
-        child = children[ i ];
+      for ( var i = 0; i < children.length; child = children[ ++i ] ) {
 
         if ( _filter !== undefined ) {
 

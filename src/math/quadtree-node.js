@@ -35,7 +35,7 @@ export class QuadtreeNode {
 
   static set USE_POOL ( _value ) {
 
-    PS_USE_POOL = _value;
+    PS_USE_POOL = !!_value;
   
   }
 
@@ -45,6 +45,8 @@ export class QuadtreeNode {
     this.level = _level;
     this.objectCap = _objCap;
     this.levelCap = _levelCap;
+
+    return this;
   
   }
 
@@ -196,7 +198,7 @@ export class QuadtreeNode {
 
       if ( PS_USE_POOL === true ) {
 
-        nodes[PS_TOP_LEFT].Store();
+        nodes[ PS_TOP_LEFT ].Store();
         nodes[ PS_TOP_RIGHT ].Store();
         nodes[ PS_BOTTOM_LEFT ].Store();
         nodes[ PS_BOTTOM_RIGHT ].Store();
@@ -265,24 +267,20 @@ const PS_TOP_LEFT = 'TL';
 const PS_TOP_RIGHT = 'TR';
 const PS_BOTTOM_LEFT = 'BL';
 const PS_BOTTOM_RIGHT = 'BR';
-const PS_pool = new Pool( QuadtreeNode );
+const PS_pool = new Pool();
 let PS_USE_POOL = true;
 
 PS_pool.Retrieve = function ( _aabb, _level, _objCap, _levelCap ) {
 
   this.PreRetrieve();
 
-  const qtn = this.objects.pop();
-
-  qtn.Set( _aabb, _level, _objCap, _levelCap );
-
-  return qtn;
+  return this.objects.pop().Set( _aabb, _level, _objCap, _levelCap );
 
 };
 
-PS_pool.Flood( ( _qtn ) => {
+PS_pool.Flood( () => {
 
-  _qtn.Set( null, 0, 0, 0 );
+  return new QuadtreeNode( null, 0, 0, 0 );
 
 }, 500 );
 // <----- Private static

@@ -58,7 +58,7 @@ export class Line2D {
 
     for ( var i = 0; i < _cuts.length; ++i ) {
 
-      _points.push( this.s.GetWeightedAverageV( this.e, _cuts[i] ) );
+      _points.push( this.s.GetWeightedAverageV( this.e, _cuts[ i ] ) );
     
     }
 

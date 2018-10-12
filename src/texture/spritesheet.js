@@ -27,9 +27,9 @@ export class Spritesheet {
 
     for ( var i = 0; i < frames.length; ++i ) {
 
-      frame = frames[i];
+      frame = frames[ i ];
       frameData = frame.frame;
-      frameTag = frameTags[i];
+      frameTag = frameTags[ i ];
       this.frameCache.Store( new Frame(
         frameData.x,
         frameData.y,

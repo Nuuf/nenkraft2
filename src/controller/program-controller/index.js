@@ -5,3 +5,5 @@ export { GLPixelBatchProgramController } from './gl-pixel-batch-program-controll
 export { GLRectangleProgramController } from './gl-rectangle-program-controller';
 export { GLTexture2DBatchProgramController } from './gl-texture2d-batch-program-controller';
 export { GLTexture2DProgramController } from './gl-texture2d-program-controller';
+export { GLDynamicTexture2DProgramController } from './gl-dynamic-texture2d-program-controller';
+export { GLUnProgramController } from './gl-un-program-controller';

@@ -170,7 +170,8 @@ export class Ticker {
 
 // Private Static ----->
 const PS_LOG = true;
-const PS_LOG_CSS = 'background-color:black;font-family:Arial;font-size:16px;padding:5px;';const Log = function () {
+const PS_LOG_CSS = 'background-color:#36802d;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
+const Log = function () {
 
   if ( PS_LOG === false ) return;
   console.log.apply( null, arguments );
