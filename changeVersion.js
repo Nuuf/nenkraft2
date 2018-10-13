@@ -7,9 +7,9 @@ var files = [
   './bundle-be/package.json'
 ];
 
-files.forEach( function ( filename ) {
+files.forEach( function ( path ) {
 
-  fs.readFile( filename, 'utf8', function ( err, content ) {
+  fs.readFile( path, 'utf8', function ( err, content ) {
 
     if ( err ) {
 
@@ -21,14 +21,14 @@ files.forEach( function ( filename ) {
     
     }
 
-    console.log( 'file loaded -- changing version', filename, VERSION );
+    console.log( 'file loaded -- changing version', path, VERSION );
 
     var newContent = content.replace( /\"version":.*?\,/g, VERSION );
 
-    fs.writeFile( filename, newContent, 'utf8', function ( err ) {
+    fs.writeFile( path, newContent, 'utf8', function ( err ) {
 
       if ( err ) console.error( err );
-      else console.log( 'file version changed', filename, VERSION );
+      else console.log( 'file version changed', path, VERSION );
 
     } );
 
@@ -36,4 +36,4 @@ files.forEach( function ( filename ) {
 
 } );
 
-// Run with node -- node ./changeVersion.js 1.0.0
+// Run with node -- ex - node ./changeVersion.js 1.0.0
