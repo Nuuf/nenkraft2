@@ -19,7 +19,7 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
     super( _gl, DynamicTEXTURE_2D( _units ) );
     this.units = _units;
     this.originalTextures = [];
-    this.boundTextures = [];
+    this.textures = [];
     this.essenceBuffers = [];
     this.lastUsedUnit = 0;
     this.Initialise();
@@ -54,12 +54,12 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
 
     _texture.uniformId = _unitId;
     this.originalTextures[ _unitId ] = _texture;
-    this.boundTextures[ _unitId ] = gl.createTexture();
+    this.textures[ _unitId ] = gl.createTexture();
     this.essenceBuffers[ _unitId ] = gl.createBuffer();
 
     essence.push.apply( essence, TriRectArray( 0, 0, 1, 1 ) );
 
-    gl.bindTexture( gl.TEXTURE_2D, this.boundTextures[ _unitId ] );
+    gl.bindTexture( gl.TEXTURE_2D, this.textures[ _unitId ] );
     gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT );
@@ -74,10 +74,10 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
 
   BindUnit ( _gl, _uniforms, _attributes, _unitId ) {
 
-    if ( this.boundTextures[ _unitId ] == null ) return;
+    if ( this.textures[ _unitId ] == null ) return;
 
     _gl.activeTexture( _gl.TEXTURE0 + _unitId );
-    _gl.bindTexture( _gl.TEXTURE_2D, this.boundTextures[ _unitId ] );
+    _gl.bindTexture( _gl.TEXTURE_2D, this.textures[ _unitId ] );
     _gl.bindBuffer( _gl.ARRAY_BUFFER, this.essenceBuffers[ _unitId ] );
     _gl.enableVertexAttribArray( _attributes[ 'aPosition' + _unitId ] );
     _gl.vertexAttribPointer( _attributes[ 'aPosition' + _unitId ], 2, _gl.FLOAT, false, 0, 0 );
@@ -102,14 +102,14 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
       
       }
       
-      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uUnitId, _unitId );
       gl.uniform1i( uniforms.uImage, _unitId );
       GLProgramController.LAST_USED_CONTROLLER = this;
       this.lastUsedUnit = _unitId;
     
     } else if ( _unitId !== this.lastUsedUnit ) {
 
-      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uUnitId, _unitId );
       gl.uniform1i( uniforms.uImage, _unitId );
       this.lastUsedUnit = _unitId;
     

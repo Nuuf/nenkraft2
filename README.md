@@ -1,6 +1,7 @@
 
 ![Nenkraft2][logo]
-[![Npm Version](https://img.shields.io/npm/v/nenkraft2.svg)](https://www.npmjs.com/package/nenkraft2)
+[![Npm Version](https://img.shields.io/npm/v/@nuuf/nk2-frontend.svg)](https://www.npmjs.com/package/@nuuf/nk2-frontend)
+[![Npm Version](https://img.shields.io/npm/v/@nuuf/nk2-backend.svg)](https://www.npmjs.com/package/@nuuf/nk2-backend)
 
 ------
 

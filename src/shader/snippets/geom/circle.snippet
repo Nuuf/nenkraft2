@@ -1,0 +1,3 @@
+float circle( vec2 pos, float r, float blur ) {
+  return ( 1.0 - smoothstep( r - blur, r, dot( pos , pos ) * 4.0 ) );
+}

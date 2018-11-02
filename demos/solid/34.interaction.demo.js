@@ -16,7 +16,7 @@ export default () => {
     c.setAttribute( 'height', H );
     c.style.display = 'initial';
     c.style.position = 'absolute';
-
+    
     const options = {
       canvas: c,
       x: 0,
@@ -33,6 +33,8 @@ export default () => {
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
+
+    line.path.Rotate( 23 / 180 * Math.PI );
 
     camera.force.SetSame( 5 );
 

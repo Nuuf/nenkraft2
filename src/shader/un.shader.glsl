@@ -3,7 +3,7 @@
 */
 
 @vertex@
-precision lowp float;
+precision highp float;
 
 attribute vec2 a_v2Position;
 
@@ -18,32 +18,59 @@ void main() {
 @vertex-end@
 
 @fragment@
-precision lowp float;
+
+(import 'RADIAN' /)
+
+precision highp float;
 
 uniform float u_fTime;
 uniform vec2 u_v2Resolution;
 
 varying vec2 v_v2Position;
 
+(import 'rotate2d' /)
+(import 'mod289' /)
+(import 'permute' /)
+(import 'snoise' /)
+(import 'ridge' /)
+(import 'rmf' [
+  {
+    "set": {
+      "OFFSET": "1.0 + 0.1 * abs( sin( u_fTime ) )",
+      "OCTAVES": "19"
+    }
+  }
+] /)
+(import 'rmf' [
+  {
+    "replace": {
+      "rmf": "rmf2"
+    },
+    "set": {
+      "OFFSET": "0.5 + 0.1 * abs( sin( u_fTime ) )",
+      "OCTAVES": "3"
+    }
+  }
+] /)
+
 void main() {
 
   vec2 pos = v_v2Position / u_v2Resolution;
+  float sp = 4.0 * u_fTime;
 
-  //pos.x -= v_v2Position.x;
-
-  float r = sqrt( dot( pos, pos ) ) * 1.9 - sin ( u_fTime ) * 0.2;
-  float a = atan( pos.x, pos.y ) + sin ( 0.9 * u_fTime );
-  float s = 0.5 + 0.4999 * sin( 12.0 * a );
-  float t = 0.15 + 0.35 * pow( s, 0.1 * sin( u_fTime ) * 0.5 );
-  t += 0.1 * pow( 0.5 + 0.5 * cos( 24.0 * a ), 0.5 );
-  float h = r / t;
-  float f = 0.0;
-  f = smoothstep( h-0.05, h+0.05, 1.0 );
-
-  vec4 color = vec4( mix( vec3( f ), vec3( 0.5 + 0.5 * h, h, 0.5 * h ), f ), f );
-
-  gl_FragColor = color;
+  pos *= -1.0; 
 
 
+  pos.y += u_fTime / 2.0;
+  
+  // pos += 0.5;
+
+  vec3 color = vec3( 0.0, rmf2( pos * 20.0 ) * rmf( pos * 0.4 ), 0.0 );
+
+  color = mix( color * rmf( pos * 20.0 ), vec3( 0.9, 0.0, 0.9 ), 0.2 );
+
+  gl_FragColor = vec4( color, 1.0 );
+  
 }
+
 @fragment-end@

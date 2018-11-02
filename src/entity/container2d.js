@@ -40,6 +40,18 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  PostDraw () {
+
+    return;
+  
+  }
+
+  GLPostDraw () {
+
+    return;
+  
+  }
+
   Draw ( _rc ) {
 
     this.PreDraw( _rc );
@@ -60,6 +72,8 @@ export class Container2D extends CoreEntity2D {
       }
     
     }
+
+    this.PostDraw( _rc );
   
   }
 
@@ -91,6 +105,8 @@ export class Container2D extends CoreEntity2D {
       }
     
     }
+
+    this.GLPostDraw( _gl );
   
   }
 

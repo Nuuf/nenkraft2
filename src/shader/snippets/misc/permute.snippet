@@ -1,0 +1,9 @@
+float permute( float n ) { 
+    return ( mod289( ( ( n * 34.0 ) +1.0 ) * n ) );
+}
+vec2 permute( vec2 p ) { 
+    return ( mod289( ( ( p * 34.0 ) +1.0 ) * p ) );
+}
+vec3 permute( vec3 p ) { 
+    return ( mod289( ( ( p * 34.0 ) +1.0 ) * p ) );
+}

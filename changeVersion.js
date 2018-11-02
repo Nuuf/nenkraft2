@@ -1,5 +1,8 @@
 var fs = require( 'fs' );
 var v = process.argv[ 2 ];
+
+if ( v == null ) throw new Error( 'version argument was null...' );
+
 var VERSION = '"version": "' + v + '",';
 var files = [
   './package.json',

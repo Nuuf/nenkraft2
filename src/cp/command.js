@@ -15,7 +15,6 @@ export class Command {
     this.options = null;
     this.registry = null;
     this.optionPrefix = _optionPrefix == null ? PS_OPTION_PREFIX : _optionPrefix;
-    this.dsCopy = [];
     this.dataSeparator = '=';
     this.allOptionIds = null;
     this.fullInfo = null;
@@ -91,8 +90,8 @@ export class Command {
   HandleData ( _dataStrs, _data ) {
   
     let data;
-    const ds = this.dataSeparator;
-    const dsCopy = this.dsCopy;
+    const dsep = this.dataSeparator;
+    const dsCopy = PS_DS_COPY;
     const jsonPrefix = this.jsonPrefix;
     const jsonPrefixL = jsonPrefix.length;
 
@@ -102,7 +101,7 @@ export class Command {
   
     for ( var i = 0; i < dsCopy.length; str = dsCopy[ ++i ] ) {
   
-      data = str.split( ds );
+      data = str.split( dsep );
   
       if ( data.length === 2 ) {
 
@@ -226,6 +225,7 @@ export class Command {
   
 // Private Static ----->
 let PS_OPTION_PREFIX = '';
+const PS_DS_COPY = [];
 const PS_FilterNullElements = function ( _element ) {
 
   return _element != null;

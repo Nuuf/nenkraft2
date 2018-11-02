@@ -69,7 +69,7 @@ module.exports = function () {
           ]
         },
         {
-          test: /\.shader|txt|glslfunc$/,
+          test: /\.txt|snippet|glsl$/,
           use: {
             loader: 'raw-loader'
           },

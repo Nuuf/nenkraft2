@@ -12,39 +12,22 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
 
     super( _gl, TEXTURE_2D_BATCH );
     this.originalTexture = null;
-    this.boundTexture = null;
+    this.texture = null;
     this.essenceBuffer = null;
     this.dataBuffer = null;
     this.indexBuffer = null;
     this.previousNumberOfElements = 0;
+    this.Initialise();
   
   }
 
-  BindBasicTexture ( _texture, _param ) {
+  Initialise () {
 
     const gl = this.gl;
-    const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
 
-    _param = _param != null ? _param : gl.LINEAR;
-
-    this.aia = gl.getExtension( 'ANGLE_instanced_arrays' );
-    this.originalTexture = _texture;
-    this.boundTexture = gl.createTexture();
+    this.texture = gl.createTexture();
     this.essenceBuffer = gl.createBuffer();
     this.dataBuffer = gl.createBuffer();
-
-    essence.push.apply( essence, TriRectArray( 0, 0, 1, 1 ) );
-
-    gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, _param );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, _param );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
-    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
-    gl.bindBuffer( gl.ARRAY_BUFFER, null );
-    gl.bindTexture( gl.TEXTURE_2D, null );
 
     this.AssignAttribute( 'aPosition' );
     this.AssignAttribute( 'aTexCoord' );
@@ -61,6 +44,31 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
   
   }
 
+  BindBasicTexture ( _texture, _param ) {
+
+    const gl = this.gl;
+    const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
+
+    _param = _param != null ? _param : gl.LINEAR;
+
+    this.aia = gl.getExtension( 'ANGLE_instanced_arrays' );
+    this.originalTexture = _texture;
+
+    essence.push.apply( essence, TriRectArray( 0, 0, 1, 1 ) );
+
+    gl.bindTexture( gl.TEXTURE_2D, this.texture );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, _param );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, _param );
+    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    gl.bindTexture( gl.TEXTURE_2D, null );
+  
+  }
+
   Execute ( _data, _numberOfElements ) {
 
     const gl = this.gl;
@@ -72,7 +80,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
 
       gl.useProgram( this.program );
       gl.activeTexture( gl.TEXTURE0 );
-      gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
+      gl.bindTexture( gl.TEXTURE_2D, this.texture );
       gl.uniform1i( uniforms.uImage, 0 );
       gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
       gl.enableVertexAttribArray( attributes.aPosition );

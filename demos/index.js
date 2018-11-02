@@ -2,7 +2,7 @@ require( '../style/default.css' );
 
 const nk2 = require( '../src/fe.index' );
 
-console.log( nk2 );
+console.log( nk2, nk2.Shader.UN );
 
 nk2.Utility.PRINT_VERSION();
 

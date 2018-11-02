@@ -1,0 +1,7 @@
+vec2 vrandom( vec2 p ) {
+    p = vec2( 
+        dot( p, vec2( VRSEED1, VRSEED2 ) ),
+        dot( p, vec2( VRSEED3, VRSEED4 ) )
+    );
+    return ( -1.0 + 2.0 * fract( sin ( p ) * VRSEED5 ) );
+}

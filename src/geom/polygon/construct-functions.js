@@ -197,9 +197,9 @@ export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _
   const l = _accuracy;
   const c = Supershape.C;
 
-  _n1 = _n1 === undefined ? 1 : _n1;
-  _n2 = _n2 === undefined ? 1 : _n2;
-  _n3 = _n3 === undefined ? 1 : _n3;
+  _n1 = _n1 == null ? 1 : _n1;
+  _n2 = _n2 == null ? 1 : _n2;
+  _n3 = _n3 == null ? 1 : _n3;
 
   _polygon.Recreate( [] );
 

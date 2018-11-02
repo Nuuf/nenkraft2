@@ -1,7 +1,0 @@
-float circle( vec2 pos, float radius ) {
-
-  float dist = dot( pos, pos );
-  
-  return step( dist, radius * radius );
-
-}

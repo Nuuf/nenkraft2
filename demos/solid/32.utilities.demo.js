@@ -140,7 +140,7 @@ export default () => {
             'anOption anopt',
             ( dataStrs, data, staticData ) => {
 
-              console.log( dataStrs, data, staticData, 'priorty 1' );
+              console.log( dataStrs, data, staticData, 'priorty 0' );
 
             },
             'some info about this option',
@@ -151,11 +151,11 @@ export default () => {
             'op2',
             () => {
 
-              console.log( 'op2 called.', 'priorty 0' );
+              console.log( 'op2 called.', 'priorty 99' );
 
             },
             'brrrr',
-            1,
+            99,
             false
           )
       );

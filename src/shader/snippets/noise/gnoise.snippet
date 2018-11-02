@@ -1,0 +1,17 @@
+float gnoise( vec2 p ) {
+    vec2 fl = floor( p );
+    vec2 fr = fract( p );
+    vec2 sm = fr * fr * ( 3.0 - 2.0 * fr );
+    return ( mix( 
+            mix( 
+                dot( vrandom( fl ), fr ), 
+                dot( vrandom( fl + vec2( 1.0, 0.0 ) ), fr - vec2( 1.0, 0.0 ) ), sm.x
+            ),
+            mix( 
+                dot( vrandom( fl + vec2( 0.0, 1.0 ) ), fr - vec2( 0.0, 1.0 ) ), 
+                dot( vrandom( fl + vec2( 1.0, 1.0 ) ), fr - vec2( 1.0, 1.0 ) ), sm.x
+            ),
+            sm.y
+        )
+    );
+}

@@ -35,9 +35,9 @@ export class Stage2D extends Container2D {
     this.touch = null;
     this.ticker = null;
 
-    if ( _options.mode != null && _options.mode.toLowerCase() === 'webgl' ) {
+    if ( _options.mode != null && ( _options.mode.toLowerCase() === 'webgl2' || _options.mode.toLowerCase() === 'webgl' ) ) {
 
-      this.gl = _options.canvas.getContext( 'webgl', {
+      this.gl = _options.canvas.getContext( _options.mode.toLowerCase(), {
         antialias: _options.antialias,
         powerPreference: _options.powerPreference,
         preserveDrawingBuffer: true
@@ -206,7 +206,6 @@ export class Stage2D extends Container2D {
   GLProcess ( _delta ) {
 
     this.GLDraw( this.gl );
-    this.GLPostDraw( this.gl );
     this.onProcess.Dispatch( this, _delta );
   
   }
@@ -216,7 +215,6 @@ export class Stage2D extends Container2D {
     if ( this.usingWebGL === true ) {
 
       this.GLDraw( this.gl );
-      this.GLPostDraw( this.gl );
       
     } else {
   
@@ -225,6 +223,25 @@ export class Stage2D extends Container2D {
     }
   
     this.onProcess.Dispatch( this, _delta );
+  
+  }
+
+  SetFramebuffer ( _gl, _buffer ) {
+
+    if ( _gl == null ) _gl = this.gl;
+
+    if ( _buffer == null ) {
+
+      _gl.viewport( 0, 0, this.w, this.h );
+      _gl.bindFramebuffer( _gl.FRAMEBUFFER, null );
+
+    } else {
+
+      _gl.viewport( 0, 0, _buffer.w, _buffer.h );
+      _gl.bindFramebuffer( _gl.FRAMEBUFFER, _buffer.frameBuffer );
+      _gl.clear( _gl.COLOR_BUFFER_BIT );
+
+    }
   
   }
 

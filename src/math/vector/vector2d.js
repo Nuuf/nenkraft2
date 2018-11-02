@@ -491,11 +491,8 @@ export class Vector2D {
 
     const magnitude = _vector2d.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
-    const projection = _vector2d.Copy();
 
-    projection.Multiply( scale, scale );
-
-    return projection;
+    return _vector2d.Copy().Multiply( scale, scale );
   
   }
 

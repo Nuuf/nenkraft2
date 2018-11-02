@@ -46,7 +46,7 @@ export default () => {
       .Trigger();
 
     const pc = new nk2.Controller.ProgramController.GLUnProgramController( stage.gl, nk2.Shader.UN );
-    let i = 50;
+    let i = 1;
 
     while ( i-- ) {
 
@@ -59,9 +59,12 @@ export default () => {
     
       glentity.transformShouldUpdate = true;
 
-      const size = nk2.Utility.RandomFloat( 1, 10 );
+      const size = 12; // nk2.Utility.RandomFloat( 1, 10 );
 
       glentity.w = glentity.h = 32 * size;
+
+      glentity.w = W;
+      glentity.h = H;
 
       glentity.timeInc = 0.05 / size;
 
@@ -70,6 +73,8 @@ export default () => {
       glentity.position.Set( 
         nk2.Utility.RandomInteger( -HW, HW ),
         nk2.Utility.RandomInteger( -HH, HH ) );
+
+      glentity.position.Set( 0, 0 );
 
       scene.AddChild( glentity );
     

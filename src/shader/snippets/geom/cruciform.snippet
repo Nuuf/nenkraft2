@@ -1,0 +1,4 @@
+float cruciform( vec2 pos, float size, float armSize, float blur ) {
+  return aabb( pos, vec2( size, armSize ), blur ) +
+         aabb( pos, vec2( armSize, size ), blur );
+}

@@ -1,0 +1,13 @@
+float abs_fbm ( vec2 p ) {
+    float v = 0.0;
+    float AMP = 0.5;
+    float LACUNARITY = 2.0;
+    float GAIN = 0.5;
+    const int OCTAVES = 3;
+    for ( int i = 0; i < OCTAVES; ++i ) {
+        v += AMP * abs( NOISE( p ) );
+        AMP *= GAIN;
+        p *= LACUNARITY;
+    }
+    return v;
+}

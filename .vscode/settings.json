@@ -2,7 +2,5 @@
     "eslint.options": {
       "configFile": "./.eslintrc"
     },
-    "eslint.autoFixOnSave": true,
-    "editor.renderWhitespace": "none",
-    "editor.autoIndent": false
+    "eslint.autoFixOnSave": true
   }

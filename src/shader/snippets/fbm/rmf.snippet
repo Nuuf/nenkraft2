@@ -1,0 +1,18 @@
+float rmf ( vec2 p ) {
+    float LACUNARITY = 2.0;
+    float GAIN = 0.5;
+    float OFFSET = 0.9;
+    float v = 0.0;
+    float f = 1.0;
+    float AMP = 0.5;
+    float prev = 1.0;
+    const int OCTAVES = 3;
+    for ( int i = 0; i < OCTAVES; ++i ) {
+        float n = ridge( snoise( p * f ), OFFSET );
+        v += ( n * AMP ) + ( n * AMP * prev );
+        prev = n;
+        f *= LACUNARITY;
+        AMP *= GAIN;
+    }
+    return v;
+}

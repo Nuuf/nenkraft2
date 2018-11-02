@@ -21,7 +21,7 @@ export class Particle2D {
     this.initialScale = new Vector2D( 1, 1 );
     this.fade = false;
     this.deflate = false;
-    this.gravity = new Vector2D();
+    this.gravity = new Vector2D( 0, 0 );
     this.lifespan = 0;
     this.lifespanTotal = 0;
     this.dead = false;

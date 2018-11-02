@@ -35,7 +35,7 @@ export class Controller {
   GetAnimationById ( _id ) {
 
     const animations = this.animations;
-    let animation = animations[ i ];
+    let animation = animations[ 0 ];
 
     for ( var i = 0; i < animations.length; animation = animations[ ++i ] ) {
 

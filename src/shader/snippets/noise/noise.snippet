@@ -1,0 +1,19 @@
+float noise( float n ) {
+    float fl = floor( n );
+    return( mix( random( fl ), random( fl + 1.0 ), fract( n ) ) );
+}
+float noise ( vec2 p ) {
+    vec2 fl = floor( p );
+    vec2 fr = fract( p );
+    float a = random( fl );
+    float b = random( fl + vec2( 1.0, 0.0 ) );
+    float c = random( fl + vec2( 0.0, 1.0 ) );
+    float d = random( fl + vec2( 1.0, 1.0 ) );
+    vec2 sm = fr * fr * ( 3.0 - 2.0 * fr );
+    return ( 
+        mix( a, b, sm.x ) + 
+        ( c -a ) * sm.y * 
+        ( 1.0 - sm.x ) + 
+        ( d - b ) * sm.x * sm.y
+    );
+}

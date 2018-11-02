@@ -2,6 +2,31 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
+class OscillatingObject {
+
+  constructor ( _from, _to, _amplitude ) {
+
+    this.Set( _from, _to, _amplitude );
+  
+  }
+
+  Set ( _from, _to, _amplitude ) {
+
+    this.from = _from;
+    this.to = _to;
+    this.amplitude = _amplitude;
+    this.active = true;
+  
+  }
+
+  Inactivate () {
+
+    this.active = false;
+  
+  }
+
+}
+
 export class Oscillation {
 
   constructor () {
@@ -24,12 +49,7 @@ export class Oscillation {
 
     if ( this[ _key ] !== null ) throw new Error( 'Invalid key' );
 
-    this[ _key ] = {
-      from: _from,
-      to: _to,
-      amplitude: _amplitude,
-      active: true
-    };
+    this[ _key ] = new OscillatingObject( _from, _to, _amplitude );
   
   }
 
@@ -43,10 +63,7 @@ export class Oscillation {
     
     }
 
-    obj.from = _from;
-    obj.to = _to;
-    obj.amplitude = _amplitude;
-    obj.active = true;
+    obj.Set( _from, _to, _amplitude );
   
   }
 
@@ -54,7 +71,7 @@ export class Oscillation {
 
     if ( this[ _key ] != null ) {
 
-      this[ _key ].active = false;
+      this[ _key ].Inactivate();
     
     }
   

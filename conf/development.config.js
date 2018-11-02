@@ -58,7 +58,7 @@ module.exports = function () {
           exclude: /node_modules/
         },
         {
-          test: /\.shader|txt|glslfunc$/,
+          test: /\.txt|snippet|glsl$/,
           use: {
             loader: 'raw-loader'
           },

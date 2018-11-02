@@ -17,7 +17,7 @@ export default () => {
     c.style.display = 'initial';
     c.style.position = 'absolute';
 
-    const gl = c.getContext( 'webgl' );
+    const gl = c.getContext( 'webgl2' );
     const container = new nk2.Container2D( 0, 0 );
     const ticker = conf.ticker = new nk2.Time.Ticker( Update, 1000, true );
     let numTimes = 20;

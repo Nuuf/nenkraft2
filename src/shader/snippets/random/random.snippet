@@ -1,0 +1,6 @@
+float random( float n ) {
+    return ( fract( sin( n ) * RSEED3 ) );
+}
+float random( vec2 p ) {
+    return ( fract( sin( dot( p, vec2( RSEED1, RSEED2 ) ) ) * RSEED3 ) );
+}

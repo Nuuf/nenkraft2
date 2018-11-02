@@ -7,3 +7,4 @@ export { GLTexture2DBatchProgramController } from './gl-texture2d-batch-program-
 export { GLTexture2DProgramController } from './gl-texture2d-program-controller';
 export { GLDynamicTexture2DProgramController } from './gl-dynamic-texture2d-program-controller';
 export { GLUnProgramController } from './gl-un-program-controller';
+export { GLRendertextureProgramController } from './gl-rendertexture-program-controller';

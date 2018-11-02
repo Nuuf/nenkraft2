@@ -106,7 +106,7 @@ export class Cache {
   Contains ( _item, _id ) {
 
     const items = this.items;
-    let item = items[ i ];
+    let item = items[ 0 ];
 
     for ( var i = 0 ; i < items.length; item = items[ ++i ] ) {
 

@@ -1,5 +1,0 @@
-float line ( float axis, float percent, float prec ) {
-
-  return plot( axis, percent, prec );
-
-}

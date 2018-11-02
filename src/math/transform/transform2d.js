@@ -26,7 +26,7 @@ export class Transform2D {
   
   }
 
-  Set ( _matrix ) {
+  SetMatrix ( _matrix ) {
 
     _matrix.Decompose( this );
     this.UpdateSkew();
@@ -50,7 +50,7 @@ export class Transform2D {
   
   }
 
-  UpdateGlobal ( _parentGlobalTransform ) {
+  UpdateGlobal ( _transform ) {
 
     const localTransform = this.localTransform;
     const globalTransform = this.globalTransform;
@@ -66,13 +66,12 @@ export class Transform2D {
     localTransform.e = position.x - pivot.x * localTransform.a + pivot.y * localTransform.c;
     localTransform.f = position.y - pivot.y * localTransform.b + pivot.y * localTransform.d;
 
-    globalTransform.a = localTransform.a * _parentGlobalTransform.a + localTransform.b * _parentGlobalTransform.c;
-    globalTransform.b = localTransform.a * _parentGlobalTransform.b + localTransform.b * _parentGlobalTransform.d;
-    globalTransform.c = localTransform.c * _parentGlobalTransform.a + localTransform.d * _parentGlobalTransform.c;
-    globalTransform.d = localTransform.c * _parentGlobalTransform.b + localTransform.d * _parentGlobalTransform.d;
-
-    globalTransform.e = localTransform.e * _parentGlobalTransform.a + localTransform.f * _parentGlobalTransform.c + _parentGlobalTransform.e;
-    globalTransform.f = localTransform.e * _parentGlobalTransform.b + localTransform.f * _parentGlobalTransform.d + _parentGlobalTransform.f;
+    globalTransform.a = localTransform.a * _transform.a + localTransform.b * _transform.c;
+    globalTransform.b = localTransform.a * _transform.b + localTransform.b * _transform.d;
+    globalTransform.c = localTransform.c * _transform.a + localTransform.d * _transform.c;
+    globalTransform.d = localTransform.c * _transform.b + localTransform.d * _transform.d;
+    globalTransform.e = localTransform.e * _transform.a + localTransform.f * _transform.c + _transform.e;
+    globalTransform.f = localTransform.e * _transform.b + localTransform.f * _transform.d + _transform.f;
   
   }
 

@@ -1,0 +1,6 @@
+float aabb( vec2 pos, vec2 size, float blur ){
+    size = 0.5 - size * 0.5;
+    vec2 dim = smoothstep( size, size + blur, pos ) *
+               smoothstep( size - blur, size, 1.0 - pos - blur );
+    return dim.x * dim.y;
+}

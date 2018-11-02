@@ -50,5 +50,6 @@ void main() {
   } else {
     gl_FragColor = uOutlineColor;
   }
+  
 }
 @fragment-end@

@@ -22,7 +22,7 @@ export default () => {
       x: 0,
       y: 0,
       halt: false,
-      mode: 'WebGL',
+      mode: 'WebGL2',
       antialias: true
     };
     const stage = conf.stage = new nk2.Stage2D( options );

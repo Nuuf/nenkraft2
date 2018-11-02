@@ -1,0 +1,6 @@
+float plot ( float n, float pct, float prec ) {
+    return (
+        smoothstep( pct - prec, pct, n ) -
+        smoothstep( pct, pct + prec, n )
+    );
+}
