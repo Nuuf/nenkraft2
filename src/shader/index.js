@@ -77,8 +77,6 @@ export const ParseImports = function ( _shader ) {
 
           v1[ 1 ] = v0[ 1 ].replace( v1[ 1 ], json.set[ key ] );
 
-          console.log( v1 );
-
           rsnippet = rsnippet.replace( v0[ 1 ], v1[ 1 ] );
           
         }
