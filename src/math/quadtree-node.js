@@ -283,4 +283,4 @@ PS_pool.Flood( () => {
   return new QuadtreeNode( null, 0, 0, 0 );
 
 }, 500 );
-// <----- Private static
+// <----- Private Static

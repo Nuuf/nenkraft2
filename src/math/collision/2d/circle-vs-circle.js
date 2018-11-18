@@ -52,14 +52,14 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
-  if ( anchor1 != undefined ) {
+  if ( anchor1 != null ) {
 
     PS_pos1.x += anchor1.x * c1.diameter;
     PS_pos1.y += anchor1.y * c1.diameter;
     
   }
 
-  if ( anchor2 != undefined ) {
+  if ( anchor2 != null ) {
 
     PS_pos2.x += anchor2.x * c2.diameter;
     PS_pos2.y += anchor2.y * c2.diameter;
@@ -68,7 +68,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
   if ( radii * radii > distanceSq ) {
 
-    if ( _result != undefined ) {
+    if ( _result != null ) {
 
       const distance = Sqrt( distanceSq );
       const dm = ( c1.radiusSquared - c2.radiusSquared + distanceSq ) / ( distance + distance );
@@ -137,7 +137,7 @@ export const ElasticResponse = function ( _obj1, _obj2, _result ) {
 
 };
 
-// Private Static ----->
+// REUSABLE ----->
 const PS_n = new Vector2D( 0, 0 );
 const PS_mtv = new Vector2D( 0, 0 );
 const PS_pos1 = new Vector2D( 0, 0 );
@@ -146,4 +146,4 @@ const PS_poc1 = new Vector2D( 0, 0 );
 const PS_poc2 = new Vector2D( 0, 0 );
 const PS_poc3 = new Vector2D( 0, 0 );
 const PS_delta = new Vector2D( 0, 0 );
-// <----- Private static
+// <----- REUSABLE

@@ -21,7 +21,7 @@ export class XHRLoader {
 
     if ( _onComplete != null ) {
 
-      this.onComplete.Add( _onComplete, this );
+      this.onComplete.Add( _onComplete, this, true );
     
     }
 

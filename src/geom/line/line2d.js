@@ -3,7 +3,7 @@
  */
 
 import { Vector2D } from '../../math/vector/vector2d';
-import { LineLineIntersection, ClosestPointOnLine } from '../../math';
+import { Line2DLine2DIntersection, ClosestPoint2DOnLine2D } from '../../math/misc';
 
 export class Line2D {
 
@@ -78,7 +78,7 @@ export class Line2D {
   
   }
 
-  IntersectsPoint ( _p ) {
+  IntersectsPoint2D ( _p ) {
 
     const s = this.s;
     const e = this.e;
@@ -108,15 +108,15 @@ export class Line2D {
   
   }
 
-  IntersectsLine ( _line2d ) {
+  IntersectsLine2D ( _line ) {
 
-    return LineLineIntersection( this.s, this.e, _line2d.s, _line2d.e );
+    return Line2DLine2DIntersection( this.s, this.e, _line.s, _line.e );
   
   }
 
-  GetClosestPointTo ( _p ) {
+  GetClosestPoint2DTo ( _p ) {
 
-    return ClosestPointOnLine( this.s, this.e, _p );
+    return ClosestPoint2DOnLine2D( this.s, this.e, _p );
   
   }
 
@@ -136,4 +136,4 @@ export class Line2D {
 
 // Private Static ----->
 const PS_TYPE = 0;
-// <----- Private static
+// <----- Private Static

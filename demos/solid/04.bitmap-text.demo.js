@@ -31,7 +31,7 @@ export default () => {
     bitmapText.x = HW - bitmapText.width * 0.5;
     bitmapText.y = HH - bitmapText.height * 0.5;
 
-    bitmapText.Draw( rc );
+    bitmapText.Render( rc );
 
   } );
 

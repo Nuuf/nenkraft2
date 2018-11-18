@@ -10,12 +10,13 @@ export class AABB2D extends AABB2DGeom {
   constructor ( _tlx, _tly, _brx, _bry, _style ) {
 
     super( _tlx, _tly, _brx, _bry );
+    
     this.programController = null;
     this.style = FFSa( _style );
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
     const tl = this.tl;
     const br = this.br;
@@ -46,7 +47,7 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
-  GLDraw ( _gl, _transform2d ) {
+  GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
 

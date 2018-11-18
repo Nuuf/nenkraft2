@@ -177,4 +177,4 @@ const Log = function () {
   console.log.apply( null, arguments );
 
 };
-// <----- Private static
+// <----- Private Static

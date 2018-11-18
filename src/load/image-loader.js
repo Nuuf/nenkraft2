@@ -17,11 +17,11 @@ export class ImageLoader {
     this.count = 0;
     this.loading = false;
     this.toLoad = null;
-    this.createTexture = false;
+    this.createTextures = false;
 
     if ( _onComplete != null ) {
 
-      this.onComplete.Add( _onComplete, this );
+      this.onComplete.Add( _onComplete, this, true );
     
     }
 
@@ -99,8 +99,9 @@ export class ImageLoader {
   
   }
 
-  OnError () {
+  OnError ( _event ) {
 
+    console.error( _event );
     throw new Error( 'Request failed' );
   
   }

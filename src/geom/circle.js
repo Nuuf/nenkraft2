@@ -61,7 +61,13 @@ export class Circle {
   
   }
 
-  IntersectsPoint ( _p ) {
+  ContainsCircle ( _circle ) {
+
+    return ( this.radius - _circle.radius > this.center.GetDistanceV( _circle.center ) );
+
+  }
+
+  IntersectsPoint2D ( _p ) {
 
     return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _p ) );
   
@@ -80,9 +86,9 @@ export class Circle {
 
     for ( var i = 0; i < _amount; ++i ) {
       
-      const point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+      const point = new Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
-      while ( this.IntersectsPoint( point ) === _outside ) {
+      while ( this.IntersectsPoint2D( point ) === _outside ) {
 
         point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
@@ -105,7 +111,7 @@ export class Circle {
     for ( var i = 0; i < _amount; i += _margin ) {
 
       points.push(
-        Nenkraft.Vector2D(
+        new Vector2D(
           this.x + Cos( DegreesToRadians( i ) ) * this.radius,
           this.y + Sin( DegreesToRadians( i ) ) * this.radius
         )
@@ -160,4 +166,4 @@ export class Circle {
 
 // Private Static ----->
 const PS_TYPE = 2;
-// <----- Private static
+// <----- Private Static

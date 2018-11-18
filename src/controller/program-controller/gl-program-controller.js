@@ -102,4 +102,4 @@ export class GLProgramController {
 
 // Private Static ----->
 let PS_LAST_USED_CONTROLLER = null;
-// <----- Private static
+// <----- Private Static

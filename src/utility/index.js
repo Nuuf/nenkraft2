@@ -68,6 +68,30 @@ export function Sign ( _value, _1If0 ) {
 
 }
 
+export function IsBitSet ( _bit, _n ) {
+
+  return ( ( _n & ( 1 << _bit ) ) !== 0 );
+
+}
+
+export function SetBit ( _bit, _n ) {
+
+  return ( _n | ( 1 << _bit ) );
+
+}
+
+export function ClearBit ( _bit, _n ) {
+
+  return ( _n & ~( 1 << _bit ) );
+
+}
+
+export function ToggleBit ( _bit, _n ) {
+
+  return ( _n ^ ( 1 << _bit ) );
+
+}
+
 export function Clamp ( _value, _min, _max ) {
 
   if ( _value < _min ) return _min;

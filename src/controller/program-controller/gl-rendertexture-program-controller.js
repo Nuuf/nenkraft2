@@ -10,6 +10,7 @@ export class GLRendertextureProgramController extends GLProgramController {
   constructor ( _gl, _un ) {
 
     super( _gl, _un );
+    
     this.essenceBuffer = null;
     this.frameBuffer = null;
     this.renderBuffer = null;

@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateDemo( 'Container2D', ( conf ) => {
+  CreateDemo( 'VisualContainer2D', ( conf ) => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -20,12 +20,13 @@ export default () => {
     const sprite = new nk2.Sprite( HW, HH );
 
     sprite.anchor.SetSame( 0.5 );
+    sprite.UpdateTextureTransform();
 
-    const container = new nk2.Container2D( 0, 0 );
+    const container = new nk2.VisualContainer2D( 0, 0 );
 
     container.AddChild( sprite );
 
-    container.Draw( c.getContext( '2d' ) );
+    container.Render( c.getContext( '2d' ) );
 
   } );
 

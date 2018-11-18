@@ -2,13 +2,13 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Container2D } from './container2d';
+import { VisualContainer2D } from './visual-container2d';
 import { Vector2D } from '../math/vector/vector2d';
 
 const Cos = Math.cos;
 const Sin = Math.sin;
 
-export class Camera2D extends Container2D {
+export class Camera2D extends VisualContainer2D {
 
   constructor ( _focus, _target ) {
 
@@ -73,4 +73,4 @@ export class Camera2D extends Container2D {
 // Private Static ----->
 let PS_DELTA = new Vector2D( 0, 0 );
 let PS_TARGET_POSITION = new Vector2D( 0, 0 );
-// <----- Private static
+// <----- Private Static

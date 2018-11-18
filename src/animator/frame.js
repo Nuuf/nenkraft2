@@ -43,6 +43,15 @@ export class Frame {
   
   }
 
+  FullApply ( _sprite ) {
+
+    this.Apply( _sprite );
+    _sprite.w = this.w;
+    _sprite.h = this.h;
+    _sprite.scale.SetSame( 1 );
+  
+  }
+
   Reset () {
 
     this.timer = this.rate;

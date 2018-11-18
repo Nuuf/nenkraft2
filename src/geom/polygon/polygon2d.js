@@ -78,7 +78,7 @@ export class Polygon2D {
       
       const point = new Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
-      while ( this.IntersectsPoint( point ) === _outside ) {
+      while ( this.IntersectsPoint2D( point ) === _outside ) {
 
         point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
 
@@ -127,7 +127,7 @@ export class Polygon2D {
   Recreate ( _vertices ) {
 
     this.vertices.length = 0;
-    if ( _vertices != undefined ) this.vertices.push.apply( this.vertices, _vertices );
+    if ( _vertices != null ) this.vertices.push.apply( this.vertices, _vertices );
   
   }
 
@@ -264,10 +264,10 @@ export class Polygon2D {
   
   }
 
-  IntersectsPoint ( _p ) {
+  IntersectsPoint2D ( _p ) {
 
     if ( this.dirtyBounds === true ) this.ComputeBounds();
-    if ( this.aabb.IntersectsPoint( _p ) === false ) return false;
+    if ( this.aabb.IntersectsPoint2D( _p ) === false ) return false;
 
     let vertexi;
     let vertexj;
@@ -300,4 +300,4 @@ export class Polygon2D {
 
 // Private Static ----->
 const PS_TYPE = 3;
-// <----- Private static
+// <----- Private Static

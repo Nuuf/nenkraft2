@@ -4,6 +4,7 @@
 
 import { SimplifyAspectRatio } from '../math';
 import { Event } from '../event/event';
+import { AABB2D } from '../geom/aabb/aabb2d';
 
 export class CanvasManager {
 
@@ -16,6 +17,8 @@ export class CanvasManager {
     this.onChange = new Event();
     this.mode = _mode;
     this.stage = null;
+    this.culler = null;
+    this.cullerAabbOrig = null;
     this.rootContainer = null;
     this.currentWidth = 0;
     this.currentHeight = 0;
@@ -98,13 +101,29 @@ export class CanvasManager {
   
   }
 
+  BindCuller ( _culler ) {
+
+    this.culler = _culler;
+    this.cullerAabbOrig = new AABB2D( 0, 0, 0, 0 );
+    this.cullerAabbOrig.SetC( _culler.bounds );
+
+    return this;
+
+  }
+
   SetCurrent ( _w, _h ) {
+
+    _w = _w | 0;
+    _h = _h | 0;
 
     this.canvas.setAttribute( 'width', _w );
     this.canvas.setAttribute( 'height', _h );
 
     this.currentWidth = _w;
     this.currentHeight = _h;
+
+    const scaleX = _w / this.w;
+    const scaleY = _h / this.h;
 
     if ( this.stage !== null ) {
 
@@ -113,19 +132,13 @@ export class CanvasManager {
 
       if ( this.stage.mouse ) {
 
-        this.stage.mouse.scale.Set(
-          _w / this.w,
-          _h / this.h
-        );
+        this.stage.mouse.scale.Set( scaleX, scaleY );
       
       } 
 
       if ( this.stage.touch ) {
 
-        this.stage.touch.scale.Set(
-          _w / this.w,
-          _h / this.h
-        );
+        this.stage.touch.scale.Set( scaleX, scaleY );
       
       }
 
@@ -139,12 +152,16 @@ export class CanvasManager {
 
     if ( this.rootContainer !== null ) {
       
-      this.rootContainer.scale.Set(
-        _w / this.w,
-        _h / this.h
-      );
+      this.rootContainer.scale.Set( scaleX, scaleY );
 
     } 
+
+    if ( this.culler !== null ) {
+
+      this.culler.bounds.SetC( this.cullerAabbOrig );
+      this.culler.bounds.Scale( scaleX, scaleY );
+
+    }
   
   }
 
@@ -227,4 +244,4 @@ const PS_KEEP_ASPECT_RATIO = 'KeepAspectRatio';
 const PS_KEEP_ASPECT_RATIO_MIN = 'KeepAspectRatioMIN';
 const PS_KEEP_ASPECT_RATIO_MAX = 'KeepAspectRatioMAX';
 const PS_KEEP_ASPECT_RATIO_FIT = 'KeepAspectRatioFIT';
-// <----- Private static
+// <----- Private Static

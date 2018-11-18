@@ -20,7 +20,7 @@ export default () => {
     const path = new nk2.Path.Circle( 0, 0, 50 );
     const graphic = new nk2.Graphic2D( HW, HH, path );
 
-    graphic.Draw( c.getContext( '2d' ) );
+    graphic.Render( c.getContext( '2d' ) );
 
   } );
 

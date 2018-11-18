@@ -2,76 +2,66 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Container2D } from './container2d';
+import { BatchableContainer2D } from './batchable-container2d';
 import { Vector2D } from '../math/vector/vector2d';
-import { DEFAULT } from '../style/gco';
 
-export class Graphic2D extends Container2D {
+export class Graphic2D extends BatchableContainer2D {
 
   constructor ( _x, _y, _path ) {
 
     super( _x, _y );
+    
     this.anchor = new Vector2D( 0, 0 );
     this.SetPath( _path );
-    this.alpha = 1.0;
-    this.gco = DEFAULT;
-    this.interactive = true;
+    this.alpha = 1;
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
-    this.PreDraw( _rc );
+    this.PreRender( _rc );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
+      this.ProcessTransform( this.parent );
 
       this.transform.ApplyGlobal( _rc );
 
       const path = this.path;
 
-      if ( path && path.Draw && this.display === true ) {
+      if ( path && path.Render && this.display === true ) {
 
         _rc.globalAlpha = this.alpha;
         _rc.globalCompositeOperation = this.gco;
-        path.Draw( _rc );
+        path.Render( _rc );
       
       }
 
       if ( this.children.length > 0 ) {
 
-        this.DrawChildren( _rc );
+        this.RenderChildren( _rc );
       
       }
     
     }
+
+    this.PostRender( _rc );
   
   }
 
-  GLDraw ( _gl ) {
+  GLRender ( _gl ) {
 
-    this.GLPreDraw( _gl );
+    this.GLPreRender( _gl );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
+      this.ProcessTransform( this.parent );
 
       const path = this.path;
 
-      if ( path && path.GLDraw && this.display === true ) {
+      if ( path && path.GLRender && this.display === true ) {
 
-        path.GLDraw( _gl, this.transform );
+        path.GLRender( _gl, this.transform );
       
       }
 
@@ -79,23 +69,25 @@ export class Graphic2D extends Container2D {
 
         if ( this.isBatchParent === true ) {
 
-          this.GLBatchDrawChildren( _gl );
+          this.GLBatchRenderChildren( _gl );
         
         } else {
 
-          this.GLDrawChildren( _gl );
+          this.GLRenderChildren( _gl );
         
         }
       
       }
     
     }
+
+    this.GLPostRender( _gl );
   
   }
 
   GetBufferData () {
 
-    this.UpdateTransform();
+    this.UpdateTransform( this.parent );
 
     const transformData = this.transform.globalTransform.AsArray( true );
 
@@ -130,7 +122,7 @@ export class Graphic2D extends Container2D {
 
   UpdateInBuffer () {
 
-    this.UpdateTransform();
+    this.UpdateTransform( this.parent );
 
     const transformData = this.transform.globalTransform.AsArray( true );
     const buffer = this.parent.childDataBuffer;
@@ -154,13 +146,13 @@ export class Graphic2D extends Container2D {
   
   }
 
-  IntersectsPoint ( _p ) {
+  IntersectsPoint2D ( _p ) {
 
     if ( this.interactive === false ) return false;
     PS_TP.SetV( _p );
     PS_TP.SubtractV( this.position );
 
-    return this.path.IntersectsPoint( PS_TP );
+    return this.path.IntersectsPoint2D( PS_TP );
   
   }
 
@@ -193,4 +185,4 @@ export class Graphic2D extends Container2D {
 
 // Private Static ----->
 const PS_TP = new Vector2D( 0, 0 );
-// <----- Private static
+// <----- Private Static

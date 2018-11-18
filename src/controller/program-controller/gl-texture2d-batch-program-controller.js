@@ -11,6 +11,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, TEXTURE_2D_BATCH );
+    
     this.originalTexture = null;
     this.texture = null;
     this.essenceBuffer = null;

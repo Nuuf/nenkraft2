@@ -16,7 +16,7 @@ export class Polygon2D extends Polygon2DGeom {
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
     const vertices = this.vertices;
     const style = this.style;
@@ -51,7 +51,7 @@ export class Polygon2D extends Polygon2DGeom {
  
   /**
    * TODO
-   * GLDraw ( _gl, _transform2d ) {
+   * GLRender ( _gl, _transform2d ) {
    * }
    *
    * LinkProgramController ( _pc ) {

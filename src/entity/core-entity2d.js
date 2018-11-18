@@ -4,7 +4,7 @@
 
 import { Transform2D } from '../math/transform/transform2d';
 import { Vector2D } from '../math/vector/vector2d';
-import { AABB2D } from '../geom/aabb/aabb2d';
+import { Bounds2D } from '../math/bounds/bounds2d';
 
 export class CoreEntity2D {
 
@@ -12,86 +12,17 @@ export class CoreEntity2D {
 
     this.transform = new Transform2D( _x, _y );
     this.data = {};
-    this.parent = null;
     this.w = 0;
     this.h = 0;
-    this.bounds = null;
-    this.boundsDirty = true;
+    this.bounds = new Bounds2D();
     this.globalPosition = null;
+    this.transformShouldUpdate = true;
+    this.transformAutomaticUpdate = true;
+    this.render = true;
+    this.motionManager = null;
 
   }
-
-  UpdateTransform () {
-
-    if ( this.parent != null ) {
-
-      this.transform.UpdateGlobal( this.parent.transform.globalTransform );
-      
-    } else {
   
-      this.transform.UpdateGlobal( PS_NULL_TRANSFORM.globalTransform );
-      
-    }
-  
-  }
-
-  GetGlobalPosition () {
-
-    const wt = this.transform.globalTransform;
-
-    if ( this.globalPosition === null ) {
-
-      this.globalPosition = new Vector2D( wt.e, wt.f );
-    
-    } else {
-
-      this.globalPosition.Set( wt.e, wt.f );
-      
-    }
-
-    return this.globalPosition;
-  
-  }
-
-  ComputeBounds ( _anchor ) {
-
-    let wtax = 0;
-    let htay = 0;
-
-    if ( _anchor != null ) {
-
-      wtax = this.width * _anchor.x;
-      htay = this.height * _anchor.y;
-    
-    }
-
-    if ( this.bounds === null ) {
-
-      this.bounds = new AABB2D(
-        this.x - wtax,
-        this.y - htay,
-        this.x + this.width - wtax,
-        this.y + this.height - htay
-      );
-      this.bounds.belongsTo = this;
-    
-    } else {
-
-      this.bounds.Set(
-        this.x - wtax,
-        this.y - htay,
-        this.x + this.width - wtax,
-        this.y + this.height - htay
-      );
-    
-    }
-
-    this.boundsDirty = false;
-
-    return this.bounds;
-  
-  }
-
   get rotation () {
 
     return this.transform.rotation;
@@ -155,8 +86,8 @@ export class CoreEntity2D {
 
   set width ( _value ) {
 
-    this.w = _value;
-  
+    this.scale.x = _value / this.w;
+    
   }
 
   get height () {
@@ -167,7 +98,77 @@ export class CoreEntity2D {
 
   set height ( _value ) {
 
-    this.h = _value;
+    this.scale.y = _value / this.h;
+    
+  }
+
+  UpdateTransform ( _parent ) {
+
+    if ( _parent != null ) {
+
+      this.transform.UpdateGlobal( _parent.transform.globalTransform );
+      
+    } else {
+  
+      this.transform.UpdateGlobal( PS_NULL_TRANSFORM.globalTransform );
+      
+    }
+  
+  }
+
+  ProcessTransform ( _parent ) {
+
+    if ( this.transformShouldUpdate === true ) {
+
+      this.UpdateTransform( _parent );
+      if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      
+    }
+  
+  }
+
+  RequestTransformUpdate () {
+
+    this.transformShouldUpdate = true;
+  
+  }
+
+  GetGlobalPosition ( _matrix ) {
+
+    const wt = this.transform.globalTransform;
+
+    if ( this.globalPosition === null ) {
+
+      this.globalPosition = new Vector2D( wt.e, wt.f );
+    
+    } else {
+
+      this.globalPosition.Set( wt.e, wt.f );
+      
+    }
+
+    if ( _matrix != null ) {
+
+      this.globalPosition.Subtract( _matrix.e, _matrix.f );
+      this.globalPosition.Divide( _matrix.a, _matrix.d );
+    
+    }
+
+    return this.globalPosition;
+  
+  }
+
+  ComputeLocalBounds ( _anchor ) {
+
+    return this.bounds.ComputeLocal( this.x, this.y, this.width, this.height, _anchor, this );
+  
+  }
+
+  ComputeGlobalBounds ( _anchor, _matrix ) {
+
+    const p = this.GetGlobalPosition( _matrix );
+
+    return this.bounds.ComputeGlobal( p.x, p.y, this.width, this.height, _anchor, this );
   
   }
 
@@ -175,4 +176,4 @@ export class CoreEntity2D {
 
 // Private Static ----->
 const PS_NULL_TRANSFORM = new Transform2D();
-// <----- Private static
+// <----- Private Static

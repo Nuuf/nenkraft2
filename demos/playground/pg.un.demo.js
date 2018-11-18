@@ -19,15 +19,13 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: 0,
-      y: 0,
       halt: false,
       mode: 'WebGL'
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const root = new nk2.Container2D( 0, 0 );
+    const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
-    const scene = new nk2.Container2D( HW, HH );
+    const scene = new nk2.VisualContainer2D( HW, HH );
 
     stage.gl.clearColor( 0.9, 0.9, 0.9, 1.0 );
 
@@ -68,15 +66,15 @@ export default () => {
 
       glentity.timeInc = 0.05 / size;
 
-      glentity.ComputeBounds( { x: 0.5, y: 0.5 } );
+      glentity.ComputeLocalBounds( { x: 0.5, y: 0.5 } );
 
       glentity.position.Set( 
         nk2.Utility.RandomInteger( -HW, HW ),
         nk2.Utility.RandomInteger( -HH, HH ) );
 
-      glentity.position.Set( 0, 0 );
+      glentity.position.Set( HW, HH );
 
-      scene.AddChild( glentity );
+      root.AddChild( glentity );
     
     }
 

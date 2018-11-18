@@ -3,7 +3,7 @@
  */
 
 import { Vector2D } from '../../vector/vector2d';
-import { ClosestPointOnLine } from '../..';
+import { ClosestPoint2DOnLine2D } from '../../misc';
 
 const Sqrt = Math.sqrt;
 
@@ -29,17 +29,17 @@ export class Result {
 
 }
 
-export const CollideRel = function ( _c, _l, _result ) {
+export const CollideRel = function ( _obj1, _obj2, _result ) {
 
-  const lshape = _l.shape;
-  const cshape = _c.shape;
-  const lpos = _l.relative;
-  const cpos = _c.relative;
+  const lshape = _obj2.shape;
+  const cshape = _obj1.shape;
+  const lpos = _obj2.relative;
+  const cpos = _obj1.relative;
 
   PS_s.Set( lshape.s.x + lpos.x, lshape.s.y + lpos.y );
   PS_e.Set( lshape.e.x + lpos.x, lshape.e.y + lpos.y );
 
-  const cp = ClosestPointOnLine( PS_s, PS_e, cpos );
+  const cp = ClosestPoint2DOnLine2D( PS_s, PS_e, cpos );
 
   PS_delta.Set( cpos.x - cp.x, cpos.y - cp.y );
 
@@ -77,13 +77,13 @@ export const CollideRel = function ( _c, _l, _result ) {
 
 };
 
-export const ReflectingResponse = function ( _c, _l, _result ) {
+export const ReflectingResponse = function ( _obj1, _obj2, _result ) {
 
   let n;
   let refl;
-  const lshape = _l.shape;
-  const cvel = _c.velocity;
-  const cpos = _c.relative;
+  const lshape = _obj2.shape;
+  const cvel = _obj1.velocity;
+  const cpos = _obj1.relative;
   const cp = _result.cp;
 
   if ( _result.sOrE !== 0 ) {
@@ -103,8 +103,8 @@ export const ReflectingResponse = function ( _c, _l, _result ) {
 
 };
 
-// Private Static ----->
+// REUSABLE ----->
 const PS_s = new Vector2D( 0, 0 );
 const PS_e = new Vector2D( 0, 0 );
 const PS_delta = new Vector2D( 0, 0 );
-// <----- Private static
+// <----- REUSABLE

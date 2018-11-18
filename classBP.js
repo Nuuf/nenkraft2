@@ -32,4 +32,4 @@ export class NewClass {
 
 // Private Static ----->
 const PS_privateStaticSomething = 'someValue';
-// <----- Private static
+// <----- Private Static

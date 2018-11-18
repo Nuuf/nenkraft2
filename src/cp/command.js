@@ -231,4 +231,4 @@ const PS_FilterNullElements = function ( _element ) {
   return _element != null;
 
 };
-// <----- Private static
+// <----- Private Static

@@ -18,10 +18,18 @@ export default () => {
     c.style.position = 'absolute';
 
     const sprite = new nk2.Sprite( HW, HH );
+    const l1 = new nk2.Graphic2D( HW, HH, new nk2.Path.Line2D( -HW, 0, HW, 0 ) );
+    const l2 = new nk2.Graphic2D( HW, HH, new nk2.Path.Line2D( 0, -HH, 0, HH ) );
 
     sprite.anchor.SetSame( 0.5 );
 
-    sprite.Draw( c.getContext( '2d' ) );
+    sprite.UpdateTextureTransform();
+
+    const ctx = c.getContext( '2d' );
+
+    sprite.Render( ctx );
+    l1.Render( ctx );
+    l2.Render( ctx );
 
   } );
 

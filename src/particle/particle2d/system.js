@@ -2,15 +2,16 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Container2D } from '../../entity/container2d';
+import { VisualContainer2D } from '../../entity/visual-container2d';
 import { Timer } from '../../time/timer';
 import { Particle2D } from './particle2d';
 
-export class System extends Container2D {
+export class System extends VisualContainer2D {
 
   constructor ( _x, _y ) {
 
     super( _x, _y );
+    
     this.particles = [];
     this.deletionTimer = new Timer( 60 );
     this.deletionTimer.onFinish.Add( this.HandleParticleDeletion, this );

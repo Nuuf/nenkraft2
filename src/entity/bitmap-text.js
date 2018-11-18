@@ -2,10 +2,10 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Sprite } from './sprite';
+import { TextureEntity2D } from './texture-entity2d';
 import { Char } from './char';
 
-export class BitmapText extends Sprite {
+export class BitmapText extends TextureEntity2D {
 
   constructor ( _x, _y, _texture, _data, _text, _unitId ) {
 
@@ -28,18 +28,13 @@ export class BitmapText extends Sprite {
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
-    this.PreDraw( _rc );
+    this.PreRender( _rc );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
+      this.ProcessTransform( this.parent );
 
       this.transform.ApplyGlobal( _rc );
 
@@ -47,36 +42,33 @@ export class BitmapText extends Sprite {
 
         _rc.globalAlpha = this.alpha;
         _rc.globalCompositeOperation = this.gco;
-        this.DrawText( _rc );
+        this.RenderText( _rc );
       
       }
 
       if ( this.children.length > 0 ) {
 
-        this.DrawChildren( _rc );
+        this.RenderChildren( _rc );
       
       }
     
     }
+
+    this.PostRender( _rc );
   
   }
 
-  GLDraw ( _gl ) {
+  GLRender ( _gl ) {
 
-    this.GLPreDraw( _gl );
+    this.GLPreRender( _gl );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
+      this.ProcessTransform( this.parent );
 
       if ( this.display === true && this.programController !== null ) {
 
-        this.GLDrawText( _gl );
+        this.GLRenderText( _gl );
       
       }
 
@@ -84,34 +76,36 @@ export class BitmapText extends Sprite {
 
         if ( this.isBatchParent === true ) {
 
-          this.GLBatchDrawChildren( _gl );
+          this.GLBatchRenderChildren( _gl );
         
         } else {
 
-          this.GLDrawChildren( _gl );
+          this.GLRenderChildren( _gl );
         
         }
       
       }
     
     }
+
+    this.GLPostRender( _gl );
   
   }
 
-  DrawText ( _rc ) {
+  RenderText ( _rc ) {
 
     const chars = this.chars;
     const image = this.texture.image;
 
     for ( var i = 0; i < chars.length; ++i ) {
 
-      chars[ i ].Draw( _rc, image );
+      chars[ i ].Render( _rc, image );
     
     }
   
   }
 
-  GLDrawText () {
+  GLRenderText () {
 
     const chars = this.chars;
 
@@ -119,7 +113,7 @@ export class BitmapText extends Sprite {
 
       for ( var i = 0; i < chars.length; ++i ) {
 
-        chars[ i ].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
+        chars[ i ].GLRenderAuto( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -127,7 +121,7 @@ export class BitmapText extends Sprite {
 
       for ( i = 0; i < chars.length; ++i ) {
 
-        chars[ i ].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
+        chars[ i ].GLRender( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -150,7 +144,7 @@ export class BitmapText extends Sprite {
     const chars = this.chars;
     const text = this.text;
 
-    this.UpdateTransform();
+    this.UpdateTransform( this.parent );
     chars.length = 0;
 
     if ( this.fontData.font.kernings ) {
@@ -247,4 +241,4 @@ export class BitmapText extends Sprite {
 
 // Private Static ----->
 const PS_ACCESS_BUFFER_ERROR_MSG = 'Cannot access buffer data directly on BitmapText!';
-// <----- Private static
+// <----- Private Static

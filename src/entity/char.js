@@ -26,7 +26,7 @@ export class Char extends CoreEntity2D {
   
   }
 
-  Draw ( _rc, _image ) {
+  Render ( _rc, _image ) {
 
     _rc.drawImage(
       _image,
@@ -38,7 +38,7 @@ export class Char extends CoreEntity2D {
   
   }
 
-  GLDrawAuto ( _pc, _tintChannel, _unitId ) {
+  GLRenderAuto ( _pc, _tintChannel, _unitId ) {
 
     this.UpdateMatrices();
     _pc.Execute(
@@ -51,7 +51,7 @@ export class Char extends CoreEntity2D {
   
   }
 
-  GLDraw ( _pc, _tintChannel, _unitId ) {
+  GLRender ( _pc, _tintChannel, _unitId ) {
 
     _pc.Execute(
       this.transform.globalTransform.AsArray( true ),
@@ -125,7 +125,7 @@ export class Char extends CoreEntity2D {
       const tscaleX = this.width / texture.fw;
       const tscaleY = this.height / texture.fh;
 
-      this.UpdateTransform();
+      this.UpdateTransform( this.parent );
       this.translation.SetTransform( 0, 0, tscaleX, tscaleY );
       this.transformation.SetTransform( 
         tscaleX * this.cx / this.width, 

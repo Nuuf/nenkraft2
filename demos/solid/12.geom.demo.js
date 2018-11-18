@@ -34,12 +34,12 @@ export default () => {
     const g5 = new nk2.Graphic2D( 100, 300, polygon );
     const g6 = new nk2.Graphic2D( 400, 400, rose );
 
-    g1.Draw( rc );
-    g2.Draw( rc );
-    g3.Draw( rc );
-    g4.Draw( rc );
-    g5.Draw( rc );
-    g6.Draw( rc );
+    g1.Render( rc );
+    g2.Render( rc );
+    g3.Render( rc );
+    g4.Render( rc );
+    g5.Render( rc );
+    g6.Render( rc );
 
   } );
 

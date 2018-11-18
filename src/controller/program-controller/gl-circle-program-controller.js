@@ -12,6 +12,7 @@ export class GLCircleProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, CIRCLE );
+    
     this.essenceBuffer = null;
     this.vertices = null;
     this.fillColor = null;

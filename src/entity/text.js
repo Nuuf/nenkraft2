@@ -2,35 +2,31 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Container2D } from './container2d';
+import { VisualContainer2D } from './visual-container2d';
 import { SaT } from '../style';
 import { DEFAULT } from '../style/gco';
 
-export class Text extends Container2D {
+export class Text extends VisualContainer2D {
 
   constructor ( _x, _y, _text, _style ) {
 
     super( _x, _y );
+    
     this.text = _text;
     this.style = SaT( _style );
     this.maxWidth = undefined;
-    this.alpha = 1.0;
+    this.alpha = 1;
     this.gco = DEFAULT;
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
       
-    this.PreDraw( _rc );
+    this.PreRender( _rc );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
+      this.ProcessTransform( this.parent );
 
       this.transform.ApplyGlobal( _rc );
 
@@ -58,7 +54,7 @@ export class Text extends Container2D {
 
       if ( this.children.length > 0 ) {
 
-        this.DrawChildren( _rc );
+        this.RenderChildren( _rc );
       
       }
     
@@ -66,7 +62,7 @@ export class Text extends Container2D {
 
   }
 
-  IntersectsPoint () {
+  IntersectsPoint2D () {
 
     return false;
   

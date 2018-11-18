@@ -28,7 +28,7 @@ export default () => {
     text.style.text.lineWidth = 0.3;
     text.style.text.font = '40px Arial';
 
-    text.Draw( rc );
+    text.Render( rc );
 
   } );
 

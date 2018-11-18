@@ -17,13 +17,12 @@ export class Circle extends CircleGeom {
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
-    const center = this.center;
     const style = this.style;
     
     _rc.beginPath();
-    _rc.arc( center.x, center.y, this.radius, 0, PII, false );
+    _rc.arc( this.x, this.y, this.radius, 0, PII, false );
     _rc.closePath();
 
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
@@ -44,13 +43,13 @@ export class Circle extends CircleGeom {
   
   }
 
-  GLDraw ( _gl, _transform2d ) {
+  GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
 
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),
-        this.center.x, this.center.y, this.radius
+        this.x, this.y, this.radius
       );
       
     }

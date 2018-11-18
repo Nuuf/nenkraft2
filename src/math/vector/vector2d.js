@@ -637,4 +637,4 @@ PS_pool.Flood( () => {
   return new Vector2D( 0, 0 );
 
 }, 1000 );
-// <----- Private static
+// <----- Private Static

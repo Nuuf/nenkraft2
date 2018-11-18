@@ -29,7 +29,7 @@ export class SpritesheetLoader {
 
     if ( _onComplete != null ) {
 
-      this.onComplete.Add( _onComplete, this );
+      this.onComplete.Add( _onComplete, this, true );
     
     }
 
@@ -68,6 +68,10 @@ export class SpritesheetLoader {
       this.count = 0;
       this.loading = false;
       this.toLoad = null;
+      this.tempBasicTexture = null;
+      this.tempData = null;
+      this.xhrLoader.onXHRLoaded.Dump();
+      this.imageLoader.onImageLoaded.Dump();
       this.onComplete.Dispatch( this, { spritesheetCache: this.spritesheetCache } );
     
     }
@@ -78,11 +82,6 @@ export class SpritesheetLoader {
 
     if ( ++this.pairCount === 2 ) {
 
-      const size = this.tempData.meta.size;
-  
-      this.tempBasicTexture.fw = size.w;
-      this.tempBasicTexture.fh = size.h;
-  
       const spritesheet = new Spritesheet( this.tempBasicTexture, this.tempData );
   
       this.spritesheetCache.StoreSafe( spritesheet );

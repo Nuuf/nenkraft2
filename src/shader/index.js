@@ -105,6 +105,7 @@ export const SNIPPETS = {
   scale2d: Uglify( require( './snippets/misc/scale2d.snippet' ) ),
   plot: Uglify( require( './snippets/misc/plot.snippet' ) ),
   ridge: Uglify( require( './snippets/misc/ridge.snippet' ) ),
+  pixelate: Uglify( require( './snippets/misc/pixelate.snippet' ) ),
   random: Uglify( require( './snippets/random/random.snippet' ) ),
   vrandom: Uglify( require( './snippets/random/vrandom.snippet' ) ),
   noise: Uglify( require( './snippets/noise/noise.snippet' ) ),

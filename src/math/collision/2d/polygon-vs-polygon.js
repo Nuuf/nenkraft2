@@ -58,7 +58,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
     
   }
 
-  if ( _result != undefined ) {
+  if ( _result != null ) {
 
     _result.mtv.SetV( _result.olAxis );
     _result.mtv.Multiply( _result.mtd, _result.mtd );
@@ -84,7 +84,7 @@ export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
     
   }
 
-  if ( _result != undefined ) {
+  if ( _result != null ) {
 
     let mtd = 0;
     let o1 = 0;

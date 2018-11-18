@@ -1,8 +1,12 @@
-import * as AABB2DvsAABB2D from './2d/aabb2d-vs-aabb2d';
+import * as AABB2DvsAABB2D from './2d/aabb-vs-aabb';
+import * as Line2DvsLine2D from './2d/line-vs-line';
+import * as AABB2DvsLine2D from './2d/aabb-vs-line';
 import * as CirclevsCircle from './2d/circle-vs-circle';
-import * as CirclevsLine from './2d/circle-vs-line';
-import * as PolygonvsPolygon from './2d/polygon-vs-polygon';
+import * as CirclevsLine2D from './2d/circle-vs-line';
+import * as Polygon2DvsPolygon2D from './2d/polygon-vs-polygon';
 export { AABB2DvsAABB2D };
+export { Line2DvsLine2D };
+export { AABB2DvsLine2D };
 export { CirclevsCircle };
-export { CirclevsLine };
-export { PolygonvsPolygon };
+export { CirclevsLine2D };
+export { Polygon2DvsPolygon2D };

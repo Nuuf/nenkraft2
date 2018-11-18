@@ -19,7 +19,7 @@ export class Color {
       _a == null ? 1 : _a
     ] );
     this.value = '';
-    this.currentConversion = '';
+    this.currentConversion = 'rgb';
     this.ComputeValueRGBA();
   
   }
@@ -95,10 +95,6 @@ export class Color {
     this.currentConversion = 'hsl';
     this.ComputeValueHSLA();
   
-  }
-
-  ConvertToHEX () {
-
   }
 
   SetRGB ( _r, _g, _b, _noCompute ) {
@@ -208,4 +204,4 @@ export class Color {
 const PS_MAX_VAL = 255;
 const PS_MIN_VAL = 0;
 const PS_NORM = 1 / PS_MAX_VAL;
-// <----- Private static
+// <----- Private Static

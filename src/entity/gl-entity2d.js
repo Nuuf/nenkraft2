@@ -9,34 +9,36 @@ export class GLEntity2D extends CoreEntity2D {
   constructor ( _x, _y, _pc ) {
 
     super( _x, _y );
+    
     this.programController = _pc;
-    this.transformShouldUpdate = false;
-    this.transformAutomaticUpdate = false;
     this.w = 128;
     this.h = 128;
     this.time = 0;
     this.timeInc = 0.1;
+    this.transformShouldUpdate = false;
+    this.transformAutomaticUpdate = false;
 
   }
 
-  GLPreDraw () {
+  GLPreRender () {
 
     return;
   
   }
 
-  GLDraw ( _gl ) {
+  GLPostRender () {
 
-    this.GLPreDraw( _gl );
+    return;
+  
+  }
 
-    if ( this.transformShouldUpdate === true ) {
+  GLRender ( _gl ) {
 
-      this.UpdateTransform();
-      if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-    }
+    this.GLPreRender( _gl );
 
-    const bounds = this.bounds;
+    this.ProcessTransform( this.parent );
+
+    const bounds = this.bounds.local;
 
     this.programController.Execute(
       this.transform.globalTransform.AsArray( true ),
@@ -45,6 +47,8 @@ export class GLEntity2D extends CoreEntity2D {
     );
 
     this.time += this.timeInc;
+
+    this.GLPostRender( _gl );
 
   }
 

@@ -11,13 +11,14 @@ export class Pixel extends Vector2D {
   constructor ( _x, _y, _style ) {
 
     super( _x, _y );
+    
     this.style = P( _style );
     this.color = new Color();
     this.programController = null;
     this.bufferData = null;
   
   }
-  GLDraw ( _gl, _transform ) {
+  GLRender ( _gl, _transform ) {
 
     if ( this.programController !== null ) {
 

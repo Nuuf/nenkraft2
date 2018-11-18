@@ -16,7 +16,7 @@ export default () => {
     c.style.position = 'absolute';
 
     const rc = c.getContext( '2d' );
-    const container = new nk2.Container2D( 0, 0 );
+    const container = new nk2.VisualContainer2D( 0, 0 );
     const ticker = conf.ticker = new nk2.Time.Ticker( Update, 1000, true );
     let numTimes = 20;
     const hold = 20;
@@ -98,7 +98,7 @@ export default () => {
       rc.setTransform( 1, 0, 0, 1, 0, 0 );
       rc.fillStyle = 'rgba(0,0,0,1)';
       rc.fillRect( 0, 0, W, H );
-      container.Draw( rc );
+      container.Render( rc );
       timer.Process();
 
     }

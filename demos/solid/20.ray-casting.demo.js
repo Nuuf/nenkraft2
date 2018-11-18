@@ -19,14 +19,12 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: 0,
-      y: 0,
       halt: false
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const root = new nk2.Container2D( 0, 0 );
+    const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
-    const scene = new nk2.Container2D( HW, HH );
+    const scene = new nk2.VisualContainer2D( HW, HH );
 
     camera.force.SetSame( 5 );
 
@@ -97,6 +95,8 @@ export default () => {
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 
+    const contactPoint = new nk2.Vector2D( 0, 0 );
+
     stage.onProcess.Add( () => {
 
       camera.Process();
@@ -118,7 +118,6 @@ export default () => {
       let polygon;
       let vertexA;
       let vertexB;
-      let contactPoint;
       const rl = rays.length;
       const pl = polygons.length;
       let pvl = 0;
@@ -138,20 +137,17 @@ export default () => {
 
             vertexA = polygon.path.vertices[ k ];
             vertexB = polygon.path.vertices[ kk ];
-            contactPoint = nk2.Math.LineLineIntersection(
+
+            if ( nk2.Collision.Line2DvsLine2D.Line2DLine2DCollision(
               ray.path.s,
               ray.path.e,
               vertexA,
-              vertexB
-            );
-
-            if ( contactPoint ) {
+              vertexB,
+              contactPoint
+            ) ) {
 
               rays[ i ].path.e.SetV( contactPoint );
-
-              contactPoint.Store();
-              contactPoint = null;
-
+            
             }
 
           }

@@ -16,7 +16,7 @@ export class Line2D extends Line2DGeom {
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
     const s = this.s;
     const e = this.e;
@@ -38,7 +38,7 @@ export class Line2D extends Line2DGeom {
   
   }
 
-  GLDraw ( _gl, _transform2d ) {
+  GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
 

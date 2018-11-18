@@ -2,18 +2,17 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Container2D } from './container2d';
-import { Vector2D } from '../math/vector/vector2d';
+import { VisualContainer2D } from './visual-container2d';
 import { Event } from '../event/event';
 import { Ticker } from '../time/ticker/ticker';
 import { DEFAULT } from '../style/gco';
 import { Keyboard, Mouse, Touch } from '../input';
 
-export class Stage2D extends Container2D {
+export class Stage2D extends VisualContainer2D {
 
   constructor ( _options ) {
 
-    super( _options.x, _options.y );
+    super( 0, 0 );
 
     if ( typeof _options.canvas === 'string' ) {
 
@@ -29,7 +28,6 @@ export class Stage2D extends Container2D {
     this.clear = true;
     this.fill = true;
     this.usingWebGL = false;
-    this.positionReconfiguration = new Vector2D( _options.x, _options.y );
     this.canvasManager = null;
     this.mouse = null;
     this.touch = null;
@@ -69,7 +67,7 @@ export class Stage2D extends Container2D {
         0.0392156862745098,
         0.0784313725490196,
         0.11764705882352941,
-        1.0
+        1
       );
       this.usingWebGL = true;
 
@@ -123,7 +121,7 @@ export class Stage2D extends Container2D {
 
     if ( _options.noMouse !== true ) {
 
-      this.mouse = new Mouse( _options.canvas, _options.x, _options.y );
+      this.mouse = new Mouse( _options.canvas, 0, 0 );
     
     }
 
@@ -135,16 +133,16 @@ export class Stage2D extends Container2D {
 
     if ( _options.noTouch !== true ) {
 
-      this.touch = new Touch( _options.canvas, _options.x, _options.y );
+      this.touch = new Touch( _options.canvas, 0, 0 );
 
     }
 
   }
 
-  PreDraw ( _rc ) {
+  PreRender ( _rc ) {
 
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
-    _rc.globalAlpha = 1.0;
+    _rc.globalAlpha = 1;
     _rc.globalCompositeOperation = DEFAULT;
 
     if ( this.fill === true ) {
@@ -165,13 +163,8 @@ export class Stage2D extends Container2D {
 
     if ( _gl == null ) _gl = this.gl;
 
-    this.position.SetSame( 0 );
+    this.position.Set( -1, 1 );
     this.scale.Set( 2 / this.w, -2 / this.h );
-    this.position.Add( -1, 1 );
-    this.position.Add( 
-      this.positionReconfiguration.x * this.scale.x, 
-      this.positionReconfiguration.y * this.scale.y
-    );
     this.UpdateTransform();
     _gl.viewport( 0, 0, this.w, this.h );
     _gl.enable( _gl.BLEND );
@@ -180,7 +173,7 @@ export class Stage2D extends Container2D {
   
   }
 
-  GLPreDraw ( _gl ) {
+  GLPreRender ( _gl ) {
 
     if ( this.clear === true ) {
 
@@ -190,7 +183,7 @@ export class Stage2D extends Container2D {
   
   }
 
-  GLPostDraw ( _gl ) {
+  GLPostRender ( _gl ) {
 
     _gl.flush();
   
@@ -198,14 +191,14 @@ export class Stage2D extends Container2D {
 
   Process ( _delta ) {
 
-    this.Draw( this.rc );
+    this.Render( this.rc );
     this.onProcess.Dispatch( this, _delta );
   
   }
 
   GLProcess ( _delta ) {
 
-    this.GLDraw( this.gl );
+    this.GLRender( this.gl );
     this.onProcess.Dispatch( this, _delta );
   
   }
@@ -214,11 +207,11 @@ export class Stage2D extends Container2D {
       
     if ( this.usingWebGL === true ) {
 
-      this.GLDraw( this.gl );
+      this.GLRender( this.gl );
       
     } else {
   
-      this.Draw( this.rc );
+      this.Render( this.rc );
       
     }
   
@@ -248,10 +241,10 @@ export class Stage2D extends Container2D {
   Destroy () {
 
     this.Dump();
-    this.keyboard.Destroy();
-    this.mouse.Destroy();
-    this.touch.Destroy();
-    if ( this.ticker != null ) this.ticker.Stop();
+    if ( this.keyboard !== null ) this.keyboard.Destroy();
+    if ( this.mouse !== null ) this.mouse.Destroy();
+    if ( this.touch !== null ) this.touch.Destroy();
+    if ( this.ticker !== null ) this.ticker.Stop();
   
   }
 

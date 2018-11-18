@@ -226,4 +226,4 @@ export class Matrix2D {
 
 // Private Static ----->
 const PS_EPSILON = 0.00001;
-// <----- Private static
+// <----- Private Static

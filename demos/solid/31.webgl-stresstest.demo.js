@@ -18,7 +18,7 @@ export default () => {
     c.style.position = 'absolute';
 
     const gl = c.getContext( 'webgl2' );
-    const container = new nk2.Container2D( 0, 0 );
+    const container = new nk2.VisualContainer2D( 0, 0 );
     const ticker = conf.ticker = new nk2.Time.Ticker( Update, 1000, true );
     let numTimes = 20;
     const hold = 20;
@@ -34,7 +34,7 @@ export default () => {
     
     container.scale.Set( 2 / W, -2 / H );
     container.position.Add( -1 + 1, -1 + 1 );
-    container.UpdateTransform();
+    container.UpdateTransform( container.parent );
 
     spritePool.Flood( () => {
 
@@ -48,7 +48,7 @@ export default () => {
 
       return sprite;
     
-    }, 20000 );
+    }, 40000 );
 
     timer.onFinish.Add( function () {
 
@@ -110,7 +110,7 @@ export default () => {
       gl.enable( gl.BLEND );
       gl.disable( gl.DEPTH_TEST );
       gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
-      container.GLDraw( gl );
+      container.GLRender( gl );
       timer.Process();
       gl.flush();
 

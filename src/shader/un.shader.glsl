@@ -33,6 +33,7 @@ varying vec2 v_v2Position;
 (import 'permute' /)
 (import 'snoise' /)
 (import 'ridge' /)
+(import 'pixelate' /)
 (import 'rmf' [
   {
     "set": {
@@ -56,18 +57,20 @@ varying vec2 v_v2Position;
 void main() {
 
   vec2 pos = v_v2Position / u_v2Resolution;
+
   float sp = 4.0 * u_fTime;
 
   pos *= -1.0; 
 
+  pos = pixelate( pos, 1028 );
 
-  pos.y += u_fTime / 2.0;
+  // pos *= rotate2d( RADIAN * sp );
   
-  // pos += 0.5;
+  pos += sp / 100.0;
 
-  vec3 color = vec3( 0.0, rmf2( pos * 20.0 ) * rmf( pos * 0.4 ), 0.0 );
+  vec3 color = vec3( 0.0, rmf2( pos * 10.0 ) * rmf( pos * 0.4 ), 0.0 );
 
-  color = mix( color * rmf( pos * 20.0 ), vec3( 0.9, 0.0, 0.9 ), 0.2 );
+  color = mix( color * rmf( pos ), vec3( 0.9, 0.0, 0.9 ), 0.2 );
 
   gl_FragColor = vec4( color, 1.0 );
   

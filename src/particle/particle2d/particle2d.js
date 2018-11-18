@@ -656,4 +656,4 @@ PS_pool.Flood( () => {
   return new Particle2D();
 
 }, 1000 );
-// <----- Private static
+// <----- Private Static

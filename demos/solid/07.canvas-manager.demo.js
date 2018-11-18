@@ -7,8 +7,10 @@ export default () => {
 
     const W = 1920;
     const H = 1080;
-    const HW = W * 0.5;
-    const HH = H * 0.5;
+    /*
+     *const HW = W * 0.5;
+     *const HH = H * 0.5;
+     */
     const c = conf.canvas = document.createElement( 'canvas' );
 
     document.body.appendChild( c );
@@ -19,12 +21,10 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: HW,
-      y: HH,
       halt: false
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const rootContainer = new nk2.Container2D( 0, 0 );
+    const rootContainer = new nk2.VisualContainer2D( 0, 0 );
     const canvasManager = conf.canvasManager = new nk2.CanvasManager(
       c,
       W,

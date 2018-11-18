@@ -12,6 +12,7 @@ export class GLRectangleProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, RECTANGLE );
+    
     this.essenceBuffer = null;
     this.vertices = null;
     this.fillColor = null;

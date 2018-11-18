@@ -37,7 +37,7 @@ export default () => {
 
       sprite.anchor.Set( 0.5, 0.5 );
 
-      sprite.Draw( c.getContext( '2d' ) );
+      sprite.Render( c.getContext( '2d' ) );
 
     };
 

@@ -17,6 +17,7 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
     }
 
     super( _gl, DynamicTEXTURE_2D( _units ) );
+    
     this.units = _units;
     this.originalTextures = [];
     this.textures = [];

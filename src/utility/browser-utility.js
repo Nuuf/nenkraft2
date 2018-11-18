@@ -44,7 +44,7 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
   }
 
   PS_canvasrc.setTransform( 1, 0, 0, 1, 0, 0 );
-  drawable.Draw( PS_canvasrc );
+  drawable.Render( PS_canvasrc );
 
   return PS_canvas.toDataURL( 'image/png' );
 

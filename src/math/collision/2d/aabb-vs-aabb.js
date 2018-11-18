@@ -41,14 +41,14 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
   const br2yh = PS_tl2.y + h1;
   const br1yh = PS_tl1.y + h2;
 
-  if ( anchor1 != undefined ) {
+  if ( anchor1 != null ) {
 
     PS_tl1.x += anchor1.x * w1;
     PS_tl1.y += anchor1.y * h1;
     
   }
 
-  if ( anchor2 != undefined ) {
+  if ( anchor2 != null ) {
 
     PS_tl2.x += anchor2.x * w2;
     PS_tl2.y += anchor2.y * h2;
@@ -62,7 +62,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
     PS_tl2.y < br1yh
   ) {
 
-    if ( _result != undefined ) {
+    if ( _result != null ) {
 
       PS_tvs[ 0 ].Set( PS_tl1.x - tl2xw, 0 );
       PS_tvs[ 1 ].Set( tl1xw - PS_tl2.x, 0 );
@@ -82,7 +82,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
 };
 
-// Private Static ----->
+// REUSABLE ----->
 const PS_tl1 = new Vector2D( 0, 0 );
 const PS_tl2 = new Vector2D( 0, 0 );
 const PS_tvs = [
@@ -91,4 +91,4 @@ const PS_tvs = [
   new Vector2D( 0, 0 ),
   new Vector2D( 0, 0 )
 ];
-// <----- Private static
+// <----- REUSABLE

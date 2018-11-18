@@ -2,18 +2,19 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Sprite } from './sprite';
+import { TextureEntity2D } from './texture-entity2d';
 import { Vector2D } from '../math/vector/vector2d';
 import { BasicTexture2D } from '../texture/basic-texture2d';
 import { ImageFromDataURL, GenerateSimpleBase64PNG } from '../utility/browser-utility';
 import { Polygon2D } from '../path/polygon2d';
 import { Graphic2D } from './graphic2d';
 
-export class Tilesprite extends Sprite {
+export class Tilesprite extends TextureEntity2D {
 
   constructor ( _x, _y, _texture, _unitId ) {
 
     super( _x, _y, _texture == null ? PS_DEFAULT_TEXTURE : _texture, _unitId );
+    
     this.pattern = null;
     this.patternOffset = new Vector2D( 0, 0 );
   
@@ -65,22 +66,17 @@ export class Tilesprite extends Sprite {
   
   }
 
-  Draw ( _rc ) {
+  Render ( _rc ) {
 
-    this.PreDraw( _rc );
+    this.PreRender( _rc );
 
     if ( this.render === true ) {
 
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
-
-      this.transform.ApplyGlobal( _rc );
+      this.ProcessTransform( this.parent );
 
       if ( this.display === true && this.pattern !== null ) {
+
+        this.transform.ApplyGlobal( _rc );
 
         _rc.globalAlpha = this.tint.channel[ 3 ];
         _rc.globalCompositeOperation = this.gco;
@@ -95,11 +91,13 @@ export class Tilesprite extends Sprite {
 
       if ( this.children.length > 0 ) {
 
-        this.DrawChildren( _rc );
+        this.RenderChildren( _rc );
       
       }
     
     }
+
+    this.PostRender( _rc );
   
   }
 
@@ -110,7 +108,7 @@ export class Tilesprite extends Sprite {
       this.pattern = _rc.createPattern( this.texture.image, null );
       this.w = _w;
       this.h = _h;
-      this.scale.SetSame( 1.0 );
+      this.scale.SetSame( 1 );
       
     } else {
   
@@ -147,4 +145,4 @@ export class Tilesprite extends Sprite {
 // Private Static ----->
 let PS_DEFAULT_TEXTURE = null;
 let PS_DEFAULT_TEXTURE_BUILT = false;
-// <----- Private static
+// <----- Private Static

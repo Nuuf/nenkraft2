@@ -10,6 +10,7 @@ export class GLUnProgramController extends GLProgramController {
   constructor ( _gl, _un ) {
 
     super( _gl, _un );
+    
     this.essenceBuffer = null;
     this.vertices = null;
     this.Initialise();

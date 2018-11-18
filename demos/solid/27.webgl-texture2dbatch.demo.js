@@ -19,20 +19,19 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: 0,
-      y: 0,
       halt: false,
       mode: 'WebGL'
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const root = new nk2.Container2D( 0, 0 );
+    const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
-    const scene = new nk2.Container2D( HW, HH );
+    const scene = new nk2.VisualContainer2D( HW, HH );
     const sprite = new nk2.Sprite( 0, 0 );
 
     camera.force.SetSame( 5 );
 
     sprite.anchor.SetSame( 0.5 );
+    sprite.UpdateTextureTransform();
 
     stage
       .AddChild( root )
@@ -47,7 +46,7 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    const bp = new nk2.Container2D( 0, 0 );
+    const bp = new nk2.BatchableContainer2D( 0, 0 );
     const pc = new nk2.Controller.ProgramController.GLTexture2DBatchProgramController( stage.gl );
 
     pc.BindBasicTexture( window.testData.imgloader.GetBasicTextureById( 'colors' ) );
@@ -58,7 +57,7 @@ export default () => {
 
     {
 
-      let i = 5000;
+      let i = 10000;
 
       while ( i-- ) {
 
@@ -83,7 +82,7 @@ export default () => {
 
         bp.Mount( sprite );
 
-        sprite.UpdateTransform();
+        sprite.UpdateTransform( sprite.parent );
 
       }
 

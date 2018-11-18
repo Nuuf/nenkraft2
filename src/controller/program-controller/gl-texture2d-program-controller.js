@@ -11,6 +11,7 @@ export class GLTexture2DProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, TEXTURE_2D );
+    
     this.originalTexture = null;
     this.texture = null;
     this.essenceBuffer = null;

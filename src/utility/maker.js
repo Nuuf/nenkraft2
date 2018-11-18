@@ -217,4 +217,4 @@ const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
   }
 
 };
-// <----- Private static
+// <----- Private Static

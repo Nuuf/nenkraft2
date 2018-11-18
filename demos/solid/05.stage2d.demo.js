@@ -7,8 +7,10 @@ export default () => {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
-    const HW = W * 0.5;
-    const HH = H * 0.5;
+    /*
+     * const HW = W * 0.5;
+     * const HH = H * 0.5;
+     */
     const c = conf.canvas = document.createElement( 'canvas' );
 
     document.body.appendChild( c );
@@ -19,8 +21,6 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: HW,
-      y: HH,
       halt: true
     };
     const stage = conf.stage = new nk2.Stage2D( options );

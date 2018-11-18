@@ -19,14 +19,12 @@ export default () => {
 
     const options = {
       canvas: c,
-      x: 0,
-      y: 0,
       halt: false
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const root = new nk2.Container2D( 0, 0 );
+    const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
-    const scene = new nk2.Container2D( HW, HH );
+    const scene = new nk2.VisualContainer2D( HW, HH );
 
     camera.force.SetSame( 5 );
 
@@ -37,8 +35,8 @@ export default () => {
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
     const bodies = [];
-    const CollideRel = nk2.Collision.PolygonvsPolygon.CollideRel;
-    const result = new nk2.Collision.PolygonvsPolygon.Result();
+    const CollideRel = nk2.Collision.Polygon2DvsPolygon2D.CollideRel;
+    const result = new nk2.Collision.Polygon2DvsPolygon2D.Result();
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
@@ -136,7 +134,7 @@ export default () => {
 
       while ( i-- ) {
 
-        if ( scene.children[ i ].IntersectsPoint( p ) ) {
+        if ( scene.children[ i ].IntersectsPoint2D( p ) ) {
 
           dragStart.SetV( p );
           dragger = scene.children[ i ];

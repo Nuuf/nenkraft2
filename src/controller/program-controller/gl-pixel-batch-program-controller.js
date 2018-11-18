@@ -10,6 +10,7 @@ export class GLPixelBatchProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, PIXEL_BATCH );
+    
     this.dataBuffer = null;
     this.previousNumberOfElements = 0;
     this.Initialise();
@@ -54,18 +55,20 @@ export class GLPixelBatchProgramController extends GLProgramController {
     
     }
 
+    const STRIDE = 64;
+
     gl.enableVertexAttribArray( attributes.aProjection1 );
-    gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 64, 0 );
+    gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, STRIDE, 0 );
     gl.enableVertexAttribArray( attributes.aProjection2 );
-    gl.vertexAttribPointer( attributes.aProjection2, 3, gl.FLOAT, false, 64, 12 );
+    gl.vertexAttribPointer( attributes.aProjection2, 3, gl.FLOAT, false, STRIDE, 12 );
     gl.enableVertexAttribArray( attributes.aProjection3 );
-    gl.vertexAttribPointer( attributes.aProjection3, 3, gl.FLOAT, false, 64, 24 );
+    gl.vertexAttribPointer( attributes.aProjection3, 3, gl.FLOAT, false, STRIDE, 24 );
     gl.enableVertexAttribArray( attributes.aPosition );
-    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 64, 36 );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, STRIDE, 36 );
     gl.enableVertexAttribArray( attributes.aColor );
-    gl.vertexAttribPointer( attributes.aColor, 4, gl.FLOAT, false, 64, 44 );
+    gl.vertexAttribPointer( attributes.aColor, 4, gl.FLOAT, false, STRIDE, 44 );
     gl.enableVertexAttribArray( attributes.aPointSize );
-    gl.vertexAttribPointer( attributes.aPointSize, 1, gl.FLOAT, false, 64, 60 );
+    gl.vertexAttribPointer( attributes.aPointSize, 1, gl.FLOAT, false, STRIDE, 60 );
     gl.drawArrays( gl.POINTS, 0, _numElements );
     this.previousNumberOfElements = _numElements;
   

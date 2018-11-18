@@ -68,43 +68,53 @@ export class AABB2D {
   
   }
 
-  IntersectsPoint ( _p ) {
+  IntersectsPoint2D ( _p ) {
 
-    return !( _p.x < this.tl.x || _p.x > this.br.x || _p.y < this.tl.y || _p.y > this.br.y );
+    return !( 
+      _p.x < this.tl.x ||
+      _p.x > this.br.x ||
+      _p.y < this.tl.y ||
+      _p.y > this.br.y
+    );
   
   }
 
   ContainsPoint ( _p ) {
 
-    return ( _p.x > this.tl.x && _p.x < this.br.x && _p.y > this.tl.y && _p.y < this.br.y );
+    return !( 
+      _p.x <= this.tl.x ||
+      _p.x >= this.br.x ||
+      _p.y <= this.tl.y ||
+      _p.y >= this.br.y
+    );
   
   }
 
-  IntersectsAABB2D ( _aabb2d ) {
-
-    const tl1 = this.tl;
-    const br1 = this.br;
-    const tl2 = _aabb2d.tl;
-    const br2 = _aabb2d.br;
+  IntersectsAABB2D ( _aabb ) {
     
-    return !( tl2.x >= br1.x || tl2.y >= br1.y || br2.x <= tl1.x || br2.y <= tl1.y );
+    return !( 
+      _aabb.tl.x >= this.br.x || 
+      _aabb.tl.y >= this.br.y ||
+      _aabb.br.x <= this.tl.x ||
+      _aabb.br.y <= this.tl.y
+    );
   
   }
 
-  ContainsAABB2D ( _aabb2d ) {
+  ContainsAABB2D ( _aabb ) {
 
-    if ( _aabb2d.area > this.area ) {
+    if ( _aabb.area > this.area ) {
 
       return false;
       
     }
-  
-    const tl1 = this.tl;
-    const br1 = this.br;
-    const tl2 = _aabb2d.tl;
-    const br2 = _aabb2d.br;
 
-    return ( tl2.x >= tl1.x && tl2.y >= tl1.y && br2.x <= br1.x && br2.y <= br1.y );
+    return ( 
+      _aabb.tl.x > this.tl.x &&
+      _aabb.tl.y > this.tl.y &&
+      _aabb.br.x < this.br.x &&
+      _aabb.br.y < this.br.y
+    );
   
   }
 
@@ -158,4 +168,4 @@ const PS_TOP_RIGHT = 'TR';
 const PS_BOTTOM_LEFT = 'BL';
 const PS_BOTTOM_RIGHT = 'BR';
 const PS_TYPE = 1;
-// <----- Private static
+// <----- Private Static

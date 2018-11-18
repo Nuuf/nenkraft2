@@ -25,7 +25,7 @@ export default () => {
     sprite.x = HW - sprite.width * 0.5;
     sprite.y = HH - sprite.height * 0.5;
 
-    sprite.Draw( rc );
+    sprite.Render( rc );
 
   } );
 

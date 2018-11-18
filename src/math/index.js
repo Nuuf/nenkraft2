@@ -73,51 +73,6 @@ export function Oscillate ( _time, _from, _to, _amplitude ) {
 
 }
 
-export function LineLineIntersection ( _startA, _endA, _startB, _endB ) {
-
-  const d1 = _endA.SubtractVC( _startA );
-  const d2 = _endB.SubtractVC( _startB );
-  const l = -d2.x * d1.y + d1.x * d2.y;
-  const abx = _startA.x - _startB.x;
-  const aby = _startA.y - _startB.y;
-  const s = ( -d1.y * abx + d1.x * aby ) / l;
-  const t = ( d2.x * aby - d2.y * abx ) / l;
-
-  d2.Store();
-
-  if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
-
-    d1.Set( _startA.x + ( t * d1.x ), _startA.y + ( t * d1.y ) );
-
-    return d1;
-    
-  }
-
-  return false;
-
-}
-
-export function ClosestPointOnLine ( _start, _end, _point ) {
-
-  const delta = _end.SubtractVC( _start );
-  const u = ( ( _point.x - _start.x ) * delta.x + ( _point.y - _start.y ) * delta.y ) / delta.GetMagnitudeSquared();
-
-  if ( u < 0 ) {
-
-    return _start;
-    
-  } else if ( u > 1 ) {
-
-    return _end;
-    
-  }
-
-  delta.Set( _start.x + u * delta.x, _start.y + u * delta.y );
-
-  return delta;
-
-}
-
 export function LikeASquareGrid ( _points, _w, _marginX, _marginY ) {
 
   const columns = ( _w / _marginX ) | 0;
@@ -189,3 +144,6 @@ export function IntegerNotation ( _value, _roof, _splitter ) {
   return Ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
   
 }
+
+import * as Misc from './misc';
+export { Misc };

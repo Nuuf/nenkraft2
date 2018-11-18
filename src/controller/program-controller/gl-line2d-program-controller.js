@@ -11,6 +11,7 @@ export class GLLine2DProgramController extends GLProgramController {
   constructor ( _gl ) {
 
     super( _gl, LINE2D );
+    
     this.essenceBuffer = null;
     this.vertices = null;
     this.color = null;

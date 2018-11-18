@@ -109,4 +109,4 @@ export class Motion {
 
 // Private Static ----->
 const PS_DEFAULT_EASING = 'Linear';
-// <----- Private static
+// <----- Private Static
