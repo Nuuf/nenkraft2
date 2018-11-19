@@ -14,6 +14,7 @@ export class Touch {
     this.scale = new Vector2D( 1, 1 );
     this.offset = new Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
+    this.offsets = [];
 
     this.___bound___OnMove = this.OnMove.bind( this );
     this.___bound___OnStart = this.OnStart.bind( this );
@@ -84,13 +85,29 @@ export class Touch {
 
   CalculatePosition ( _x, _y ) {
 
+    const offsets = this.offsets;
     const pos = this.position;
 
-    pos.Set( _x, _y );
-    pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
-    pos.SubtractV( this.offset );
-    pos.DivideV( this.scale );
+    pos
+      .Set( _x, _y )
+      .Subtract( this.element.offsetLeft, this.element.offsetTop )
+      .SubtractV( this.offset )
+      .DivideV( this.scale );
+
+    for ( var i = 0; i < offsets.length; ++i ) {
+
+      pos.SubtractV( offsets[ i ] );
+    
+    }
   
+  }
+
+  AddOffset ( _offset ) {
+
+    this.offsets.push( _offset );
+
+    return this;
+
   }
 
   Destroy () {
