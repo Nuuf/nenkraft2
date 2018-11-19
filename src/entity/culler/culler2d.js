@@ -3,15 +3,18 @@
  */
 
 import { AABB2D } from '../../geom/aabb/aabb2d';
+import { Event } from '../../event/event';
 
 export class Culler2D {
 
-  constructor ( _x, _y, _w, _h ) {
+  constructor ( _tlx, _tly, _brx, _bry ) {
   
-    this.bounds = new AABB2D( _x, _y, _x + _w, _y + _h );
+    this.bounds = new AABB2D( _tlx, _tly, _brx, _bry );
     this.container = null;
     this.entities = null;
     this.rootMatrix = null;
+    this.onOut = new Event();
+    this.onIn = new Event();
 
   }
 
@@ -37,18 +40,25 @@ export class Culler2D {
     const entities = this.entities;
     let entity = entities[ 0 ];
     const bounds = this.bounds;
+    const rm = this.rootMatrix;
 
     for ( var i = 0; i < entities.length; entity = entities[ ++i ] ) {
     
-      entity.ComputeGlobalBounds( entity.anchor, this.rootMatrix );
+      entity.ComputeGlobalBounds( entity.anchor, rm );
 
       if ( bounds.IntersectsAABB2D( entity.bounds.global ) === false ) {
 
-        entity.display = false;
+        if ( entity.__inside__ !== false ) {
 
-      } else {
+          entity.__inside__ = false;
+          this.onOut.Dispatch( entity );
+        
+        }
 
-        entity.display = true;
+      } else if ( entity.__inside__ !== true ) {
+
+        entity.__inside__ = true;
+        this.onIn.Dispatch( entity );
       
       }
 

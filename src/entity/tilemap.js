@@ -192,6 +192,11 @@ export class Tilemap extends TextureEntity2D {
       tgpos.Subtract( rme, rmf );
       tgpos.Divide( rma, rmd );
 
+      /*
+       * w & h are disposed as a simple performance "boost"
+       * and should be applied in the culler bounds
+       */
+
       if ( 
         tgpos.x > cBoundsBR.x ||
         tgpos.y > cBoundsBR.y ||

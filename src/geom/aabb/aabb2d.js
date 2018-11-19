@@ -42,17 +42,17 @@ export class AABB2D {
   
   }
 
-  Scale ( _x, _y ) {
+  Scale ( _x, _y, _notl ) {
 
-    this.tl.Multiply( _x, _y );
+    if ( _notl !== false ) this.tl.Multiply( _x, _y );
     this.br.Multiply( _x, _y );
     this.ComputeWH();
   
   }
 
-  ScaleV ( _p ) {
+  ScaleV ( _p, _notl ) {
 
-    this.tl.MultiplyV( _p );
+    if ( _notl !== false ) this.tl.MultiplyV( _p );
     this.br.MultiplyV( _p );
     this.ComputeWH();
   

@@ -4,6 +4,8 @@
 
 import { AABB2D } from '../../geom/aabb/aabb2d';
 
+const Abs = Math.abs;
+
 export class Bounds2D {
 
   constructor () {
@@ -51,7 +53,18 @@ export class Bounds2D {
   
   }
 
-  ComputeGlobal ( _x, _y, _w, _h, _anchor, _owner ) {
+  ComputeGlobal ( _x, _y, _w, _h, _anchor, _owner, _matrix ) {
+
+    if ( _matrix != null ) {
+
+      _x -= _matrix.e;
+      _y -= _matrix.f;
+      _x /= _matrix.a;
+      _y /= _matrix.d;
+      _w = Abs( _w / _matrix.a );
+      _h = Abs( _h / _matrix.d );
+    
+    }
 
     if ( _anchor != null ) {
 

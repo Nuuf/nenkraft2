@@ -32,8 +32,23 @@ export default () => {
     tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
     const sprite = new nk2.Sprite( 0, 0, tpc );
 
+    sprite.anchor.SetSame( 0.5 );
+    sprite.UpdateTextureTransform();
+
     culler.BindContainer( scene );
     culler.SetRootMatrix( stage.transform.globalTransform );
+    culler.onIn.Add( ( event ) => {
+
+      event.target.display = true;
+      console.log( 'in' );
+    
+    } );
+    culler.onOut.Add( ( event ) => {
+
+      event.target.display = false;
+      console.log( 'out' );
+    
+    } );
 
     camera.force.SetSame( 5 );
 
@@ -50,6 +65,8 @@ export default () => {
       .BindRootContainer( root )
       .BindCuller( culler )
       .Trigger();
+
+    console.log( culler );
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 

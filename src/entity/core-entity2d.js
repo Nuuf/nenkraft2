@@ -6,6 +6,8 @@ import { Transform2D } from '../math/transform/transform2d';
 import { Vector2D } from '../math/vector/vector2d';
 import { Bounds2D } from '../math/bounds/bounds2d';
 
+const Abs = Math.abs;
+
 export class CoreEntity2D {
 
   constructor ( _x, _y ) {
@@ -19,7 +21,9 @@ export class CoreEntity2D {
     this.transformShouldUpdate = true;
     this.transformAutomaticUpdate = true;
     this.render = true;
+    // Reserved
     this.motionManager = null;
+    this.__inside__ = null;
 
   }
   
@@ -133,25 +137,18 @@ export class CoreEntity2D {
   
   }
 
-  GetGlobalPosition ( _matrix ) {
+  GetGlobalPosition () {
 
-    const wt = this.transform.globalTransform;
+    const gt = this.transform.globalTransform;
 
     if ( this.globalPosition === null ) {
 
-      this.globalPosition = new Vector2D( wt.e, wt.f );
+      this.globalPosition = new Vector2D( gt.e, gt.f );
     
     } else {
 
-      this.globalPosition.Set( wt.e, wt.f );
+      this.globalPosition.Set( gt.e, gt.f );
       
-    }
-
-    if ( _matrix != null ) {
-
-      this.globalPosition.Subtract( _matrix.e, _matrix.f );
-      this.globalPosition.Divide( _matrix.a, _matrix.d );
-    
     }
 
     return this.globalPosition;
@@ -166,9 +163,9 @@ export class CoreEntity2D {
 
   ComputeGlobalBounds ( _anchor, _matrix ) {
 
-    const p = this.GetGlobalPosition( _matrix );
+    const gt = this.transform.globalTransform;
 
-    return this.bounds.ComputeGlobal( p.x, p.y, this.width, this.height, _anchor, this );
+    return this.bounds.ComputeGlobal( gt.e, gt.f, Abs( this.w * gt.a ), Abs( this.h * gt.d ), _anchor, this, _matrix );
   
   }
 
