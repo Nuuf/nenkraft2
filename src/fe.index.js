@@ -18,6 +18,7 @@ import * as Particle from './particle';
 import * as Texture from './texture';
 import * as Animator from './animator';
 import * as Debug from './debug';
+import * as Packing from './math/packing';
 
 export { Math };
 export { Assert } from './utility/assert';
@@ -43,6 +44,7 @@ export { QuadtreeNode } from './math/quadtree-node';
 export { Ease }; 
 export { Collision };
 export { Geom };
+export { Packing };
 export { Path };
 export { CoreEntity2D } from './entity/core-entity2d';
 export { Container2D } from './entity/container2d';

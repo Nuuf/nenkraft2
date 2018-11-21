@@ -32,13 +32,22 @@ export class AABB2D {
 
     this.tl.Set( _tlx, _tly );
     this.br.Set( _brx, _bry );
-    this.ComputeWH();
+
+    return this.ComputeWH();
   
   }
 
   SetC ( _aabb2d ) {
 
     this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
+
+    return this;
+  
+  }
+
+  SetXYWH ( _x, _y, _w, _h ) {
+
+    return this.Set( _x, _y, _x + _w, _y + _h );
   
   }
 
@@ -46,7 +55,8 @@ export class AABB2D {
 
     if ( _notl !== false ) this.tl.Multiply( _x, _y );
     this.br.Multiply( _x, _y );
-    this.ComputeWH();
+
+    return this.ComputeWH();
   
   }
 
@@ -54,7 +64,8 @@ export class AABB2D {
 
     if ( _notl !== false ) this.tl.MultiplyV( _p );
     this.br.MultiplyV( _p );
-    this.ComputeWH();
+
+    return this.ComputeWH();
   
   }
 
@@ -65,6 +76,8 @@ export class AABB2D {
     this.hw = this.w * 0.5;
     this.hh = this.h * 0.5;
     this.area = this.w * this.h;
+
+    return this;
   
   }
 

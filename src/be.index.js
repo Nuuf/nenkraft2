@@ -8,6 +8,8 @@ import * as Geom from './geom';
 import * as Time from './time/time.be';
 import * as CP from './cp';
 import * as Motion from './motion';
+import * as Packing from './math/packing';
+
 export { Math };
 export { Assert } from './utility/assert';
 export { Pool } from './utility/pool';
@@ -28,6 +30,7 @@ export { QuadtreeNode } from './math/quadtree-node';
 export { Ease }; 
 export { Collision };
 export { Geom };
+export { Packing };
 export { CoreEntity2D } from './entity/core-entity2d';
 export { Container2D } from './entity/container2d';
 export { Culler2D } from './entity/culler/culler2d';

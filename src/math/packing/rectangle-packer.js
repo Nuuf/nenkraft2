@@ -1,0 +1,229 @@
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+import { AABB2D } from '../../geom';
+
+export class RectanglePacker {
+
+  constructor ( _w, _h ) {
+
+    this.root = null;
+    this.propW = 'width';
+    this.propH = 'height';
+    this.w = _w;
+    this.h = _h;
+    this.__dynamic = !_w;
+
+  }
+
+  Pack ( _objects, _suppress ) {
+
+    const l = _objects.length;
+    const pw = this.propW;
+    const ph = this.propH;
+    let obj = _objects[ 0 ];
+    let ow = obj[ pw ];
+    let oh = obj[ ph ];
+    let node = null;
+    const arr = [];
+
+    this.root = new AABB2D( 0, 0, 0, 0 )
+      .SetXYWH( 0, 0, this.w, this.h );
+
+    for ( var i = 0; i < l; obj = _objects[ ++i ] ) {
+
+      ow = obj[ pw ];
+      oh = obj[ ph ];
+
+      node = this.Find( this.root, ow, oh );
+
+      if ( node ) {
+
+        arr[ i ] = this.Partition( node, ow, oh ) ;
+
+      }
+
+      if ( arr[ i ] == null && _suppress !== true ) {
+
+        throw new Error( PS_SIZE_ERROR );
+      
+      }
+
+    }    
+
+    return arr;
+  
+  }
+
+  PackDynamic ( _objects, _suppress ) {
+
+    const l = _objects.length;
+    const pw = this.propW;
+    const ph = this.propH;
+    let obj = _objects[ 0 ];
+    let ow = obj[ pw ];
+    let oh = obj[ ph ];
+    let node = null;
+    const arr = [];
+
+    this.root = new AABB2D( 0, 0, 0, 0 )
+      .SetXYWH( 0, 0, ow, oh );
+
+    for ( var i = 0; i < l; obj = _objects[ ++i ] ) {
+
+      ow = obj[ pw ];
+      oh = obj[ ph ];
+
+      node = this.Find( this.root, ow, oh );
+
+      if ( node ) {
+
+        arr[ i ] = this.Partition( node, ow, oh ) ;
+
+      } else {
+
+        arr[ i ] = this.Extend( ow, oh );
+      
+      }
+
+      if ( arr[ i ] == null && _suppress !== true ) {
+
+        throw new Error( PS_UNSORTED_ERROR );
+      
+      }
+
+    }    
+
+    return arr;
+
+  }
+
+  Find ( _node, _w, _h ) {
+
+    if ( _node.vertical && _node.horizontal ) {
+
+      return this.Find( _node.horizontal, _w, _h ) || this.Find( _node.vertical, _w, _h );
+
+    } else if ( ( _w <= _node.w ) && ( _h <= _node.h ) ) {
+
+      return _node;
+    
+    }
+
+    return null;
+
+  }
+
+  Partition ( _node, _w, _h ) {
+
+    _node.vertical = new AABB2D( 0, 0, 0, 0 )
+      .SetXYWH( _node.tl.x, _node.tl.y + _h, _node.w, _node.h - _h );
+    _node.horizontal = new AABB2D( 0, 0, 0, 0 )
+      .SetXYWH( _node.tl.x + _w, _node.tl.y, _node.w - _w, _h );
+
+    return _node;
+  
+  }
+
+  Extend ( _w, _h ) {
+
+    const a = ( _w <= this.root.w );
+    const b = ( _h <= this.root.h );
+    const c = a && ( this.root.w >= ( this.root.h + _h ) );
+    const d = b && ( this.root.h >= ( this.root.w + _w ) );
+
+    if ( !!d ) {
+
+      return this.ExtendAxis( _w, _h );
+    
+    } else if ( !!c ) {
+
+      return this.ExtendAxis( _w, _h, true );
+    
+    } else if ( !!b ) {
+
+      return this.ExtendAxis( _w, _h );
+    
+    } else if ( !!a ) {
+
+      return this.ExtendAxis( _w, _h, true );
+    
+    }
+
+    return null;
+  
+  }
+
+  ExtendAxis ( _w, _h, _vertical ) {
+
+    let newRoot = null;
+
+    if ( !!_vertical ) {
+
+      newRoot = new AABB2D( 0, 0, 0, 0 )
+        .SetXYWH( 0, 0, this.root.w, this.root.h + _h );
+
+      newRoot.horizontal = this.root;
+      newRoot.vertical = new AABB2D( 0, 0, 0, 0 )
+        .SetXYWH( 0, this.root.h, this.root.w, _h );
+    
+    } else {
+
+      newRoot = new AABB2D( 0, 0, 0, 0 )
+        .SetXYWH( 0, 0, this.root.w + _w, this.root.h );
+
+      newRoot.vertical = this.root;
+      newRoot.horizontal = new AABB2D( 0, 0, 0, 0 )
+        .SetXYWH( this.root.w, 0, _w, this.root.h );
+    
+    }
+
+    this.root = newRoot;
+
+    let node = this.Find( this.root, _w, _h ) ;
+
+    if ( node ) {
+
+      return this.Partition( node, _w, _h );
+    
+    }
+
+    return null;
+  
+  }
+
+  UseWidthAndHeight () {
+
+    this.propW = 'width';
+    this.propH = 'height';
+
+    return this;
+  
+  }
+
+  UseWAndH () {
+
+    this.propW = 'w';
+    this.propH = 'h';
+
+    return this;
+  
+  }
+
+  SetSize ( _w, _h ) {
+
+    this.w = _w;
+    this.h = _h;
+    this.dynamic = true;
+
+    return this;
+
+  }
+
+}
+
+// Private Static ----->
+const PS_UNSORTED_ERROR = 'Objects were not properly sorted. Suppress with Pack([], true);';
+const PS_SIZE_ERROR = 'Size error. Suppress with Pack([], true);';
+// <----- Private Static
