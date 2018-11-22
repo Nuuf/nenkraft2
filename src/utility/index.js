@@ -119,13 +119,13 @@ export function NearestPow2Floor ( _n ) {
 
 export function NearestPow2Ceil ( _n ) {
 
-  return ( 1 << 32 - Clz32( _n * 2 ) );
+  return ( 1 << 31 - Clz32( _n * 2 ) );
 
 }
 
 export function NearestPow2Round ( _n ) {
 
-  return ( 1 << 32 - Clz32( _n * 1.5 ) );
+  return ( 1 << 31 - Clz32( _n * 1.5 ) );
 
 }
 
