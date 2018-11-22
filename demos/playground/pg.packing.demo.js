@@ -27,14 +27,14 @@ export default () => {
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let mouseIsDown = false;
-    let i = 100;
+    let i = 15;
     const sprites = [];
 
     while ( i-- ) {
 
       const s = new nk2.Sprite( 0, 0 );
 
-      s.w = ( 10 + Math.random() * 100 ) | 0;
+      s.w = ( 100 + Math.random() * 100 ) | 0;
       s.h = ( 100 + Math.random() * 10 ) | 0;
 
       sprites.push( s );
@@ -47,8 +47,8 @@ export default () => {
     
     } );
 
-    const packer = new nk2.Packing.RectanglePacker( 2048, 2048 );
-    const packingResult = packer.PackDynamic( sprites, true );
+    const packer = new nk2.Packing.RectanglePacker().SetPadding( 10, 10 );
+    const packingResult = packer.PackDynamic( sprites );
 
     packingResult.forEach( ( result, index ) => {
 

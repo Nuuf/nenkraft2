@@ -323,6 +323,6 @@ export class Tilemap extends TextureEntity2D {
 }
 
 // Private Static ----->
-const PS_MAPDATA_SIZE_ERROR = 'Size mismatch!';
+const PS_MAPDATA_SIZE_ERROR = 'Size error!';
 const PS_ORTHOGONAL = 'orthogonal';
 // <----- Private Static

@@ -3,6 +3,7 @@
  */
 
 import { AABB2D } from '../../geom';
+import { Vector2D } from '../vector/vector2d';
 
 export class RectanglePacker {
 
@@ -14,6 +15,7 @@ export class RectanglePacker {
     this.w = _w;
     this.h = _h;
     this.__dynamic = !_w;
+    this.padding = new Vector2D( 0, 0 );
 
   }
 
@@ -46,7 +48,7 @@ export class RectanglePacker {
 
       if ( arr[ i ] == null && _suppress !== true ) {
 
-        throw new Error( PS_SIZE_ERROR );
+        throw new Error( PS_PACK_SIZE_ERROR );
       
       }
 
@@ -59,11 +61,13 @@ export class RectanglePacker {
   PackDynamic ( _objects, _suppress ) {
 
     const l = _objects.length;
-    const pw = this.propW;
-    const ph = this.propH;
+    const prw = this.propW;
+    const prh = this.propH;
+    const px = this.padding.x;
+    const py = this.padding.y;
     let obj = _objects[ 0 ];
-    let ow = obj[ pw ];
-    let oh = obj[ ph ];
+    let ow = obj[ prw ] + px;
+    let oh = obj[ prh ] + py;
     let node = null;
     const arr = [];
 
@@ -72,8 +76,8 @@ export class RectanglePacker {
 
     for ( var i = 0; i < l; obj = _objects[ ++i ] ) {
 
-      ow = obj[ pw ];
-      oh = obj[ ph ];
+      ow = obj[ prw ] + px;
+      oh = obj[ prh ] + py;
 
       node = this.Find( this.root, ow, oh );
 
@@ -89,7 +93,7 @@ export class RectanglePacker {
 
       if ( arr[ i ] == null && _suppress !== true ) {
 
-        throw new Error( PS_UNSORTED_ERROR );
+        throw new Error( PS_PACK_SIZE_ERROR );
       
       }
 
@@ -193,19 +197,10 @@ export class RectanglePacker {
   
   }
 
-  UseWidthAndHeight () {
+  UseProp ( _w, _h ) {
 
-    this.propW = 'width';
-    this.propH = 'height';
-
-    return this;
-  
-  }
-
-  UseWAndH () {
-
-    this.propW = 'w';
-    this.propH = 'h';
+    this.propW = _w;
+    this.propH = _h;
 
     return this;
   
@@ -221,9 +216,16 @@ export class RectanglePacker {
 
   }
 
+  SetPadding ( _x, _y ) {
+
+    this.padding.Set( _x, _y );
+
+    return this;
+
+  }
+
 }
 
 // Private Static ----->
-const PS_UNSORTED_ERROR = 'Objects were not properly sorted. Suppress with Pack([], true);';
-const PS_SIZE_ERROR = 'Size error. Suppress with Pack([], true);';
+const PS_PACK_SIZE_ERROR = 'Size error!';
 // <----- Private Static
