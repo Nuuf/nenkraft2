@@ -20,7 +20,7 @@ export default () => {
         this.x = nk2.Utility.RandomFloat( -HW, HW );
         this.y = nk2.Utility.RandomFloat( 0, H );
         this.rotation = nk2.Utility.RandomInteger( 0, nk2.Math.PII );
-        this.rotation = nk2.Utility.ThisOrThat( this.rotation, -this.rotation );
+        this.rotation = nk2.Utility.FlipACoin( this.rotation, -this.rotation );
         var mm = this.motionManager = new nk2.Motion.Manager( this );
 
         mm.Create( 'moveX', 'x', 0, 120, 'SineInOut' );

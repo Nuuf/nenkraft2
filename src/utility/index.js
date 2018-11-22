@@ -9,6 +9,7 @@ import CharacterSets from './character-sets';
 
 const VERSION = require( '../../package.json' ).version;
 const Random = Math.random;
+const Clz32 = Math.clz32;
 
 export function RandomInteger ( _min, _max ) {
 
@@ -37,14 +38,6 @@ export function IsFloat ( _value ) {
 export function IsArray ( _value ) {
 
   return Object.prototype.toString.call( _value ) === '[object Array]';
-
-}
-
-export function ThisOrThat ( _this, _that ) {
-
-  if ( Random() > 0.5 ) return _this;
-
-  return _that;
 
 }
 
@@ -115,6 +108,24 @@ export function FlipACoin ( _x, _y ) {
   if ( RandomInteger( 1, 2 ) === 1 ) return _x;
 
   return _y;
+
+}
+
+export function NearestPow2Floor ( _n ) {
+
+  return ( 1 << 31 - Clz32( _n ) );
+
+}
+
+export function NearestPow2Ceil ( _n ) {
+
+  return ( 1 << 32 - Clz32( _n * 2 ) );
+
+}
+
+export function NearestPow2Round ( _n ) {
+
+  return ( 1 << 32 - Clz32( _n * 1.5 ) );
 
 }
 
