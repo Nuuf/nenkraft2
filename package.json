@@ -30,7 +30,7 @@
     "clear-bundle-be": "rimraf bundle-be/dist",
     "clear-dist": "rimraf dist",
     "ce": "rimraf dist bundle-fe/dist bundle-be/dist",
-    "be": "npm run ce && npm run build-prod && npm run build-bundle-be && npm run build-bundle-fe",
+    "be": "yarn run ce && yarn run build-prod && yarn run build-bundle-be && yarn run build-bundle-fe",
     "lint-f": "eslint src demos --fix",
     "lint": "eslint src demos"
   },
