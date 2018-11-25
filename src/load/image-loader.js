@@ -14,6 +14,7 @@ export class ImageLoader {
     this.basicTextureCache = new Cache( BasicTexture2D );
     this.onImageLoaded = new Event();
     this.onComplete = new Event();
+    this.onError = new Event();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;
@@ -101,8 +102,7 @@ export class ImageLoader {
 
   OnError ( _event ) {
 
-    console.error( _event );
-    throw new Error( 'Request failed' );
+    this.onError.Dispatch( null, _event );
   
   }
 

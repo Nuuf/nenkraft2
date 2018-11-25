@@ -15,6 +15,7 @@ export class XHRLoader {
     this.dataCache = new Cache();
     this.onXHRLoaded = new Event();
     this.onComplete = new Event();
+    this.onError = new Event();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;
@@ -138,8 +139,7 @@ export class XHRLoader {
 
   OnError ( _event ) {
 
-    console.error( _event );
-    throw new Error( 'Request failed' );
+    this.onError.Dispatch( null, _event );
   
   }
 
