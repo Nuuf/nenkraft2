@@ -47,13 +47,13 @@ export default () => {
 
     stage.gl.clearColor( 0.3, 0.3, 0.3, 1.0 );
 
-    root.GLPreDraw = function ( gl ) {
+    root.GLPreRender = function ( gl ) {
 
       stage.SetFramebuffer( gl, rtpc );
     
     };
 
-    root.GLPostDraw = function () {
+    root.GLPostRender = function () {
 
       stage.SetFramebuffer();
       rtpc.Execute();

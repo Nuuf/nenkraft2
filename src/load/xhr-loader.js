@@ -15,7 +15,8 @@ export class XHRLoader {
     this.dataCache = new Cache();
     this.onXHRLoaded = new Event();
     this.onComplete = new Event();
-    this.onError = new Event();
+    this.onNetworkError = new Event();
+    this.onLoadError = new Event();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;
@@ -66,7 +67,7 @@ export class XHRLoader {
       
       }
 
-      xhr.onerror = this.OnError.bind( this );
+      xhr.onerror = this.OnNetworkError.bind( this );
 
       if ( xhr.data != null ) {
 
@@ -111,6 +112,10 @@ export class XHRLoader {
 
       t.abort();
     
+    } else if ( t.status === 404 || t.status === 500 || t.status === 0 ) {
+
+      this.onLoadError.Dispatch( t );
+
     }
   
   }
@@ -133,13 +138,17 @@ export class XHRLoader {
 
       t.abort();
     
+    } else if ( t.status === 404 || t.status === 500 || t.status === 0 ) {
+
+      this.onLoadError.Dispatch( t );
+
     }
   
   }
 
-  OnError ( _event ) {
+  OnNetworkError ( _event ) {
 
-    this.onError.Dispatch( null, _event );
+    this.onNetworkError.Dispatch( null, _event );
   
   }
 
