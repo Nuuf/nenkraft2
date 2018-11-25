@@ -36,7 +36,7 @@ export class Spritesheet {
         frameData.w,
         frameData.h,
         frame.duration,
-        frameTag ? frameTag.name : null
+        frameTag ? frameTag.name : frames[ i ].filename
       ) ); 
     
     }
