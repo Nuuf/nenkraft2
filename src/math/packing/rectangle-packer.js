@@ -24,9 +24,11 @@ export class RectanglePacker {
     const l = _objects.length;
     const pw = this.propW;
     const ph = this.propH;
+    const px = this.padding.x;
+    const py = this.padding.y;
     let obj = _objects[ 0 ];
-    let ow = obj[ pw ];
-    let oh = obj[ ph ];
+    let ow = obj[ pw ] + px;
+    let oh = obj[ ph ] + py;
     let node = null;
     const arr = [];
 
@@ -35,8 +37,15 @@ export class RectanglePacker {
 
     for ( var i = 0; i < l; obj = _objects[ ++i ] ) {
 
-      ow = obj[ pw ];
-      oh = obj[ ph ];
+      ow = obj[ pw ] + px;
+      oh = obj[ ph ] + py;
+
+      if ( i === l - 1 ) {
+
+        ow -= px;
+        oh -= py;
+      
+      }
 
       node = this.Find( this.root, ow, oh );
 
@@ -78,6 +87,13 @@ export class RectanglePacker {
 
       ow = obj[ prw ] + px;
       oh = obj[ prh ] + py;
+
+      if ( i === l - 1 ) {
+
+        ow -= px;
+        oh -= py;
+      
+      }
 
       node = this.Find( this.root, ow, oh );
 
