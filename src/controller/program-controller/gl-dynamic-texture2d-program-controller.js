@@ -50,7 +50,7 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
     const gl = this.gl;
     const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
 
-    if ( _unitId == null || _unitId < 0 || _unitId > 3 ) _unitId = 0;
+    if ( _unitId == null ) _unitId = 0;
     _param = _param != null ? _param : gl.LINEAR;
 
     _texture.uniformId = _unitId;
