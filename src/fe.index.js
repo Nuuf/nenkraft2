@@ -19,6 +19,7 @@ import * as Texture from './texture';
 import * as Animator from './animator';
 import * as Debug from './debug';
 import * as Packing from './math/packing';
+import * as Input from './input';
 
 export { Math };
 export { Assert } from './utility/assert';
@@ -73,3 +74,4 @@ export { Particle };
 export { Texture };
 export { Animator };
 export { Debug };
+export { Input };

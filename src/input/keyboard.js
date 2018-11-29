@@ -9,8 +9,18 @@ export class Keyboard {
   constructor ( _element ) {
 
     this.element = _element;
-    this.element.setAttribute( 'tabindex', '1' );
-    this.element.focus();
+
+    if ( this.element.setAttribute ) {
+
+      this.element.setAttribute( 'tabindex', '1' );
+    
+    }
+
+    if ( this.element.focus ) {
+
+      this.element.focus();
+    
+    }
 
     this.___bound___OnKeyDown = this.OnKeyDown.bind( this );
     this.___bound___OnKeyUp = this.OnKeyUp.bind( this );
