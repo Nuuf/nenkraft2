@@ -16,6 +16,8 @@ export default () => {
     c.setAttribute( 'height', H );
     c.style.display = 'initial';
     c.style.position = 'absolute';
+    c.style.top = '50%';
+    c.style.transform = 'translateY(-50%)';
     
     const options = {
       canvas: c,
@@ -59,7 +61,7 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
+    stage.touch.AddOffset( scene ).AddOffset( camera );
 
     stage.onProcess.Add( () => {
 
@@ -67,7 +69,7 @@ export default () => {
     
     } );
 
-    stage.mouse.onDown.Add( ( event ) => {
+    stage.touch.onStart.Add( ( event ) => {
 
       let i = scene.children.length;
       const p = event.data.position;
@@ -97,7 +99,7 @@ export default () => {
 
     } );
 
-    stage.mouse.onMove.Add( ( event ) => {
+    stage.touch.onMove.Add( ( event ) => {
 
       if ( dragger ) {
 
@@ -109,7 +111,7 @@ export default () => {
     
     }, stage );
 
-    stage.mouse.onUp.Add( () => {
+    stage.touch.onEnd.Add( () => {
 
       if ( dragger ) dragger = null;
     

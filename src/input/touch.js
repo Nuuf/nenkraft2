@@ -33,13 +33,13 @@ export class Touch {
 
   }
 
-  static get x () {
+  get x () {
 
     return this.position.x;
   
   }
 
-  static get y () {
+  get y () {
 
     return this.position.y;
   
@@ -49,7 +49,7 @@ export class Touch {
 
     _event.preventDefault();
     _event.stopPropagation();
-    this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
+    this.CalculatePosition( _event.touches.item( 0 ).clientX, _event.touches.item( 0 ).clientY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
 
@@ -61,7 +61,7 @@ export class Touch {
 
     _event.preventDefault();
     _event.stopPropagation();
-    this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
+    this.CalculatePosition( _event.touches.item( 0 ).clientX, _event.touches.item( 0 ).clientY );
     this.eventData.native = _event;
     this.onStart.Dispatch( this.element, this.eventData );
   
@@ -87,10 +87,11 @@ export class Touch {
 
     const offsets = this.offsets;
     const pos = this.position;
+    const rect = this.element.getBoundingClientRect();
 
     pos
       .Set( _x, _y )
-      .Subtract( this.element.offsetLeft, this.element.offsetTop )
+      .Subtract( rect.left, rect.top )
       .SubtractV( this.offset )
       .DivideV( this.scale );
 

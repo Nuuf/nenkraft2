@@ -36,13 +36,13 @@ export class Mouse {
   
   }
 
-  static get x () {
+  get x () {
 
     return this.position.x;
   
   }
 
-  static get y () {
+  get y () {
 
     return this.position.y;
   
@@ -50,7 +50,7 @@ export class Mouse {
 
   OnMove ( _event ) {
 
-    this.CalculatePosition( _event.pageX, _event.pageY );
+    this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
 
@@ -62,7 +62,7 @@ export class Mouse {
 
     _event.stopPropagation();
     _event.preventDefault();
-    this.CalculatePosition( _event.pageX, _event.pageY );
+    this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onDown.Dispatch( this.element, this.eventData );
   
@@ -72,7 +72,7 @@ export class Mouse {
 
     _event.stopPropagation();
     _event.preventDefault();
-    this.CalculatePosition( _event.pageX, _event.pageY );
+    this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onUp.Dispatch( this.element, this.eventData );
   
@@ -81,7 +81,7 @@ export class Mouse {
   OnLeave ( _event ) {
 
     _event.stopPropagation();
-    this.CalculatePosition( _event.pageX, _event.pageY );
+    this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onLeave.Dispatch( this.element, this.eventData );
   
@@ -90,7 +90,7 @@ export class Mouse {
   OnWheel ( _event ) {
 
     _event.stopPropagation();
-    this.CalculatePosition( _event.pageX, _event.pageY );
+    this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onWheel.Dispatch( this.element, this.eventData );
   
@@ -100,10 +100,11 @@ export class Mouse {
 
     const offsets = this.offsets;
     const pos = this.position;
+    const rect = this.element.getBoundingClientRect();
 
     pos
       .Set( _x, _y )
-      .Subtract( this.element.offsetLeft, this.element.offsetTop )
+      .Subtract( rect.left, rect.top )
       .SubtractV( this.offset )
       .DivideV( this.scale );
 
