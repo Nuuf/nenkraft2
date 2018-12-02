@@ -35,7 +35,6 @@ export class Keyboard {
 
   OnKeyDown ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.onDown.Dispatch( this.element, _event );
   
@@ -43,7 +42,6 @@ export class Keyboard {
 
   OnKeyUp ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.onUp.Dispatch( this.element, _event );
   

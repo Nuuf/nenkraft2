@@ -61,7 +61,7 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.touch.AddOffset( scene ).AddOffset( camera );
+    stage.mouse.AddOffset( scene ).AddOffset( camera );
 
     stage.onProcess.Add( () => {
 
@@ -69,7 +69,7 @@ export default () => {
     
     } );
 
-    stage.touch.onStart.Add( ( event ) => {
+    stage.mouse.onDown.Add( ( event ) => {
 
       let i = scene.children.length;
       const p = event.data.position;
@@ -99,7 +99,7 @@ export default () => {
 
     } );
 
-    stage.touch.onMove.Add( ( event ) => {
+    stage.mouse.onMove.Add( ( event ) => {
 
       if ( dragger ) {
 
@@ -111,7 +111,7 @@ export default () => {
     
     }, stage );
 
-    stage.touch.onEnd.Add( () => {
+    stage.mouse.onUp.Add( () => {
 
       if ( dragger ) dragger = null;
     

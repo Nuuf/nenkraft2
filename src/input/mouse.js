@@ -61,7 +61,6 @@ export class Mouse {
   OnDown ( _event ) {
 
     _event.stopPropagation();
-    _event.preventDefault();
     this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onDown.Dispatch( this.element, this.eventData );
@@ -71,7 +70,6 @@ export class Mouse {
   OnUp ( _event ) {
 
     _event.stopPropagation();
-    _event.preventDefault();
     this.CalculatePosition( _event.clientX, _event.clientY );
     this.eventData.native = _event;
     this.onUp.Dispatch( this.element, this.eventData );

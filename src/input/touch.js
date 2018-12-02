@@ -47,7 +47,6 @@ export class Touch {
 
   OnMove ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.CalculatePosition( _event.touches.item( 0 ).clientX, _event.touches.item( 0 ).clientY );
     this.eventData.native = _event;
@@ -59,7 +58,6 @@ export class Touch {
 
   OnStart ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.CalculatePosition( _event.touches.item( 0 ).clientX, _event.touches.item( 0 ).clientY );
     this.eventData.native = _event;

@@ -22,11 +22,23 @@ export default () => {
         this.rotation = nk2.Utility.RandomInteger( 0, nk2.Math.PII );
         this.rotation = nk2.Utility.FlipACoin( this.rotation, -this.rotation );
         var mm = this.motionManager = new nk2.Motion.Manager( this );
+        const mx = mm.Create( 'moveX', 'x', 0, 120, 'SineInOut' );
+        const my = mm.Create( 'moveY', 'y', 0, 120, 'SineInOut' );
+        const mr = mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
 
-        mm.Create( 'moveX', 'x', 0, 120, 'SineInOut' );
-        mm.Create( 'moveY', 'y', 0, 120, 'SineInOut' );
-        mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
-        mm.StartMultiple( 'moveX moveY rotate' );
+        mm.Start( 'moveX' );
+
+        mx.onEnd.Add( () => {
+
+          mr.Start();
+        
+        } );
+
+        mr.onEnd.Add( () => {
+
+          my.Start();
+        
+        } );
 
         if ( this.w > 12 ) {
 
@@ -95,7 +107,7 @@ export default () => {
 
     new Branch( new nk2.Vector2D( 0, 0 ), new nk2.Vector2D( 0, 300 ), scene );
 
-    const timer = new nk2.Time.Timer( 130 );
+    const timer = new nk2.Time.Timer( 500 );
 
     timer.onFinish.Add( () => {
 
