@@ -12,7 +12,6 @@ export class Frame {
     this.y = _y;
     this.w = _w;
     this.h = _h;
-    this.nextFrameIndex = null;
     this.id = null;
 
     if ( _id != null ) {

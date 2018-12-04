@@ -36,15 +36,13 @@ export default () => {
       spritesheet: window.testData.invadersSpritesheet,
       id: 'explode',
       frames: [
-        'Explo-f1',
-        'Explo-f2',
-        'Explo-f3',
-        'Explo-f4'
+        { id: 'Explo-f1', rate: 14 },
+        { id: 'Explo-f2', rate: 2 },
+        { id: 'Explo-f3', rate: 10 },
+        { id: 'Explo-f4', rate: 2 }
       ],
-      rate: 15,
       loop: true,
-      reverse: false,
-      overrideFrameRate: true
+      reverse: false
     } );
     sprite2.PlayAnimation( 'explode' );
     sprite2.anchor.SetSame( 0.5 );

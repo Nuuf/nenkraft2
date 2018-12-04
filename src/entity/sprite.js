@@ -174,20 +174,28 @@ export class Sprite extends TextureEntity2D {
     const animation = this.animationController.CreateAnimation( _data.id, _data.rate );
   
     if ( _data.spritesheet != null ) {
+
+      let frame = null;
   
       for ( i = 0; i < _data.frames.length; ++i ) {
+
+        frame = _data.spritesheet.GetFrameById( _data.frames[ i ].id || _data.frames[ i ] );
+        
+        if ( _data.frames[ i ].rate != null ) {
+
+          frame.rate = _data.frames[ i ].rate;
+        
+        }
   
-        animation.AddFrame( _data.spritesheet.GetFrameById( _data.frames[ i ] ) );
+        animation.CreateFrame( frame.x, frame.y, frame.w, frame.h, frame.rate );
         
       }
       
     } else {
 
-      let frame = _data.frames[ 0 ];
-
-      for ( i = 0; i < _data.frames.length; frame = _data.frames[ ++i ] ) {
+      for ( i = 0; i < _data.frames.length; ++i ) {
   
-        animation.CreateFrame( frame.x, frame.y, frame.w, frame.h, frame.rate );
+        animation.AddFrame( _data.frames[ i ] );
         
       }
     
