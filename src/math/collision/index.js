@@ -4,6 +4,7 @@ import * as AABB2DvsLine2D from './2d/aabb-vs-line';
 import * as CirclevsCircle from './2d/circle-vs-circle';
 import * as CirclevsLine2D from './2d/circle-vs-line';
 import * as Polygon2DvsPolygon2D from './2d/polygon-vs-polygon';
+export { Body2D } from './2d/body';
 export { AABB2DvsAABB2D };
 export { Line2DvsLine2D };
 export { AABB2DvsLine2D };

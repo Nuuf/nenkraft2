@@ -33,7 +33,8 @@ export default () => {
 
     /*
      * Using the Maker continuously can slow things down quite a bit.
-     * It is more for convenience and fun...
+     * It is more for convenience and fun... Initialising etc.
+     * 
      */
 
     const factory = new nk2.Maker();

@@ -28,11 +28,11 @@ export class Result {
 
 }
 
-export const CollideRel = function ( _obj1, _obj2, _result ) {
+export const Collide = function ( _a, _b, _result ) {
 
   let i = 0;
-  const p1 = _obj1.shape;
-  const p2 = _obj2.shape;
+  const p1 = _a.shape;
+  const p2 = _a.shape;
   const p1Normals = p1.normals;
   const p2Normals = p2.normals;
   const p1l = p1Normals.length;
@@ -40,7 +40,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
   for ( i; i < p1l; ++i ) {
 
-    if ( AxisSeparates( _obj1, _obj2, p1Normals[ i ], _result ) === true ) {
+    if ( AxisSeparates( _a, _b, p1Normals[ i ], _result ) === true ) {
 
       return false;
       
@@ -50,7 +50,7 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
   for ( i = 0; i < p2l; ++i ) {
 
-    if ( AxisSeparates( _obj1, _obj2, p2Normals[ i ], _result ) === true ) {
+    if ( AxisSeparates( _a, _b, p2Normals[ i ], _result ) === true ) {
 
       return false;
       
@@ -70,11 +70,11 @@ export const CollideRel = function ( _obj1, _obj2, _result ) {
 
 };
 
-export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
+export const AxisSeparates = function ( _a, _b, _axis, _result ) {
 
-  const d1 = _axis.GetMinMaxDot( _obj1.shape.vertices );
-  const d2 = _axis.GetMinMaxDot( _obj2.shape.vertices );
-  const offset = _obj2.relative.SubtractVC( _obj1.relative ).GetDotV( _axis );
+  const d1 = _axis.GetMinMaxDot( _a.shape.vertices );
+  const d2 = _axis.GetMinMaxDot( _b.shape.vertices );
+  const offset = _b.relative.SubtractVC( _a.relative ).GetDotV( _axis );
   
   d2.Add( offset, offset );
 
@@ -156,5 +156,14 @@ export const AxisSeparates = function ( _obj1, _obj2, _axis, _result ) {
   }
 
   return false;
+
+};
+
+export const SeparatingResponse = function ( _a, _b, _result ) {
+
+  _result.mtv.Multiply( 0.5, 0.5 );
+
+  _a.relative.SubtractV( _result.mtv );
+  _b.relative.AddV( _result.mtv );
 
 };

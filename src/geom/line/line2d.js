@@ -5,6 +5,8 @@
 import { Vector2D } from '../../math/vector/vector2d';
 import { Line2DLine2DIntersection, ClosestPoint2DOnLine2D } from '../../math/misc';
 
+const Abs = Math.abs;
+
 export class Line2D {
 
   constructor ( _sx, _sy, _ex, _ey ) {
@@ -22,12 +24,34 @@ export class Line2D {
     this.s.Set( _sx, _sy );
     this.e.Set( _ex, _ey );
 
+    return this;
+
   }
 
   SetC ( _line2d ) {
 
     this.s.SetV( _line2d.s );
     this.e.SetV( _line2d.e );
+
+    return this;
+  
+  }
+
+  SetPosition ( _x, _y ) {
+
+    const nex = _x + Abs( this.e.x - this.s.x );
+    const ney = _y + Abs( this.e.y - this.s.y );
+
+    this.s.Set( _x, _y );
+    this.e.Set( nex, ney );
+
+    return this;
+
+  }
+
+  GetPosition () {
+
+    return this.s;
   
   }
 
@@ -37,18 +61,26 @@ export class Line2D {
 
     this.s.PushFromV( this.e, hm );
     this.e.PushFromV( this.s, hm );
+
+    return this;
   
   }
 
   Rotate ( _angle, _anchorX, _anchorY ) {
 
-    _anchorX = _anchorX == undefined ? 0.5 : _anchorX;
-    const ap = this.s.Copy();
+    _anchorX = _anchorX == null ? 0.5 : _anchorX;
 
-    ap.AddV( this.e );
-    ap.Multiply( _anchorX, _anchorY == undefined ? _anchorX : _anchorY );
-    this.s.RotateAroundV( ap, _angle );
-    this.e.RotateAroundV( ap, _angle );
+    PS_ap
+      .SetV( this.s )
+      .AddV( this.e )
+      .Multiply( 
+        _anchorX,
+        _anchorY == null ? _anchorX : _anchorY
+      );
+    this.s.RotateAroundV( PS_ap, _angle );
+    this.e.RotateAroundV( PS_ap, _angle );
+
+    return this;
   
   }
 
@@ -136,4 +168,5 @@ export class Line2D {
 
 // Private Static ----->
 const PS_TYPE = 0;
+const PS_ap = new Vector2D( 0, 0 );
 // <----- Private Static

@@ -36,89 +36,62 @@ export class Result {
 
 }
 
-export const CollideRel = function ( _obj1, _obj2, _result ) {
+export const Collide = function ( _a, _b, _result ) {
 
-  const c1 = _obj1.shape;
-  const c2 = _obj2.shape;
-  const r1 = c1.radius;
-  const r2 = c2.radius;
-  const radii = r1 + r2;
-  const anchor1 = _obj1.anchor;
-  const anchor2 = _obj2.anchor;
-  
-  PS_pos1.SetV( _obj1.relative );
-  PS_pos2.SetV( _obj2.relative );
-  PS_delta.SetV( PS_pos2 ).SubtractV( PS_pos1 );
+  const sa = _a.shape;
+  const sb = _b.shape;
+  const radii = sa.radius + sb.radius;
+
+  PS_delta.SetV( sa.center ).SubtractV( sb.center );
 
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
-  if ( anchor1 != null ) {
-
-    PS_pos1.x += anchor1.x * c1.diameter;
-    PS_pos1.y += anchor1.y * c1.diameter;
-    
-  }
-
-  if ( anchor2 != null ) {
-
-    PS_pos2.x += anchor2.x * c2.diameter;
-    PS_pos2.y += anchor2.y * c2.diameter;
-    
-  }
-
   if ( radii * radii > distanceSq ) {
 
-    if ( _result != null ) {
+    const distance = Sqrt( distanceSq );
+    const dm = ( sa.radiusSquared - sb.radiusSquared + distanceSq ) / ( distance + distance );
+    const de = Sqrt( ( sa.radiusSquared ) - ( dm * dm ) ) / distance;
+    const rx = -PS_delta.y * de;
+    const ry = PS_delta.x * de;
+    const mtd = distance - sa.radius - sb.radius;
 
-      const distance = Sqrt( distanceSq );
-      const dm = ( c1.radiusSquared - c2.radiusSquared + distanceSq ) / ( distance + distance );
-      const de = Sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
-      const rx = -PS_delta.y * de;
-      const ry = PS_delta.x * de;
+    PS_poc1.Set(
+      sa.center.x + ( PS_delta.x * dm / distance ),
+      sa.center.y + ( PS_delta.y * dm / distance )
+    );
+    PS_poc2.Set(
+      PS_poc1.x + rx,
+      PS_poc1.y + ry
+    );
+    PS_poc3.Set(
+      PS_poc1.x - rx,
+      PS_poc1.y - ry
+    );
 
-      PS_poc1.Set(
-        PS_pos1.x + ( PS_delta.x * dm / distance ),
-        PS_pos1.y + ( PS_delta.y * dm / distance )
-      );
-      PS_poc2.Set(
-        PS_poc1.x + rx,
-        PS_poc1.y + ry
-      );
-      PS_poc3.Set(
-        PS_poc1.x - rx,
-        PS_poc1.y - ry
-      );
-      // as mtv
-      PS_pos1.SubtractV( PS_pos2 ).Divide( radii, radii );
-
-      const mtd = distance - r1 - r2;
-
-      _result.poc.a.SetV( PS_poc1 );
-      _result.poc.b.SetV( PS_poc2 );
-      _result.poc.c.SetV( PS_poc3 );
-      _result.mtv.SetV( PS_pos1 /* as mtv */ );
-      _result.mtd = mtd;
-      _result.delta.SetV( PS_delta );
-      _result.occured = true;
-      
-    }
+    _result.mtv.SetV( PS_delta ).Divide( radii, radii );
+    _result.poc.a.SetV( PS_poc1 );
+    _result.poc.b.SetV( PS_poc2 );
+    _result.poc.c.SetV( PS_poc3 );
+    _result.mtd = mtd;
+    _result.delta.SetV( PS_delta );
+    _result.occured = true;
 
     return true;
-    
+  
   }
 
   return false;
 
 };
 
-export const ElasticResponse = function ( _obj1, _obj2, _result ) {
+export const ElasticResponse = function ( _a, _b, _result ) {
 
   PS_n.SetV( _result.delta ).Normalize();
   PS_mtv.SetV( _result.mtv );
-  const m1 = _obj1.mass;
-  const m2 = _obj2.mass;
-  const v1 = _obj1.velocity;
-  const v2 = _obj2.velocity;
+  const m1 = _a.mass;
+  const m2 = _b.mass;
+  const v1 = _a.velocity;
+  const v2 = _b.velocity;
   const a1 = v1.GetDotV( PS_n );
   const a2 = v2.GetDotV( PS_n );
   const op = 2 * ( a1 - a2 ) / ( m1 + m2 );
@@ -131,17 +104,15 @@ export const ElasticResponse = function ( _obj1, _obj2, _result ) {
     v2.x + op * m1 * PS_n.x,
     v2.y + op * m1 * PS_n.y
   );
-  PS_mtv.Multiply( _result.mtd, _result.mtd ).Divide( 2, 2 );
-  _obj1.relative.SubtractV( PS_mtv );
-  _obj2.relative.AddV( PS_mtv );
+  PS_mtv.Multiply( _result.mtd, _result.mtd ).Multiply( 0.5, 0.5 );
+  _a.relative.SubtractV( PS_mtv );
+  _b.relative.AddV( PS_mtv );
 
 };
 
 // REUSABLE ----->
 const PS_n = new Vector2D( 0, 0 );
 const PS_mtv = new Vector2D( 0, 0 );
-const PS_pos1 = new Vector2D( 0, 0 );
-const PS_pos2 = new Vector2D( 0, 0 );
 const PS_poc1 = new Vector2D( 0, 0 );
 const PS_poc2 = new Vector2D( 0, 0 );
 const PS_poc3 = new Vector2D( 0, 0 );

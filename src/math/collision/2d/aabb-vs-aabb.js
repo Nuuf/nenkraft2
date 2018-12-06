@@ -22,69 +22,44 @@ export class Result {
 
 }
 
-export const CollideRel = function ( _obj1, _obj2, _result ) {
+export const Collide = function ( _a, _b, _result ) {
 
-  const aabb1 = _obj1.shape;
-  const w1 = aabb1.w;
-  const h1 = aabb1.h;
-  const anchor1 = _obj1.anchor;
-  const aabb2 = _obj2.shape;
-  const w2 = aabb2.w;
-  const h2 = aabb2.h;
-  const anchor2 = _obj2.anchor;
+  const sa = _a.shape;
+  const sb = _b.shape;
 
-  PS_tl1.SetV( aabb1.tl ).SubtractV( _obj1.relative );
-  PS_tl2.SetV( aabb2.tl ).SubtractV( _obj2.relative );
-
-  const tl2xw = PS_tl2.x + w1;
-  const tl1xw = PS_tl1.x + w2;
-  const br2yh = PS_tl2.y + h1;
-  const br1yh = PS_tl1.y + h2;
-
-  if ( anchor1 != null ) {
-
-    PS_tl1.x += anchor1.x * w1;
-    PS_tl1.y += anchor1.y * h1;
-    
-  }
-
-  if ( anchor2 != null ) {
-
-    PS_tl2.x += anchor2.x * w2;
-    PS_tl2.y += anchor2.y * h2;
-    
-  }
-
-  if (
-    PS_tl1.x < tl2xw &&
-    PS_tl2.x < tl1xw &&
-    PS_tl1.y < br2yh &&
-    PS_tl2.y < br1yh
+  if ( 
+    sa.tl.x < sb.br.x &&
+    sb.tl.x < sa.br.x &&
+    sa.tl.y < sb.br.y &&
+    sb.tl.y < sa.br.y
   ) {
 
-    if ( _result != null ) {
-
-      PS_tvs[ 0 ].Set( PS_tl1.x - tl2xw, 0 );
-      PS_tvs[ 1 ].Set( tl1xw - PS_tl2.x, 0 );
-      PS_tvs[ 2 ].Set( 0, PS_tl1.y - br2yh );
-      PS_tvs[ 3 ].Set( 0, br1yh - PS_tl2.y );
-      PS_tvs.sort( Vector2D.SortMinMag );
-      _result.mtv.SetV( PS_tvs[ 0 ] );
-      _result.occured = true;
-      
-    }
+    PS_tvs[ 0 ].Set( sa.tl.x - sb.br.x, 0 );
+    PS_tvs[ 1 ].Set( sa.br.x - sb.tl.x, 0 );
+    PS_tvs[ 2 ].Set( 0, sa.tl.y - sb.br.y );
+    PS_tvs[ 3 ].Set( 0, sa.br.y - sb.tl.y );
+    PS_tvs.sort( Vector2D.SortMinMag );
+    _result.mtv.SetV( PS_tvs[ 0 ] );
+    _result.occured = true;
 
     return true;
-    
+  
   }
 
   return false;
 
 };
 
+export const SeparatingResponse = function ( _a, _b, _result ) {
+
+  _result.mtv.Multiply( 0.5, 0.5 );
+
+  _a.relative.SubtractV( _result.mtv );
+  _b.relative.AddV( _result.mtv );
+
+};
+
 // REUSABLE ----->
-const PS_tl1 = new Vector2D( 0, 0 );
-const PS_tl2 = new Vector2D( 0, 0 );
 const PS_tvs = [
   new Vector2D( 0, 0 ),
   new Vector2D( 0, 0 ),

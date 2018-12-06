@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateDemo( 'CollisionAABB2D', ( conf ) => {
+  CreateDemo( 'CollisionPolygon2D', ( conf ) => {
 
     const W = 1920 / 1;
     const H = 1080 / 1;
@@ -42,21 +42,23 @@ export default () => {
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 
-    const CollideRel = nk2.Collision.AABB2DvsAABB2D.CollideRel;
-    const result = new nk2.Collision.AABB2DvsAABB2D.Result();
-    const g1 = scene.AddChild( new nk2.Graphic2D( 0, 100, new nk2.Path.AABB2D( 0, 0, 50, 50 ) ) );
-    const g2 = scene.AddChild( new nk2.Graphic2D( 0, 0, new nk2.Path.AABB2D( 0, 0, 400, 100 ) ) );
-    const bodyA = {
-      shape: g1.path,
-      relative: g1.position
-    };
-    const bodyB = {
-      shape: g2.path,
-      relative: g2.position
-    };
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
+    const a = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
+    const b = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
+
+    nk2.Geom.PolygonConstruction.Cyclic( a.shape, 0, 0, nk2.Utility.RandomInteger( 30, 60 ), nk2.Utility.RandomInteger( 3, 6 ) );
+    nk2.Geom.PolygonConstruction.Cyclic( b.shape, 0, 0, nk2.Utility.RandomInteger( 30, 60 ), nk2.Utility.RandomInteger( 3, 6 ) );
+    const g1 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetC( a.shape ) );
+    const g2 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetC( b.shape ) );
+
+    a.SetRelative( g1.position );
+    b.SetRelative( g2.position );
+    const COLLIDE = nk2.Collision.Polygon2DvsPolygon2D.Collide;
+    const result = new nk2.Collision.Polygon2DvsPolygon2D.Result();
+
+    scene.Mount( g1, g2 );
 
     stage.onProcess.Add( () => {
 
@@ -104,12 +106,15 @@ export default () => {
 
         result.Reset();
 
-        CollideRel( bodyA, bodyB, result );
+        COLLIDE( a, b, result );
 
         if ( result.occured ) {
 
-          bodyA.relative.AddV( result.mtv );
+          // result.mtv.Multiply( 0.5, 0.5 );
 
+          g1.position.SubtractV( result.mtv );
+          // b.relative.AddV( result.mtv );
+        
         }
       
       }

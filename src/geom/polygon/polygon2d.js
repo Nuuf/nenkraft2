@@ -15,8 +15,9 @@ export class Polygon2D {
     this.normals = [];
     this.perimeterMidPoints = [];
     this.centroid = new Vector2D( 0, 0 );
-    this.aabb = null;
+    this.aabb = new AABB2D( 0, 0, 0, 0 );
     this.dirtyBounds = true;
+    this.dirtyCentroid = true;
     this.belongsTo = null;
     this.TYPE = PS_TYPE;
 
@@ -39,8 +40,28 @@ export class Polygon2D {
     
     }
 
+    p.ComputeBounds();
+    p.ComputeCentroid();
+
     return p;
   
+  }
+
+  SetC ( _polygon ) {
+
+    const vertices = _polygon.vertices;
+
+    for ( var i = 0; i < vertices.length; ++i ) {
+
+      this.AddVertex( vertices[ i ].Copy() );
+    
+    }
+
+    this.ComputeBounds();
+    this.ComputeCentroid();
+
+    return this;
+
   }
 
   ExtractSegments ( _segments ) {
@@ -95,6 +116,10 @@ export class Polygon2D {
   AddVertex ( _vector2d ) {
 
     this.vertices.push( _vector2d );
+    this.dirtyBounds = true;
+    this.dirtyCentroid = true;
+
+    return this;
   
   }
 
@@ -121,6 +146,8 @@ export class Polygon2D {
       }
     
     }
+
+    return this;
   
   }
 
@@ -128,6 +155,10 @@ export class Polygon2D {
 
     this.vertices.length = 0;
     if ( _vertices != null ) this.vertices.push.apply( this.vertices, _vertices );
+    this.dirtyBounds = true;
+    this.dirtyCentroid = true;
+
+    return this;
   
   }
 
@@ -139,8 +170,6 @@ export class Polygon2D {
     let may = -mix;
     let vertex;
     const vertices = this.vertices;
-
-    if ( this.aabb === null ) this.aabb = new AABB2D( 0, 0, 0, 0 );
 
     for ( var i = 0; i < vertices.length; ++i ) {
 
@@ -154,10 +183,18 @@ export class Polygon2D {
 
     this.aabb.Set( mix, miy, max, may );
     this.dirtyBounds = false;
+
+    return this;
   
   }
 
-  Rotate ( _angle, _anchorX, _anchorY, _updateBounds ) {
+  Rotate ( _angle, _anchorX, _anchorY ) {
+
+    if ( this.dirtyBounds === true ) {
+
+      this.ComputeBounds();
+    
+    }
 
     let i = 0;
     let vertex;
@@ -166,13 +203,10 @@ export class Polygon2D {
     const vertices = this.vertices;
     const l = vertices.length;
 
-    if ( this.dirtyBounds === true && _updateBounds === true ) this.ComputeBounds();
-    else if ( this.aabb === null ) this.ComputeBounds();
-
-    _anchorX = _anchorX === undefined ? 0.5 : _anchorX;
+    _anchorX = _anchorX == null ? 0.5 : _anchorX;
 
     ap.AddV( aabb.br );
-    ap.Multiply( _anchorX, _anchorY === undefined ? _anchorX : _anchorY );
+    ap.Multiply( _anchorX, _anchorY == null ? _anchorX : _anchorY );
 
     for ( i; i < l; ++i ) {
 
@@ -181,11 +215,36 @@ export class Polygon2D {
     
     }
 
+    this.dirtyCentroid = true;
     this.dirtyBounds = true;
   
   }
 
-  GetControid () {
+  SetPosition ( _x, _y ) {
+
+    if ( this.dirtyCentroid === true ) {
+
+      this.ComputeCentroid();
+    
+    }
+
+    const vertices = this.vertices;
+    const centroid = this.centroid;
+
+    for ( var i = 0; i < vertices.length; ++i ) {
+
+      vertices[ i ].SubtractV( centroid ).Add( _x, _y );
+
+    }
+
+    this.dirtyCentroid = true;
+    this.dirtyBounds = true;
+
+    return this;
+
+  }
+
+  ComputeCentroid () {
 
     const vertices = this.vertices;
     const centroid = this.centroid;
@@ -200,7 +259,9 @@ export class Polygon2D {
 
     centroid.Divide( vertices.length, vertices.length );
 
-    return centroid;
+    this.dirtyCentroid = false;
+
+    return this;
   
   }
 

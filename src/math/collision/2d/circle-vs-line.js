@@ -29,48 +29,37 @@ export class Result {
 
 }
 
-export const CollideRel = function ( _obj1, _obj2, _result ) {
+export const Collide = function ( _a, _b, _result ) {
 
-  const lshape = _obj2.shape;
-  const cshape = _obj1.shape;
-  const lpos = _obj2.relative;
-  const cpos = _obj1.relative;
+  const sa = _a.shape;
+  const sb = _b.shape;
+  const ccenter = sa.center;
+  const cp = ClosestPoint2DOnLine2D( sb.s, sb.e, ccenter );
 
-  PS_s.Set( lshape.s.x + lpos.x, lshape.s.y + lpos.y );
-  PS_e.Set( lshape.e.x + lpos.x, lshape.e.y + lpos.y );
-
-  const cp = ClosestPoint2DOnLine2D( PS_s, PS_e, cpos );
-
-  PS_delta.Set( cpos.x - cp.x, cpos.y - cp.y );
+  PS_delta.Set( ccenter.x - cp.x, ccenter.y - cp.y );
 
   const distanceSq = PS_delta.GetMagnitudeSquared();
 
-  if ( distanceSq < cshape.radiusSquared ) {
+  if ( distanceSq < sa.radiusSquared ) {
 
-    if ( _result ) {
-
-      const distance = cshape.radius - Sqrt( distanceSq );
+    const distance = sa.radius - Sqrt( distanceSq );
       
-      // as mtv
-      PS_delta.Normalize().Multiply( distance, distance );
-      _result.mtv.SetV( PS_delta );
-      _result.cp.SetV( cp );
-      _result.occured = true;
+    _result.mtv.SetV( PS_delta ).Normalize().Multiply( distance, distance );
+    _result.cp.SetV( cp );
+    _result.occured = true;
 
-      if ( cp === PS_s ) {
+    if ( cp === sb.s ) {
 
-        _result.sOrE = 1;
+      _result.sOrE = 1;
         
-      } else if ( cp === PS_e ) {
+    } else if ( cp === sb.e ) {
 
-        _result.sOrE = -1;
+      _result.sOrE = -1;
         
-      }
-      
     }
 
     return true;
-    
+
   }
 
   return false;
@@ -104,7 +93,5 @@ export const ReflectingResponse = function ( _obj1, _obj2, _result ) {
 };
 
 // REUSABLE ----->
-const PS_s = new Vector2D( 0, 0 );
-const PS_e = new Vector2D( 0, 0 );
 const PS_delta = new Vector2D( 0, 0 );
 // <----- REUSABLE

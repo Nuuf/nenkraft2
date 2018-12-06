@@ -51,6 +51,21 @@ export class AABB2D {
   
   }
 
+  SetPosition ( _x, _y ) {
+
+    this.tl.Set( _x, _y );
+    this.br.Set( _x + this.w, _y + this.h );
+
+    return this;
+
+  }
+
+  GetPosition () {
+
+    return this.tl;
+
+  }
+
   Scale ( _x, _y, _notl ) {
 
     if ( _notl !== false ) this.tl.Multiply( _x, _y );

@@ -37,6 +37,8 @@ export class Circle {
 
     this.center.Set( _x, _y );
     this.radius = _radius;
+
+    return this;
   
   }
 
@@ -44,12 +46,30 @@ export class Circle {
 
     this.center.SetV( _circle );
     this.radius = _circle.radius;
+    
+    return this;
+  
+  }
+
+  SetPosition ( _x, _y ) {
+
+    this.center.Set( _x, _y );
+
+    return this;
+
+  }
+
+  GetPosition () {
+
+    return this.center;
   
   }
 
   Scale ( _scale ) {
 
     this.radius *= _scale;
+    
+    return this;
   
   }
 
