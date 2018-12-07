@@ -40,10 +40,14 @@ export class Event {
 
   Add ( _handle, _context, _removeOnNextCall ) {
 
-    const listener = new Listener( this, _context, _handle, _removeOnNextCall );
-
-    this.listeners.push( listener );
+    this.listeners.push( new Listener( this, _context, _handle, _removeOnNextCall ) );
   
+  }
+
+  Once ( _handle, _context ) {
+
+    this.Add( _handle, _context, true );
+
   }
 
   Remove ( _handle, _context ) {
