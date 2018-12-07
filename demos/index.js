@@ -74,12 +74,12 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
       }
     ] );
 
-    loaderCombiner.onComplete.Add( () => {
+    loaderCombiner.onComplete.Once( () => {
 
       console.log( loaderCombiner );
       Go();
     
-    }, null, true );
+    } );
     loaderCombiner.Load();
   
     function Go () {
