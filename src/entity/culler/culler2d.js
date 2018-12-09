@@ -3,7 +3,7 @@
  */
 
 import { AABB2D } from '../../geom/aabb/aabb2d';
-import { Event } from '../../event/event';
+import { Dispatcher } from '../../event/dispatcher';
 
 export class Culler2D {
 
@@ -13,8 +13,8 @@ export class Culler2D {
     this.container = null;
     this.entities = null;
     this.rootMatrix = null;
-    this.onOut = new Event();
-    this.onIn = new Event();
+    this.onOut = new Dispatcher();
+    this.onIn = new Dispatcher();
 
   }
 

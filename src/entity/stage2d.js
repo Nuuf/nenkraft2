@@ -3,7 +3,7 @@
  */
 
 import { VisualContainer2D } from './visual-container2d';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { Ticker } from '../time/ticker/ticker';
 import { DEFAULT } from '../style/gco';
 import { Keyboard, Mouse, Touch } from '../input';
@@ -117,7 +117,7 @@ export class Stage2D extends VisualContainer2D {
     
     }
 
-    this.onProcess = new Event();
+    this.onProcess = new Dispatcher();
 
     if ( _options.noMouse !== true ) {
 

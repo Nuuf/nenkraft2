@@ -3,7 +3,7 @@
  */
 
 import * as Ease from '../math/ease';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { Nested } from '../utility';
 
 export class Motion {
@@ -22,11 +22,11 @@ export class Motion {
     this.property = null;
     this.properyObject = null;
     this.running = false;
-    this.onStart = new Event();
-    this.onEnd = new Event();
-    this.onStop = new Event();
-    this.onReconfigure = new Event();
-    this.onReset = new Event();
+    this.onStart = new Dispatcher();
+    this.onEnd = new Dispatcher();
+    this.onStop = new Dispatcher();
+    this.onReconfigure = new Dispatcher();
+    this.onReset = new Dispatcher();
   
   }
 

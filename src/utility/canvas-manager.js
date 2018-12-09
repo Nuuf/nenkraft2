@@ -3,7 +3,7 @@
  */
 
 import { SimplifyAspectRatio } from '../math';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { AABB2D } from '../geom/aabb/aabb2d';
 
 export class CanvasManager {
@@ -14,7 +14,7 @@ export class CanvasManager {
     this.w = _w;
     this.h = _h;
     this.aspectRatio = SimplifyAspectRatio( _w, _h );
-    this.onChange = new Event();
+    this.onChange = new Dispatcher();
     this.mode = _mode;
     this.stage = null;
     this.culler = null;

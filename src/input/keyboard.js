@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 
 export class Keyboard {
 
@@ -28,8 +28,8 @@ export class Keyboard {
     this.element.addEventListener( 'keydown', this.___bound___OnKeyDown );
     this.element.addEventListener( 'keyup', this.___bound___OnKeyUp );
 
-    this.onDown = new Event();
-    this.onUp = new Event();
+    this.onDown = new Dispatcher();
+    this.onUp = new Dispatcher();
 
   }
 

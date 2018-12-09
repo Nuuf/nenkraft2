@@ -3,7 +3,7 @@
  */
 
 import { Cache } from '../utility/cache';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { XHRLoader } from './xhr-loader';
 import { ImageLoader } from './image-loader';
 import { Tileset } from '../texture/tileset';
@@ -15,8 +15,8 @@ export class TilesetLoader {
     this.tilesetCache = new Cache( Tileset );
     this.xhrLoader = new XHRLoader();
     this.imageLoader = new ImageLoader();
-    this.onComplete = new Event();
-    this.onTilesetLoaded = new Event();
+    this.onComplete = new Dispatcher();
+    this.onTilesetLoaded = new Dispatcher();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;

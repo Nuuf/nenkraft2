@@ -3,7 +3,7 @@
  */
 
 import { Vector2D } from '../math/vector/vector2d';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 
 export class Mouse {
 
@@ -28,11 +28,11 @@ export class Mouse {
     this.element.addEventListener( 'mouseleave', this.___bound___OnLeave );
     this.element.addEventListener( 'wheel', this.___bound___OnWheel, { passive: true } );
 
-    this.onMove = new Event();
-    this.onDown = new Event();
-    this.onUp = new Event();
-    this.onLeave = new Event();
-    this.onWheel = new Event();
+    this.onMove = new Dispatcher();
+    this.onDown = new Dispatcher();
+    this.onUp = new Dispatcher();
+    this.onLeave = new Dispatcher();
+    this.onWheel = new Dispatcher();
   
   }
 

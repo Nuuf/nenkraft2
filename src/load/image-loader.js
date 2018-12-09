@@ -3,7 +3,7 @@
  */
 
 import { Cache } from '../utility/cache';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { BasicTexture2D } from '../texture/basic-texture2d';
 
 export class ImageLoader {
@@ -12,9 +12,9 @@ export class ImageLoader {
 
     this.imageCache = new Cache( Image );
     this.basicTextureCache = new Cache( BasicTexture2D );
-    this.onImageLoaded = new Event();
-    this.onComplete = new Event();
-    this.onError = new Event();
+    this.onImageLoaded = new Dispatcher();
+    this.onComplete = new Dispatcher();
+    this.onError = new Dispatcher();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;

@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 
 export class LoaderCombiner {
 
@@ -10,7 +10,7 @@ export class LoaderCombiner {
 
     this.loaders = _loaders;
     this.count = 0;
-    this.onComplete = new Event();
+    this.onComplete = new Dispatcher();
   
   }
 

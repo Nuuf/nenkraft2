@@ -3,7 +3,7 @@
  */
 
 import { Cache } from '../utility/cache';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { XMLToJSON } from '../utility/browser-utility';
 import { DeepClone } from '../utility';
 
@@ -13,10 +13,10 @@ export class XHRLoader {
 
     this.XHRcache = new Cache( XMLHttpRequest );
     this.dataCache = new Cache();
-    this.onXHRLoaded = new Event();
-    this.onComplete = new Event();
-    this.onNetworkError = new Event();
-    this.onLoadError = new Event();
+    this.onXHRLoaded = new Dispatcher();
+    this.onComplete = new Dispatcher();
+    this.onNetworkError = new Dispatcher();
+    this.onLoadError = new Dispatcher();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;

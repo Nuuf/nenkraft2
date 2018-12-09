@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { Frame } from './frame';
 
 export class Animation {
@@ -13,9 +13,9 @@ export class Animation {
     this.controller = _controller;
     this.sprite = _controller.sprite;
     this.id = _id;
-    this.onEnd = new Event();
-    this.onStop = new Event();
-    this.onStart = new Event();
+    this.onEnd = new Dispatcher();
+    this.onStop = new Dispatcher();
+    this.onStart = new Dispatcher();
     this.currentFrame = 0;
     this.currentFrameIndex = 0;
     this.playing = false;

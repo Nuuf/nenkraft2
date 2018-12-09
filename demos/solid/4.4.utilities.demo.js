@@ -179,6 +179,18 @@ export default () => {
     
     }
 
+    // Event
+
+    const event = new nk2.Event.Dispatcher();
+
+    event.Once( ( event ) => {
+
+      console.log( event.target, event.data );
+    
+    } );
+
+    event.Dispatch( 'istarget', { myEventData: 'something' } );
+
   } );
 
 };

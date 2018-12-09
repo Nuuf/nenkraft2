@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 
 const Round = Math.round;
 
@@ -15,12 +15,12 @@ export class Timer {
     this.isRunning = false;
     this.canResume = false;
     this.count = 0;
-    this.onStop = new Event();
-    this.onFinish = new Event();
-    this.onStart = new Event();
-    this.onReset = new Event();
-    this.onPause = new Event();
-    this.onResume = new Event();
+    this.onStop = new Dispatcher();
+    this.onFinish = new Dispatcher();
+    this.onStart = new Dispatcher();
+    this.onReset = new Dispatcher();
+    this.onPause = new Dispatcher();
+    this.onResume = new Dispatcher();
   
   }
 

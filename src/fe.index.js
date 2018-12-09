@@ -20,6 +20,7 @@ import * as Animator from './animator';
 import * as Debug from './debug';
 import * as Packing from './math/packing';
 import * as Input from './input';
+import * as Event from './event';
 
 export { Math };
 export { Assert } from './utility/assert';
@@ -75,3 +76,4 @@ export { Texture };
 export { Animator };
 export { Debug };
 export { Input };
+export { Event };

@@ -9,6 +9,7 @@ import * as Time from './time/time.be';
 import * as CP from './cp';
 import * as Motion from './motion';
 import * as Packing from './math/packing';
+import * as Event from './event';
 
 export { Math };
 export { Assert } from './utility/assert';
@@ -36,3 +37,4 @@ export { Container2D } from './entity/container2d';
 export { Culler2D } from './entity/culler/culler2d';
 export { CP };
 export { Motion };
+export { Event };

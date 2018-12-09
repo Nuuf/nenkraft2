@@ -3,7 +3,7 @@
  */
 
 import { Cache } from '../utility/cache';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 import { XHRLoader } from './xhr-loader';
 import { ImageLoader } from './image-loader';
 import { Spritesheet } from '../texture/spritesheet';
@@ -15,8 +15,8 @@ export class SpritesheetLoader {
     this.spritesheetCache = new Cache( Spritesheet );
     this.xhrLoader = new XHRLoader();
     this.imageLoader = new ImageLoader();
-    this.onComplete = new Event();
-    this.onSpritesheetLoaded = new Event();
+    this.onComplete = new Dispatcher();
+    this.onSpritesheetLoaded = new Dispatcher();
     this.count = 0;
     this.loading = false;
     this.toLoad = null;

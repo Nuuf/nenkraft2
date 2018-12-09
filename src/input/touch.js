@@ -3,7 +3,7 @@
  */
 
 import { Vector2D } from '../math/vector/vector2d';
-import { Event } from '../event/event';
+import { Dispatcher } from '../event/dispatcher';
 
 export class Touch {
 
@@ -26,10 +26,10 @@ export class Touch {
     this.element.addEventListener( 'touchend', this.___bound___OnEnd );
     this.element.addEventListener( 'touchcancel', this.___bound___OnCancel );
 
-    this.onMove = new Event();
-    this.onStart = new Event();
-    this.onEnd = new Event();
-    this.onCancel = new Event();
+    this.onMove = new Dispatcher();
+    this.onStart = new Dispatcher();
+    this.onEnd = new Dispatcher();
+    this.onCancel = new Dispatcher();
 
   }
 
