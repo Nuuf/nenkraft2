@@ -56,7 +56,7 @@ export class Body2D {
 
   SetPosition ( _x, _y ) {
 
-    this.shape.SetPosition( _x, _y ).AddV( this.offset );
+    this.shape.SetPosition( _x + this.offset.x, _y + this.offset.y );
 
   }
 
