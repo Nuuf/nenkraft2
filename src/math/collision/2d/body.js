@@ -12,12 +12,21 @@ export class Body2D {
     this.mass = 0;
     this.relative = null;
     this.velocity = new Vector2D( 0, 0 );
+    this.offset = new Vector2D( 0, 0 );
 
   }
 
   SetMass ( _n ) {
 
     this.mass = _n;
+
+    return this;
+  
+  }
+
+  SetOffset ( _x, _y ) {
+
+    this.offset.Set( _x, _y );
 
     return this;
   
@@ -47,13 +56,13 @@ export class Body2D {
 
   SetPosition ( _x, _y ) {
 
-    this.shape.SetPosition( _x, _y );
+    this.shape.SetPosition( _x, _y ).AddV( this.offset );
 
   }
 
   SetPositionV ( _v ) {
 
-    this.shape.SetPosition( _v.x, _v.y );
+    this.SetPosition( _v.x, _v.y );
 
     return this;
   
