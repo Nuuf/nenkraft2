@@ -104,6 +104,8 @@ export class Color {
     this.channel[ 2 ] = Clamp( _b, PS_MIN_VAL, PS_MAX_VAL );
     this.currentConversion = 'rgb';
     if ( !_noCompute ) this.ComputeValueRGBA();
+
+    return this;
   
   }
 
@@ -112,6 +114,8 @@ export class Color {
     this.SetRGB( _r, _g, _b, true );
     this.channel[ 3 ] = Clamp( _a, 0, 1 );
     this.ComputeValueRGBA();
+
+    return this;
   
   }
 
@@ -123,6 +127,8 @@ export class Color {
     strs = strs.map( Base16ToBase10 );
     if ( strs[ 3 ] == null ) strs[ 3 ] = 1;
     this.SetRGBA( strs[ 0 ], strs[ 1 ], strs[ 2 ], strs[ 3 ] );
+
+    return this;
   
   }
 
@@ -132,6 +138,8 @@ export class Color {
     if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
 
+    return this;
+
   }
 
   SetChannel ( _channel, _value ) {
@@ -139,7 +147,22 @@ export class Color {
     this.channel[ _channel ] = _value;
     if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+
+    return this;
   
+  }
+
+  SetSame ( _value ) {
+
+    this.channel[ 0 ] = 
+    this.channel[ 1 ] = 
+    this.channel[ 2 ] = _value;
+
+    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+
+    return this;
+
   }
 
   Normalize () {

@@ -22,28 +22,21 @@ export default () => {
     const options = {
       canvas: c,
       halt: false,
-      mode: 'webgl2'
+      mode: '2d'
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
     const scene = new nk2.VisualContainer2D( HW, HH );
-    const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
-    const cpc = new nk2.Controller.ProgramController.GLCircleProgramController( stage.gl );
-    const lpc = new nk2.Controller.ProgramController.GLLine2DProgramController( stage.gl );
-
-    tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
-
-    const sprite = new nk2.Sprite( 0, 0, tpc );
     const circle = new nk2.Graphic2D( -100, -100, new nk2.Path.Circle( 0, 0, 50 ) );
     const line = new nk2.Graphic2D( 100, 100, new nk2.Path.Line2D( -100, 0, 100, 0 ) );
-
-    circle.path.LinkProgramController( cpc );
-    line.path.LinkProgramController( lpc );
-
+    const polygon = new nk2.Graphic2D( -100, 100, new nk2.Path.Polygon2D() );
+    const rect = new nk2.Graphic2D( 0, 0, new nk2.Path.AABB2D( 0, 0, 100, 100 ) );
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
+
+    nk2.Geom.PolygonConstruction.Cyclic2D( polygon.path, 0, 0, 50, 5 );
 
     line.path.Rotate( 23 / 180 * Math.PI );
 
@@ -52,7 +45,7 @@ export default () => {
     stage
       .AddChild( root )
       .AddChild( camera )
-      .AddChild( scene ).AddChildren( sprite, circle, line );
+      .AddChild( scene ).AddChildren( circle, line, rect, polygon );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
 

@@ -30,7 +30,7 @@ export default () => {
     const ptimer = new nk2.Time.Timer( 10 );
     const positions = new nk2.Geom.Polygon2D();
 
-    nk2.Geom.PolygonConstruction.Cyclic( positions, 0, 0, 400, 72 );
+    nk2.Geom.PolygonConstruction.Cyclic2D( positions, 0, 0, 400, 72 );
 
     const velocities = positions.Copy();
 

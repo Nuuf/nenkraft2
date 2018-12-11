@@ -265,7 +265,7 @@ export class Polygon2D {
   
   }
 
-  GetNormalsA () {
+  ComputeNormalsA () {
 
     const vertices = this.vertices;
     const l = vertices.length - 1;
@@ -281,11 +281,11 @@ export class Polygon2D {
 
     normals.push( vertices[ l ].GetNormalAV( vertices[ 0 ] ) );
 
-    return normals;
+    return this;
   
   }
   
-  GetNormalsA () {
+  ComputeNormalsB () {
 
     const vertices = this.vertices;
     const l = vertices.length - 1;
@@ -301,11 +301,11 @@ export class Polygon2D {
 
     normals.push( vertices[ l ].GetNormalBV( vertices[ 0 ] ) );
 
-    return normals;
+    return this;
   
   }
 
-  GetPerimeterMidPoints () {
+  ComputePerimeterMidPoints () {
 
     const vertices = this.vertices;
     const l = vertices.length - 1;
@@ -321,7 +321,7 @@ export class Polygon2D {
 
     perimeterMidPoints.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
 
-    return perimeterMidPoints;
+    return this;
   
   }
 

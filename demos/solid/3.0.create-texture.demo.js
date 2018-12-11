@@ -21,7 +21,7 @@ export default () => {
 
       const path = new nk2.Path.Polygon2D();
 
-      nk2.Geom.PolygonConstruction.Supershape( path, 0, 0, 100, 100, 6, 0.3, 0.3, 0.3 );
+      nk2.Geom.PolygonConstruction.Supershape2D( path, 0, 0, 100, 100, 6, 0.3, 0.3, 0.3 );
 
       return new nk2.Graphic2D( 
         Math.abs( path.aabb.tl.x ), Math.abs( path.aabb.tl.y ), path

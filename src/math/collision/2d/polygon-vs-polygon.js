@@ -31,14 +31,10 @@ export class Result {
 export const Collide = function ( _a, _b, _result ) {
 
   let i = 0;
-  const p1 = _a.shape;
-  const p2 = _a.shape;
-  const p1Normals = p1.normals;
-  const p2Normals = p2.normals;
-  const p1l = p1Normals.length;
-  const p2l = p2Normals.length;
+  const p1Normals = _a.shape.normals;
+  const p2Normals = _b.shape.normals;
 
-  for ( i; i < p1l; ++i ) {
+  for ( i; i < p2Normals.length; ++i ) {
 
     if ( AxisSeparates( _a, _b, p1Normals[ i ], _result ) === true ) {
 
@@ -48,7 +44,7 @@ export const Collide = function ( _a, _b, _result ) {
     
   }
 
-  for ( i = 0; i < p2l; ++i ) {
+  for ( i = 0; i < p2Normals.length; ++i ) {
 
     if ( AxisSeparates( _a, _b, p2Normals[ i ], _result ) === true ) {
 
@@ -58,13 +54,9 @@ export const Collide = function ( _a, _b, _result ) {
     
   }
 
-  if ( _result != null ) {
-
-    _result.mtv.SetV( _result.olAxis );
-    _result.mtv.Multiply( _result.mtd, _result.mtd );
-    _result.occured = true;
-    
-  }
+  _result.mtv.SetV( _result.olAxis );
+  _result.mtv.Multiply( _result.mtd, _result.mtd );
+  _result.occured = true;
 
   return true;
 
@@ -75,7 +67,7 @@ export const AxisSeparates = function ( _a, _b, _axis, _result ) {
   const d1 = _axis.GetMinMaxDot( _a.shape.vertices );
   const d2 = _axis.GetMinMaxDot( _b.shape.vertices );
   const offset = _b.relative.SubtractVC( _a.relative ).GetDotV( _axis );
-  
+
   d2.Add( offset, offset );
 
   if ( d1.x > d2.y || d2.x > d1.y ) {
@@ -84,42 +76,19 @@ export const AxisSeparates = function ( _a, _b, _axis, _result ) {
     
   }
 
-  if ( _result != null ) {
+  let mtd = 0;
+  let o1 = 0;
+  let o2 = 0;
+  const d1x = d1.x;
+  const d1y = d1.y;
+  const d2x = d2.x;
+  const d2y = d2.y;
 
-    let mtd = 0;
-    let o1 = 0;
-    let o2 = 0;
-    const d1x = d1.x;
-    const d1y = d1.y;
-    const d2x = d2.x;
-    const d2y = d2.y;
+  if ( d1x < d2x ) {
 
-    if ( d1x < d2x ) {
+    if ( d1y < d2y ) {
 
-      if ( d1y < d2y ) {
-
-        mtd = d1y - d2x;
-        
-      } else {
-
-        o1 = d1y - d2x;
-        o2 = d2y - d1x;
-
-        if ( o1 < o2 ) {
-
-          mtd = o1;
-          
-        } else {
-
-          mtd = -o2;
-          
-        }
-        
-      }
-      
-    } else if ( d1y > d2y ) {
-
-      mtd = d1x - d2y;
+      mtd = d1y - d2x;
         
     } else {
 
@@ -137,22 +106,41 @@ export const AxisSeparates = function ( _a, _b, _axis, _result ) {
       }
         
     }
-
-    const absMtd = Abs( mtd );
-
-    if ( absMtd < _result.mtd ) {
-
-      _result.mtd = absMtd;
-      _result.olAxis.SetV( _axis );
-
-      if ( mtd < 0 ) {
-
-        _result.olAxis.Invert();
-        
-      }
       
+  } else if ( d1y > d2y ) {
+
+    mtd = d1x - d2y;
+        
+  } else {
+
+    o1 = d1y - d2x;
+    o2 = d2y - d1x;
+
+    if ( o1 < o2 ) {
+
+      mtd = o1;
+          
+    } else {
+
+      mtd = -o2;
+          
     }
-    
+        
+  }
+
+  const absMtd = Abs( mtd );
+
+  if ( absMtd < _result.mtd ) {
+
+    _result.mtd = absMtd;
+    _result.olAxis.SetV( _axis );
+
+    if ( mtd < 0 ) {
+
+      _result.olAxis.Invert();
+        
+    }
+      
   }
 
   return false;

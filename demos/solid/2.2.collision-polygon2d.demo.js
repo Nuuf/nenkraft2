@@ -34,7 +34,7 @@ export default () => {
       .AddChild( scene );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
-
+    
     canvasManager
       .BindStage( stage )
       .BindRootContainer( root )
@@ -45,16 +45,18 @@ export default () => {
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
-    const a = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
-    const b = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
+    const a = new nk2.Collision.Body2D( new nk2.Path.Polygon2D() );
+    const b = new nk2.Collision.Body2D( new nk2.Path.Polygon2D() );
 
-    nk2.Geom.PolygonConstruction.Cyclic( a.shape, 0, 0, nk2.Utility.RandomInteger( 30, 60 ), nk2.Utility.RandomInteger( 3, 6 ) );
-    nk2.Geom.PolygonConstruction.Cyclic( b.shape, 0, 0, nk2.Utility.RandomInteger( 30, 60 ), nk2.Utility.RandomInteger( 3, 6 ) );
-    const g1 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetC( a.shape ) );
-    const g2 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetC( b.shape ) );
+    nk2.Geom.PolygonConstruction.Cyclic2D( a.shape, 0, 0, 60, 6 );
+    nk2.Geom.PolygonConstruction.Cyclic2D( b.shape, 0, 0, 60, 4 );
+
+    const g1 = new nk2.Graphic2D( 0, 0, a.shape );
+    const g2 = new nk2.Graphic2D( 0, 0, b.shape );
 
     a.SetRelative( g1.position );
     b.SetRelative( g2.position );
+
     const COLLIDE = nk2.Collision.Polygon2DvsPolygon2D.Collide;
     const result = new nk2.Collision.Polygon2DvsPolygon2D.Result();
 
@@ -63,6 +65,19 @@ export default () => {
     stage.onProcess.Add( () => {
 
       camera.Process();
+      
+      // a.shape.Rotate( nk2.Math.RADIAN );
+
+      result.Reset();
+
+      COLLIDE( a, b, result );
+
+      if ( result.occured ) {
+        
+        a.relative.SubtractV( result.mtv );
+        b.relative.AddV( result.mtv );
+        
+      }
     
     } );
 
@@ -103,19 +118,6 @@ export default () => {
         const p = event.data.position;
 
         dragger.position.SetV( p ).AddV( dragOffset ).SubtractV( dragStart );
-
-        result.Reset();
-
-        COLLIDE( a, b, result );
-
-        if ( result.occured ) {
-
-          // result.mtv.Multiply( 0.5, 0.5 );
-
-          g1.position.SubtractV( result.mtv );
-          // b.relative.AddV( result.mtv );
-        
-        }
       
       }
     

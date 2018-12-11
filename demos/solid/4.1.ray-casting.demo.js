@@ -51,7 +51,7 @@ export default () => {
 
         const p = new nk2.Path.Polygon2D();
 
-        nk2.Geom.PolygonConstruction.Cyclic(
+        nk2.Geom.PolygonConstruction.Cyclic2D(
           p,
           nk2.Utility.RandomInteger( -W, W ),
           nk2.Utility.RandomInteger( -H, H ),

@@ -13,7 +13,7 @@ const Abs = Math.abs;
 const Pow = Math.pow;
 const Exp = Math.exp;
 
-export const Rectangular = function ( _polygon, _x, _y, _w, _h ) {
+export const Rectangular2D = function ( _polygon, _x, _y, _w, _h ) {
 
   const tl = new Vector2D( _x, _y );
   const tr = new Vector2D( _x + _w, _y );
@@ -22,13 +22,13 @@ export const Rectangular = function ( _polygon, _x, _y, _w, _h ) {
 
   _polygon.Recreate( [ tl, tr, br, bl ] );
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Isosceles = function ( _polygon, _x, _y, _w, _h ) {
+export const Isosceles2D = function ( _polygon, _x, _y, _w, _h ) {
 
   const tm = new Vector2D( _x, _y );
   const br = new Vector2D( _x + _w * 0.5, _y + _h );
@@ -36,13 +36,13 @@ export const Isosceles = function ( _polygon, _x, _y, _w, _h ) {
 
   _polygon.Recreate( [ tm, br, bl ] );
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Cyclic = function ( _polygon, _x, _y, _radius, _accuracy ) {
+export const Cyclic2D = function ( _polygon, _x, _y, _radius, _accuracy ) {
 
   let i = 0;
   let x;
@@ -63,13 +63,13 @@ export const Cyclic = function ( _polygon, _x, _y, _radius, _accuracy ) {
   }
 
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Equilateral = function ( _polygon, _x, _y, _side ) {
+export const Equilateral2D = function ( _polygon, _x, _y, _side ) {
 
   let x;
   let y;
@@ -87,13 +87,13 @@ export const Equilateral = function ( _polygon, _x, _y, _side ) {
   _polygon.AddVertex( new Vector2D( _x + x, _y + y ) );
   _polygon.Rotate( new Math.RADIAN * -90 );
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Star = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _corners ) {
+export const Star2D = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _corners ) {
 
   let i = 0;
   let x;
@@ -116,19 +116,19 @@ export const Star = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _co
   }
 
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Butterfly = function ( _polygon, _x, _y, _n, _radius ) {
+export const Butterfly2D = function ( _polygon, _x, _y, _n, _radius ) {
 
   let i = 0;
   let x;
   let y;
   let u;
-  const c = Butterfly.C;
+  const c = Butterfly2D.C;
 
   _polygon.Recreate( [] );
 
@@ -142,13 +142,13 @@ export const Butterfly = function ( _polygon, _x, _y, _n, _radius ) {
   }
 
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-Butterfly.C = {
+Butterfly2D.C = {
   _1: 24,
   _2: 2,
   _3: 4,
@@ -156,7 +156,7 @@ Butterfly.C = {
   _5: 5
 };
 
-export const Rose = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loops ) {
+export const Rose2D = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loops ) {
 
   let i = 0;
   let x;
@@ -179,13 +179,13 @@ export const Rose = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loops 
   }
 
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _n1, _n2, _n3 ) {
+export const Supershape2D = function ( _polygon, _x, _y, _radius, _accuracy, _m, _n1, _n2, _n3 ) {
 
   let i = 0;
   let x;
@@ -195,7 +195,7 @@ export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _
   let t1;
   let t2;
   const l = _accuracy;
-  const c = Supershape.C;
+  const c = Supershape2D.C;
 
   _n1 = _n1 == null ? 1 : _n1;
   _n2 = _n2 == null ? 1 : _n2;
@@ -236,13 +236,13 @@ export const Supershape = function ( _polygon, _x, _y, _radius, _accuracy, _m, _
   }
 
   _polygon.ComputeBounds();
-  _polygon.GetNormalsA();
+  _polygon.ComputeNormalsA();
 
   return _polygon;
 
 };
 
-Supershape.C = {
+Supershape2D.C = {
   _A: 1,
   _B: 1
 };
