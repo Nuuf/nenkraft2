@@ -30,11 +30,6 @@ uniform sampler2D uImage;
 varying vec2 vTexCoord;
 
 void main() {
-    vec4 color = TEX( uImage, vTexCoord );
-    gl_FragColor = vec4( vec3(
-      1.0 - color.r,
-      1.0 - color.g,
-      1.0 - color.b
-    ), color.a );
+    gl_FragColor =  TEX( uImage, vTexCoord );
 }
 @fragment-end@

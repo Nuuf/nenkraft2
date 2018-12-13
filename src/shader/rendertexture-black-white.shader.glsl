@@ -3,7 +3,7 @@
 */
 
 @vertex@
-precision mediump float;
+precision highp float;
 
 attribute vec2 aPosition;
 attribute vec2 aTexCoord;
@@ -23,14 +23,14 @@ void main() {
 #define TEX texture
 #endif
 
-precision mediump float;
+precision highp float;
 
 uniform sampler2D uImage;
 
 varying vec2 vTexCoord;
 
 void main() {
-  vec4 color = TEX( uImage, vTexCoord );
-  gl_FragColor = vec4( vec3( step( 1.0, color.r + color.g + color.b / 3.0 ) ), color.a );
+    vec4 color = TEX( uImage, vTexCoord );
+    gl_FragColor = vec4( vec3( step( 1.0, color.r + color.g + color.b / 3.0 ) ), color.a );
 }
 @fragment-end@

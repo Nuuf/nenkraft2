@@ -15,6 +15,7 @@ import RendertextureBlackWhite from './rendertexture-black-white.shader.glsl';
 import RendertextureGrayscale from './rendertexture-grayscale.shader.glsl';
 import RendertextureSepia from './rendertexture-sepia.shader.glsl';
 import RendertextureInvert from './rendertexture-invert.shader.glsl';
+import RendertextureDefault from './rendertexture-default.shader.glsl';
 
 export const Uglify = function ( _data ) {
 
@@ -182,13 +183,14 @@ export const RENDERTEXTURE_BLACK_WHITE = Parse( RendertextureBlackWhite );
 export const RENDERTEXTURE_GRAYSCALE = Parse( RendertextureGrayscale );
 export const RENDERTEXTURE_SEPIA = Parse( RendertextureSepia );
 export const RENDERTEXTURE_INVERT = Parse( RendertextureInvert );
+export const RENDERTEXTURE_DEFAULT = Parse( RendertextureDefault );
 
 export const DynamicTEXTURE_2D = function ( _num ) {
 
   const vertex = [];
 
   vertex.push( 
-    'precision mediump float;'
+    'precision highp float;'
   );
 
   let i;

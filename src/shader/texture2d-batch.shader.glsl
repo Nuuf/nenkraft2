@@ -3,7 +3,7 @@
 */
 
 @vertex@
-precision mediump float;
+precision highp float;
 
 attribute vec2 aPosition;
 attribute vec2 aTexCoord;
@@ -23,11 +23,11 @@ attribute vec3 aTransformation3;
 varying vec2 vTexCoord;
 
 void main() {
-  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );
-  mat3 translation = mat3( aTranslation1, aTranslation2, aTranslation3 );
-  mat3 transformation = mat3( aTransformation1, aTransformation2, aTransformation3 );
-  gl_Position = vec4( ( projection * translation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );
-  vTexCoord = ( transformation * vec3( aTexCoord, 1.0 ) ).xy;
+    mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );
+    mat3 translation = mat3( aTranslation1, aTranslation2, aTranslation3 );
+    mat3 transformation = mat3( aTransformation1, aTransformation2, aTransformation3 );
+    gl_Position = vec4( ( projection * translation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );
+    vTexCoord = ( transformation * vec3( aTexCoord, 1.0 ) ).xy;
 }
 @vertex-end@
 
@@ -38,13 +38,13 @@ void main() {
 #define TEX texture
 #endif
 
-precision mediump float;
+precision highp float;
 
 uniform sampler2D uImage;
 
 varying vec2 vTexCoord;
 
 void main() {
-  gl_FragColor = TEX( uImage, vTexCoord );
+    gl_FragColor = TEX( uImage, vTexCoord );
 }
 @fragment-end@

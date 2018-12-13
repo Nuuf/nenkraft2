@@ -3,7 +3,7 @@
 */
 
 @vertex@
-precision mediump float;
+precision highp float;
 
 attribute vec3 aProjection1;
 attribute vec3 aProjection2;
@@ -15,19 +15,19 @@ attribute float aPointSize;
 varying vec4 vColor;
 
 void main() {
-  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );
-  gl_Position = vec4( ( projection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );
-  gl_PointSize = aPointSize;
-  vColor = aColor;
+    mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );
+    gl_Position = vec4( ( projection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );
+    gl_PointSize = aPointSize;
+    vColor = aColor;
 }
 @vertex-end@
 
 @fragment@
-precision mediump float;
+precision highp float;
 
 varying vec4 vColor;
 
 void main() {
-  gl_FragColor = vColor;
+    gl_FragColor = vColor;
 }
 @fragment-end@
