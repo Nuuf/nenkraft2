@@ -4,6 +4,7 @@
 
 import { CoreEntity2D } from './core-entity2d';
 import { Matrix2D } from '../math/matrix/matrix2d';
+import { Pool } from '../utility/pool';
 
 export class Char extends CoreEntity2D {
 
@@ -11,18 +12,30 @@ export class Char extends CoreEntity2D {
 
     super( _x, _y );
 
-    this.id = parseInt( _data.id );
-    this.cx = parseInt( _data.x );
-    this.cy = parseInt( _data.y );
-    this.w = parseInt( _data.width );
-    this.h = parseInt( _data.height );
-    this.xoffset = parseInt( _data.xoffset );
-    this.yoffset = parseInt( _data.yoffset );
-    this.xadvance = parseInt( _data.xadvance );
+    this.id = 
+    this.cx = 
+    this.cy = 
+    this.w = 
+    this.h = 
+    this.xoffset = 
+    this.yoffset = 
+    this.xadvance = 
     this.yadvance = 0;
     this.kernings = [];
     this.translation = new Matrix2D();
     this.transformation = new Matrix2D();
+
+    if ( _data != null ) {
+
+      this.SetData( _data );
+    
+    }
+  
+  }
+
+  static get pool () {
+
+    return PS_POOL;
   
   }
 
@@ -35,6 +48,21 @@ export class Char extends CoreEntity2D {
       this.position.x, this.position.y,
       this.width, this.height
     );
+  
+  }
+
+  SetData ( _data ) {
+
+    this.id = parseInt( _data.id );
+    this.cx = parseInt( _data.x );
+    this.cy = parseInt( _data.y );
+    this.w = parseInt( _data.width );
+    this.h = parseInt( _data.height );
+    this.xoffset = parseInt( _data.xoffset );
+    this.yoffset = parseInt( _data.yoffset );
+    this.xadvance = parseInt( _data.xadvance );
+
+    return this;
   
   }
 
@@ -82,6 +110,8 @@ export class Char extends CoreEntity2D {
       }
       
     }
+
+    return this;
   
   }
 
@@ -115,6 +145,8 @@ export class Char extends CoreEntity2D {
       
     this.position.Add( this.xoffset, this.yoffset );
 
+    return this;
+
   }
 
   UpdateMatrices () {
@@ -134,7 +166,35 @@ export class Char extends CoreEntity2D {
       );
       
     }
+
+    return this;
+  
+  }
+
+  Store () {
+
+    PS_POOL.Store( this );
+
+    return this;
   
   }
 
 }
+
+// Private Static ----->
+const PS_POOL = new Pool();
+
+PS_POOL.Retrieve = function ( _data ) {
+
+  this.PreRetrieve();
+
+  return this.objects.pop().SetData( _data );
+
+};
+
+PS_POOL.Flood( () => {
+
+  return new Char( 0, 0 );
+
+}, 200 );
+// <----- Private Static

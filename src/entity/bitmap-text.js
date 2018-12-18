@@ -145,7 +145,12 @@ export class BitmapText extends TextureEntity2D {
     const text = this.text;
 
     this.UpdateTransform( this.parent );
-    chars.length = 0;
+
+    if ( chars.length !== 0 ) {
+
+      this.StoreAllChars();
+    
+    }
 
     if ( this.fontData.font.kernings ) {
 
@@ -167,7 +172,7 @@ export class BitmapText extends TextureEntity2D {
       
       }
 
-      char = new Char( 0, 0, this.GetCharDataById( charCode ) );
+      char = Char.pool.Retrieve( this.GetCharDataById( charCode ) );
       if ( kernings != null ) char.ApplyKernings( kernings );
       char.Crunch( prevChar );
 
@@ -222,6 +227,22 @@ export class BitmapText extends TextureEntity2D {
       }
       
     }
+  
+  }
+
+  StoreAllChars () {
+
+    const chars = this.chars;
+
+    for ( var i = 0; i < chars.length; ++i ) {
+
+      chars[ i ].Store();
+
+    }
+
+    chars.length = 0;
+
+    return this;
   
   }
 
