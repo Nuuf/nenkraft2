@@ -30,6 +30,7 @@ export { FlagEnum } from './utility/flag-enum';
 export { Cache } from './utility/cache';
 export { Glob } from './utility/glob';
 export { Maker } from './utility/maker';
+export { ArrayHandler } from './utility/array-handler';
 export { Color } from './utility/color';
 export { Utility };
 export { Cipher };

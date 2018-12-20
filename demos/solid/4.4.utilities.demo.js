@@ -191,6 +191,29 @@ export default () => {
 
     event.Dispatch( 'istarget', { myEventData: 'something' } );
 
+    // ArrayHandler
+
+    const a1 = [];
+    const a2 = [];
+
+    nk2.ArrayHandler
+      .Add( 'a1', a1 )
+      .Add( 'a2', a2 );
+
+    const o1 = {};
+
+    o1.arrayHandler = new nk2.ArrayHandler( o1 );
+
+    console.log( o1 );
+
+    o1.arrayHandler.In( 'a1' ).In( 'a2' );
+
+    console.log( a1, a2 );
+
+    o1.arrayHandler.Out( 'a1' ).In( 'a1' ).OutAll();
+
+    console.log( a1, a2 );
+
   } );
 
 };

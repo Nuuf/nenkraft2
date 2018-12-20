@@ -5,6 +5,7 @@
 import { Transform2D } from '../math/transform/transform2d';
 import { Vector2D } from '../math/vector/vector2d';
 import { Bounds2D } from '../math/bounds/bounds2d';
+import { ArrayHandler } from '../utility/array-handler';
 
 const Abs = Math.abs;
 
@@ -23,6 +24,7 @@ export class CoreEntity2D {
     this.render = true;
     // Reserved
     this.motionManager = null;
+    this.arrayHandler = null;
     this.__inside__ = null;
 
   }
@@ -134,6 +136,8 @@ export class CoreEntity2D {
   RequestTransformUpdate () {
 
     this.transformShouldUpdate = true;
+
+    return this;
   
   }
 
@@ -166,6 +170,30 @@ export class CoreEntity2D {
     const gt = this.transform.globalTransform;
 
     return this.bounds.ComputeGlobal( gt.e, gt.f, Abs( this.w * gt.a ), Abs( this.h * gt.d ), _anchor, this, _matrix );
+  
+  }
+
+  AHCreate () {
+
+    this.arrayHandler = new ArrayHandler( this );
+
+    return this;
+  
+  }
+
+  AHIn ( _id ) {
+
+    this.arrayHandler.In( _id );
+
+    return this;
+  
+  }
+
+  AHOut ( _id ) {
+
+    this.arrayHandler.Out( _id );
+
+    return this;
   
   }
 

@@ -18,6 +18,7 @@ export { FlagList } from './utility/flag-list';
 export { FlagEnum } from './utility/flag-enum';
 export { Cache } from './utility/cache';
 export { Glob } from './utility/glob';
+export { ArrayHandler } from './utility/array-handler';
 export { Maker } from './utility/maker';
 export { Utility };
 export { Cipher };
