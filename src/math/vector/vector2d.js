@@ -71,11 +71,7 @@ export class Vector2D {
 
   AbsoluteCopy () {
 
-    const vector = this.Copy();
-
-    vector.Positive();
-
-    return vector;
+    return this.Copy().Positive();
   
   }
 
@@ -114,9 +110,7 @@ export class Vector2D {
 
   AddVC ( _p ) {
 
-    const vector = this.Copy();
-
-    return vector.AddV( _p );
+    return this.Copy().AddV( _p );
   
   }
 
@@ -140,10 +134,8 @@ export class Vector2D {
 
   SubtractVC ( _p ) {
 
-    const vector = this.Copy();
+    return this.Copy().SubtractV( _p );
 
-    return vector.SubtractV( _p );
-  
   }
 
   SubtractV ( _p ) {
@@ -166,9 +158,7 @@ export class Vector2D {
 
   MultiplyVC ( _p ) {
 
-    const vector = this.Copy();
-    
-    return vector.MultiplyV( _p );
+    return this.Copy().MultiplyV( _p );
 
   }
 
@@ -192,9 +182,7 @@ export class Vector2D {
 
   DivideVC ( _p ) {
 
-    const vector = this.Copy();
-
-    return vector.DivideV( _p );
+    return this.Copy().DivideV( _p );
   
   }
 
