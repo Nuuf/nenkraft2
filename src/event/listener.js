@@ -7,7 +7,7 @@ export class Listener {
   constructor ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
 
     this.context = _listenerContext;
-    this.holderContext = _holderContext;
+    this.holderContext = _holderContext == null ? _listenerContext : _holderContext;
     this.handle = _handle;
     this.removeOnNextCall = _removeOnNextCall; 
   

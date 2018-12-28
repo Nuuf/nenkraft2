@@ -6,11 +6,17 @@ import { Dispatcher } from '../event/dispatcher';
 
 export class LoaderCombiner {
 
-  constructor ( _loaders ) {
+  constructor ( _loaders, _onComplete ) {
 
     this.loaders = _loaders;
     this.count = 0;
     this.onComplete = new Dispatcher();
+
+    if ( _onComplete != null ) {
+
+      this.onComplete.Once( _onComplete );
+    
+    }
   
   }
 
@@ -21,7 +27,7 @@ export class LoaderCombiner {
 
     for ( var i = 0; i < loaders.length; loader = loaders[ ++i ] ) {
 
-      loader.loader.onComplete.Add( this.OnLoaderComplete, this, true );
+      loader.loader.onComplete.Once( this.OnLoaderComplete, this );
       loader.loader.Load.apply( loader.loader, loader.args );
 
     }

@@ -12,7 +12,7 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
 
     const loaderCombiner = new nk2.Load.LoaderCombiner( [ 
       {
-        loader: new nk2.Load.ImageLoader(),
+        loader: new nk2.Load.ImageLoader( null, null, () => console.log( 'IMAGE Finished' ) ),
         args: [
           [
             { id: 'fontimg', src: './assets/images/font.png' },
@@ -28,7 +28,7 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
         ]
       },
       {
-        loader: new nk2.Load.XHRLoader(),
+        loader: new nk2.Load.XHRLoader( null, () => console.log( 'XHR Finished' ) ),
         args: [
           [
             { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
@@ -39,7 +39,7 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
         ]
       },
       {
-        loader: new nk2.Load.SpritesheetLoader(),
+        loader: new nk2.Load.SpritesheetLoader( null, () => console.log( 'Spritesheet Finished' ) ),
         args: [
           [
             {
@@ -56,7 +56,7 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
         ]
       },
       {
-        loader: new nk2.Load.TilesetLoader(),
+        loader: new nk2.Load.TilesetLoader( null, () => console.log( 'Tileset Finished' ) ),
         args: [
           [
             {
