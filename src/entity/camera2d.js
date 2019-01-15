@@ -18,6 +18,10 @@ export class Camera2D extends VisualContainer2D {
     this.target = _target;
     this.velocity = new Vector2D( 0, 0 );
     this.force = new Vector2D( 1, 1 );
+    this.maxX = null;
+    this.maxY = null;
+    this.minX = null;
+    this.minY = null;
     this.stopRadiusSq = 1000;
     this.EPSILON = 0.0002;
   
@@ -57,12 +61,70 @@ export class Camera2D extends VisualContainer2D {
       this.position.SubtractV( this.velocity );
     
     }
+
+    if ( this.maxX != null ) {
+
+      if ( this.x > this.maxX ) {
+
+        this.x = this.maxX;
+        
+      }
+      
+    }
+      
+    if ( this.minX != null ) {
+
+      if ( this.x < this.minX ) {
+
+        this.x = this.minX;
+        
+      }
+      
+    }
+
+    if ( this.maxY != null ) {
+
+      if ( this.y > this.maxY ) {
+
+        this.y = this.maxY;
+        
+      }
+      
+    }
+      
+    if ( this.minY != null ) {
+
+      if ( this.y < this.minY ) {
+
+        this.y = this.minY;
+        
+      }
+      
+    }
   
   }
 
   SetTarget ( _target ) {
 
     this.target = _target;
+
+    return this;
+  
+  }
+
+  SetMax ( _x, _y ) {
+
+    this.maxX = _x;
+    this.maxY = _y;
+
+    return this;
+  
+  }
+
+  SetMin ( _x, _y ) {
+
+    this.minX = _x;
+    this.minY = _y;
 
     return this;
   

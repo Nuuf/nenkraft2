@@ -15,9 +15,9 @@ export class Controller {
   
   }
 
-  CreateAnimation ( _id, _rate ) {
+  CreateAnimation ( _id, _frameDuration, _dynamicSize ) {
 
-    const animation = new Animation( this, _id, _rate );
+    const animation = new Animation( this, _id, _frameDuration, _dynamicSize );
 
     this.animations.push( animation );
 

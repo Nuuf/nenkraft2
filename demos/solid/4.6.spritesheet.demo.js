@@ -36,10 +36,10 @@ export default () => {
       spritesheet: window.testData.invadersSpritesheet,
       id: 'explode',
       frames: [
-        { id: 'Explo-f1', rate: 14 },
-        { id: 'Explo-f2', rate: 2 },
-        { id: 'Explo-f3', rate: 10 },
-        { id: 'Explo-f4', rate: 2 }
+        { id: 'Explo-f1', duration: 20 },
+        { id: 'Explo-f2', duration: 10 },
+        { id: 'Explo-f3', duration: 20 },
+        { id: 'Explo-f4', duration: 10 }
       ],
       loop: true,
       reverse: false

@@ -79,7 +79,7 @@ export class Sprite extends TextureEntity2D {
     }
   
     let i;
-    const animation = this.animationController.CreateAnimation( _data.id, _data.rate );
+    const animation = this.animationController.CreateAnimation( _data.id, _data.frameDuration, _data.dynamicSize );
   
     if ( _data.spritesheet != null ) {
 
@@ -88,14 +88,14 @@ export class Sprite extends TextureEntity2D {
       for ( i = 0; i < _data.frames.length; ++i ) {
 
         frame = _data.spritesheet.GetFrameById( _data.frames[ i ].id || _data.frames[ i ] );
-        
-        if ( _data.frames[ i ].rate != null ) {
-
-          frame.rate = _data.frames[ i ].rate;
-        
-        }
   
-        animation.CreateFrame( frame.x, frame.y, frame.w, frame.h, frame.rate );
+        animation.CreateFrame( 
+          frame.x, frame.y,
+          frame.w, frame.h,
+          _data.frames[ i ].duration,
+          frame.offsetX, frame.offsetY,
+          frame.originW, frame.originH
+        );
         
       }
       
@@ -110,7 +110,7 @@ export class Sprite extends TextureEntity2D {
     }
 
     animation.loop = !!_data.loop;
-    animation.overrideFrameRate = !!_data.overrideFrameRate;
+    animation.overrideFrameTimer = !!_data.overrideFrameTimer;
     animation.reverse = !!_data.reverse;
 
     return animation;

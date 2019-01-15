@@ -21,6 +21,8 @@ export class Spritesheet {
     let frame;
     let frameData;
     let frameTag;
+    let sSource;
+    let source;
     const data = this.data;
     const frames = data.frames;
     const frameTags = data.meta.frameTags;
@@ -29,15 +31,20 @@ export class Spritesheet {
 
       frame = frames[ i ];
       frameData = frame.frame;
+      sSource = frame.spriteSourceSize;
+      source = frame.sourceSize;
       frameTag = frameTags[ i ];
+
       this.frameCache.Store( new Frame(
         frameData.x,
         frameData.y,
         frameData.w,
         frameData.h,
         frame.duration,
-        frameTag ? frameTag.name : frames[ i ].filename
-      ) ); 
+        frameTag ? frameTag.name : frames[ i ].filename,
+        sSource.x, sSource.y,
+        source.w, source.h
+      ) );
     
     }
 

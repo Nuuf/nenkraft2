@@ -179,7 +179,7 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
-  ClipReconfigure ( _x, _y, _w, _h ) {
+  ClipReconfigure ( _x, _y, _w, _h, _offsetX, _offsetY, _originW, _originH ) {
 
     const tscaleX = _w / this.texture.fw;
     const tscaleY = _h / this.texture.fh;
@@ -198,8 +198,8 @@ export class TextureEntity2D extends BatchableContainer2D {
     }
     
     this.textureTranslation.SetTransform( 
-      -_w * this.anchor.x,
-      -_h * this.anchor.y,
+      ( -_originW * this.anchor.x ) + _offsetX,
+      ( -_originH * this.anchor.y ) + _offsetY,
       tscaleX, tscaleY
     );
     
@@ -214,7 +214,12 @@ export class TextureEntity2D extends BatchableContainer2D {
   SetTexture ( _texture ) {
 
     this.texture = _texture;
-    this.ClipReconfigure( 0, 0, _texture.w, _texture.h );
+    this.ClipReconfigure( 
+      0, 0,
+      _texture.w, _texture.h,
+      0, 0,
+      _texture.w, _texture.h
+    );
     this.shape.SetC( this.clip );
     this.originalShape.SetC( this.shape );
   

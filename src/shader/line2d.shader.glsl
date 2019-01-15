@@ -8,6 +8,7 @@ precision highp float;
 attribute vec2 aPosition;
 
 uniform mat3 uProjection;
+
 uniform lowp vec4 uColor;
 
 void main() {

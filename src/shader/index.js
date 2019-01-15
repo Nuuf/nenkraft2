@@ -16,6 +16,7 @@ import RendertextureGrayscale from './rendertexture-grayscale.shader.glsl';
 import RendertextureSepia from './rendertexture-sepia.shader.glsl';
 import RendertextureInvert from './rendertexture-invert.shader.glsl';
 import RendertextureDefault from './rendertexture-default.shader.glsl';
+import WaterTest from './water.test.shader.glsl';
 
 export const Uglify = function ( _data ) {
 
@@ -96,6 +97,8 @@ export const ParseImports = function ( _shader ) {
 };
 
 export const SNIPPETS = {
+  VERTEX_TEXTURE_DEFAULT: Uglify( require( './snippets/vertex/texture.default.snippet' ) ),
+  VERTEX_TEXTURE_TRANSFORM: Uglify( require( './snippets/vertex/texture.transform.snippet' ) ),
   PI: Uglify( require( './snippets/constants/pi.snippet' ) ),
   RADIAN: Uglify( require( './snippets/constants/radian.snippet' ) ),
   RSEEDS: Uglify( require( './snippets/constants/rseeds.snippet' ) ),
@@ -184,6 +187,7 @@ export const RENDERTEXTURE_GRAYSCALE = Parse( RendertextureGrayscale );
 export const RENDERTEXTURE_SEPIA = Parse( RendertextureSepia );
 export const RENDERTEXTURE_INVERT = Parse( RendertextureInvert );
 export const RENDERTEXTURE_DEFAULT = Parse( RendertextureDefault );
+export const WT = Parse( WaterTest );
 
 export const DynamicTEXTURE_2D = function ( _num ) {
 

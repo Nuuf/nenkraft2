@@ -16,11 +16,11 @@
 precision highp float;
 
 uniform sampler2D uImage;
-uniform vec4 uTint;
 
 varying vec2 vTexCoord;
 
 void main() {
-    gl_FragColor = TEX( uImage, vTexCoord ) * uTint;
+    vec4 color = TEX( uImage, vTexCoord );
+    gl_FragColor = color;
 }
 @fragment-end@

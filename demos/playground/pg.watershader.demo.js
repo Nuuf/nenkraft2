@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateDemo( 'Rendertexture', ( conf ) => {
+  CreateDemo( 'PGWATERSHADER', ( conf ) => {
 
     const W = 1920;
     const H = 1080;
@@ -26,26 +26,28 @@ export default () => {
     const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
     const scene = new nk2.VisualContainer2D( HW, HH );
-    const bscene = new nk2.VisualContainer2D( HW, HH );
     const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
 
-    tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
+    tpc.BindBasicTexture( window.testData.imgloader.GetBasicTextureById( 'watertest' ) );
 
-    const rtpc = new nk2.Controller.ProgramController.GLRendertextureProgramController( stage.gl, nk2.Shader.RENDERTEXTURE_INVERT );
+    const rtpc = new nk2.Controller.ProgramController.GLRendertextureProgramController( stage.gl, nk2.Shader.WT );
 
-    rtpc.Config( W, H, stage.gl.LINEAR );
-    const sprite1 = new nk2.Sprite( 0, 0, tpc );
-    const sprite2 = new nk2.Sprite( 0, 0, tpc );
+    rtpc.Config( W, H, stage.gl.LINEAR, 0, 0, W, H );
+    const sprite1 = new nk2.Sprite( -HW, -HH, tpc );
 
-    sprite1.anchor.SetSame( 0.5 );
-    sprite2.anchor.SetSame( 0.5 );
-
-    sprite1.alpha = 0.5;
+    sprite1.width = W;
+    sprite1.height = H * 0.8;
 
     sprite1.UpdateTextureTransform();
-    sprite2.UpdateTextureTransform();
 
     stage.gl.clearColor( 0.3, 0.3, 0.3, 1.0 );
+
+    const e1 = new nk2.TextureEntity2D( 0, H, new nk2.Texture.BasicTexture2D( null, 'noid', W, H, W, H ) );
+    const e2 = new nk2.TextureEntity2D( 0, H * 0.8, new nk2.Texture.BasicTexture2D( null, 'noid', W, H, W, H ) );
+
+    e1.scale.y = -1;
+
+    e2.textureTransformation.ApplyTranslation( 0, 0.2 );
 
     root.GLPreRender = function ( gl ) {
 
@@ -56,19 +58,32 @@ export default () => {
     root.GLPostRender = function () {
 
       stage.SetFramebuffer();
-      rtpc.ExecuteClean();
-    
+
+      e1.UpdateTransform( root );
+      e2.UpdateTransform( root );
+
+      rtpc.Execute(
+        e1.transform.globalTransform.AsArray( true ),
+        e1.textureTranslation.AsArray( true ),
+        e1.textureTransformation.AsArray( true )
+      );
+
+      rtpc.Execute(
+        e2.transform.globalTransform.AsArray( true ),
+        e2.textureTranslation.AsArray( true ),
+        e2.textureTransformation.AsArray( true )
+      );
+
     };
 
-    camera.force.SetSame( 5 );
+    camera.force.SetSame( 0.5 );
 
     stage
       .AddChild( root )
       .AddChild( camera )
-      .Mount( scene, bscene );
+      .Mount( scene );
 
     scene.Mount( sprite1 );
-    bscene.Mount( sprite2 );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
 
@@ -78,24 +93,6 @@ export default () => {
       .Trigger();
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
-
-    let a = 0;
-
-    stage.onProcess.Add( () => {
-
-      camera.Process();
-
-      sprite1.x = Math.cos( a ) * 128.0;
-      sprite1.y = Math.sin( a ) * 128.0;
-      a += nk2.Math.RADIAN;
-    
-    } );
-
-    stage.mouse.onDown.Add( ( event ) => {
-
-      camera.target.position.SetV( event.data.position );
-
-    } );
 
   } );
 

@@ -22,7 +22,8 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
             { id: 'colors', src: './assets/images/colors.png' },
             { id: 'glass-of-blueberryjuice', src: './assets/images/glass-of-blueberryjuice.png' },
             { id: 'raindrop', src: './assets/images/raindrop.png' },
-            { id: 'smudge', src: './assets/images/smudge.png' }
+            { id: 'smudge', src: './assets/images/smudge.png' },
+            { id: 'watertest', src: './assets/images/watertest.jpg' }
           ], 
           true
         ]
@@ -49,6 +50,16 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
               },
               data: {
                 src: './../assets/xhr/invaders.json',
+                type: 'json'
+              }
+            },
+            {
+              id: 'sheet-character',
+              image: {
+                src: './../assets/images/spritesheet-character.png'
+              },
+              data: {
+                src: './../assets/xhr/spritesheet-character.json',
                 type: 'json'
               }
             }
@@ -92,10 +103,12 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
         ssloader: loaderCombiner.loaders[ 2 ],
         tsloader: loaderCombiner.loaders[ 3 ],
         invadersSpritesheet: loaderCombiner.loaders[ 2 ].GetSpritesheetById( 'sheet-default' ),
+        characterSheet: loaderCombiner.loaders[ 2 ].GetSpritesheetById( 'sheet-character' ),
         tileset: loaderCombiner.loaders[ 3 ].GetTilesetById( 'tileset' )
       };
 
       window.testData.invadersSpritesheet.GenerateFrames();
+      window.testData.characterSheet.GenerateFrames();
   
       const context = require.context( './', true, /\.(demo)$/ );
       

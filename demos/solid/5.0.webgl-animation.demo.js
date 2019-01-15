@@ -30,6 +30,9 @@ export default () => {
 
     camera.force.SetSame( 5 );
 
+    camera.SetMax( 100, 100 );
+    camera.SetMin( -100, -100 );
+
     stage
       .AddChild( root )
       .AddChild( camera )
@@ -44,13 +47,30 @@ export default () => {
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 
-    const pc = new nk2.Controller.ProgramController.GLDynamicTexture2DProgramController( stage.gl, 2 );
+    const pc = new nk2.Controller.ProgramController.GLDynamicTexture2DProgramController( stage.gl, 3 );
 
     pc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE, 0 );
     pc.BindBasicTexture( window.testData.imgloader.GetBasicTextureById( '1to8' ), 1 );
+    pc.BindBasicTexture( window.testData.characterSheet.basicTexture, 2, stage.gl.NEAREST );
 
     const sprite = new nk2.Sprite( 0, 0, pc, 1 );
     const sprite2 = new nk2.Sprite( 0, 0, pc, 0 );
+    const sprite3 = new nk2.Sprite( 0, 0, pc, 2 );
+
+    sprite3.CreateAnimation( {
+      spritesheet: window.testData.characterSheet,
+      frames: [
+        '1', '2', '3', '4', '5', '6', '7', '8', '9'
+      ],
+      loop: true,
+      overrideFrameTimer: true,
+      frameDuration: 7,
+      id: 'run',
+      dynamicSize: true
+    } );
+
+    sprite3.anchor.SetSame( 0.5 );
+    sprite3.UpdateTextureTransform();
 
     sprite.anchor.SetSame( 0.5 );
 
@@ -58,13 +78,17 @@ export default () => {
     sprite2.UpdateTextureTransform();
     sprite2.alpha = 0.5;
 
-    scene.AddChildren( sprite, sprite2 );
+    scene.AddChildren( sprite, sprite2, sprite3 );
 
     const ac = sprite.animationController = new nk2.Animator.Controller( sprite );
     const animation = ac.CreateAnimation( 'play', 25 );
 
     sprite.width = 64;
     sprite.height = 64;
+
+    sprite3.PlayAnimation( 'run' );
+
+    sprite3.scale.SetSame( 3 );
 
     animation.GenerateFrames( 64, 64, 512, 64, 8, {
       '5': 10,
@@ -79,6 +103,7 @@ export default () => {
 
       camera.Process();
       animation.Process();
+      sprite3.animationController.Process();
     
     } );
 

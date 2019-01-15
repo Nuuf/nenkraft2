@@ -7,7 +7,7 @@ import { Frame } from './frame';
 
 export class Animation {
 
-  constructor ( _controller, _id, _rate ) {
+  constructor ( _controller, _id, _frameDuration, _dynamicSize ) {
 
     this.frames = [];
     this.controller = _controller;
@@ -19,28 +19,34 @@ export class Animation {
     this.currentFrame = 0;
     this.currentFrameIndex = 0;
     this.playing = false;
-    this.rate = 60;
+    this.frameDuration = _frameDuration != null ? _frameDuration : 60;
     this.timer = 0;
     this.reverse = false;
-    this.overrideFrameRate = false;
+    this.overrideFrameTimer = false;
     this.loop = false;
     this.autoFrame = true;
-    if ( _rate != null ) this.rate = _rate;
+    this.dynamicSize = !!_dynamicSize;
   
   }
 
-  CreateFrame ( _x, _y, _w, _h, _rate ) {
+  CreateFrame ( _x, _y, _w, _h, _duration, _offsetX, _offsetY, _originW, _originH ) {
 
-    _rate = _rate == null ? this.rate : _rate;
-    this.frames.push( new Frame( _x, _y, _w, _h, _rate ) );
+    _duration = _duration == null ? this.frameDuration : _duration;
+    this.frames.push( new Frame( 
+      _x, _y,
+      _w, _h,
+      _duration, null,
+      _offsetX, _offsetY,
+      _originW, _originH
+    ) );
   
   }
 
   AddFrame ( _frame ) {
 
-    if ( _frame.rate == null || _frame.rate <= 0 ) {
+    if ( _frame.duration == null || _frame.duration <= 0 ) {
 
-      _frame.rate = this.rate;
+      _frame.duration = this.frameDuration;
       
     }
   
@@ -50,15 +56,15 @@ export class Animation {
 
   GenerateFrames ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
 
-    let rate;
+    let duration;
     const columns = _imageWidth / _imageHeight;
 
     _data = _data == null ? {} : _data;
 
     for ( var i = 0; i < _amount; ++i ) {
 
-      rate = _data[ i ];
-      this.CreateFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
+      duration = _data[ i ];
+      this.CreateFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, duration );
     
     }
   
@@ -74,7 +80,7 @@ export class Animation {
 
       this.currentFrame = frame;
       this.currentFrameIndex = _index;
-      this.currentFrame.Apply( this.sprite );
+      this.currentFrame.Apply( this.sprite, this.dynamicSize );
     
     }
   
@@ -124,7 +130,7 @@ export class Animation {
 
     this.SetFrame( _index );
     this.ResetAllFrames();
-    this.timer = this.rate;
+    this.timer = this.frameDuration;
     this.playing = true;
     this.onStart.Dispatch();
   
@@ -141,11 +147,11 @@ export class Animation {
 
     if ( this.playing === true ) {
 
-      if ( this.overrideFrameRate === true ) {
+      if ( this.overrideFrameTimer === true ) {
   
         if ( --this.timer <= 0 ) {
   
-          this.timer = this.rate;
+          this.timer = this.frameDuration;
           this.NextFrame();
           
         }
@@ -208,7 +214,7 @@ export class Animation {
     }
     
     this.currentFrame = frames[ this.currentFrameIndex ];
-    this.currentFrame.Apply( this.sprite );
+    this.currentFrame.Apply( this.sprite, this.dynamicSize );
 
     if ( done === true ) {
 
@@ -230,7 +236,7 @@ export class Animation {
     this.currentFrame = null;
     this.playing = false;
     this.currentFrameIndex = 0;
-    this.timer = this.rate;
+    this.timer = this.frameDuration;
   
   }
 
@@ -238,7 +244,7 @@ export class Animation {
 
     this.SetFrame( 0 );
     this.ResetAllFrames();
-    this.timer = this.rate;
+    this.timer = this.frameDuration;
     this.playing = false;
   
   }
