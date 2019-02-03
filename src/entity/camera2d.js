@@ -33,10 +33,7 @@ export class Camera2D extends VisualContainer2D {
 
     if ( target != null ) {
 
-      PS_TARGET_POSITION.SetV( target.position );
-
-      PS_TARGET_POSITION.Invert();
-      PS_TARGET_POSITION.AddV( this.focus );
+      PS_TARGET_POSITION.SetV( target.position ).Invert().AddV( this.focus );
 
       PS_DELTA.SetV( this.position ).SubtractV( PS_TARGET_POSITION );
       let distance = PS_DELTA.GetMagnitudeSquared();

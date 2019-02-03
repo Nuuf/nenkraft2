@@ -24,7 +24,6 @@ export class Animation {
     this.reverse = false;
     this.overrideFrameTimer = false;
     this.loop = false;
-    this.autoFrame = true;
     this.dynamicSize = !!_dynamicSize;
   
   }
@@ -114,7 +113,7 @@ export class Animation {
 
   Start ( _index ) {
     
-    if ( _index == null && this.autoFrame ) {
+    if ( _index == null ) {
 
       if ( this.reverse ) {
 

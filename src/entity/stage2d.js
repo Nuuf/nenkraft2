@@ -183,9 +183,9 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
-  GLPostRender ( _gl ) {
+  GLPostRender ( /* _gl */ ) {
 
-    _gl.flush();
+    // _gl.flush();
   
   }
 
