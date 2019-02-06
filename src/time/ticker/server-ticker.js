@@ -21,7 +21,7 @@ export class ServerTicker {
 
     if ( !_halt ) {
 
-      this.StartAF();
+      this.Start();
       
     }
 

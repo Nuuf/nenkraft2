@@ -7,7 +7,7 @@ module.exports = function () {
     '* @package     Nenkraft2',
     '* @author      Gustav \'Nuuf\' Åberg <gustavrein@gmail.com>',
     '* @version     ' + version,
-    '* @copyright   (C) 2018 Gustav \'Nuuf\' Åberg',
+    '* @copyright   (C) 2018-2019 Gustav \'Nuuf\' Åberg',
     '* @license     {@link https://github.com/Nuuf/nenkraft2/blob/master/LICENSE}',
     '*/'
   ].join( '\n' );
