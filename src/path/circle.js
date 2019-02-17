@@ -23,7 +23,6 @@ export class Circle extends CircleGeom {
     
     _rc.beginPath();
     _rc.arc( this.x, this.y, this.radius, 0, PII, false );
-    _rc.closePath();
 
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
 

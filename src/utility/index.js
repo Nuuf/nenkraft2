@@ -17,10 +17,42 @@ export function RandomInteger ( _min, _max ) {
 
 }
 
+export function RandomIntegerAvoid ( _min, _max, _amin, _amax ) {
+
+  let value = RandomInteger( _min, _max );
+
+  if ( _min > _amin || _max < _amax ) throw new Error( 'Avoid causing infinite loops!' );
+
+  while ( value > _amin && value < _amax ) {
+
+    value = RandomInteger( _min, _max );
+  
+  }
+
+  return value;
+
+}
+
 export function RandomFloat ( _min, _max ) {
 
   return Random() * ( _max - _min ) + _min;
   
+}
+
+export function RandomFloatAvoid ( _min, _max, _amin, _amax ) {
+
+  let value = RandomFloat( _min, _max );
+
+  if ( _min > _amin || _max < _amax ) throw new Error( 'Avoid causing infinite loops!' );
+
+  while ( value > _amin && value < _amax ) {
+
+    value = RandomFloat( _min, _max );
+  
+  }
+
+  return value;
+
 }
 
 export function IsInteger ( _value ) {
@@ -467,15 +499,35 @@ export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
 }
 
+export function AssignIfUndefined ( _o1, _o2 ) {
+
+  let key;
+
+  for ( key in _o1 ) {
+
+    if ( _o1.hasOwnProperty( key ) ) {
+  
+      if ( _o2[ key ] === undefined ) {
+
+        _o2[ key ] = _o1[ key ];
+
+      }
+        
+    }
+      
+  }
+
+}
+
 export function PRINT_VERSION ( _server ) {
 
   if ( !_server ) {
 
     console.log(
       '%cnenkraft2 %cversion %c' + VERSION,
-      'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#f0f7da;background-color:#36802d;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#f0f7da;background-color:#77ab59;font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+      'color:#c89664;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#5078a0;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#6496c8;font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
     );
   
   } else {

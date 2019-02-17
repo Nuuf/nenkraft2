@@ -31,6 +31,7 @@ export class Polygon2D extends Polygon2DGeom {
     }
 
     _rc.closePath();
+    
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
 
     if ( style.fill.applied === true ) {

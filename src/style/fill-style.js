@@ -8,7 +8,7 @@ export class FillStyle {
 
   constructor ( _props ) {
 
-    this.color = '#36802d';
+    this.color = '#6496c8';
     this.applied = true;
     ApplyProperties( this, _props );
 

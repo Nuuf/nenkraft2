@@ -112,7 +112,7 @@ export default () => {
       gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
       container.GLRender( gl );
       timer.Process();
-      gl.flush();
+      // gl.flush();
 
     }
 

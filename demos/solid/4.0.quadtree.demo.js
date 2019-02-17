@@ -24,12 +24,23 @@ export default () => {
     const rootNode = new nk2.QuadtreeNode( bounds, 0, 4, 5 );
     const nodes = [];
     const objs = [];
+    const drawOpt = {
+      rc: stage.rc,
+      fill: true,
+      stroke: true,
+      tl: null,
+      br: null,
+      globalAlpha: 0.2
+    };
 
     stage.onProcess.Add( () => {
     
       nodes.forEach( function ( node ) {
 
-        nk2.Debug.Draw.AABB2D( stage.rc, node.aabb );
+        drawOpt.tl = node.aabb.tl;
+        drawOpt.br = node.aabb.br;
+
+        nk2.Draw.AABB2D( drawOpt );
       
       } );
 

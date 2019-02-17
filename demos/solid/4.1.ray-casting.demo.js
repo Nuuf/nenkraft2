@@ -45,7 +45,7 @@ export default () => {
 
     {
 
-      let i = 100;
+      let i = 25;
 
       while ( i-- ) {
 
@@ -109,6 +109,8 @@ export default () => {
         ray.path.e.RotateAroundV( ray.path.s, ray.data.angle );
       
       } );
+
+      // NOTE! A broad phase should be used to check if the polygons are in radius
 
       let i = 0;
       let j = 0;

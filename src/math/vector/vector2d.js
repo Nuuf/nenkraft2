@@ -285,21 +285,17 @@ export class Vector2D {
 
   PushFromV ( _p, _magnitude ) {
 
-    const vector = this.Copy();
+    PS_a.SetV( this ).SubtractV( _p ).Normalize().Multiply( _magnitude, _magnitude );
 
-    vector.SubtractV( _p ).Normalize().Multiply( _magnitude, _magnitude );
-
-    return this.AddV( vector );
+    return this.AddV( PS_a );
 
   }
 
   PushFrom ( _x, _y, _magnitude ) {
 
-    const vector = this.Copy();
+    PS_a.SetV( this ).SubtractV( _x, _y ).Normalize().Multiply( _magnitude, _magnitude );
 
-    vector.SubtractV( _x, _y ).Normalize().Multiply( _magnitude, _magnitude );
-
-    return this.AddV( vector );
+    return this.AddV( PS_a );
   
   }
 
@@ -377,25 +373,25 @@ export class Vector2D {
 
   GetDistanceSquaredV ( _p ) {
 
-    return this.Copy().SubtractV( _p ).GetMagnitudeSquared();
+    return PS_a.SetV( this ).SubtractV( _p ).GetMagnitudeSquared();
   
   }
 
   GetDistanceSquared ( _x, _y ) {
 
-    return this.Copy().Subtract( _x, _y ).GetMagnitudeSquared();
+    return PS_a.SetV( this ).Subtract( _x, _y ).GetMagnitudeSquared();
   
   }
 
   GetDistanceV ( _p ) {
 
-    return this.Copy().SubtractV( _p ).GetMagnitude();
+    return PS_a.SetV( this ).SubtractV( _p ).GetMagnitude();
   
   }
 
   GetDistance ( _x, _y ) {
 
-    return this.Copy().Subtract( _x, _y ).GetMagnitude();
+    return PS_a.SetV( this ).Subtract( _x, _y ).GetMagnitude();
   
   }
 
@@ -625,4 +621,5 @@ PS_pool.Flood( () => {
   return new Vector2D( 0, 0 );
 
 }, 1000 );
+const PS_a = new Vector2D( 0, 0 );
 // <----- Private Static

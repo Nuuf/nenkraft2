@@ -9,8 +9,8 @@ export class TextStyle {
 
   constructor ( _props ) {
 
-    this.fillColor = '#36802d';
-    this.strokeColor = '#36802d';
+    this.fillColor = '#6496c8';
+    this.strokeColor = '#c89664';
     this.fontSize = 45;
     this.font = null;
     this.fontFamily = 'Arial';

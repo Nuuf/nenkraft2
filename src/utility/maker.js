@@ -185,19 +185,19 @@ const PS_IteratorArgsLookup = function ( _args, _ias, _index ) {
           switch ( ia.mod ) {
   
             case '+':
-              _args[ ia.iteratorIndex ] = _index + parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index + Number( ia.val );
               break;
             case '*':
-              _args[ ia.iteratorIndex ] = _index * parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index * Number( ia.val );
               break;
             case '-':
-              _args[ ia.iteratorIndex ] = _index - parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index - Number( ia.val );
               break;
             case '/':
-              _args[ ia.iteratorIndex ] = _index / parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index / Number( ia.val );
               break;
             case '%':
-              _args[ ia.iteratorIndex ] = _index % parseInt( ia.val );
+              _args[ ia.iteratorIndex ] = _index % Number( ia.val );
               break;
             default:
               throw new Error( 'Bad mod!' );

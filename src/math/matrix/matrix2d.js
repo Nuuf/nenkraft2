@@ -134,8 +134,8 @@ export class Matrix2D {
 
   Rotate ( _angle ) {
 
-    const sa = Math.sin( _angle );
-    const ca = Math.cos( _angle );
+    const sa = Sin( _angle );
+    const ca = Cos( _angle );
     const a = this.a;
     const c = this.c;
     const e = this.e;

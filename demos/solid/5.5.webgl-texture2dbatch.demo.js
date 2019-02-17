@@ -57,7 +57,7 @@ export default () => {
 
     {
 
-      let i = 10000;
+      let i = 1000;
 
       while ( i-- ) {
 
@@ -77,8 +77,10 @@ export default () => {
 
         animation.SetFrame( nk2.Utility.RandomInteger( 0, 15 ) );
 
-        sprite.data.velocity = new nk2.Vector2D( nk2.Utility.RandomFloat( -2, 2 ), nk2.Utility.RandomFloat( -2, 2 ) );
-        sprite.data.torque = nk2.Utility.RandomFloat( -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20 );
+        sprite.data.velocity = new nk2.Vector2D( nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 ), nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 ) );
+        const tval = nk2.Math.RADIAN * 20;
+
+        sprite.data.torque = nk2.Utility.RandomFloatAvoid( -tval, tval, -tval / 25, tval / 25 );
 
         bp.Mount( sprite );
 

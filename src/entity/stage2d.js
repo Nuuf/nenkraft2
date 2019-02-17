@@ -43,7 +43,7 @@ export class Stage2D extends VisualContainer2D {
 
       if ( this.gl != null ) {
 
-        console.log( '%cWebGL!', 'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
+        console.log( '%cWebGL!', 'color:#f0f7da;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
       
       } else {
 
@@ -83,7 +83,7 @@ export class Stage2D extends VisualContainer2D {
 
       this.rc = _options.canvas.getContext( '2d' );
 
-      console.log( '%cCanvas 2D!', 'color:#f0f7da;background-color:#234d20;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
+      console.log( '%cCanvas 2D!', 'color:#f0f7da;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
 
       if ( _options.noTicker !== true ) {
 
@@ -183,7 +183,7 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
-  GLPostRender ( /* _gl */ ) {
+  GLPostRender ( /* _gl*/ ) {
 
     // _gl.flush();
   

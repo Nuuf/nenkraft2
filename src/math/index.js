@@ -12,6 +12,7 @@ const Round = Math.round;
 const Ceil = Math.ceil;
 
 export const PII = PI * 2;
+export const TAU = PII;
 
 export const PI5 = PI * 0.5;
 

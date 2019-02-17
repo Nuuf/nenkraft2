@@ -16,7 +16,6 @@ export class Ticker {
     this.then = 0;
     this.now = 0;
     this.desiredRate = 0;
-    this.supplyDelta = true;
 
     if ( !_halt ) {
 
@@ -78,7 +77,7 @@ export class Ticker {
 
     if ( this.afId !== null ) {
 
-      Log( '%cTicker: RAF is running!', 'color:red;'.concat( PS_LOG_CSS ) );
+      Log( '%cTicker: RAF is running!', 'color:#F00;'.concat( PS_LOG_CSS ) );
 
       return null;
       
@@ -170,7 +169,7 @@ export class Ticker {
 
 // Private Static ----->
 const PS_LOG = true;
-const PS_LOG_CSS = 'background-color:#36802d;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
+const PS_LOG_CSS = 'background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
 const Log = function () {
 
   if ( PS_LOG === false ) return;

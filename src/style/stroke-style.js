@@ -9,10 +9,12 @@ export class StrokeStyle {
 
   constructor ( _props ) {
 
-    this.color = '#c9df8a';
+    this.color = '#c89664';
     this.lineCap = CAP_ROUND;
     this.lineJoin = JOIN_ROUND;
     this.lineWidth = 2;
+    this.lineDashOffset = 0;
+    this.lineDash = [ 0, 0 ];
     this.miterLimit = 10;
     this.applied = true;
     ApplyProperties( this, _props );
@@ -26,6 +28,8 @@ export class StrokeStyle {
     _rc.lineJoin = this.lineJoin;
     _rc.lineWidth = this.lineWidth;
     _rc.miterLimit = this.miterLimit;
+    _rc.lineDashOffset = this.lineDashOffset;
+    _rc.setLineDash( this.lineDash );
   
   }
 

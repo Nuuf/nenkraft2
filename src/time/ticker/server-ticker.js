@@ -11,13 +11,10 @@ export class ServerTicker {
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
     this.intervalId = null;
-    this.timeoutId = null;
-    this.immediateId = null;
     this.delta = 0;
     this.then = 0;
     this.now = 0;
     this.desiredRate = 0;
-    this.supplyDelta = true;
 
     if ( !_halt ) {
 

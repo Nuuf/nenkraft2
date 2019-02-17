@@ -25,7 +25,6 @@ export class Line2D extends Line2DGeom {
     _rc.beginPath();
     _rc.moveTo( s.x, s.y );
     _rc.lineTo( e.x, e.y );
-    _rc.closePath();
     
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
 

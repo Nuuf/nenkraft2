@@ -8,7 +8,7 @@ export class ShadowStyle {
 
   constructor ( _props ) {
 
-    this.color = '#234d20';
+    this.color = '#c89664';
     this.blur = 5;
     this.offsetX = 0;
     this.offsetY = 0;

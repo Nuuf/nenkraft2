@@ -8,7 +8,7 @@ export class PixelStyle {
 
   constructor ( _props ) {
 
-    this.color = '#c9df8a';
+    this.color = '#6496c8';
     this.size = 1;
     ApplyProperties( this, _props );
 
