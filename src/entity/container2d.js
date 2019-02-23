@@ -4,8 +4,11 @@
 
 import { CoreEntity2D } from './core-entity2d';
 import { IsArray } from '../utility';
+import { AABB2D } from '../geom/aabb/aabb2d';
 
 const Abs = Math.abs;
+const Min = Math.min;
+const Max = Math.max;
 
 export class Container2D extends CoreEntity2D {
 
@@ -294,7 +297,42 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  Construct () {
+
+    const children = this.children;
+    let child = children[ 0 ];
+    let cBounds;
+
+    PS_minmax.Set( 0, 0, 0, 0 );
+    const tl = PS_minmax.tl;
+    const br = PS_minmax.br;
+
+    for ( var i = 0; i < children.length; child = children[ ++i ] ) {
+
+      cBounds = child.ComputeLocalBounds( child.anchor );
+
+      tl.x = Min( tl.x, cBounds.tl.x );
+      tl.y = Min( tl.y, cBounds.tl.y );
+      br.x = Max( br.x, cBounds.br.x );
+      br.y = Max( br.y, cBounds.br.y );
+
+    }
+
+    PS_minmax.ComputeWH();
+
+    this.w = PS_minmax.w;
+    this.h = PS_minmax.h;
+
+    this.bounds.ComputeLocal( tl.x, tl.y, this.width, this.height, null, this );
+
+  }
+
 }
 
 // Alias
 Container2D.prototype.Mount = Container2D.prototype.AddChildren;
+Container2D.prototype.Unmount = Container2D.prototype.RemoveChildren;
+
+// Private Static ----->
+const PS_minmax = new AABB2D( 0, 0, 0, 0 );
+// <----- Private Static

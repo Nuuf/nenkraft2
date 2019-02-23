@@ -141,7 +141,7 @@ export class CoreEntity2D {
   
   }
 
-  GetGlobalPosition () {
+  ComputeGlobalPosition () {
 
     const gt = this.transform.globalTransform;
 

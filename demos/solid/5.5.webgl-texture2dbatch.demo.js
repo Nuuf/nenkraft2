@@ -57,7 +57,7 @@ export default () => {
 
     {
 
-      let i = 1000;
+      let i = 20000;
 
       while ( i-- ) {
 

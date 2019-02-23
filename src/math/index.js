@@ -74,13 +74,18 @@ export function Oscillate ( _time, _from, _to, _amplitude ) {
 
 }
 
-export function LikeASquareGrid ( _points, _w, _marginX, _marginY ) {
+export function LikeASquareGrid ( _objects, _w, _marginX, _marginY, _offsetX, _offsetY ) {
+
+  _offsetX = _offsetX ? _offsetX : 0;
+  _offsetY = _offsetY ? _offsetY : 0;
 
   const columns = ( _w / _marginX ) | 0;
+  let object = _objects[ 0 ];
  
-  for ( var i = 0 ; i < _points.length; ++i ) {
+  for ( var i = 0 ; i < _objects.length; object = _objects[ ++i ] ) {
 
-    _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
+    object.x = ( ( i % columns ) * _marginX ) + _offsetX;
+    object.y = ( ( ( i / columns ) | 0 ) * _marginY ) + _offsetY;
       
   }
 

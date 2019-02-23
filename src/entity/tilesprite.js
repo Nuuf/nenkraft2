@@ -52,7 +52,7 @@ export class Tilesprite extends TextureEntity2D {
 
           return new Graphic2D( 0, 0, path );
         
-        } ), 64, 64, _onLoad
+        } ), _onLoad, 64, 64
       ), '__DEFAULT_TILESPRITE_TEXTURE__', 64, 64, 64, 64
     );
 

@@ -6,7 +6,7 @@ import { IsObjectEmpty } from '.';
 
 const Ceil = Math.ceil;
 
-export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHeight, _backgroundColor ) {
+export function GenerateSimpleBase64PNG ( _renderFunction, _backgroundColor, _forceWidth, _forceHeight ) {
 
   const drawable = _renderFunction();
 
@@ -17,8 +17,8 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
     
   }
 
-  PS_canvas.width = Ceil( drawable.w ) ;
-  PS_canvas.height = Ceil( drawable.h );
+  PS_canvas.width = Ceil( drawable.width ) ;
+  PS_canvas.height = Ceil( drawable.height );
 
   if ( _forceWidth != null ) {
 
@@ -50,12 +50,12 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _forceWidth, _forceHe
 
 }
 
-export function ImageFromDataURL ( _url, _w, _h, _onLoad ) {
+export function ImageFromDataURL ( _url, _onLoad, _w, _h ) {
 
   const image = new Image();
 
-  image.width = _w;
-  image.height = _h;
+  if ( _w ) image.width = _w;
+  if ( _h ) image.height = _h;
   image.onload = _onLoad;
   image.src = _url;
 

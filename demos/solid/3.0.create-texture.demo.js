@@ -41,7 +41,7 @@ export default () => {
 
     };
 
-    img.src = nk2.BrowserUtility.GenerateSimpleBase64PNG( createTexture, null, null, 'white' );
+    img.src = nk2.BrowserUtility.GenerateSimpleBase64PNG( createTexture, 'white' );
 
   } );
 

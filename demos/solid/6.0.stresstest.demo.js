@@ -38,7 +38,7 @@ export default () => {
 
       return sprite;
     
-    }, 20000 );
+    }, 10000 );
 
     timer.onFinish.Add( function () {
 

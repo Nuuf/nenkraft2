@@ -130,5 +130,5 @@ export class BatchableContainer2D extends VisualContainer2D {
 }
 
 // Private Static ----->
-const PS_ACCESS_BUFFER_ERROR_MSG = 'Cannot access buffer data directly on Container2D!';
+const PS_ACCESS_BUFFER_ERROR_MSG = 'Cannot access buffer data directly!';
 // <----- Private Static

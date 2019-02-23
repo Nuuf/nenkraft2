@@ -19,7 +19,7 @@ export class Color {
       _a == null ? 1 : _a
     ] );
     this.value = '';
-    this.currentConversion = 'rgb';
+    this.currentConversion = RGB;
     this.ComputeValueRGBA();
   
   }
@@ -39,7 +39,7 @@ export class Color {
 
     this.value = 'rgba('.concat( this.channel.join( ',' ).concat( ')' ) );
 
-    return this.value;
+    return this;
   
   }
 
@@ -47,7 +47,7 @@ export class Color {
 
     this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
 
-    return this.value;
+    return this;
   
   }
 
@@ -55,8 +55,21 @@ export class Color {
 
     this.value = '#' + this.channel[ 0 ].toString( 16 ) + this.channel[ 1 ].toString( 16 ) + this.channel[ 2 ].toString( 16 );
 
-    return this.value;
+    return this;
   
+  }
+
+  Mix ( _color, _percentage ) {
+      
+    const pb = 1 - _percentage;
+
+    return new Color(
+      this.channel[ 0 ] * _percentage + _color.channel[ 0 ] * pb,
+      this.channel[ 1 ] * _percentage + _color.channel[ 1 ] * pb,
+      this.channel[ 2 ] * _percentage + _color.channel[ 2 ] * pb,
+      this.channel[ 3 ] * _percentage + _color.channel[ 3 ] * pb
+    );
+
   }
 
   ConvertToHSLA ( _round ) {
@@ -92,7 +105,7 @@ export class Color {
     
     }
 
-    this.currentConversion = 'hsl';
+    this.currentConversion = HSL;
     this.ComputeValueHSLA();
   
   }
@@ -102,7 +115,7 @@ export class Color {
     this.channel[ 0 ] = Clamp( _r, PS_MIN_VAL, PS_MAX_VAL );
     this.channel[ 1 ] = Clamp( _g, PS_MIN_VAL, PS_MAX_VAL );
     this.channel[ 2 ] = Clamp( _b, PS_MIN_VAL, PS_MAX_VAL );
-    this.currentConversion = 'rgb';
+    this.currentConversion = RGB;
     if ( !_noCompute ) this.ComputeValueRGBA();
 
     return this;
@@ -135,8 +148,8 @@ export class Color {
   IncreaseChannel ( _channel, _value ) {
 
     this.channel[ _channel ] += _value;
-    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
-    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+    if ( this.currentConversion === RGB ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === HSL ) this.ComputeValueHSLA();
 
     return this;
 
@@ -145,8 +158,8 @@ export class Color {
   SetChannel ( _channel, _value ) {
 
     this.channel[ _channel ] = _value;
-    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
-    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+    if ( this.currentConversion === RGB ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === HSL ) this.ComputeValueHSLA();
 
     return this;
   
@@ -158,8 +171,8 @@ export class Color {
     this.channel[ 1 ] = 
     this.channel[ 2 ] = _value;
 
-    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
-    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+    if ( this.currentConversion === RGB ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === HSL ) this.ComputeValueHSLA();
 
     return this;
 
@@ -224,6 +237,8 @@ export class Color {
 }
 
 // Private Static ----->
+const RGB = 'RGB';
+const HSL = 'HSL';
 const PS_MAX_VAL = 255;
 const PS_MIN_VAL = 0;
 const PS_NORM = 1 / PS_MAX_VAL;

@@ -445,7 +445,7 @@ export class Vector2D {
 
   GetMidpointV ( _p ) {
 
-    return this.Copy().AddV( _p ).Divide( 2, 2 );
+    return this.Copy().AddV( _p ).Multiply( 0.5, 0.5 );
   
   }
 
@@ -488,14 +488,12 @@ export class Vector2D {
 
     const dot = this.GetDotV( projection );
 
-    if ( dot === 0 ) return this.FromPool( 0, 0 );
+    if ( dot === 0 ) return projection.SetSame( 0 );
 
     const magnitude = projection.GetMagnitude();
     const scale = dot / ( magnitude * magnitude );
 
-    projection.Multiply( scale, scale );
-
-    return projection;
+    return projection.Multiply( scale, scale );
   
   }
 

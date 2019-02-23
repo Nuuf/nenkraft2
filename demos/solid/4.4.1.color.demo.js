@@ -3,10 +3,10 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateDemo( 'ParticleSystem', ( conf ) => {
+  CreateDemo( 'Color', ( conf ) => {
 
-    const W = 1920;
-    const H = 1080;
+    const W = 600;
+    const H = 400;
     const HW = W * 0.5;
     const HH = H * 0.5;
     const c = conf.canvas = document.createElement( 'canvas' );
@@ -25,48 +25,42 @@ export default () => {
     const root = new nk2.VisualContainer2D( 0, 0 );
     const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
     const scene = new nk2.VisualContainer2D( HW, HH );
-    const particleSystem = new nk2.Particle.Particle2D.System( 0, 0 );
-    const pdata = window.testData.xhrloader.GetClonedDataById( 'particleExplosion' );
-    const ptimer = new nk2.Time.Timer( 10 );
-    const positions = new nk2.Geom.Polygon2D();
+    const img = nk2.BrowserUtility.ImageFromDataURL( nk2.BrowserUtility.GenerateSimpleBase64PNG( () => {
 
-    nk2.Geom.PolygonConstruction.Cyclic2D( positions, 0, 0, 400, 72 );
+      const osize = 25;
+      let prevColor = new nk2.Color( 255, 255, 255, 1 );
+      const container = new nk2.VisualContainer2D( 0, 0 );
 
-    const velocities = positions.Copy();
+      for ( var i = 0; i < 260; ++i ) {
 
-    velocities.vertices.forEach( ( vertex ) => {
+        const path = new nk2.Path.AABB2D( 0, 0, osize, osize );
 
-      vertex.Invert();
-      vertex.Multiply( 0.1, 0.1 );
+        path.style.fill.color = new nk2.Color( i, 0, 0, 1 ).Mix( prevColor, 0.6 ).ComputeValueRGBA().value;
+        path.style.stroke.color = new nk2.Color( 0, 255 - i, 0, 1 ).Mix( prevColor, 0.9 ).ComputeValueRGBA().value;
+        const graphic = new nk2.Graphic2D( 0, 0, path );
+
+        container.AddChild( graphic );
+
+      }
+
+      nk2.Math.LikeASquareGrid( container.children, 25 * 20, osize, osize );
+
+      container.Construct();
+
+      return container;
+
+    }, 'white' ), () => {
+
+      scene.AddChild( new nk2.Sprite( -HW, -HH, new nk2.Texture.BasicTexture2D( img, null, img.width, img.height ) ) );
     
     } );
 
-    ptimer.onFinish.Add( () => {
+    camera.force.SetSame( 5 );
 
-      particleSystem.Emit( pdata );
-      ptimer.Start();
-    
-    } );
-    ptimer.Start();
-
-    pdata.texture = nk2.Sprite.DEFAULT_TEXTURE;
-    pdata.position = {
-      points: positions.vertices,
-      moduloWrapper: positions.vertices.length,
-      indexGap: 8
-    };
-    pdata.velocity = {
-      points: velocities.vertices,
-      moduloWrapper: positions.vertices.length,
-      indexGap: 4
-    };
-
-    camera.force.SetSame( 0.1 );
     stage
       .AddChild( root )
       .AddChild( camera )
-      .AddChild( scene )
-      .AddChild( particleSystem );
+      .AddChild( scene );
 
     const canvasManager = new nk2.CanvasManager( c, W, H, nk2.CanvasManager.KEEP_ASPECT_RATIO_FIT );
 
@@ -80,8 +74,6 @@ export default () => {
     stage.onProcess.Add( () => {
 
       camera.Process();
-      particleSystem.Process();
-      ptimer.Process();
     
     } );
 

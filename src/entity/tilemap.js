@@ -187,7 +187,7 @@ export class Tilemap extends TextureEntity2D {
 
       tile.ProcessTransform( this );
 
-      tgpos = tile.GetGlobalPosition();
+      tgpos = tile.ComputeGlobalPosition();
 
       tgpos.Subtract( rme, rmf );
       tgpos.Divide( rma, rmd );
@@ -268,7 +268,7 @@ export class Tilemap extends TextureEntity2D {
 
       tile.ProcessTransform( this );
 
-      tgpos = tile.GetGlobalPosition(); 
+      tgpos = tile.ComputeGlobalPosition(); 
 
       tgpos.Subtract( rme, rmf );
       tgpos.Divide( rma, rmd );
