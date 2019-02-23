@@ -1,47 +1,49 @@
 html, body {
     padding: 0;
     margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(25, 75, 125);
   }
   
   #buttons {
-    width: 750px;
-    display: inline-block;
+    width: 70%;
+    display: block;
     height: auto;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 0;
+    text-align: center;
+    margin: 60px auto 0 auto;
+    background-color: rgb(75, 125, 175);
+    padding: 2px;
   }
       
   #buttons input[type='button'] {
-    display: list-item;
-    list-style: none;
-    width: 100%;
-    background-color: black;
+    display: inline-block;
+    background-color: rgb(100, 150, 200);
     color: white;
-    border: none;
     padding: 15px;
     cursor: pointer;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    width: 150px;
-    float: left;
+    width: auto;
+    border: none;
+    margin: 2px;
   }
   #buttons input:active {
     outline: none;
   }
   #buttons input:hover {
-    color: grey;
+    background-color: rgb(50, 100, 150);
   }
   #back-button {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     position: fixed;
     z-index: 999;
-    background-color: grey;
+    background-color: rgb(200, 150, 100, 0.8);
     color: white;
     padding: 15px;
+    border: none;
     cursor: pointer;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
     width: 150px;
   }
   canvas {
@@ -52,7 +54,7 @@ html, body {
     outline: none;
   }
   .mcnvs {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(20, 19, 19, 0.3);
     display: block;
     position: absolute;
     top: 50%;

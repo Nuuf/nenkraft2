@@ -297,7 +297,7 @@ export class Container2D extends CoreEntity2D {
   
   }
 
-  Construct () {
+  ClusterBind () {
 
     const children = this.children;
     let child = children[ 0 ];

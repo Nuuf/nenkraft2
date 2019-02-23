@@ -45,7 +45,7 @@ export default () => {
 
       nk2.Math.LikeASquareGrid( container.children, 25 * 20, osize, osize );
 
-      container.Construct();
+      container.ClusterBind();
 
       return container;
 

@@ -25,13 +25,17 @@ export default () => {
     const nodes = [];
     const objs = [];
     const drawOpt = {
+
+    };
+    const d = new nk2.Draw( {
       rc: stage.rc,
       fill: true,
       stroke: true,
       tl: null,
       br: null,
-      globalAlpha: 0.2
-    };
+      globalAlpha: 0.2,
+      identity: true
+    } );
 
     stage.onProcess.Add( () => {
     
@@ -40,7 +44,7 @@ export default () => {
         drawOpt.tl = node.aabb.tl;
         drawOpt.br = node.aabb.br;
 
-        nk2.Draw.AABB2D( drawOpt );
+        d.AABB( drawOpt );
       
       } );
 
