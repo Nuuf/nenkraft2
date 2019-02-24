@@ -1,15 +1,13 @@
 /**
 * @package     Nenkraft2
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.9.2
+* @version     1.9.3
 * @copyright   (C) 2018-2019 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft2/blob/master/LICENSE}
 */
 html, body {
     padding: 0;
     margin: 0;
-    height: 100%;
-    width: 100%;
     background-color: rgb(25, 75, 125);
   }
   
@@ -19,9 +17,10 @@ html, body {
     height: auto;
     font-size: 0;
     text-align: center;
-    margin: 60px auto 0 auto;
+    margin: 0 auto;
     background-color: rgb(75, 125, 175);
     padding: 2px;
+    margin-top: 60px;
   }
       
   #buttons input[type='button'] {

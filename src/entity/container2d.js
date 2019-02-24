@@ -146,7 +146,7 @@ export class Container2D extends CoreEntity2D {
   
   }
 
-  Swap ( _index ) {
+  Swap ( _withIndex ) {
 
     if ( this.parent != null ) {
 
@@ -155,15 +155,15 @@ export class Container2D extends CoreEntity2D {
 
       if ( index !== -1 ) {
 
-        if ( _index === -1 ) {
+        if ( _withIndex === -1 ) {
 
-          _index = pChildren.length - 1;
+          _withIndex = pChildren.length - 1;
 
         }
 
-        const sibling = pChildren[ _index ];
+        const sibling = pChildren[ _withIndex ];
 
-        pChildren[ _index ] = this;
+        pChildren[ _withIndex ] = this;
         pChildren[ index ] = sibling; 
 
       }
@@ -263,7 +263,7 @@ export class Container2D extends CoreEntity2D {
     let child;
     let distance = 0;
     let tempDistance;
-    let closestChild;
+    let furthestChild;
     const children = this.children;
 
     if ( children.length !== 0 ) {
@@ -272,24 +272,20 @@ export class Container2D extends CoreEntity2D {
 
         child = children[ i ];
 
-        if ( _filter !== undefined ) {
-
-          if ( _filter( child ) === false ) continue;
-        
-        }
+        if ( _filter && _filter( child ) ) continue;
 
         tempDistance = Abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
 
         if ( tempDistance > distance ) {
 
           distance = tempDistance;
-          closestChild = child;
+          furthestChild = child;
         
         }
       
       }
 
-      return closestChild;
+      return furthestChild;
     
     }
 

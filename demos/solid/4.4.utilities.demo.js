@@ -214,6 +214,24 @@ export default () => {
 
     console.log( a1, a2 );
 
+    // Flag
+
+    const colors = new nk2.FlagEnum();
+
+    colors
+      .Add( 'red' )
+      .Add( 'green' )
+      .Add( 'blue' );
+    const flagList = new nk2.FlagList();
+
+    console.log( colors );
+
+    flagList.Add( colors.GREEN | colors.BLUE );
+
+    console.log( flagList.Holds( colors.RED ) );
+    console.log( flagList.Holds( colors.GREEN ) );
+    console.log( flagList.Holds( colors.BLUE ) );
+
   } );
 
 };

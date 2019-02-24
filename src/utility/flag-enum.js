@@ -21,6 +21,8 @@ export class FlagEnum {
       this.next = this.next << 1;
         
     }
+
+    return this;
   
   }
 

@@ -13,19 +13,17 @@ export class FlagList {
   Add ( _value ) {
 
     this.value |= _value;
+
+    return this;
   
   }
 
   Remove ( _value ) {
 
     this.value = ( this.value & ~_value );
+
+    return this;
   
-  }
-
-  Compare ( _value ) {
-
-    return ( ( this.value & _value ) !== 0 );
-
   }
 
   Holds ( _value ) {
@@ -37,6 +35,8 @@ export class FlagList {
   Toggle ( _value ) {
 
     this.value ^= _value;
+
+    return this;
   
   }
 
