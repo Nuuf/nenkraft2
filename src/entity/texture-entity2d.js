@@ -7,12 +7,21 @@ import { Vector2D } from '../math/vector/vector2d';
 import { Matrix2D } from '../math/matrix/matrix2d';
 import { AABB2D } from '../geom/aabb/aabb2d';
 import { Color } from '../utility/color';
-import { GLTexture2DProgramController } from '../controller/program-controller/gl-texture2d-program-controller';
+import { 
+  GLTexture2DProgramController
+} from '../controller/program-controller/gl-texture2d-program-controller';
 import { GLDynamicTexture2DProgramController } from '../controller/program-controller';
 import { DEFAULT } from '../style/gco';
 
 export class TextureEntity2D extends BatchableContainer2D {
 
+  /**
+   * 
+   * @param {number}         _x 
+   * @param {number}         _y 
+   * @param {BasicTexture2D} _texture 
+   * @param {integer?}       _unitId 
+   */
   constructor ( _x, _y, _texture, _unitId ) {
 
     super( _x, _y );
@@ -56,18 +65,34 @@ export class TextureEntity2D extends BatchableContainer2D {
 
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get alpha () {
 
     return this.tint.channel[ 3 ];
   
   }
 
+  /**
+   * 
+   * @param {number} _value 
+   * 
+   * @return {void}
+   */
   set alpha ( _value ) {
 
     this.tint.channel[ 3 ] = _value;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -109,6 +134,12 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -153,6 +184,10 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateTextureTransform () {
 
     this.textureTranslation.TranslateTo(
@@ -166,6 +201,12 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Shape} _newShape 
+   * 
+   * @return {void}
+   */
   UpdateShape ( _newShape ) {
 
     if ( _newShape != null ) {
@@ -179,6 +220,19 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Numer} _x 
+   * @param {Numer} _y 
+   * @param {Numer} _w 
+   * @param {Numer} _h 
+   * @param {Numer} _offsetX 
+   * @param {Numer} _offsetY 
+   * @param {Numer} _originW 
+   * @param {Numer} _originH 
+   * 
+   * @return {void}
+   */
   ClipReconfigure ( _x, _y, _w, _h, _offsetX, _offsetY, _originW, _originH ) {
 
     const tscaleX = _w / this.texture.fw;
@@ -211,6 +265,12 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {BasicTexture2D} _texture
+   * 
+   * @return {void} 
+   */
   SetTexture ( _texture ) {
 
     this.texture = _texture;
@@ -225,6 +285,10 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {Number[]}
+   */
   GetBufferData () {
 
     this.UpdateTransform( this.parent );
@@ -275,6 +339,10 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateInBuffer () {
 
     this.UpdateTransform( this.parent );
@@ -316,6 +384,12 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   }
   
+  /**
+   * 
+   * @param {Vector2D|Object} _p 
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D ( _p ) {
 
     if ( this.interactive === false ) return false;

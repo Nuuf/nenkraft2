@@ -8,9 +8,17 @@ import { IsBitSet, ClearBit } from '../utility';
 
 export class Tilemap extends TextureEntity2D {
 
-  constructor ( _x, _y, _texture, _mapData, _layerIndex, _unitId ) {
+  /**
+   * 
+   * @param {number}   _x 
+   * @param {number}   _y 
+   * @param {Tileset}  _tileset 
+   * @param {number}   _layerIndex 
+   * @param {integer?} _unitId 
+   */
+  constructor ( _x, _y, _tileset, _layerIndex, _unitId ) {
 
-    super( _x, _y, _texture, _unitId );
+    super( _x, _y, _tileset.pc || _tileset.basicTexture, _unitId );
     
     this.w = 0;
     this.h = 0;
@@ -19,13 +27,19 @@ export class Tilemap extends TextureEntity2D {
     this.columns = 0;
     this.cull = false;
     this.tiles = [];
-    this.mapData = _mapData;
+    this.tileset = _tileset;
 
-    this.Config( _mapData );
-    this.SetMapLayer( _mapData.layers[ _layerIndex ] );
+    this.Config( _tileset.mapData );
+    this.SetMapLayer( _tileset.mapData.layers[ _layerIndex ] );
   
   }
 
+  /**
+   * 
+   * @param {object} _mapData 
+   * 
+   * @return {void}
+   */
   Config ( _mapData ) {
 
     this.tileW = _mapData.tilewidth;
@@ -36,16 +50,26 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {object} _layer 
+   * 
+   * @return {void}
+   */
   SetMapLayer ( _layer ) {
 
     const data = _layer.data;
 
-    if ( _layer.width * _layer.height !== data.length ) throw new Error( PS_MAPDATA_SIZE_ERROR );
+    if ( _layer.width * _layer.height !== data.length ) {
+
+      throw new Error( PS_MAPDATA_SIZE_ERROR );
+    
+    }
 
     this.tiles.length = 0;
     this.alpha = _layer.opacity;
 
-    if ( this.mapData.orientation === PS_ORTHOGONAL ) {
+    if ( this.tileset.mapData.orientation === PS_ORTHOGONAL ) {
 
       this.SetOrthogonal( data );
     
@@ -53,6 +77,12 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Culler2D} _culler 
+   * 
+   * @return {void}
+   */
   Cull ( _culler ) {
 
     this.culler = _culler;
@@ -60,13 +90,22 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {object} _data 
+   * 
+   * @return {void}
+   */
   SetOrthogonal ( _data ) {
 
+    const attributes = this.tileset.setData.tileset.attributes;
     const l = _data.length;
     const tileW = this.tileW;
     const tileH = this.tileH;
-    const texColumns = ( this.texture.fw / tileW ) | 0;
-    const columns = ( this.w / tileW ) | 0;
+    const texColumns = attributes.columns;
+    const spacing = parseInt( attributes.spacing );
+    const margin = parseInt( attributes.margin );
+    const columns = this.columns;
     const tscaleX = tileW / this.texture.fw;
     const tscaleY = tileH / this.texture.fh;
     let tileIndex = 0;
@@ -75,6 +114,8 @@ export class Tilemap extends TextureEntity2D {
     let y = 0;
     let cx = 0;
     let cy = 0;
+    let texRow = 0;
+    let texCol = 0;
 
     for ( var i = 0; i < l; ++i ) {
 
@@ -83,11 +124,15 @@ export class Tilemap extends TextureEntity2D {
       if ( index === 0 ) continue;
 
       tileIndex = ClearBit( 31, ClearBit( 30, ClearBit( 29, index ) ) ) - 1;
+
+      texCol = ( tileIndex % texColumns );
+      texRow = ( ( tileIndex / texColumns ) | 0 );
       
-      x = ( i % columns ) * ( tileW );
-      y = ( ( i / columns ) | 0 ) * ( tileH );
-      cx = ( tileIndex % texColumns ) * ( tileW ); 
-      cy = ( ( tileIndex / texColumns ) | 0 ) * ( tileH );
+      x = ( i % columns ) * tileW;
+      y = ( ( i / columns ) | 0 ) * tileH ;
+
+      cx = ( texCol * tileW ) + ( texCol * spacing ) + margin;
+      cy = ( texRow * tileH ) + ( texRow * spacing ) + margin;
 
       this.tiles.push( new Tile(
         tileIndex, x, y, cx, cy,
@@ -99,6 +144,12 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -133,6 +184,12 @@ export class Tilemap extends TextureEntity2D {
 
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -167,6 +224,12 @@ export class Tilemap extends TextureEntity2D {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   CullRender ( _rc ) {
 
     const image = this.texture.image;
@@ -222,6 +285,12 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   NoCullRender ( _rc ) {
 
     const image = this.texture.image;
@@ -248,6 +317,11 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * 
+   * @return {void}
+   */
   GLCullRender () {
 
     const pc = this.programController;
@@ -296,6 +370,11 @@ export class Tilemap extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * 
+   * @return {void}
+   */
   GLNoCullRender () {
 
     const pc = this.programController;

@@ -7,6 +7,13 @@ import { Frame } from './frame';
 
 export class Animation {
 
+  /**
+   * 
+   * @param {Controller} _controller 
+   * @param {any?}       _id 
+   * @param {integer?}   _frameDuration 
+   * @param {boolean?}   _dynamicSize 
+   */
   constructor ( _controller, _id, _frameDuration, _dynamicSize ) {
 
     this.frames = [];
@@ -28,6 +35,20 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @param {integer}  _x 
+   * @param {integer}  _y 
+   * @param {integer}  _w 
+   * @param {integer}  _h 
+   * @param {integer}  _duration 
+   * @param {integer?} _offsetX 
+   * @param {integer?} _offsetY 
+   * @param {integer?} _originW 
+   * @param {integer?} _originH 
+   * 
+   * @return {void}
+   */
   CreateFrame ( _x, _y, _w, _h, _duration, _offsetX, _offsetY, _originW, _originH ) {
 
     _duration = _duration == null ? this.frameDuration : _duration;
@@ -41,6 +62,12 @@ export class Animation {
   
   }
 
+  /**
+   *
+   * @param {Frame} _frame 
+   * 
+   * @return {void}
+   */
   AddFrame ( _frame ) {
 
     if ( _frame.duration == null || _frame.duration <= 0 ) {
@@ -53,6 +80,17 @@ export class Animation {
   
   }
 
+  /**
+   *
+   * @param {integer} _frameWidth 
+   * @param {integer} _frameHeight 
+   * @param {integer} _imageWidth 
+   * @param {integer} _imageHeight 
+   * @param {integer} _amount 
+   * @param {object?} _data 
+   * 
+   * @return {void}
+   */
   GenerateFrames ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
 
     let duration;
@@ -63,12 +101,24 @@ export class Animation {
     for ( var i = 0; i < _amount; ++i ) {
 
       duration = _data[ i ];
-      this.CreateFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, duration );
+      this.CreateFrame( 
+        ( i % columns ) * _frameWidth,
+        ( ( i / columns ) | 0 ) * _frameHeight,
+        _frameWidth,
+        _frameHeight,
+        duration
+      );
     
     }
   
   }
 
+  /**
+   *
+   * @param {integer} _index 
+   * 
+   * @return {void}
+   */
   SetFrame ( _index ) {
 
     _index = _index == null ? 0 : _index;
@@ -85,6 +135,13 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @param {any}      _id 
+   * @param {boolean?} _returnIndex
+   * 
+   * @return {Frame}
+   */
   GetFrameById ( _id, _returnIndex ) {
 
     const frames = this.frames;
@@ -103,6 +160,12 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {void}
+   */
   SetFrameById ( _id ) {
 
     const index = this.GetFrameById( _id, true );
@@ -111,6 +174,12 @@ export class Animation {
   
   }
 
+  /**
+   *
+   * @param {integer?} _index 
+   * 
+   * @return {void}
+   */
   Start ( _index ) {
     
     if ( _index == null ) {
@@ -135,6 +204,10 @@ export class Animation {
   
   }
 
+  /**
+   *
+   * @return {void}
+   */
   Stop () {
 
     this.playing = false;
@@ -142,6 +215,10 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     if ( this.playing === true ) {
@@ -165,6 +242,10 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   NextFrame () {
 
     let done = false;
@@ -229,6 +310,10 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Clear () {
 
     this.frames = [];
@@ -239,6 +324,10 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     this.SetFrame( 0 );
@@ -248,6 +337,10 @@ export class Animation {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   ResetAllFrames () {
 
     const frames = this.frames;

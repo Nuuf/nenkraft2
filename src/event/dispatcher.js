@@ -6,6 +6,9 @@ import { Listener } from './listener';
 
 export class Dispatcher {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.listeners = [];
@@ -15,6 +18,13 @@ export class Dispatcher {
   
   }
 
+  /**
+   * 
+   * @param {Function} _handle 
+   * @param {any?}     _context 
+   * 
+   * @return {integer}
+   */
   GetListenerIndex ( _handle, _context ) {
 
     let listener;
@@ -38,18 +48,40 @@ export class Dispatcher {
   
   }
 
+  /**
+   * 
+   * @param {Function} _handle 
+   * @param {any?}     _context 
+   * @param {boolean?} _removeOnNextCall 
+   * 
+   * @return {void}
+   */
   Add ( _handle, _context, _removeOnNextCall ) {
 
     this.listeners.push( new Listener( this, _context, _handle, _removeOnNextCall ) );
   
   }
 
+  /**
+   * 
+   * @param {Function} _handle 
+   * @param {any?}     _context 
+   * 
+   * @return {void}
+   */
   Once ( _handle, _context ) {
 
     this.Add( _handle, _context, true );
 
   }
 
+  /**
+   * 
+   * @param {Function} _handle 
+   * @param {any?}     _context 
+   * 
+   * @return {void}
+   */
   Remove ( _handle, _context ) {
 
     const ix = this.GetListenerIndex( _handle, _context );
@@ -62,6 +94,12 @@ export class Dispatcher {
   
   }
 
+  /**
+   * 
+   * @param {any?} _context 
+   * 
+   * @return {void}
+   */
   Dump ( _context ) {
 
     let listener;
@@ -90,6 +128,13 @@ export class Dispatcher {
   
   }
 
+  /**
+   * 
+   * @param {any?} _target 
+   * @param {any?} _data 
+   * 
+   * @return {void}
+   */
   Dispatch ( _target, _data ) {
 
     const listeners = this.listeners.slice();

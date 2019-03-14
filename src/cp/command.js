@@ -6,6 +6,15 @@ import { Option } from './option';
 
 export class Command {
 
+  /**
+   * 
+   * @param {string}   _id 
+   * @param {Function} _handle 
+   * @param {string?}  _info 
+   * @param {boolean?} _continueToPrime 
+   * @param {boolean?} _filterNull 
+   * @param {string?}  _optionPrefix 
+   */
   constructor ( _id, _handle, _info, _continueToPrime, _filterNull, _optionPrefix ) {
   
     this.id = _id.split( ' ' );
@@ -24,18 +33,35 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @return {string}
+   */
   static get OPTION_PREFIX () {
   
     return PS_OPTION_PREFIX;
     
   }
   
+  /**
+   * @param {string} _value
+   * 
+   * @return {void}
+   */
   static set OPTION_PREFIX ( _value ) {
   
     PS_OPTION_PREFIX = _value;
     
   }
   
+  /**
+   * 
+   * @param {Array}   _dataStrs 
+   * @param {object}  _data 
+   * @param {object?} _staticData 
+   * 
+   * @return {void}
+   */
   Execute ( _dataStrs, _data, _staticData ) {
   
     this.HandleData( _dataStrs, _data );
@@ -54,6 +80,17 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @param {string}   _id 
+   * @param {Function} _handle 
+   * @param {string?}  _info 
+   * @param {integer?} _priority 
+   * @param {boolean?} _breakIfExecuted 
+   * @param {string?}  _optionPrefix 
+   * 
+   * @return {this}
+   */
   AddOption ( _id, _handle, _info, _priority, _breakIfExecuted, _optionPrefix ) {
   
     _optionPrefix = _optionPrefix == null ? this.optionPrefix : _optionPrefix;
@@ -87,6 +124,13 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @param {Array}  _dataStrs 
+   * @param {object} _data 
+   * 
+   * @return {void}
+   */
   HandleData ( _dataStrs, _data ) {
   
     let data;
@@ -125,6 +169,14 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @param {Array}   _dataStrs 
+   * @param {object}  _data 
+   * @param {object?} _staticData 
+   * 
+   * @return {boolean}
+   */
   HandleOptions ( _dataStrs, _data, _staticData ) {
   
     if ( _dataStrs.length === 0 ) {
@@ -150,6 +202,12 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {Option|null}
+   */
   GetOptionById ( _id ) {
   
     const options = this.options;
@@ -165,6 +223,10 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @return {String[]}
+   */
   GetAllOptionIds () {
   
     const options = this.options;
@@ -180,6 +242,12 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @param {Array} _dataStrs 
+   * 
+   * @return {String[]}
+   */
   GetAndRemoveMatchingOptionIds ( _dataStrs ) {
   
     const allOptionIds = this.allOptionIds;
@@ -205,6 +273,10 @@ export class Command {
     
   }
   
+  /**
+   * 
+   * @return {string}
+   */
   GenerateInfoString () {
   
     let str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';

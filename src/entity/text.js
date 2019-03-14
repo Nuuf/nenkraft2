@@ -8,6 +8,13 @@ import { DEFAULT } from '../style/gco';
 
 export class Text extends VisualContainer2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {string} _text 
+   * @param {object} _style 
+   */
   constructor ( _x, _y, _text, _style ) {
 
     super( _x, _y );
@@ -20,6 +27,12 @@ export class Text extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
       
     this.PreRender( _rc );
@@ -62,6 +75,10 @@ export class Text extends VisualContainer2D {
 
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D () {
 
     return false;

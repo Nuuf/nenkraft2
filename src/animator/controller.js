@@ -6,6 +6,10 @@ import { Animation } from './animation';
 
 export class Controller {
 
+  /**
+   * 
+   * @param {Sprite} _sprite 
+   */
   constructor ( _sprite ) {
 
     this.animations = [];
@@ -15,6 +19,14 @@ export class Controller {
   
   }
 
+  /**
+   * 
+   * @param {any}      _id 
+   * @param {integer?} _frameDuration 
+   * @param {boolean?} _dynamicSize 
+   * 
+   * @return {Animation}
+   */
   CreateAnimation ( _id, _frameDuration, _dynamicSize ) {
 
     const animation = new Animation( this, _id, _frameDuration, _dynamicSize );
@@ -25,6 +37,12 @@ export class Controller {
   
   }
 
+  /**
+   *
+   * @param {Animation} _animation 
+   * 
+   * @return {void}
+   */
   AddAnimation ( _animation ) {
 
     _animation.controller = this;
@@ -32,6 +50,12 @@ export class Controller {
   
   }
 
+  /**
+   * 
+   * @param {any} _id 
+   * 
+   * @return {Animation|Null}
+   */
   GetAnimationById ( _id ) {
 
     const animations = this.animations;
@@ -47,6 +71,13 @@ export class Controller {
   
   }
 
+  /**
+   * 
+   * @param {any}      _id 
+   * @param {integer?} _frameIndex 
+   * 
+   * @return {void}
+   */
   PlayAnimation ( _id, _frameIndex ) {
 
     const animation = this.GetAnimationById( _id );
@@ -60,6 +91,10 @@ export class Controller {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   StopCurrentAnimation () {
 
     if ( this.currentAnimation !== null ) {
@@ -70,6 +105,10 @@ export class Controller {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     if ( this.currentAnimation !== null ) this.currentAnimation.Process();

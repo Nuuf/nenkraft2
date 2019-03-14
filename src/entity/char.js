@@ -8,6 +8,12 @@ import { Pool } from '../utility/pool';
 
 export class Char extends CoreEntity2D {
 
+  /**
+   * 
+   * @param {number}  _x 
+   * @param {number}  _y 
+   * @param {object?} _data 
+   */
   constructor ( _x, _y, _data ) {
 
     super( _x, _y );
@@ -33,12 +39,23 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {Pool}
+   */
   static get pool () {
 
     return PS_POOL;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * @param {Image}                    _image 
+   * 
+   * @return {void}
+   */
   Render ( _rc, _image ) {
 
     _rc.drawImage(
@@ -51,6 +68,12 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {object} _data 
+   * 
+   * @return {this}
+   */
   SetData ( _data ) {
 
     this.id = parseInt( _data.id );
@@ -66,6 +89,14 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * @param {Float32Array}      _tintChannel 
+   * @param {integer}           _unitId 
+   * 
+   * @return {void}
+   */
   GLRenderAuto ( _pc, _tintChannel, _unitId ) {
 
     this.UpdateMatrices();
@@ -79,6 +110,14 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * @param {Float32Array}      _tintChannel 
+   * @param {integer}           _unitId 
+   * 
+   * @return {void}
+   */
   GLRender ( _pc, _tintChannel, _unitId ) {
 
     _pc.Execute(
@@ -91,6 +130,12 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {object} _kernings 
+   * 
+   * @return {this}
+   */
   ApplyKernings ( _kernings ) {
 
     let attributes;
@@ -115,6 +160,12 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Char} _prevChar 
+   * 
+   * @return {this}
+   */
   Crunch ( _prevChar ) {
 
     this.position.SetSame( 0 );
@@ -149,6 +200,10 @@ export class Char extends CoreEntity2D {
 
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   UpdateMatrices () {
 
     if ( this.parent != null ) {
@@ -171,6 +226,10 @@ export class Char extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Store () {
 
     PS_POOL.Store( this );

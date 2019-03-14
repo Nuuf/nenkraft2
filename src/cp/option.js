@@ -4,6 +4,14 @@
 
 export class Option {
 
+  /**
+   * 
+   * @param {string}   _id 
+   * @param {Function} _handle 
+   * @param {string?}  _info 
+   * @param {integer?} _priority 
+   * @param {boolean?} _breakIfExecuted 
+   */
   constructor ( _id, _handle, _info, _priority, _breakIfExecuted ) {
 
     this.id = _id.split( ' ' );
@@ -16,6 +24,14 @@ export class Option {
   
   }
 
+  /**
+   * 
+   * @param {Array}   _dataStrs 
+   * @param {object}  _data 
+   * @param {object?} _staticData 
+   * 
+   * @return {boolean}
+   */
   Execute ( _dataStrs, _data, _staticData ) {
 
     this.handle( _dataStrs, _data, _staticData );

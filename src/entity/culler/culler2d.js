@@ -7,6 +7,13 @@ import { Dispatcher } from '../../event/dispatcher';
 
 export class Culler2D {
 
+  /**
+   * 
+   * @param {number} _tlx 
+   * @param {number} _tly 
+   * @param {number} _brx 
+   * @param {number} _bry 
+   */
   constructor ( _tlx, _tly, _brx, _bry ) {
   
     this.bounds = new AABB2D( _tlx, _tly, _brx, _bry );
@@ -18,6 +25,12 @@ export class Culler2D {
 
   }
 
+  /**
+   * 
+   * @param {Container2D} _container2d 
+   * 
+   * @return {this}
+   */
   BindContainer ( _container2d ) {
 
     this.container = _container2d;
@@ -27,6 +40,12 @@ export class Culler2D {
   
   }
 
+  /**
+   * 
+   * @param {Matrix2D} _matrix 
+   * 
+   * @return {this}
+   */
   SetRootMatrix ( _matrix ) {
 
     this.rootMatrix = _matrix;
@@ -35,6 +54,10 @@ export class Culler2D {
 
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     const entities = this.entities;

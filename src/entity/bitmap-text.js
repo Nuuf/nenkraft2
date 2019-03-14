@@ -7,6 +7,15 @@ import { Char } from './char';
 
 export class BitmapText extends TextureEntity2D {
 
+  /**
+   * 
+   * @param {number}         _x 
+   * @param {number}         _y 
+   * @param {BasicTexture2D} _texture 
+   * @param {object}         _data 
+   * @param {string?}        _text 
+   * @param {integer?}       _unitId 
+   */
   constructor ( _x, _y, _texture, _data, _text, _unitId ) {
 
     super( _x, _y, _texture, _unitId );
@@ -28,6 +37,12 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -58,6 +73,12 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -92,6 +113,12 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   RenderText ( _rc ) {
 
     const chars = this.chars;
@@ -105,6 +132,10 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLRenderText () {
 
     const chars = this.chars;
@@ -113,7 +144,11 @@ export class BitmapText extends TextureEntity2D {
 
       for ( var i = 0; i < chars.length; ++i ) {
 
-        chars[ i ].GLRenderAuto( this.programController, this.tint.channel, this.texture.uniformId );
+        chars[ i ].GLRenderAuto( 
+          this.programController, 
+          this.tint.channel, 
+          this.texture.uniformId
+        );
       
       }
     
@@ -129,6 +164,10 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   ComputeText () {
 
     let kernings;
@@ -202,6 +241,10 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateChars () {
 
     const chars = this.chars;
@@ -214,6 +257,12 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {object}
+   */
   GetCharDataById ( _id ) {
 
     const chars = this.fontData.font.chars.char;
@@ -230,6 +279,10 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   StoreAllChars () {
 
     const chars = this.chars;
@@ -246,12 +299,20 @@ export class BitmapText extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateInBuffer () {
 
     throw new Error( PS_ACCESS_BUFFER_ERROR_MSG );
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GetBufferData () {
 
     throw new Error( PS_ACCESS_BUFFER_ERROR_MSG );

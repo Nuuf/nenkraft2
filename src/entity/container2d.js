@@ -12,6 +12,11 @@ const Max = Math.max;
 
 export class Container2D extends CoreEntity2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     super( _x, _y );
@@ -21,6 +26,10 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Render () {
 
     if ( this.render === true ) {
@@ -37,6 +46,10 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   RenderChildren () {
 
     const children = this.children;
@@ -49,6 +62,12 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Entity} _child 
+   * 
+   * @return {Entity}
+   */
   AddChild ( _child ) {
 
     const parent = _child.parent;
@@ -66,6 +85,10 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   AddChildren () {
 
     let children = arguments;
@@ -81,9 +104,17 @@ export class Container2D extends CoreEntity2D {
       this.AddChild( children[ i ] );
     
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {Entity} _sibling 
+   * 
+   * @return {Entity}
+   */
   AddSibling ( _sibling ) {
 
     const parent = this.parent;
@@ -98,6 +129,12 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Entity} _child 
+   * 
+   * @return {Entity}
+   */
   RemoveChild ( _child ) {
 
     const children = this.children;
@@ -113,6 +150,10 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {Entity[]}
+   */
   RemoveChildren () {
 
     let aChildren = arguments;
@@ -146,6 +187,12 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {integer} _withIndex 
+   * 
+   * @return {this}
+   */
   Swap ( _withIndex ) {
 
     if ( this.parent != null ) {
@@ -169,21 +216,39 @@ export class Container2D extends CoreEntity2D {
       }
 
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   SendToFront () {
 
     this.Swap( -1 );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   SendToBack () {
 
     this.Swap( 0 );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Dump () {
 
     const children = this.children;
@@ -195,22 +260,42 @@ export class Container2D extends CoreEntity2D {
     }
 
     children.length = 0;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     this.Dump();
     if ( this.parent != null ) this.parent.RemoveChild( this );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {Container2D} _parent 
+   * 
+   * @return {this}
+   */
   AttachTo ( _parent ) {
 
     _parent.AddChild( this );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {Entity|null}
+   */
   Detach () {
 
     if ( this.parent != null ) return this.parent.RemoveChild( this );
@@ -219,6 +304,13 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Entity|Vector2D|Objct} _object 
+   * @param {Function?}             _filter 
+   * 
+   * @return {Entity|null}
+   */
   GetChildClosestTo ( _object, _filter ) {
 
     let child;
@@ -258,6 +350,13 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Entity|Vector2D|Objct} _object 
+   * @param {Function?}             _filter 
+   * 
+   * @return {Entity|null}
+   */
   GetChildFurthestFrom ( _object, _filter ) {
 
     let child;
@@ -293,6 +392,10 @@ export class Container2D extends CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ClusterBind () {
 
     const children = this.children;
@@ -320,6 +423,8 @@ export class Container2D extends CoreEntity2D {
     this.h = PS_minmax.h;
 
     this.bounds.ComputeLocal( tl.x, tl.y, this.width, this.height, null, this );
+
+    return this;
 
   }
 

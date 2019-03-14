@@ -30,7 +30,9 @@ export function Line2DLine2DIntersection ( _startA, _endA, _startB, _endB ) {
 export function ClosestPoint2DOnLine2D ( _start, _end, _point ) {
 
   const delta = _end.SubtractVC( _start );
-  const u = ( ( _point.x - _start.x ) * delta.x + ( _point.y - _start.y ) * delta.y ) / delta.GetMagnitudeSquared();
+  const u = 
+    ( ( _point.x - _start.x ) * delta.x + ( _point.y - _start.y ) * delta.y ) /
+    delta.GetMagnitudeSquared();
 
   if ( u < 0 ) {
 

@@ -9,6 +9,13 @@ const Abs = Math.abs;
 
 export class Line2D {
 
+  /**
+   * 
+   * @param {number} _sx 
+   * @param {number} _sy 
+   * @param {number} _ex 
+   * @param {number} _ey 
+   */
   constructor ( _sx, _sy, _ex, _ey ) {
 
     this.s = new Vector2D( _sx, _sy );
@@ -19,6 +26,25 @@ export class Line2D {
 
   }
 
+  /**
+   *
+   * @return {integer}
+   */
+  static get TYPE () {
+
+    return PS_TYPE;
+  
+  }
+
+  /**
+   * 
+   * @param {number} _sx 
+   * @param {number} _sy 
+   * @param {number} _ex 
+   * @param {number} _ey 
+   * 
+   * @return {this}
+   */
   Set ( _sx, _sy, _ex, _ey ) {
 
     this.s.Set( _sx, _sy );
@@ -28,6 +54,12 @@ export class Line2D {
 
   }
 
+  /**
+   * 
+   * @param {Line2D} _line2d 
+   * 
+   * @return {this}
+   */
   SetC ( _line2d ) {
 
     this.s.SetV( _line2d.s );
@@ -37,6 +69,13 @@ export class Line2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   SetPosition ( _x, _y ) {
 
     const nex = _x + Abs( this.e.x - this.s.x );
@@ -49,12 +88,22 @@ export class Line2D {
 
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetPosition () {
 
     return this.s;
   
   }
 
+  /**
+   * 
+   * @param {number} _magnitude 
+   * 
+   * @return {this}
+   */
   Stretch ( _magnitude ) {
 
     const hm = _magnitude * 0.5;
@@ -66,6 +115,14 @@ export class Line2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _angle 
+   * @param {number} _anchorX 
+   * @param {number} _anchorY 
+   * 
+   * @return {this}
+   */
   Rotate ( _angle, _anchorX, _anchorY ) {
 
     _anchorX = _anchorX == null ? 0.5 : _anchorX;
@@ -84,6 +141,13 @@ export class Line2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D[]} _cuts 
+   * @param {Array?}          _points 
+   * 
+   * @return {Vector2D[]}
+   */
   Cut ( _cuts, _points ) {
 
     if ( _points == null ) _points = [];
@@ -98,18 +162,32 @@ export class Line2D {
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetLength () {
 
     return this.s.GetDistanceV( this.e );
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetLengthSquared () {
 
     return this.s.GetDistanceSquaredV( this.e );
   
   }
 
+  /**
+   * 
+   * @param {Object|Vector2D|Point} _p 
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D ( _p ) {
 
     const s = this.s;
@@ -140,24 +218,44 @@ export class Line2D {
   
   }
 
+  /**
+   * 
+   * @param {Line2D} _line 
+   * 
+   * @return {boolean}
+   */
   IntersectsLine2D ( _line ) {
 
     return Line2DLine2DIntersection( this.s, this.e, _line.s, _line.e );
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetClosestPoint2DTo ( _p ) {
 
     return ClosestPoint2DOnLine2D( this.s, this.e, _p );
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetNormalA () {
 
     return this.s.GetNormalAV( this.e );
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetNormalB () {
 
     return this.s.GetNormalBV( this.e );

@@ -7,6 +7,10 @@ import { PIXEL_BATCH } from '../../shader';
 
 export class GLPixelBatchProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   */
   constructor ( _gl ) {
 
     super( _gl, PIXEL_BATCH );
@@ -17,6 +21,10 @@ export class GLPixelBatchProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -31,6 +39,13 @@ export class GLPixelBatchProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Array}   _data 
+   * @param {integer} _numElements 
+   * 
+   * @return {void}
+   */
   Execute ( _data, _numElements ) {
 
     const gl = this.gl;

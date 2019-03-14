@@ -6,7 +6,9 @@ import { IsObjectEmpty } from '.';
 
 const Ceil = Math.ceil;
 
-export function GenerateSimpleBase64PNG ( _renderFunction, _backgroundColor, _forceWidth, _forceHeight ) {
+export function GenerateSimpleBase64PNG ( 
+  _renderFunction, _backgroundColor, _forceWidth, _forceHeight
+) {
 
   const drawable = _renderFunction();
 

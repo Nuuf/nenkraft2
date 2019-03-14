@@ -178,6 +178,14 @@
       "computed-property-spacing": [
         "error",
         "always"
+      ],
+      "max-len": [
+        "error", 
+        {
+          "code": 100,
+          "comments": 100,
+          "tabWidth": 4
+        }
       ]
     }
   }

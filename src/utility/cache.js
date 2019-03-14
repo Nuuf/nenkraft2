@@ -82,6 +82,8 @@ export class Cache {
 
   GetById ( _id ) {
 
+    if ( !_id ) throw new Error( 'ID Null or Undefined' );
+
     const items = this.items;
     let item = items[ 0 ];
 
@@ -90,7 +92,7 @@ export class Cache {
       if ( item != null ) {
   
         if ( item.id === _id || ( item.data != null && item.data.id === _id ) ) {
-  
+
           return item;
           
         }
@@ -104,6 +106,8 @@ export class Cache {
   }
 
   Contains ( _item, _id ) {
+
+    if ( !_id ) throw new Error( 'ID Null or Undefined' );
 
     const items = this.items;
     let item = items[ 0 ];

@@ -11,6 +11,11 @@ const Abs = Math.abs;
 
 export class CoreEntity2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     this.transform = new Transform2D( _x, _y );
@@ -29,12 +34,22 @@ export class CoreEntity2D {
 
   }
   
+  /**
+   * 
+   * @return {number}
+   */
   get rotation () {
 
     return this.transform.rotation;
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   * 
+   * @return {void}
+   */
   set rotation ( _value ) {
 
     this.transform.rotation = _value;
@@ -42,72 +57,130 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   get scale () {
 
     return this.transform.scale;
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   get position () {
 
     return this.transform.position;
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   get pivot () {
 
     return this.transform.pivot;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get x () {
 
     return this.transform.position.x;
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   * 
+   * @return {void}
+   */
   set x ( _value ) {
 
     this.transform.position.x = _value;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get y () {
 
     return this.transform.position.y;
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   * 
+   * @return {void}
+   */
   set y ( _value ) {
 
     this.transform.position.y = _value;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get width () {
 
     return this.w * this.scale.x;
   
   }
 
+  /**
+   *
+   * @param {number} _value
+   * 
+   * @return {void}
+   */
   set width ( _value ) {
 
     this.scale.x = _value / this.w;
     
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get height () {
 
     return this.h * this.scale.y;
   
   }
 
+  /**
+   *
+   * @param {number} _value
+   * 
+   * @return {void}
+   */
   set height ( _value ) {
 
     this.scale.y = _value / this.h;
     
   }
 
+  /**
+   * 
+   * @param {Container2D} _parent 
+   * 
+   * @return {void}
+   */
   UpdateTransform ( _parent ) {
 
     if ( _parent != null ) {
@@ -122,6 +195,12 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Container2D} _parent 
+   * 
+   * @return {void}
+   */
   ProcessTransform ( _parent ) {
 
     if ( this.transformShouldUpdate === true ) {
@@ -133,6 +212,10 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   RequestTransformUpdate () {
 
     this.transformShouldUpdate = true;
@@ -141,6 +224,10 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   ComputeGlobalPosition () {
 
     const gt = this.transform.globalTransform;
@@ -159,20 +246,52 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _anchor 
+   * 
+   * @return {Bounds2D}
+   */
   ComputeLocalBounds ( _anchor ) {
 
-    return this.bounds.ComputeLocal( this.x, this.y, this.width, this.height, _anchor, this );
+    return this.bounds.ComputeLocal( 
+      this.x,
+      this.y,
+      this.width,
+      this.height,
+      _anchor,
+      this
+    );
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _anchor 
+   * @param {Matrix2D} _matrix 
+   * 
+   * @return {Bounds2D}
+   */
   ComputeGlobalBounds ( _anchor, _matrix ) {
 
     const gt = this.transform.globalTransform;
 
-    return this.bounds.ComputeGlobal( gt.e, gt.f, Abs( this.w * gt.a ), Abs( this.h * gt.d ), _anchor, this, _matrix );
+    return this.bounds.ComputeGlobal( 
+      gt.e,
+      gt.f,
+      Abs( this.w * gt.a ),
+      Abs( this.h * gt.d ),
+      _anchor,
+      this,
+      _matrix
+    );
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   AHCreate () {
 
     this.arrayHandler = new ArrayHandler( this );
@@ -181,6 +300,12 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {this}
+   */
   AHIn ( _id ) {
 
     this.arrayHandler.In( _id );
@@ -189,6 +314,12 @@ export class CoreEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {this}
+   */
   AHOut ( _id ) {
 
     this.arrayHandler.Out( _id );

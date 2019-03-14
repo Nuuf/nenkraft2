@@ -6,6 +6,12 @@ import { CoreEntity2D } from './core-entity2d';
 
 export class GLEntity2D extends CoreEntity2D {
 
+  /**
+   * 
+   * @param {number}            _x 
+   * @param {number}            _y 
+   * @param {ProgramController} _pc 
+   */
   constructor ( _x, _y, _pc ) {
 
     super( _x, _y );
@@ -20,18 +26,32 @@ export class GLEntity2D extends CoreEntity2D {
 
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLPreRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLPostRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );

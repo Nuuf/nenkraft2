@@ -8,6 +8,12 @@ import { BasicTexture2D } from '../texture/basic-texture2d';
 
 export class ImageLoader {
 
+  /**
+   * 
+   * @param {object[]?} _objects 
+   * @param {boolean?}  _createTextures 
+   * @param {Function?} _onComplete 
+   */
   constructor ( _objects, _createTextures, _onComplete ) {
 
     this.imageCache = new Cache( Image );
@@ -15,9 +21,9 @@ export class ImageLoader {
     this.onImageLoaded = new Dispatcher();
     this.onComplete = new Dispatcher();
     this.onError = new Dispatcher();
-    this.count = 0;
+    this.toLoadCount = 0;
+    this.loadedCount = 0;
     this.loading = false;
-    this.toLoad = null;
     this.createTextures = false;
 
     if ( _onComplete != null ) {
@@ -30,88 +36,115 @@ export class ImageLoader {
   
   }
 
+  /**
+   *
+   * @param {object[]?} _objects 
+   * @param {boolean?}  _createTextures 
+   * 
+   * @return {void}
+   */
   Load ( _objects, _createTextures ) {
-
-    if ( this.toLoad === null ) this.toLoad = [];
-    
-    this.toLoad.push.apply( this.toLoad, _objects );
-
-    if ( _createTextures != null ) {
-
-      this.createTextures = _createTextures;
-    
-    }
 
     if ( this.loading === false ) {
 
-      this.count = 0;
       this.loading = true;
-      this.Haul( this.count );
+      this.loadedCount = 0;
+      this.toLoadCount = 0;
     
     }
-  
-  }
 
-  Haul ( _count ) {
+    this.createTextures = !!_createTextures;
 
-    const item = this.toLoad[ _count ];
+    const l = _objects.length;
+    let item = _objects[ 0 ];
 
-    if ( item != null ) {
+    this.toLoadCount += l;
+
+    for ( var i = 0; i < _objects.length; item = _objects[ ++i ] ) {
 
       const image = new Image();
 
       image.onload = this.OnLoad.bind( this );
       image.onerror = this.OnError.bind( this );
-      image.src = item.src;
       image.id = item.id;
       image.data = Object.create( null );
       image.data.w = item.w;
       image.data.h = item.h;
       image.data.fw = item.fw;
       image.data.fh = item.fh;
-    
-    } else {
+      image.src = item.src;
 
-      this.count = 0;
-      this.loading = false;
-      this.toLoad = null;
-      this.onComplete.Dispatch( this, { imageCache: this.imageCache, basicTextureCache: this.basicTextureCache } );
-    
     }
-  
+
   }
 
+  /**
+   * 
+   * @param {Event} _event 
+   * 
+   * @return {void}
+   */
   OnLoad ( _event ) {
-
+  
     const t = _event.currentTarget;
 
-    t.onload = null;
-    t.onerror = null;
+    delete t.onload;
+    delete t.onerror;
+
     this.imageCache.StoreSafe( t );
 
     if ( this.createTextures === true ) {
 
-      this.basicTextureCache.StoreSafe( new BasicTexture2D( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );
+      this.basicTextureCache.StoreSafe( 
+        new BasicTexture2D( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh )
+      );
     
     }
 
-    this.onImageLoaded.Dispatch( t, { count: this.count } );
-    this.Haul( ++this.count );
-  
+    this.onImageLoaded.Dispatch( t, { loadedCount: ++this.loadedCount } );
+
+    if ( this.loadedCount === this.toLoadCount ) {
+
+      this.loading = false;
+      this.onComplete.Dispatch( this, { 
+        imageCache: this.imageCache,
+        basicTextureCache: this.basicTextureCache
+      } );
+    
+    }
+
   }
 
+  /**
+   * 
+   * @param {Event} _event 
+   * 
+   * @return {void}
+   */
   OnError ( _event ) {
 
     this.onError.Dispatch( null, _event );
   
   }
 
+  /**
+   * 
+   * @param {any} _id 
+   * 
+   * @return {Image|null}
+   */
   GetImageById ( _id ) {
 
     return this.imageCache.GetById( _id );
   
   }
 
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {BasicTexture2D|null} 
+   */
   GetBasicTextureById ( _id ) {
 
     return this.basicTextureCache.GetById( _id );

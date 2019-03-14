@@ -6,6 +6,13 @@
 
 import { RandomInteger } from '.';
 
+/**
+ * 
+ * @param {string}   _string 
+ * @param {integer?} _cci
+ * 
+ * @return {string} 
+ */
 export function CCH1 ( _string, _cci ) {
 
   let char;
@@ -13,7 +20,7 @@ export function CCH1 ( _string, _cci ) {
   const chars = _string.split( '' );
   const output = [];
   
-  _cci = _cci === undefined ? 1 : _cci;
+  _cci = _cci ? _cci : 1;
 
   for ( var i = 0; i < chars.length; ++i ) {
 
@@ -28,13 +35,20 @@ export function CCH1 ( _string, _cci ) {
 
 }
 
+/**
+ * 
+ * @param {string}   _string 
+ * @param {integer?} _cci
+ * 
+ * @return {string} 
+ */
 export function CCH1Decipher ( _string, _cci ) {
    
   let string;
   const strings = _string.split( ' ' );
   const output = [];
 
-  _cci = _cci === undefined ? 1 : _cci;
+  _cci = _cci ? _cci : 1;
 
   for ( var i = 0; i < strings.length; ++i ) {
 

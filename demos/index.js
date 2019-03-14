@@ -73,11 +73,15 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
             {
               id: 'tileset',
               image: {
-                src: './../assets/images/spritesheet-tiles.png'
+                src: './../assets/images/aseprite-tiles.png'
               },
-              data: {
-                src: './../assets/xhr/spritesheet-tiles.json',
+              mapData: {
+                src: './../assets/xhr/aseprite-tiles.json',
                 type: 'json'
+              },
+              setData: {
+                src: './../assets/xhr/aseprite-tiles.tsx',
+                type: 'xml'
               }
             }
           ]

@@ -6,6 +6,11 @@ import { Container2D } from './container2d';
 
 export class VisualContainer2D extends Container2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     super( _x, _y );
@@ -14,30 +19,52 @@ export class VisualContainer2D extends Container2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   PreRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLPreRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   PostRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLPostRender () {
 
     return;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -58,6 +85,12 @@ export class VisualContainer2D extends Container2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -78,6 +111,12 @@ export class VisualContainer2D extends Container2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   RenderChildren ( _rc ) {
 
     const children = this.children;
@@ -90,6 +129,12 @@ export class VisualContainer2D extends Container2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRenderChildren ( _gl ) {
 
     const children = this.children;

@@ -8,6 +8,10 @@ import { Color } from '../../utility/color';
 
 export class GLLine2DProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   */
   constructor ( _gl ) {
 
     super( _gl, LINE2D );
@@ -19,6 +23,10 @@ export class GLLine2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -35,6 +43,14 @@ export class GLLine2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {matrix2D} _projection 
+   * @param {Vector2D} _s 
+   * @param {Vector2D} _e 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _s, _e ) {
 
     const gl = this.gl;

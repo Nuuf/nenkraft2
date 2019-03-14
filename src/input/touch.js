@@ -7,6 +7,12 @@ import { Dispatcher } from '../event/dispatcher';
 
 export class Touch {
 
+  /**
+   * 
+   * @param {DOMElement} _element 
+   * @param {number}     _offsetX 
+   * @param {number}     _offsetY 
+   */
   constructor ( _element, _offsetX, _offsetY ) {
 
     this.element = _element;
@@ -33,18 +39,32 @@ export class Touch {
 
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get x () {
 
     return this.position.x;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get y () {
 
     return this.position.y;
   
   }
 
+  /**
+   *
+   * @param {TouchEvent} _event 
+   * 
+   * @return {boolean}
+   */
   OnMove ( _event ) {
 
     _event.stopPropagation();
@@ -56,6 +76,12 @@ export class Touch {
   
   }
 
+  /**
+   *
+   * @param {TouchEvent} _event 
+   * 
+   * @return {void}
+   */
   OnStart ( _event ) {
 
     _event.stopPropagation();
@@ -65,6 +91,12 @@ export class Touch {
   
   }
 
+  /**
+   *
+   * @param {TouchEvent} _event 
+   * 
+   * @return {void}
+   */
   OnEnd ( _event ) {
 
     _event.stopPropagation();
@@ -73,6 +105,12 @@ export class Touch {
   
   }
 
+  /**
+   *
+   * @param {TouchEvent} _event 
+   * 
+   * @return {void}
+   */
   OnCancel ( _event ) {
 
     _event.stopPropagation();
@@ -81,6 +119,13 @@ export class Touch {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {void}
+   */
   CalculatePosition ( _x, _y ) {
 
     const offsets = this.offsets;
@@ -101,6 +146,12 @@ export class Touch {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _offset 
+   * 
+   * @return {this}
+   */
   AddOffset ( _offset ) {
 
     this.offsets.push( _offset );
@@ -109,12 +160,18 @@ export class Touch {
 
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     this.element.removeEventListener( 'touchmove', this.___bound___OnMove );
     this.element.removeEventListener( 'touchstart', this.___bound___OnStart );
     this.element.removeEventListener( 'touchend', this.___bound___OnEnd );
     this.element.removeEventListener( 'touchcancel', this.___bound___OnCancel );
+
+    return this;
   
   }
 

@@ -7,6 +7,11 @@ import { TriRectArray } from '../../math';
 
 export class GLRendertextureProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {object}                                       _un 
+   */
   constructor ( _gl, _un ) {
 
     super( _gl, _un );
@@ -21,6 +26,10 @@ export class GLRendertextureProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -39,6 +48,18 @@ export class GLRendertextureProgramController extends GLProgramController {
 
   }
 
+  /**
+   * 
+   * @param {number}   _w 
+   * @param {number}   _h 
+   * @param {integer?} _param 
+   * @param {number?}  _ex 
+   * @param {number?}  _ey 
+   * @param {number?}  _ew 
+   * @param {number?}  _eh 
+   * 
+   * @return {void}
+   */
   Config ( _w, _h, _param, _ex, _ey, _ew, _eh ) {
 
     this.w = _w;
@@ -47,8 +68,15 @@ export class GLRendertextureProgramController extends GLProgramController {
     const gl = this.gl;
     let essence;
 
-    if ( _ex != null && _ey != null && _ew != null && _eh != null ) essence = TriRectArray( _ex, _ey, _ew, _eh );
-    else essence = TriRectArray( -1, -1, 2, 2 );
+    if ( _ex != null && _ey != null && _ew != null && _eh != null ) {
+
+      essence = TriRectArray( _ex, _ey, _ew, _eh );
+    
+    } else {
+
+      essence = TriRectArray( -1, -1, 2, 2 );
+    
+    }
 
     _param = _param != null ? _param : gl.LINEAR;
 
@@ -65,7 +93,12 @@ export class GLRendertextureProgramController extends GLProgramController {
     gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, this.w, this.h );
     gl.bindFramebuffer( gl.FRAMEBUFFER, this.frameBuffer );
     gl.framebufferTexture2D( gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texture, 0 );
-    gl.framebufferRenderbuffer( gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, this.renderBuffer );
+    gl.framebufferRenderbuffer( 
+      gl.FRAMEBUFFER, 
+      gl.DEPTH_ATTACHMENT,
+      gl.RENDERBUFFER, 
+      this.renderBuffer
+    );
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
     gl.bindTexture( gl.TEXTURE_2D, null );
@@ -74,6 +107,10 @@ export class GLRendertextureProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   ExecuteClean () {
 
     const gl = this.gl;
@@ -100,6 +137,14 @@ export class GLRendertextureProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Matrix2D} _projection 
+   * @param {Matrix2D} _translation 
+   * @param {Matrix2D} _transformation 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _translation, _transformation ) {
 
     const gl = this.gl;

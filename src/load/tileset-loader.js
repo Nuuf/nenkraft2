@@ -10,21 +10,25 @@ import { Tileset } from '../texture/tileset';
 
 export class TilesetLoader {
 
+  /**
+   * 
+   * @param {object[]?}  _objects 
+   * @param {Function?} _onComplete 
+   */
   constructor ( _objects, _onComplete ) {
 
     this.tilesetCache = new Cache( Tileset );
-    this.xhrLoader = new XHRLoader();
+    this.mapDataLoader = new XHRLoader();
+    this.setDataLoader = new XHRLoader();
     this.imageLoader = new ImageLoader();
     this.onComplete = new Dispatcher();
     this.onTilesetLoaded = new Dispatcher();
-    this.count = 0;
+    this.toLoadCount = 0;
+    this.loadedCount = 0;
     this.loading = false;
-    this.toLoad = null;
-    this.pairCount = 0;
-    this.tempBasicTexture = null;
-    this.tempData = null;
 
-    this.xhrLoader.onXHRLoaded.Add( this.OnPartXHRLoaded, this );
+    this.mapDataLoader.onXHRLoaded.Add( this.OnPartMapDataLoaded, this );
+    this.setDataLoader.onXHRLoaded.Add( this.OnPartSetDataLoaded, this );
     this.imageLoader.onImageLoaded.Add( this.OnPartImageLoaded, this );
 
     if ( _onComplete != null ) {
@@ -37,77 +41,143 @@ export class TilesetLoader {
   
   }
 
+  /**
+   * 
+   * @param {object[]?} _objects 
+   * 
+   * @return {void}
+   */
   Load ( _objects ) {
-
-    if ( this.toLoad === null ) this.toLoad = [];
-
-    this.toLoad.push.apply( this.toLoad, _objects );
 
     if ( this.loading === false ) {
 
-      this.count = 0;
       this.loading = true;
-      this.Haul( this.count );
+      this.loadedCount = 0;
+      this.toLoadCount = 0;
     
     }
+
+    const l = _objects.length;
+    let item = _objects[ 0 ];
+
+    this.toLoadCount += l;
+
+    const mapData = [];
+    const setData = [];
+    const image = [];
+
+    for ( var i = 0; i < _objects.length; item = _objects[ ++i ] ) {
+
+      item.mapData.id = item.setData.id = item.image.id = item.id;
+      mapData.push( item.mapData );
+      setData.push( item.setData );
+      image.push( item.image );
+
+    }
+
+    this.mapDataLoader.Load( mapData );
+    this.setDataLoader.Load( setData );
+    this.imageLoader.Load( image, true );
   
   }
 
-  Haul ( _count ) {
+  /**
+   * 
+   * @param {any} _id 
+   * 
+   * @return {void}
+   */
+  OnTilesetLoaded ( _id ) {
 
-    const item = this.toLoad[ _count ];
+    const texture = this.imageLoader.GetBasicTextureById( _id );
+    const mapData = this.mapDataLoader.GetDataById( _id );
+    const setData = this.setDataLoader.GetDataById( _id );
+    const tileset = new Tileset( texture, mapData, setData );
 
-    if ( item != null ) {
+    this.tilesetCache.StoreSafe( tileset );
 
-      item.data.id = item.image.id = item.id;
-      this.xhrLoader.Load( [ item.data ] );
-      this.imageLoader.Load( [ item.image ], true );
-      
-    } else {
+    this.onTilesetLoaded.Dispatch( tileset, { loadedCount: ++this.loadedCount } );
 
-      this.count = 0;
+    if ( this.loadedCount === this.toLoadCount ) {
+
       this.loading = false;
-      this.toLoad = null;
-      this.tempBasicTexture = null;
-      this.tempData = null;
-      this.xhrLoader.onXHRLoaded.Dump();
-      this.imageLoader.onImageLoaded.Dump();
-      this.onComplete.Dispatch( this, { tilesetCache: this.tilesetCache } );
+      this.onComplete.Dispatch( this, {
+        spritesheetCache: this.spritesheetCache
+      } );
     
     }
   
   }
 
-  OnPartLoaded () {
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
+  OnPartMapDataLoaded ( _event ) {
 
-    if ( ++this.pairCount === 2 ) {
-  
-      const tileset = new Tileset( this.tempBasicTexture, this.tempData );
-  
-      this.tilesetCache.StoreSafe( tileset );
-  
-      this.pairCount = 0;
-      this.onTilesetLoaded.Dispatch( tileset, { count: this.count } );
-      this.Haul( ++this.count );
-      
+    const id = _event.target.data.id;
+
+    if ( 
+      this.imageLoader.imageCache.Contains( null, id ) &&
+      this.setDataLoader.dataCache.Contains( null, id )
+    ) {
+
+      this.OnTilesetLoaded( id );
+    
+    }
+
+  }
+
+  /**
+   *
+   * @param {Event} _event
+   *
+   * @return {void} 
+   */
+  OnPartSetDataLoaded ( _event ) {
+
+    const id = _event.target.data.id;
+
+    if ( 
+      this.imageLoader.imageCache.Contains( null, id ) &&
+      this.mapDataLoader.dataCache.Contains( null, id )
+    ) {
+
+      this.OnTilesetLoaded( id );
+    
     }
   
   }
 
-  OnPartXHRLoaded ( _event ) {
-
-    this.tempData = this.xhrLoader.GetDataById( _event.target.data.id );
-    this.OnPartLoaded();
-  
-  }
-
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
   OnPartImageLoaded ( _event ) {
 
-    this.tempBasicTexture = this.imageLoader.GetBasicTextureById( _event.target.id );
-    this.OnPartLoaded();
+    const id = _event.target.id;
+
+    if ( 
+      this.mapDataLoader.dataCache.Contains( null, id ) &&
+      this.setDataLoader.dataCache.Contains( null, id )
+    ) {
+
+      this.OnTilesetLoaded( id );
+    
+    }
   
   }
 
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {Tileset|null} 
+   */
   GetTilesetById ( _id ) {
 
     return this.tilesetCache.GetById( _id );

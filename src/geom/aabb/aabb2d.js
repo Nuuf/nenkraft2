@@ -6,6 +6,13 @@ import { Vector2D } from '../../math/vector/vector2d';
 
 export class AABB2D {
 
+  /**
+   * 
+   * @param {number} _tlx 
+   * @param {number} _tly 
+   * @param {number} _brx 
+   * @param {number} _bry 
+   */
   constructor ( _tlx, _tly, _brx, _bry ) {
 
     this.tl = new Vector2D( _tlx, _tly );
@@ -22,12 +29,25 @@ export class AABB2D {
 
   }
 
+  /**
+   * 
+   * @return {integer}
+   */
   static get TYPE () {
 
     return PS_TYPE;
   
   }
 
+  /**
+   * 
+   * @param {number} _tlx 
+   * @param {number} _tly 
+   * @param {number} _brx 
+   * @param {number} _bry 
+   * 
+   * @return {this}
+   */
   Set ( _tlx, _tly, _brx, _bry ) {
 
     this.tl.Set( _tlx, _tly );
@@ -37,6 +57,12 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _aabb2d 
+   * 
+   * @return {this}
+   */
   SetC ( _aabb2d ) {
 
     this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
@@ -45,12 +71,28 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _w 
+   * @param {number} _h 
+   * 
+   * @return {this}
+   */
   SetXYWH ( _x, _y, _w, _h ) {
 
     return this.Set( _x, _y, _x + _w, _y + _h );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   SetPosition ( _x, _y ) {
 
     this.tl.Set( _x, _y );
@@ -60,12 +102,24 @@ export class AABB2D {
 
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetPosition () {
 
     return this.tl;
 
   }
 
+  /**
+   * 
+   * @param {number}   _x 
+   * @param {number}   _y 
+   * @param {boolean?} _notl 
+   * 
+   * @return {this}
+   */
   Scale ( _x, _y, _notl ) {
 
     if ( _notl !== false ) this.tl.Multiply( _x, _y );
@@ -75,6 +129,13 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {Object|Vector2D|Point} _p 
+   * @param {boolean?}              _notl 
+   * 
+   * @return {this}
+   */
   ScaleV ( _p, _notl ) {
 
     if ( _notl !== false ) this.tl.MultiplyV( _p );
@@ -84,6 +145,10 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeWH () {
 
     this.w = this.br.x - this.tl.x;
@@ -96,6 +161,12 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {Object|Vector2D|Point} _p 
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D ( _p ) {
 
     return !( 
@@ -107,6 +178,12 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {Object|Vector2D|Point} _p 
+   * 
+   * @return {boolean}
+   */
   ContainsPoint ( _p ) {
 
     return !( 
@@ -118,6 +195,12 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _aabb 
+   * 
+   * @return {boolean}
+   */
   IntersectsAABB2D ( _aabb ) {
     
     return !( 
@@ -129,6 +212,12 @@ export class AABB2D {
   
   }
 
+  /**
+   *
+   * @param {AABB2D} _aabb 
+   * 
+   * @return {boolean}
+   */
   ContainsAABB2D ( _aabb ) {
 
     if ( _aabb.area > this.area ) {
@@ -146,6 +235,12 @@ export class AABB2D {
   
   }
 
+  /**
+   * 
+   * @param {string} _quadrant 
+   * 
+   * @return {AABB2D}
+   */
   GetQuadrant ( _quadrant ) {
 
     const tl = this.tl;

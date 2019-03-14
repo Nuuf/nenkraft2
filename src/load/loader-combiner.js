@@ -6,10 +6,15 @@ import { Dispatcher } from '../event/dispatcher';
 
 export class LoaderCombiner {
 
+  /**
+   * 
+   * @param {Loader[]}  _loaders 
+   * @param {Function?} _onComplete 
+   */
   constructor ( _loaders, _onComplete ) {
 
     this.loaders = _loaders;
-    this.count = 0;
+    this.loaderCount = 0;
     this.onComplete = new Dispatcher();
 
     if ( _onComplete != null ) {
@@ -20,6 +25,10 @@ export class LoaderCombiner {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Load () {
 
     const loaders = this.loaders;
@@ -34,9 +43,13 @@ export class LoaderCombiner {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   OnLoaderComplete () {
 
-    if ( ++this.count === this.loaders.length ) {
+    if ( ++this.loaderCount === this.loaders.length ) {
 
       const loaders = this.loaders;
       let loader = loaders[ 0 ];

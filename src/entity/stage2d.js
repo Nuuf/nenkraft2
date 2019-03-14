@@ -10,6 +10,10 @@ import { Keyboard, Mouse, Touch } from '../input';
 
 export class Stage2D extends VisualContainer2D {
 
+  /**
+   * 
+   * @param {object} _options 
+   */
   constructor ( _options ) {
 
     super( 0, 0 );
@@ -33,7 +37,10 @@ export class Stage2D extends VisualContainer2D {
     this.touch = null;
     this.ticker = null;
 
-    if ( _options.mode != null && ( _options.mode.toLowerCase() === 'webgl2' || _options.mode.toLowerCase() === 'webgl' ) ) {
+    if ( 
+      _options.mode != null &&
+      ( _options.mode.toLowerCase() === 'webgl2' || _options.mode.toLowerCase() === 'webgl' )
+    ) {
 
       this.gl = _options.canvas.getContext( _options.mode.toLowerCase(), {
         antialias: _options.antialias,
@@ -43,7 +50,11 @@ export class Stage2D extends VisualContainer2D {
 
       if ( this.gl != null ) {
 
-        console.log( '%cWebGL!', 'color:#f0f7da;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
+        console.log( 
+          '%cWebGL!', 
+          'color:#f0f7da;background-color:#304860;' +
+          'font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+        );
       
       } else {
 
@@ -83,7 +94,11 @@ export class Stage2D extends VisualContainer2D {
 
       this.rc = _options.canvas.getContext( '2d' );
 
-      console.log( '%cCanvas 2D!', 'color:#f0f7da;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;' );
+      console.log( 
+        '%cCanvas 2D!', 
+        'color:#f0f7da;background-color:#304860;' + 
+        'font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+      );
 
       if ( _options.noTicker !== true ) {
 
@@ -139,6 +154,12 @@ export class Stage2D extends VisualContainer2D {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   PreRender ( _rc ) {
 
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
@@ -159,6 +180,12 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLConfig ( _gl ) {
 
     if ( _gl == null ) _gl = this.gl;
@@ -173,6 +200,12 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLPreRender ( _gl ) {
 
     if ( this.clear === true ) {
@@ -183,12 +216,22 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLPostRender ( /* _gl*/ ) {
 
     // _gl.flush();
   
   }
 
+  /**
+   * 
+   * @param {number} _delta 
+   * 
+   * @return {void}
+   */
   Process ( _delta ) {
 
     this.Render( this.rc );
@@ -196,6 +239,12 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _delta 
+   * 
+   * @return {void}
+   */
   GLProcess ( _delta ) {
 
     this.GLRender( this.gl );
@@ -203,6 +252,12 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _delta 
+   * 
+   * @return {void}
+   */
   MixedProcess ( _delta ) {
       
     if ( this.usingWebGL === true ) {
@@ -219,6 +274,13 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {GLRenderTextureProgramController?}            _buffer 
+   * 
+   * @return {void}
+   */
   SetFramebuffer ( _gl, _buffer ) {
 
     if ( _gl == null ) _gl = this.gl;
@@ -238,6 +300,10 @@ export class Stage2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     this.Dump();
@@ -245,6 +311,8 @@ export class Stage2D extends VisualContainer2D {
     if ( this.mouse !== null ) this.mouse.Destroy();
     if ( this.touch !== null ) this.touch.Destroy();
     if ( this.ticker !== null ) this.ticker.Stop();
+
+    return this;
   
   }
 
