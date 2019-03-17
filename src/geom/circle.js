@@ -249,7 +249,7 @@ export class Circle {
 
   /**
    * 
-   * @return {void}
+   * @param {number} _value
    */
   set y ( _value ) {
 
@@ -269,7 +269,7 @@ export class Circle {
 
   /**
    * 
-   * @return {void}
+   * @param {number} _value}
    */
   set radius ( _value ) {
 

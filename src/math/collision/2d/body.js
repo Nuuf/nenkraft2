@@ -6,6 +6,10 @@ import { Vector2D } from '../../vector/vector2d';
 
 export class Body2D {
 
+  /**
+   * 
+   * @param {Shape} _shape 
+   */
   constructor ( _shape ) {
 
     this.shape = _shape;
@@ -16,6 +20,12 @@ export class Body2D {
 
   }
 
+  /**
+   * 
+   * @param {number} _n
+   * 
+   * @return {this} 
+   */
   SetMass ( _n ) {
 
     this.mass = _n;
@@ -24,6 +34,13 @@ export class Body2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   SetOffset ( _x, _y ) {
 
     this.offset.Set( _x, _y );
@@ -32,6 +49,13 @@ export class Body2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   SetVelocity ( _x, _y ) {
 
     this.velocity.Set( _x, _y );
@@ -40,6 +64,12 @@ export class Body2D {
 
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _v 
+   * 
+   * @return {this}
+   */
   SetVelocityV ( _v ) {
 
     this.velocity.SetV( _v );
@@ -48,18 +78,35 @@ export class Body2D {
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetPosition () {
 
     return this.shape.GetPosition();
 
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y
+   *
+   * @return {this} 
+   */
   SetPosition ( _x, _y ) {
 
     this.shape.SetPosition( _x + this.offset.x, _y + this.offset.y );
 
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _v 
+   * 
+   * @return {this}
+   */
   SetPositionV ( _v ) {
 
     this.SetPosition( _v.x, _v.y );
@@ -68,6 +115,12 @@ export class Body2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _relative
+   * 
+   * @return {this} 
+   */
   SetRelative ( _relative ) {
 
     this.relative = _relative;

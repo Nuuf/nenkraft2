@@ -44,9 +44,8 @@ export class Command {
   }
   
   /**
-   * @param {string} _value
    * 
-   * @return {void}
+   * @param {string} _value
    */
   static set OPTION_PREFIX ( _value ) {
   

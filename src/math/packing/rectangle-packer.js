@@ -7,6 +7,11 @@ import { Vector2D } from '../vector/vector2d';
 
 export class RectanglePacker {
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h 
+   */
   constructor ( _w, _h ) {
 
     this.root = null;
@@ -19,6 +24,13 @@ export class RectanglePacker {
 
   }
 
+  /**
+   * 
+   * @param {object[]} _objects 
+   * @param {boolean}  _suppress 
+   * 
+   * @return {object[]}
+   */
   Pack ( _objects, _suppress ) {
 
     const l = _objects.length;
@@ -67,6 +79,13 @@ export class RectanglePacker {
   
   }
 
+  /**
+   * 
+   * @param {object[]} _objects 
+   * @param {boolean}  _suppress 
+   * 
+   * @return {object[]}
+   */
   PackDynamic ( _objects, _suppress ) {
 
     const l = _objects.length;
@@ -119,6 +138,14 @@ export class RectanglePacker {
 
   }
 
+  /**
+   * 
+   * @param {AABB2D} _node 
+   * @param {number} _w 
+   * @param {number} _h 
+   * 
+   * @return {AABB2D|null}
+   */
   Find ( _node, _w, _h ) {
 
     if ( _node.vertical && _node.horizontal ) {
@@ -135,6 +162,14 @@ export class RectanglePacker {
 
   }
 
+  /**
+   * 
+   * @param {AABB2D} _node 
+   * @param {number} _w 
+   * @param {number} _h 
+   * 
+   * @return {AABB2D}
+   */
   Partition ( _node, _w, _h ) {
 
     _node.vertical = new AABB2D( 0, 0, 0, 0 )
@@ -146,6 +181,13 @@ export class RectanglePacker {
   
   }
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h
+   * 
+   * @return {AABB2D|null} 
+   */
   Extend ( _w, _h ) {
 
     const a = ( _w <= this.root.w );
@@ -175,6 +217,14 @@ export class RectanglePacker {
   
   }
 
+  /**
+   * 
+   * @param {number}   _w 
+   * @param {number}   _h 
+   * @param {boolean?} _vertical 
+   * 
+   * @return {AABB2D|null}
+   */
   ExtendAxis ( _w, _h, _vertical ) {
 
     let newRoot = null;
@@ -213,6 +263,13 @@ export class RectanglePacker {
   
   }
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h 
+   * 
+   * @return {this}
+   */
   UseProp ( _w, _h ) {
 
     this.propW = _w;
@@ -222,6 +279,13 @@ export class RectanglePacker {
   
   }
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h
+   * 
+   * @return {this} 
+   */
   SetSize ( _w, _h ) {
 
     this.w = _w;
@@ -232,6 +296,13 @@ export class RectanglePacker {
 
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   SetPadding ( _x, _y ) {
 
     this.padding.Set( _x, _y );

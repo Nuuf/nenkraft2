@@ -6,6 +6,12 @@ import { PrecisionRound } from '../../math';
 
 export class Ticker {
 
+  /**
+   * 
+   * @param {Function} _onProcess 
+   * @param {number}   _rate 
+   * @param {boolean}  _halt 
+   */
   constructor ( _onProcess, _rate, _halt ) {
 
     this.SetDesiredRate( _rate );
@@ -25,24 +31,40 @@ export class Ticker {
 
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   static get LOG () {
 
     return PS_LOG;
   
   }
 
+  /**
+   * 
+   * @param {boolean} _value
+   */
   static set LOG ( _value ) {
 
     PS_LOG = !!_value;
   
   }
 
+  /**
+   *
+   * @return {void}
+   */
   Process () {
 
     this.onProcess( this.ComputeDelta() );
   
   }
 
+  /**
+   *
+   * @return {void}
+   */
   ProcessAF () {
 
     this.onProcess( this.ComputeDelta() );
@@ -51,6 +73,10 @@ export class Ticker {
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   ComputeDelta () {
       
     this.now = Date.now();
@@ -61,18 +87,34 @@ export class Ticker {
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetTPS () {
 
     return PrecisionRound( 1 / this.delta * 1000, 2 );
   
   }
 
+  /**
+   * 
+   * @param {number} _rate
+   * 
+   * @return {void} 
+   */
   SetDesiredRate ( _rate ) {
 
     this.desiredRate = _rate === undefined ? 16.66 : 1000 / _rate;
   
   }
 
+  /**
+   *
+   * @param {boolean} _force
+   *
+   * @return {void} 
+   */
   Start ( _force ) {
 
     if ( this.afId !== null ) {
@@ -108,6 +150,12 @@ export class Ticker {
   
   }
 
+  /**
+   *
+   * @param {boolean} _force
+   *
+   * @return {void} 
+   */
   StartAF ( _force ) {
 
     if ( this.intervalId !== null ) {
@@ -145,6 +193,10 @@ export class Ticker {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Stop () {
 
     if ( this.intervalId !== null ) {
@@ -169,7 +221,8 @@ export class Ticker {
 
 // Private Static ----->
 const PS_LOG = true;
-const PS_LOG_CSS = 'background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
+const PS_LOG_CSS = 
+  'background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
 const Log = function () {
 
   if ( PS_LOG === false ) return;

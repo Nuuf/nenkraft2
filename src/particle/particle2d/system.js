@@ -8,6 +8,11 @@ import { Particle2D } from './particle2d';
 
 export class System extends VisualContainer2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     super( _x, _y );
@@ -19,6 +24,10 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     this.HandleParticles();
@@ -26,6 +35,10 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   HandleParticles () {
 
     const particles = this.particles;
@@ -38,6 +51,10 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   HandleParticleDeletion () {
 
     const particles = this.particles;
@@ -61,6 +78,12 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Particle2D} _particle2d 
+   * 
+   * @return {Particle2D}
+   */
   AddParticle ( _particle2d ) {
 
     _particle2d.system = this;
@@ -71,6 +94,12 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Particle2D} _particle2d 
+   * 
+   * @return {Particle2D}
+   */
   RemoveParticle ( _particle2d ) {
 
     const particles = this.particles;
@@ -87,6 +116,12 @@ export class System extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {void}
+   */
   Emit ( _options ) {
 
     for ( var i = 0; i < _options.amount; ++i ) {

@@ -23,6 +23,12 @@ export { GCO };
 export { LineConf };
 export { TextConf };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const All = function ( _style ) {
 
   return {
@@ -35,6 +41,12 @@ export const All = function ( _style ) {
 
 };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const FFSa = function ( _style ) {
 
   return {
@@ -45,6 +57,12 @@ export const FFSa = function ( _style ) {
 
 };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const SSa = function ( _style ) {
 
   return {
@@ -54,6 +72,12 @@ export const SSa = function ( _style ) {
   
 };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const FSa = function ( _style ) {
 
   return {
@@ -63,6 +87,12 @@ export const FSa = function ( _style ) {
   
 };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const SaT = function ( _style ) {
 
   return {
@@ -72,6 +102,12 @@ export const SaT = function ( _style ) {
   
 };
 
+/**
+ * 
+ * @param {object?} _style 
+ * 
+ * @return {object}
+ */
 export const P = function ( _style ) {
 
   return {

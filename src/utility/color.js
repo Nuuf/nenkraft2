@@ -10,6 +10,13 @@ const Round = Math.round;
 
 export class Color {
 
+  /**
+   * 
+   * @param {numebr?} _r 
+   * @param {numebr?} _g 
+   * @param {numebr?} _b 
+   * @param {numebr?} _a 
+   */
   constructor ( _r, _g, _b, _a ) {
 
     this.channel = new Float32Array( [
@@ -24,9 +31,15 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @return {Color}
+   */
   Copy () {
 
-    const color = new Color( this.channel[ 0 ], this.channel[ 1 ], this.channel[ 2 ], this.channel[ 3 ] );
+    const color = new Color( 
+      this.channel[ 0 ], this.channel[ 1 ], this.channel[ 2 ], this.channel[ 3 ]
+    );
 
     color.value = this.value;
     color.currentConversion = this.currentConversion;
@@ -35,6 +48,10 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeValueRGBA () {
 
     this.value = 'rgba('.concat( this.channel.join( ',' ).concat( ')' ) );
@@ -43,22 +60,44 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeValueHSLA () {
 
-    this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
+    this.value = 'hsla(' + 
+      this.channel[ 0 ] + ',' +
+      this.channel[ 1 ] + '%,' + 
+      this.channel[ 2 ] + '%,' + 
+      this.channel[ 3 ] + ')';
 
     return this;
   
   }
 
+  /**
+   *
+   * @return {this}
+   */
   ComputeValueHex () {
 
-    this.value = '#' + this.channel[ 0 ].toString( 16 ) + this.channel[ 1 ].toString( 16 ) + this.channel[ 2 ].toString( 16 );
+    this.value = '#' + 
+      this.channel[ 0 ].toString( 16 ) + 
+      this.channel[ 1 ].toString( 16 ) + 
+      this.channel[ 2 ].toString( 16 );
 
     return this;
   
   }
 
+  /**
+   * 
+   * @param {Color}  _color 
+   * @param {number} _percentage 
+   * 
+   * @return {void}
+   */
   Mix ( _color, _percentage ) {
       
     const pb = 1 - _percentage;
@@ -72,6 +111,12 @@ export class Color {
 
   }
 
+  /**
+   * 
+   * @param {boolean} _round 
+   * 
+   * @return {void}
+   */
   ConvertToHSLA ( _round ) {
 
     let h = 0;
@@ -110,6 +155,15 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @param {number}   _r 
+   * @param {number}   _g 
+   * @param {number}   _b 
+   * @param {boolean?} _noCompute 
+   * 
+   * @return {this}
+   */
   SetRGB ( _r, _g, _b, _noCompute ) {
 
     this.channel[ 0 ] = Clamp( _r, PS_MIN_VAL, PS_MAX_VAL );
@@ -122,6 +176,15 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @param {number} _r 
+   * @param {number} _g 
+   * @param {number} _b 
+   * @param {number} _a 
+   * 
+   * @return {this}
+   */
   SetRGBA ( _r, _g, _b, _a ) {
 
     this.SetRGB( _r, _g, _b, true );
@@ -132,6 +195,12 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @param {string} _hex
+   * 
+   * @return {this} 
+   */
   SetHex ( _hex ) {
 
     _hex = _hex.replace( /#/g, '' );
@@ -145,6 +214,13 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @param {integer} _channel 
+   * @param {number}  _value 
+   * 
+   * @return {this}
+   */
   IncreaseChannel ( _channel, _value ) {
 
     this.channel[ _channel ] += _value;
@@ -155,6 +231,13 @@ export class Color {
 
   }
 
+  /**
+   * 
+   * @param {integer} _channel 
+   * @param {number}  _value
+   * 
+   * @return {this} 
+   */
   SetChannel ( _channel, _value ) {
 
     this.channel[ _channel ] = _value;
@@ -165,6 +248,12 @@ export class Color {
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   * 
+   * @return {this} 
+   */
   SetSame ( _value ) {
 
     this.channel[ 0 ] = 
@@ -178,56 +267,94 @@ export class Color {
 
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Normalize () {
 
     this.channel[ 0 ] = PS_NORM * this.channel[ 0 ];
     this.channel[ 1 ] = PS_NORM * this.channel[ 1 ];
     this.channel[ 2 ] = PS_NORM * this.channel[ 2 ];
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get r () {
 
     return this.channel[ 0 ];
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   */
   set r ( _value ) {
 
     this.channel[ 0 ] = _value;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get g () {
 
     return this.channel[ 1 ];
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   */
   set g ( _value ) {
 
     this.channel[ 1 ] = _value;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get b () {
 
     return this.channel[ 2 ];
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   */
   set b ( _value ) {
 
     this.channel[ 2 ] = _value;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get a () {
 
     return this.channel[ 3 ];
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   */
   set a ( _value ) {
 
     this.channel[ 3 ] = _value;

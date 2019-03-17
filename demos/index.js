@@ -35,7 +35,8 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
             { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
             { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' },
             { id: 'fontNoK', src: './assets/xhr/fontNoK.xml', type: 'xml' },
-            { id: 'particleExplosion', src: './assets/xhr/particle-explosion.json', type: 'json' }
+            { id: 'particleExplosion', src: './assets/xhr/particle-explosion.json', type: 'json' },
+            { id: 'lorem', src: './assets/xhr/lorem.json', type: 'json' }
           ]
         ]
       },
@@ -108,7 +109,8 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
         tsloader: loaderCombiner.loaders[ 3 ],
         invadersSpritesheet: loaderCombiner.loaders[ 2 ].GetSpritesheetById( 'sheet-default' ),
         characterSheet: loaderCombiner.loaders[ 2 ].GetSpritesheetById( 'sheet-character' ),
-        tileset: loaderCombiner.loaders[ 3 ].GetTilesetById( 'tileset' )
+        tileset: loaderCombiner.loaders[ 3 ].GetTilesetById( 'tileset' ),
+        lorem: loaderCombiner.loaders[ 1 ].GetDataById( 'lorem' ).lorem
       };
 
       window.testData.invadersSpritesheet.GenerateFrames();

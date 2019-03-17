@@ -6,6 +6,9 @@ import { Nested, CreateIteratorArgs, ReplaceArgumentWithObjectValue, IsArray } f
 
 export class Maker {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.orders = [];
@@ -15,6 +18,12 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {integer} _amount
+   * 
+   * @return {this} 
+   */
   Many ( _amount ) {
 
     this.amount = _amount;
@@ -23,6 +32,13 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {object}   _object 
+   * @param {boolean?} _reset 
+   * 
+   * @return {this}
+   */
   Bind ( _object, _reset ) {
 
     if ( _reset ) this.orders.length = 0;
@@ -32,6 +48,12 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {class} _class
+   * 
+   * @return {this} 
+   */
   Make ( _class ) {
 
     const l = this.amount;
@@ -58,6 +80,14 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {Function|string} _function 
+   * @param {any[]|string}    _args 
+   * @param {string}          _prop 
+   * 
+   * @return {this}
+   */
   Call ( _function, _args, _prop ) {
 
     let context;
@@ -117,6 +147,13 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {string} _key 
+   * @param {any}    _value 
+   * 
+   * @return {this}
+   */
   Cast ( _key, _value ) {
 
     const orders = this.orders;
@@ -138,6 +175,10 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @return {any}
+   */
   Done () {
 
     this.amount = 1;
@@ -147,6 +188,10 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @return {any[]}
+   */
   Mass () {
 
     this.amount = 1;
@@ -156,6 +201,12 @@ export class Maker {
   
   }
 
+  /**
+   * 
+   * @param {boolean?} _mass
+   * 
+   * @return {any[]|any} 
+   */
   Ship ( _mass ) {
 
     this.amount = 1;

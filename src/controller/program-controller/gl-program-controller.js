@@ -38,8 +38,6 @@ export class GLProgramController {
   /**
    * 
    * @param {GLProgramController} _value
-   * 
-   * @return {void}
    */
   static set LAST_USED_CONTROLLER ( _value ) {
 

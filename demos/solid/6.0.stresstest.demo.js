@@ -82,7 +82,12 @@ export default () => {
             return a - b;
             
           } );
-          console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+          console.log( 
+            childrenMDC,
+            '\nMIN: ' + childrenMDC[ 0 ],
+            'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ],
+            'MAX: ' + childrenMDC[ childrenMDC.length - 1 ]
+          );
 
         }
       

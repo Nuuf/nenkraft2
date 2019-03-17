@@ -8,6 +8,13 @@ import { AABB2D } from '../geom/aabb/aabb2d';
 
 export class CanvasManager {
 
+  /**
+   * 
+   * @param {CanvasDOMElement} _canvas 
+   * @param {number}           _w 
+   * @param {number}           _h 
+   * @param {string}           _mode 
+   */
   constructor ( _canvas, _w, _h, _mode ) {
 
     this.canvas = _canvas;
@@ -31,42 +38,70 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get FILL_SCREEN () {
 
     return PS_FILL_SCREEN;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get KEEP_ASPECT_RATIO () {
 
     return PS_KEEP_ASPECT_RATIO;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get KEEP_ASPECT_RATIO_MIN () {
 
     return PS_KEEP_ASPECT_RATIO_MIN;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get KEEP_ASPECT_RATIO_MAX () {
 
     return PS_KEEP_ASPECT_RATIO_MAX;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get KEEP_ASPECT_RATIO_FIT () {
 
     return PS_KEEP_ASPECT_RATIO_FIT;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   OnWindowResize () {
 
     this[ this.mode ]();
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Trigger () {
 
     this.OnWindowResize();
@@ -75,6 +110,14 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h 
+   * @param {string} _mode
+   * 
+   * @return {this} 
+   */
   Reconfigure ( _w, _h, _mode ) {
 
     this.w = _w;
@@ -85,6 +128,12 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @param {Stage2D} _stage 
+   * 
+   * @return {this}
+   */
   BindStage ( _stage ) {
 
     this.stage = _stage;
@@ -93,6 +142,12 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @param {Container2D} _container 
+   * 
+   * @return {this}
+   */
   BindRootContainer ( _container ) {
 
     this.rootContainer = _container;
@@ -101,6 +156,12 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @param {Culler2D} _culler 
+   * 
+   * @return {this}
+   */
   BindCuller ( _culler ) {
 
     this.culler = _culler;
@@ -111,6 +172,13 @@ export class CanvasManager {
 
   }
 
+  /**
+   * 
+   * @param {number} _w 
+   * @param {number} _h
+   * 
+   * @return {void} 
+   */
   SetCurrent ( _w, _h ) {
 
     _w = _w | 0;
@@ -165,12 +233,20 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   FillScreen () {
 
     this.SetCurrent( window.innerWidth, window.innerHeight );
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   KeepAspectRatio () {
 
     const w = window.innerWidth;
@@ -180,6 +256,10 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   KeepAspectRatioMIN () {
 
     let h;
@@ -197,6 +277,10 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   KeepAspectRatioMAX () {
 
     let h;
@@ -214,6 +298,10 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   KeepAspectRatioFIT () {
 
     let w = window.innerWidth;
@@ -230,6 +318,10 @@ export class CanvasManager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Destroy () {
 
     window.removeEventListener( 'resize', this.___bound___OnWindowRsize );

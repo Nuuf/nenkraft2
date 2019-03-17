@@ -7,8 +7,8 @@ export class Tileset {
   /**
    * 
    * @param {BasicTexture2D} _basicTexture 
-   * @param {object} _mapData 
-   * @param {object} _setData 
+   * @param {object}         _mapData 
+   * @param {object}         _setData 
    */
   constructor ( _basicTexture, _mapData, _setData ) {
 

@@ -184,7 +184,7 @@ export class Line2D {
 
   /**
    * 
-   * @param {Object|Vector2D|Point} _p 
+   * @param {object|Vector2D|Point} _p 
    * 
    * @return {boolean}
    */

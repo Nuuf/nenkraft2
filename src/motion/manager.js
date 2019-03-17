@@ -6,6 +6,10 @@ import { Motion } from './motion';
 
 export class Manager {
 
+  /**
+   * 
+   * @param {object|Entity} _target 
+   */
   constructor ( _target ) {
 
     this.motions = [];
@@ -13,6 +17,16 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string}  _id 
+   * @param {string}  _propertyString 
+   * @param {number}  _value 
+   * @param {number}  _duration 
+   * @param {string?} _easing 
+   * 
+   * @return {Motion|null}
+   */
   Create ( _id, _propertyString, _value, _duration, _easing ) {
 
     const motion = this.GetMotionById( _id );
@@ -31,6 +45,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {Motion} _motion 
+   * 
+   * @return {void}
+   */
   Add ( _motion ) {
 
     const motion = this.GetMotionById( _motion.id );
@@ -43,6 +63,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {Motion|null}
+   */
   Start ( _id ) {
 
     const motion = this.GetMotionById( _id );
@@ -57,6 +83,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _ids 
+   * 
+   * @return {void}
+   */
   StartMultiple ( _ids ) {
     
     _ids = _ids.split( ' ' );
@@ -69,6 +101,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {Motion|null}
+   */
   Stop ( _id ) {
 
     const motion = this.GetMotionById( _id );
@@ -83,6 +121,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _ids
+   * 
+   * @return {void} 
+   */
   StopMultiple ( _ids ) {
     
     _ids = _ids.split( ' ' );
@@ -95,6 +139,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {Motion|null}
+   */
   Reset ( _id ) {
 
     const motion = this.GetMotionByid( _id );
@@ -109,6 +159,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _ids
+   * 
+   * @return {void} 
+   */
   ResetMultiple ( _ids ) {
 
     _ids = _ids.split( ' ' );
@@ -121,6 +177,10 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     const motions = this.motions;
@@ -133,6 +193,12 @@ export class Manager {
   
   }
 
+  /**
+   * 
+   * @param {string} _id
+   * 
+   * @return {Motion|null} 
+   */
   GetMotionById ( _id ) {
 
     const motions = this.motions;

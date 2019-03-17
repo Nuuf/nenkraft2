@@ -47,8 +47,6 @@ export class CoreEntity2D {
   /**
    * 
    * @param {number} _value
-   * 
-   * @return {void}
    */
   set rotation ( _value ) {
 
@@ -100,8 +98,6 @@ export class CoreEntity2D {
   /**
    * 
    * @param {number} _value
-   * 
-   * @return {void}
    */
   set x ( _value ) {
 
@@ -122,8 +118,6 @@ export class CoreEntity2D {
   /**
    * 
    * @param {number} _value
-   * 
-   * @return {void}
    */
   set y ( _value ) {
 
@@ -144,8 +138,6 @@ export class CoreEntity2D {
   /**
    *
    * @param {number} _value
-   * 
-   * @return {void}
    */
   set width ( _value ) {
 
@@ -166,8 +158,6 @@ export class CoreEntity2D {
   /**
    *
    * @param {number} _value
-   * 
-   * @return {void}
    */
   set height ( _value ) {
 

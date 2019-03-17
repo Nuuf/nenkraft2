@@ -8,6 +8,9 @@ const Abs = Math.abs;
 
 export class Result {
 
+  /**
+   * 
+   */
   constructor () {
         
     this.mtv = new Vector2D( 0, 0 );
@@ -17,6 +20,10 @@ export class Result {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     this.occured = false;
@@ -28,6 +35,14 @@ export class Result {
 
 }
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result
+ * 
+ * @return {boolean} 
+ */
 export const Collide = function ( _a, _b, _result ) {
 
   let i = 0;
@@ -62,6 +77,15 @@ export const Collide = function ( _a, _b, _result ) {
 
 };
 
+/**
+ * 
+ * @param {Body2D}   _a 
+ * @param {Body2D}   _b 
+ * @param {Vector2D} _axis 
+ * @param {Result}   _result 
+ * 
+ * @return {boolean}
+ */
 export const AxisSeparates = function ( _a, _b, _axis, _result ) {
 
   const d1 = _axis.GetMinMaxDot( _a.shape.vertices );
@@ -147,6 +171,14 @@ export const AxisSeparates = function ( _a, _b, _axis, _result ) {
 
 };
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result
+ * 
+ * @return {void} 
+ */
 export const SeparatingResponse = function ( _a, _b, _result ) {
 
   _result.mtv.Multiply( 0.5, 0.5 );

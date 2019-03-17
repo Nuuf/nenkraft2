@@ -7,6 +7,14 @@ import { FFSa } from '../style';
 
 export class AABB2D extends AABB2DGeom {
 
+  /**
+   * 
+   * @param {number}  _tlx 
+   * @param {number}  _tly 
+   * @param {number}  _brx 
+   * @param {number}  _bry 
+   * @param {object?} _style 
+   */
   constructor ( _tlx, _tly, _brx, _bry, _style ) {
 
     super( _tlx, _tly, _brx, _bry );
@@ -16,6 +24,12 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     const tl = this.tl;
@@ -47,6 +61,13 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {Transform2D}                                  _transform2d 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
@@ -60,6 +81,12 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   LinkProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -69,6 +96,12 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc
+   * 
+   * @return {this} 
+   */
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -77,6 +110,10 @@ export class AABB2D extends AABB2DGeom {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   LinkStyle () {
 
     const pc = this.programController;

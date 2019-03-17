@@ -6,6 +6,10 @@ import { ApplyProperties } from '../utility';
 
 export class FillStyle {
 
+  /**
+   * 
+   * @param {object?} _props 
+   */
   constructor ( _props ) {
 
     this.color = '#6496c8';
@@ -14,6 +18,12 @@ export class FillStyle {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Apply ( _rc ) {
 
     _rc.fillStyle = this.color;

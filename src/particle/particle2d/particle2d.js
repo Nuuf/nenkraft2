@@ -11,6 +11,11 @@ import { Sprite } from '../../entity/sprite';
 
 export class Particle2D {
 
+  /**
+   * 
+   * @param {object}   _options 
+   * @param {integer?} _index 
+   */
   constructor ( _options, _index ) {
 
     this.velocity = new Vector2D( 0, 0 );
@@ -33,24 +38,40 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   static get USE_POOL () {
 
     return PS_USE_POOL;
   
   }
 
+  /**
+   * 
+   * @param {boolean} _value
+   */
   static set USE_POOL ( _value ) {
 
     PS_USE_POOL = !!_value;
   
   }
 
+  /**
+   * 
+   * @return {Pool}
+   */
   static get Pool () {
 
     return PS_pool;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     if ( this.dead === true ) return;
@@ -214,6 +235,11 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @param {object}  _options 
+   * @param {integer?} _index 
+   */
   Renew ( _options, _index ) {
 
     if ( _options == null ) return;
@@ -527,6 +553,16 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @param {object}    _object 
+   * @param {*Vector2D} _vector 
+   * @param {integer?}  _index 
+   * @param {number?}   _rx 
+   * @param {number?}   _ry 
+   * 
+   * @return {void}
+   */
   RenewVector ( _object, _vector, _index, _rx, _ry ) {
 
     if ( _object != null ) {
@@ -585,6 +621,12 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @param {integer} _value 
+   * 
+   * @return {void}
+   */
   SetLifespan ( _value ) {
 
     this.lifespan = 0;
@@ -592,6 +634,12 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @param {integer?} _unitId 
+   * 
+   * @return {void}
+   */
   ResetEntity ( _unitId ) {
 
     const entity = this.entity;
@@ -609,6 +657,12 @@ export class Particle2D {
   
   }
 
+  /**
+   * 
+   * @param {boolean} _ifDead 
+   * 
+   * @return {boolean}
+   */
   Destroy ( _ifDead ) {
 
     if ( _ifDead === true ) {

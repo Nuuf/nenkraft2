@@ -7,6 +7,11 @@ import { FFSa } from '../style';
 
 export class Polygon2D extends Polygon2DGeom {
 
+  /**
+   * 
+   * @param {Vector2D[]?} _vertices 
+   * @param {object?}     _style 
+   */
   constructor ( _vertices, _style ) {
 
     super( _vertices );
@@ -16,6 +21,12 @@ export class Polygon2D extends Polygon2DGeom {
   
   }
 
+  /**
+   *
+   * @param {CanvasRenderingContext2D} _rc 
+   *
+   * @return {void}
+   */
   Render ( _rc ) {
 
     const vertices = this.vertices;

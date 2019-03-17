@@ -7,6 +7,10 @@ import { CAP_ROUND, JOIN_ROUND } from './line_conf';
 
 export class StrokeStyle {
 
+  /**
+   * 
+   * @param {object?} _props 
+   */
   constructor ( _props ) {
 
     this.color = '#c89664';
@@ -21,6 +25,12 @@ export class StrokeStyle {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Apply ( _rc ) {
     
     _rc.strokeStyle = this.color;

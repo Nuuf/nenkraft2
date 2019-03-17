@@ -4,6 +4,9 @@
 
 export class FlagEnum {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.NONE = 0;
@@ -11,6 +14,12 @@ export class FlagEnum {
   
   }
 
+  /**
+   * 
+   * @param {string} _id
+   * 
+   * @return {this} 
+   */
   Add ( _id ) {
 
     _id = _id.toUpperCase();

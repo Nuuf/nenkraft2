@@ -24,7 +24,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
     const sprite = new nk2.Sprite( 0, 0 );
 
@@ -77,7 +79,10 @@ export default () => {
 
         animation.SetFrame( nk2.Utility.RandomInteger( 0, 15 ) );
 
-        sprite.data.velocity = new nk2.Vector2D( nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 ), nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 ) );
+        sprite.data.velocity = new nk2.Vector2D( 
+          nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 ),
+          nk2.Utility.RandomFloatAvoid( -2, 2, -1.9, 1.9 )
+        );
         const tval = nk2.Math.RADIAN * 20;
 
         sprite.data.torque = nk2.Utility.RandomFloatAvoid( -tval, tval, -tval / 25, tval / 25 );

@@ -6,6 +6,13 @@ import { Pool } from '../utility/pool';
 
 export class QuadtreeNode {
 
+  /**
+   * 
+   * @param {AABB2D} _aabb 
+   * @param {integer} _level 
+   * @param {integer} _objCap 
+   * @param {integer} _levelCap 
+   */
   constructor ( _aabb, _level, _objCap, _levelCap ) {
 
     this.nodes = {};
@@ -21,24 +28,45 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @return {Pool}
+   */
   static get pool () {
 
     return PS_pool;
   
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   static get USE_POOL () {
 
     return PS_USE_POOL;
   
   }
 
+  /**
+   * 
+   * @param {boolean} _value
+   */
   static set USE_POOL ( _value ) {
 
     PS_USE_POOL = !!_value;
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _aabb 
+   * @param {integer} _level 
+   * @param {integer} _objCap 
+   * @param {integer} _levelCap 
+   * 
+   * @return {this}
+   */
   Set ( _aabb, _level, _objCap, _levelCap ) {
 
     this.aabb = _aabb;
@@ -50,6 +78,15 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   *
+   * @param {AABB2D}  _aabb 
+   * @param {integer} _level 
+   * @param {integer} _objCap 
+   * @param {integer} _levelCap 
+   * 
+   * @return {QuadtreeNode}
+   */
   FromPool ( _aabb, _level, _objCap, _levelCap ) {
 
     if ( PS_USE_POOL === true ) {
@@ -62,12 +99,22 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Store () {
 
     PS_pool.Store( this );
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _object 
+   * 
+   * @return {void}
+   */
   Add ( _object ) {
 
     let i = 0;
@@ -123,6 +170,12 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _object 
+   * 
+   * @return {AABB2D[]}
+   */
   Converge ( _object ) {
 
     let marking = '';
@@ -155,6 +208,10 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Split () {
 
     const nl = this.level + 1;
@@ -183,6 +240,10 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Dump () {
 
     const nodes = this.nodes;
@@ -212,6 +273,12 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @param {AABB2D} _object 
+   * 
+   * @return {string|null}
+   */
   Marking ( _object ) {
 
     const nodes = this.nodes;
@@ -244,11 +311,17 @@ export class QuadtreeNode {
   
   }
 
+  /**
+   * 
+   * @param {[]?} _nodeList 
+   * 
+   * @return {QuadtreeNode[]}
+   */
   ConcatNodes ( _nodeList ) {
 
     const nodes = this.nodes;
 
-    if ( _nodeList === undefined ) _nodeList = [];
+    if ( _nodeList == null ) _nodeList = [];
     _nodeList.push( this );
     if ( this.hasSplit === false ) return _nodeList;
     nodes[ PS_TOP_LEFT ].ConcatNodes( _nodeList );

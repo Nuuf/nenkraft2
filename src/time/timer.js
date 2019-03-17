@@ -8,6 +8,10 @@ const Round = Math.round;
 
 export class Timer {
 
+  /**
+   * 
+   * @param {number?} _stopTime 
+   */
   constructor ( _stopTime ) {
 
     this.stopTime = Round( _stopTime == null ? 0 : _stopTime );
@@ -24,6 +28,10 @@ export class Timer {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Reset () {
 
     this.onReset.Dispatch( this, null );
@@ -31,9 +39,17 @@ export class Timer {
     this.time = 0;
     this.isRunning = false;
     this.canResume = false;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {number?} _stopTime 
+   * 
+   * @return {this}
+   */
   Start ( _stopTime ) {
 
     this.stopTime = Round( _stopTime == null ? this.stopTime : _stopTime );
@@ -46,9 +62,15 @@ export class Timer {
       this.onStart.Dispatch( this, { stopTime: this.stopTime } );
     
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Stop () {
 
     if ( this.isRunning === true ) {
@@ -57,9 +79,15 @@ export class Timer {
       this.onStop.Dispatch( this, null );
       
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Pause () {
 
     if ( this.isRunning === true && this.canResume === false ) {
@@ -69,9 +97,15 @@ export class Timer {
       this.onPause.Dispatch( this, null );
       
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Resume () {
 
     if ( this.canResume === true ) {
@@ -81,9 +115,15 @@ export class Timer {
       this.onResume.Dispatch( this, null );
       
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     if ( this.time < this.stopTime && this.isRunning === true ) {

@@ -4,12 +4,26 @@
 
 class OscillatingObject {
 
+  /**
+   * 
+   * @param {number} _from 
+   * @param {number} _to 
+   * @param {number} _amplitude 
+   */
   constructor ( _from, _to, _amplitude ) {
 
     this.Set( _from, _to, _amplitude );
   
   }
 
+  /**
+   * 
+   * @param {number} _from 
+   * @param {number} _to 
+   * @param {number} _amplitude 
+   * 
+   * @return {void}
+   */
   Set ( _from, _to, _amplitude ) {
 
     this.from = _from;
@@ -19,6 +33,10 @@ class OscillatingObject {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Inactivate () {
 
     this.active = false;
@@ -29,6 +47,9 @@ class OscillatingObject {
 
 export class Oscillation {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.velocityX = null;
@@ -45,6 +66,15 @@ export class Oscillation {
 
   }
 
+  /**
+   * 
+   * @param {string} _key 
+   * @param {number} _from 
+   * @param {number} _to 
+   * @param {number} _amplitude 
+   * 
+   * @return {void}
+   */
   CreateOscillatingObject ( _key, _from, _to, _amplitude ) {
 
     if ( this[ _key ] !== null ) throw new Error( 'Invalid key' );
@@ -53,6 +83,15 @@ export class Oscillation {
   
   }
 
+  /**
+   * 
+   * @param {string} _key 
+   * @param {number} _from 
+   * @param {number} _to 
+   * @param {number} _amplitude 
+   * 
+   * @return {void}
+   */
   SetOscillatingObject ( _key, _from, _to, _amplitude ) {
 
     const obj = this[ _key ];
@@ -67,6 +106,12 @@ export class Oscillation {
   
   }
 
+  /**
+   * 
+   * @param {string} _key 
+   * 
+   * @return {void}
+   */
   Nullify ( _key ) {
 
     if ( this[ _key ] != null ) {

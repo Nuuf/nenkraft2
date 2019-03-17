@@ -7,6 +7,11 @@ import { Frame } from '../animator/frame';
 
 export class Spritesheet {
 
+  /**
+   * 
+   * @param {BasicTexture2D} _basicTexture 
+   * @param {object}         _data 
+   */
   constructor ( _basicTexture, _data ) {
 
     this.id = _basicTexture.id;
@@ -16,6 +21,10 @@ export class Spritesheet {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GenerateFrames () {
 
     let frame;
@@ -50,6 +59,12 @@ export class Spritesheet {
 
   }
 
+  /**
+   * 
+   * @param {string} _id
+   * 
+   * @return {Frame} 
+   */
   GetFrameById ( _id ) {
 
     return this.frameCache.GetById( _id );

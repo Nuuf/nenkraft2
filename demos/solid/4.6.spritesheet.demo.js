@@ -24,7 +24,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
     const sprite1 = new nk2.Sprite( 0, 0, window.testData.invadersSpritesheet.basicTexture );
     const sprite2 = new nk2.Sprite( 0, 50, window.testData.invadersSpritesheet.basicTexture );

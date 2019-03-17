@@ -25,7 +25,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
 
     camera.force.SetSame( 5 );
@@ -47,7 +49,9 @@ export default () => {
 
     stage.mouse.AddOffset( scene ).AddOffset( camera );
 
-    const pc = new nk2.Controller.ProgramController.GLDynamicTexture2DProgramController( stage.gl, 3 );
+    const pc = new nk2.Controller.ProgramController.GLDynamicTexture2DProgramController(
+      stage.gl, 3
+    );
 
     pc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE, 0 );
     pc.BindBasicTexture( window.testData.imgloader.GetBasicTextureById( '1to8' ), 1 );

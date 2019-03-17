@@ -525,9 +525,12 @@ export function PRINT_VERSION ( _server ) {
 
     console.log(
       '%cnenkraft2 %cversion %c' + VERSION,
-      'color:#c89664;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#c89664;background-color:#5078a0;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#c89664;background-color:#6496c8;font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+      'color:#c89664;background-color:#304860;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#5078a0;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#6496c8;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;'
     );
   
   } else {

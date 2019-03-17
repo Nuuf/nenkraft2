@@ -135,11 +135,11 @@ export const Equilateral2D = function ( _polygon, _x, _y, _side ) {
 /**
  * 
  * @param {Polygon2D} _polygon 
- * @param {Numebr}    _x 
- * @param {Numebr}    _y 
- * @param {Numebr}    _outerRadius 
- * @param {Numebr}    _innerRadius 
- * @param {Numebr}    _corners 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _outerRadius 
+ * @param {number}    _innerRadius 
+ * @param {number}    _corners 
  * 
  * @return {Polygon2D}
  */

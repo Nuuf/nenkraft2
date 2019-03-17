@@ -18,6 +18,14 @@ export class Pixel extends Vector2D {
     this.bufferData = null;
   
   }
+
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {Transform2D}                                  _transform2d 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl, _transform ) {
 
     if ( this.programController !== null ) {
@@ -30,17 +38,40 @@ export class Pixel extends Vector2D {
     }
   
   }
+
+  /**
+   *
+   * @param {ProgramController} _pc 
+   *
+   * @return {this}
+   */
   LinkProgramController ( _pc ) {
 
     this.programController = _pc;
     this.LinkStyle();
+
+    return this;
   
   }
+
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
+
+    return this;
   
   }
+
+  /**
+   *
+   * @return {this}
+   */
   LinkStyle () {
 
     const pc = this.programController;
@@ -51,8 +82,15 @@ export class Pixel extends Vector2D {
       pc.color.Normalize();
     
     }
+
+    return this;
   
   }
+
+  /**
+   * 
+   * @return {number[]}
+   */
   GetBufferData () {
 
     if ( this.bufferData == null ) {
@@ -75,6 +113,7 @@ export class Pixel extends Vector2D {
     return bufferData;
   
   }
+
   UpdateInBuffer ( _buffer, _index ) {
 
     const color = this.color;

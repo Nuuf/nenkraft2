@@ -19,9 +19,7 @@ export default () => {
     c.style.backgroundColor = 'white';
 
     const rc = c.getContext( '2d' );
-    const text = new nk2.Text( HW, HH, 
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-    );
+    const text = new nk2.Text( HW, HH, window.testData.lorem );
 
     text.style.text.align = nk2.Style.TextConf.ALIGN_CENTER;
     text.style.text.baseline = nk2.Style.TextConf.BASELINE_MIDDLE;

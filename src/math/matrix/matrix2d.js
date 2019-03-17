@@ -11,6 +11,9 @@ const PI = Math.PI;
 
 export class Matrix2D {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.array = new Float32Array( 9 );
@@ -23,6 +26,10 @@ export class Matrix2D {
   
   }
 
+  /**
+   *
+   * @return {void}
+   */
   Identity () {
 
     this.a = 1;
@@ -34,6 +41,10 @@ export class Matrix2D {
   
   }
 
+  /**
+   * 
+   * @return {Matrix2D}
+   */
   Copy () {
 
     const matrix = new Matrix2D();
@@ -44,6 +55,17 @@ export class Matrix2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _a 
+   * @param {number} _b 
+   * @param {number} _c 
+   * @param {number} _d 
+   * @param {number} _e 
+   * @param {number} _f 
+   * 
+   * @return {this}
+   */
   Set ( _a, _b, _c, _d, _e, _f ) {
 
     this.a = _a;
@@ -57,6 +79,20 @@ export class Matrix2D {
   
   }
 
+  /**
+   * 
+   * @param {number?} _x 
+   * @param {number?} _y 
+   * @param {number?} _sx 
+   * @param {number?} _sy 
+   * @param {number?} _r 
+   * @param {number?} _skx 
+   * @param {number?} _sky 
+   * @param {number?} _px 
+   * @param {number?} _py 
+   * 
+   * @return {this}
+   */
   SetTransform ( _x, _y, _sx, _sy, _r, _skx, _sky, _px, _py ) {
 
     _x = _x == null ? 0 : _x;
@@ -91,36 +127,79 @@ export class Matrix2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   Translate ( _x, _y ) {
 
     this.e += _x;
     this.f += _y;
+
+    return this;
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y 
+   *
+   * @return {this}
+   */
   TranslateTo ( _x, _y ) {
 
     this.e = _x;
     this.f = _y;
+
+    return this;
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y 
+   *
+   * @return {this}
+   */
   ApplyTranslation ( _x, _y ) {
 
     this.e = _x * this.a + _y * this.c + this.e;
     this.f = _x * this.b + _y * this.d + this.f;
+
+    return this;
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y 
+   *
+   * @return {this}
+   */
   ApplyScale ( _x, _y ) {
 
     this.a *= _x;
     this.b *= _y;
     this.c *= _x;
     this.d *= _y;
+
+    return this;
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y 
+   *
+   * @return {this}
+   */
   Scale ( _x, _y ) {
 
     this.a *= _x;
@@ -129,9 +208,17 @@ export class Matrix2D {
     this.d *= _y;
     this.e *= _x;
     this.f *= _y;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   Rotate ( _angle ) {
 
     const sa = Sin( _angle );
@@ -146,9 +233,17 @@ export class Matrix2D {
     this.d = c * sa + this.d * ca;
     this.e = e * ca - this.f * sa;
     this.f = e * sa + this.f * ca;
+
+    return this;
   
   }
 
+  /**
+   *
+   * @param {Transform2D} _transform 
+   * 
+   * @return {this}
+   */
   Decompose ( _transform ) {
 
     const a = this.a;
@@ -179,15 +274,31 @@ export class Matrix2D {
 
     _transform.scale.Set( Sqrt( a * a + b * b ), Sqrt( c * c + d * d ) );
     _transform.position.Set( this.e, this.f );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {this}
+   */
   ApplyToContext ( _rc ) {
 
     _rc.setTransform( this.a, this.b, this.c, this.d, this.e, this.f );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {boolean} _transpose 
+   * 
+   * @return {Float32Array}
+   */
   AsArray ( _transpose ) {
 
     const array = this.array;

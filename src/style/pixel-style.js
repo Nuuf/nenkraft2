@@ -6,6 +6,10 @@ import { ApplyProperties } from '../utility';
 
 export class PixelStyle {
 
+  /**
+   * 
+   * @param {object?} _props 
+   */
   constructor ( _props ) {
 
     this.color = '#6496c8';

@@ -306,7 +306,7 @@ export class Container2D extends CoreEntity2D {
 
   /**
    * 
-   * @param {Entity|Vector2D|Objct} _object 
+   * @param {Entity|Vector2D|Object} _object 
    * @param {Function?}             _filter 
    * 
    * @return {Entity|null}

@@ -22,7 +22,9 @@ export default () => {
       halt: true
     };
     const stage = conf.stage = new nk2.Stage2D( options );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( HW, HH ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( HW, HH ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const rootContainer = new nk2.VisualContainer2D( 0, 0 );
     const sprite = new nk2.Sprite( 0, 0 );
     const dragStart = new nk2.Vector2D( 0, 0 );

@@ -18,6 +18,12 @@ import RendertextureInvert from './rendertexture-invert.shader.glsl';
 import RendertextureDefault from './rendertexture-default.shader.glsl';
 import WaterTest from './water.test.shader.glsl';
 
+/**
+ * 
+ * @param {string} _data 
+ * 
+ * @return {string}
+ */
 export const Uglify = function ( _data ) {
 
   return _data
@@ -31,6 +37,12 @@ export const Uglify = function ( _data ) {
 
 };
 
+/**
+ * 
+ * @param {string} _shader
+ * 
+ * @return {object} 
+ */
 export const ParseImports = function ( _shader ) {
 
   const imp = _shader.match( /\((import .[\s\S]*?)\/\)/ );
@@ -124,6 +136,12 @@ export const SNIPPETS = {
   circle: Uglify( require( './snippets/geom/circle.snippet' ) )
 };
 
+/**
+ * 
+ * @param {string} _data
+ * 
+ * @return {object} 
+ */
 export const Parse = function ( _data ) {
 
   let s;
@@ -189,6 +207,12 @@ export const RENDERTEXTURE_INVERT = Parse( RendertextureInvert );
 export const RENDERTEXTURE_DEFAULT = Parse( RendertextureDefault );
 export const WT = Parse( WaterTest );
 
+/**
+ * 
+ * @param {integer} _num
+ * 
+ * @return {object} 
+ */
 export const DynamicTEXTURE_2D = function ( _num ) {
 
   const vertex = [];
@@ -225,7 +249,8 @@ export const DynamicTEXTURE_2D = function ( _num ) {
 
     vertex.push(
       'else if ( uUnitId == ' + i + ' ) {',
-      'gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition' + i + ', 1.0 ) ).xy, 0.0, 1.0 );',
+      'gl_Position = vec4( ( ' + 
+      'uProjection * uTranslation * vec3( aPosition' + i + ', 1.0 ) ).xy, 0.0, 1.0 );',
       'vTexCoord = ( uTransformation * vec3( aTexCoord' + i + ', 1.0 ) ).xy;',
       '}'
     );

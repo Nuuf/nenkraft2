@@ -14,6 +14,11 @@ const Sin = Math.sin;
 
 export class Vector2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     this.x = _x;
@@ -21,30 +26,52 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {Pool}
+   */
   static get pool () {
 
     return PS_pool;
   
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   static get USE_POOL () {
 
     return PS_USE_POOL;
   
   }
 
+  /**
+   * @param {boolean} _value
+   */
   static set USE_POOL ( _value ) {
 
     PS_USE_POOL = !!_value;
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _a 
+   * @param {Vector2D} _b 
+   * 
+   * @return {number}
+   */
   static SortMinMag ( _a, _b ) {
 
     return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   Copy () {
 
     if ( PS_USE_POOL === true ) {
@@ -57,6 +84,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {Vector2D} 
+   */
   FromPool ( _x, _y ) {
 
     if ( PS_USE_POOL === true ) {
@@ -69,12 +103,22 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   AbsoluteCopy () {
 
     return this.Copy().Positive();
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   SetV ( _p ) {
 
     this.x = _p.x;
@@ -84,6 +128,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   Set ( _x, _y ) {
 
     this.x = _x;
@@ -93,6 +144,12 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _value
+   * 
+   * @return {this} 
+   */
   SetSame ( _value ) {
 
     this.x = _value;
@@ -102,18 +159,34 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   Is0 () {
 
     return this.x === 0 && this.y === 0;
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   AddVC ( _p ) {
 
     return this.Copy().AddV( _p );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   AddV ( _p ) {
 
     this.x += _p.x;
@@ -122,7 +195,14 @@ export class Vector2D {
     return this;
   
   }
-
+  
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   Add ( _x, _y ) {
 
     this.x += _x;
@@ -132,12 +212,24 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   SubtractVC ( _p ) {
 
     return this.Copy().SubtractV( _p );
 
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   SubtractV ( _p ) {
 
     this.x -= _p.x;
@@ -147,6 +239,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   Subtract ( _x, _y ) {
 
     this.x -= _x;
@@ -156,12 +255,24 @@ export class Vector2D {
   
   }
 
+  /**
+   *
+   * @param {object|Vector2D|Point} _p 
+   *
+   * @return {this}
+   */
   MultiplyVC ( _p ) {
 
     return this.Copy().MultiplyV( _p );
 
   }
 
+  /**
+   *
+   * @param {object|Vector2D|Point} _p 
+   *
+   * @return {this}
+   */
   MultiplyV ( _p ) {
 
     this.x *= _p.x;
@@ -171,6 +282,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   Multiply ( _x, _y ) {
 
     this.x *= _x;
@@ -180,12 +298,24 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   DivideVC ( _p ) {
 
     return this.Copy().DivideV( _p );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {this}
+   */
   DivideV ( _p ) {
 
     this.x /= _p.x;
@@ -195,6 +325,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {this} 
+   */
   Divide ( _x, _y ) {
 
     this.x /= _x;
@@ -204,6 +341,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Normalize () {
 
     const magnitude = this.GetMagnitude();
@@ -212,6 +353,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Positive () {
 
     this.x = Abs( this.x );
@@ -221,6 +366,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Negative () {
 
     this.x = -Abs( this.x );
@@ -230,6 +379,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Invert () {
 
     this.x = -this.x;
@@ -239,6 +392,12 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   Rotate ( _angle ) {
 
     const sine = Sin( _angle );
@@ -253,36 +412,79 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * @param {number} _angle 
+   * 
+   * @return {this}
+   */
   RotateAroundV ( _p, _angle ) {
 
     return this.SubtractV( _p ).Rotate( _angle ).AddV( _p );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   RotateAround ( _x, _y, _angle ) {
 
     return this.SubtractV( _x, _y ).Rotate( _angle ).AddV( _x, _y );
   
   }
 
+  /**
+   * 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   RotateAbsolute ( _angle ) {
 
     return this.Rotate( _angle - this.GetAngle() );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   RotateAbsoluteAroundV ( _p, _angle ) {
 
     return this.SubtractV( _p ).RotateAbsolute( _angle ).AddV( _p );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _angle
+   * 
+   * @return {this} 
+   */
   RotateAbsoluteAround ( _x, _y, _angle ) {
 
     return this.SubtractV( _x, _y ).RotateAbsolute( _angle ).AddV( _x, _y );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * @param {number} _magnitude
+   * 
+   * @return {this} 
+   */
   PushFromV ( _p, _magnitude ) {
 
     PS_a.SetV( this ).SubtractV( _p ).Normalize().Multiply( _magnitude, _magnitude );
@@ -291,6 +493,14 @@ export class Vector2D {
 
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _magnitude
+   * 
+   * @return {this} 
+   */
   PushFrom ( _x, _y, _magnitude ) {
 
     PS_a.SetV( this ).SubtractV( _x, _y ).Normalize().Multiply( _magnitude, _magnitude );
@@ -299,6 +509,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * @param {number} _percentage
+   * 
+   * @return {Vector2D} 
+   */
   GetWeightedAverageV ( _p, _percentage ) {
 
     return this.FromPool(
@@ -308,6 +525,14 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _percentage
+   * 
+   * @return {Vector2D} 
+   */
   GetWeightedAverage ( _x, _y, _percentage ) {
 
     return this.FromPool(
@@ -317,156 +542,317 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetAngle () {
 
     return Atan2( this.y, this.x );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {number}
+   */
   GetAngleBetweenV ( _p ) {
 
     return Atan2( this.y - _p.y, this.x - _p.x );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {number} 
+   */
   GetAngleBetween ( _x, _y ) {
 
     return Atan2( this.y - _y, this.x - _x );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {number}
+   */
   GetDotV ( _p ) {
 
     return ( this.x * _p.x + this.y * _p.y );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {void} 
+   */
   GetDot ( _x, _y ) {
 
     return ( this.x * _x + this.y * _y );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p
+   * 
+   * @return {number} 
+   */
   GetCrossV ( _p ) {
 
     return ( this.x * _p.y + this.y * _p.x );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {number} 
+   */
   GetCross ( _x, _y ) {
 
     return ( this.x * _y + this.y * _x );
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetMagnitudeSquared () {
 
     return ( this.x * this.x + this.y * this.y );
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   GetMagnitude () {
 
     return Sqrt( this.x * this.x + this.y * this.y );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {number}
+   */
   GetDistanceSquaredV ( _p ) {
 
     return PS_a.SetV( this ).SubtractV( _p ).GetMagnitudeSquared();
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {number} 
+   */
   GetDistanceSquared ( _x, _y ) {
 
     return PS_a.SetV( this ).Subtract( _x, _y ).GetMagnitudeSquared();
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {number}
+   */
   GetDistanceV ( _p ) {
 
     return PS_a.SetV( this ).SubtractV( _p ).GetMagnitude();
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {number}
+   */
   GetDistance ( _x, _y ) {
 
     return PS_a.SetV( this ).Subtract( _x, _y ).GetMagnitude();
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetPerpendicularCCWV ( _p ) {
 
     return this.FromPool( -( _p.y - this.y ), _p.x - this.x );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {Vector2D} 
+   */
   GetPerpendicularCCW ( _x, _y ) {
 
     return this.FromPool( -( _y - this.y ), _x - this.x );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetPerpendicularCWV ( _p ) {
 
     return this.FromPool( _p.y - this.y, -( _p.x - this.x ) );
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y
+   *
+   * @return {Vector2D} 
+   */
   GetPerpendicularCW ( _x, _y ) {
 
     return this.FromPool( _y - this.y, -( _x - this.x ) );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetNormalAV ( _p ) {
 
     return this.GetPerpendicularCCWV( _p ).Normalize();
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y
+   *
+   * @return {Vector2D} 
+   */
   GetNormalA ( _x, _y ) {
 
     return this.GetPerpendicularCCW( _x, _y ).Normalize();
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetNormalBV ( _p ) {
 
     return this.GetPerpendicularCWV( _p ).Normalize();
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y
+   *
+   * @return {Vector2D} 
+   */
   GetNormalB ( _x, _y ) {
 
     return this.GetPerpendicularCW( _x, _y ).Normalize();
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {Vector2D}
+   */
   GetMidpointV ( _p ) {
 
     return this.Copy().AddV( _p ).Multiply( 0.5, 0.5 );
   
   }
 
+  /**
+   *
+   * @param {number} _x 
+   * @param {number} _y
+   *
+   * @return {Vector2D} 
+   */
   GetMidpoint ( _x, _y ) {
 
     return this.Copy().Add( _x, _y ).Multiply( 0.5, 0.5 );
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {boolean}
+   */
   IsEqualToV ( _p ) {
 
     return ( this.x === _p.x && this.y === _p.y );
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {boolean} 
+   */
   IsEqualTo ( _x, _y ) {
 
     return ( this.x === _x && this.y === _y );
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _vector2d 
+   * 
+   * @return {Vector2D}
+   */
   GetProjectionOntoV ( _vector2d ) {
 
     const dot = this.GetDotV( _vector2d );
@@ -480,6 +866,13 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y
+   * 
+   * @return {Vector2D} 
+   */
   GetProjectionOnto ( _x, _y ) {
 
     const projection = this.Copy();
@@ -497,6 +890,12 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _vector2d 
+   * 
+   * @return {Vector2D}
+   */
   GetReflectionV ( _vector2d ) {
 
     const reflection = _vector2d.Copy();
@@ -508,6 +907,13 @@ export class Vector2D {
 
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {Vector2D}
+   */
   GetReflection ( _x, _y ) {
  
     const reflection = this.Copy();
@@ -522,6 +928,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Store () {
 
     PS_pool.Store( this );
@@ -530,6 +940,12 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D[]} _vectors 
+   * 
+   * @return {this}
+   */
   AddTo ( _vectors ) {
 
     for ( var i = 0 ; i < _vectors.length; ++i ) {
@@ -542,6 +958,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Floor () {
 
     this.x = this.x | 0;
@@ -551,6 +971,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Ceil () {
 
     this.x = Ceil( this.x );
@@ -560,6 +984,10 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Round () {
 
     this.x = Round( this.x );
@@ -569,6 +997,12 @@ export class Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D[]} _vectors 
+   * 
+   * @return {Vector2D}
+   */
   GetMinMaxDot ( _vectors ) {
 
     let min = Infinity;
