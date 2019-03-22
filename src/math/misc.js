@@ -8,10 +8,10 @@ import { Vector2D } from './vector/vector2d';
 
 /**
  * 
- * @param {number} _startA 
- * @param {number} _endA 
- * @param {number} _startB 
- * @param {number} _endB
+ * @param {Vector2D} _startA 
+ * @param {Vector2D} _endA 
+ * @param {Vector2D} _startB 
+ * @param {Vector2D} _endB
  * 
  * @return {boolean} 
  */
