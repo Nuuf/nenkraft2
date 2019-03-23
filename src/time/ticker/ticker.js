@@ -9,8 +9,8 @@ export class Ticker {
   /**
    * 
    * @param {Function} _onProcess 
-   * @param {number}   _rate 
-   * @param {boolean}  _halt 
+   * @param {number?}  _rate 
+   * @param {boolean?} _halt 
    */
   constructor ( _onProcess, _rate, _halt ) {
 
@@ -99,7 +99,7 @@ export class Ticker {
 
   /**
    * 
-   * @param {number} _rate
+   * @param {number?} _rate
    * 
    * @return {void} 
    */
@@ -111,7 +111,7 @@ export class Ticker {
 
   /**
    *
-   * @param {boolean} _force
+   * @param {boolean?} _force
    *
    * @return {void} 
    */
@@ -152,7 +152,7 @@ export class Ticker {
 
   /**
    *
-   * @param {boolean} _force
+   * @param {boolean?} _force
    *
    * @return {void} 
    */

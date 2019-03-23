@@ -130,7 +130,7 @@ export class Cache {
   /**
    * 
    * @param {object|null} _item 
-   * @param {string|any}  _id
+   * @param {string|any?}  _id
    * 
    * @return {boolean}
    */

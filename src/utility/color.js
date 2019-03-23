@@ -12,10 +12,10 @@ export class Color {
 
   /**
    * 
-   * @param {numebr?} _r 
-   * @param {numebr?} _g 
-   * @param {numebr?} _b 
-   * @param {numebr?} _a 
+   * @param {number?} _r 
+   * @param {number?} _g 
+   * @param {number?} _b 
+   * @param {number?} _a 
    */
   constructor ( _r, _g, _b, _a ) {
 
@@ -96,7 +96,7 @@ export class Color {
    * @param {Color}  _color 
    * @param {number} _percentage 
    * 
-   * @return {void}
+   * @return {Color}
    */
   Mix ( _color, _percentage ) {
       
@@ -113,7 +113,7 @@ export class Color {
 
   /**
    * 
-   * @param {boolean} _round 
+   * @param {boolean?} _round 
    * 
    * @return {void}
    */

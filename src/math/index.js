@@ -155,7 +155,7 @@ export function LikeASquareGrid ( _objects, _w, _marginX, _marginY, _offsetX, _o
  * @param {number}   _y 
  * @param {number}   _w 
  * @param {number}   _h 
- * @param {number[]} _array
+ * @param {number[]?} _array
  * 
  * @return {number[]} 
  */
@@ -210,7 +210,7 @@ export function GreatestCommonDivisor ( _x, _y ) {
  * 
  * @param {integer}   _x 
  * @param {integer}   _y 
- * @param {integer[]} _array 
+ * @param {integer[]?} _array 
  * 
  * @return {integer[]}
  */

@@ -40,6 +40,8 @@ export class ArrayHandler {
    * 
    * @param {string} _id 
    * @param {[]}     _array 
+   * 
+   * @return {this}
    */
   static Add ( _id, _array ) {
 
