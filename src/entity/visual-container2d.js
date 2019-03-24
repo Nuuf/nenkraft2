@@ -148,6 +148,3 @@ export class VisualContainer2D extends Container2D {
   }
 
 }
-
-// Alias
-Container2D.prototype.Mount = Container2D.prototype.AddChildren;

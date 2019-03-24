@@ -174,7 +174,7 @@ export class Graphic2D extends BatchableContainer2D {
 
   /**
    * 
-   * @param {Vector2D|Object} _p 
+   * @param {Vector2D|object} _p 
    * 
    * @return {boolean}
    */

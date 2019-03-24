@@ -29,7 +29,7 @@ export class Bounds2D {
    * @param {object|Vector2D|Point} _anchor 
    * @param {object|any}            _owner 
    * 
-   * @return {Bounds2D}
+   * @return {AABB2D}
    */
   ComputeLocal ( _x, _y, _w, _h, _anchor, _owner ) {
 
@@ -77,7 +77,7 @@ export class Bounds2D {
    * @param {object|any}            _owner 
    * @param {Matrix2D}              _matrix
    * 
-   * @return {Bounds2D}
+   * @return {AABB2D}
    */
   ComputeGlobal ( _x, _y, _w, _h, _anchor, _owner, _matrix ) {
 

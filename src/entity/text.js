@@ -10,10 +10,10 @@ export class Text extends VisualContainer2D {
 
   /**
    * 
-   * @param {number} _x 
-   * @param {number} _y 
-   * @param {string} _text 
-   * @param {object} _style 
+   * @param {number}  _x 
+   * @param {number}  _y 
+   * @param {string}  _text 
+   * @param {object?} _style 
    */
   constructor ( _x, _y, _text, _style ) {
 

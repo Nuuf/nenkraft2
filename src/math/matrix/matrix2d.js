@@ -295,7 +295,7 @@ export class Matrix2D {
 
   /**
    * 
-   * @param {boolean} _transpose 
+   * @param {boolean?} _transpose 
    * 
    * @return {Float32Array}
    */

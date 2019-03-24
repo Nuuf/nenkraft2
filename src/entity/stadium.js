@@ -78,6 +78,9 @@ export class Stadium {
     _options.canvas = canvas;
     _options.noTicker = true;
     _options.halt = true;
+    _options.noMouse = true;
+    _options.noKeyboard = true;
+    _options.noTouch = true;
 
     const stage = new Stage2D( _options );
 

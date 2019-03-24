@@ -27,14 +27,14 @@ export class Culler2D {
 
   /**
    * 
-   * @param {Container2D} _container2d 
+   * @param {Container} _container
    * 
    * @return {this}
    */
-  BindContainer ( _container2d ) {
+  BindContainer ( _container ) {
 
-    this.container = _container2d;
-    this.entities = _container2d.children;
+    this.container = _container;
+    this.entities = _container.children;
 
     return this;
   

@@ -218,16 +218,6 @@ export class Stage2D extends VisualContainer2D {
 
   /**
    * 
-   * @return {void}
-   */
-  GLPostRender ( /* _gl*/ ) {
-
-    // _gl.flush();
-  
-  }
-
-  /**
-   * 
    * @param {number} _delta 
    * 
    * @return {void}

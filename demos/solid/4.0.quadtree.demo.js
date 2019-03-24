@@ -65,6 +65,9 @@ export default () => {
         rootNode.Add( obj.bounds.local );
       
       } );
+
+      console.log( rootNode.Converge( bounds ) );
+
       nodes.length = 0;
       rootNode.ConcatNodes( nodes );
     

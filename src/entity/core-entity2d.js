@@ -240,7 +240,7 @@ export class CoreEntity2D {
    * 
    * @param {Vector2D} _anchor 
    * 
-   * @return {Bounds2D}
+   * @return {AABB2D}
    */
   ComputeLocalBounds ( _anchor ) {
 
@@ -260,7 +260,7 @@ export class CoreEntity2D {
    * @param {Vector2D} _anchor 
    * @param {Matrix2D} _matrix 
    * 
-   * @return {Bounds2D}
+   * @return {AABB2D}
    */
   ComputeGlobalBounds ( _anchor, _matrix ) {
 

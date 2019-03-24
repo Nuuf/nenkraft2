@@ -280,7 +280,7 @@ export class Container2D extends CoreEntity2D {
 
   /**
    * 
-   * @param {Container2D} _parent 
+   * @param {Container} _parent 
    * 
    * @return {this}
    */
@@ -306,7 +306,7 @@ export class Container2D extends CoreEntity2D {
 
   /**
    * 
-   * @param {Entity|Vector2D|Object} _object 
+   * @param {Entity|Vector2D|object} _object 
    * @param {Function?}             _filter 
    * 
    * @return {Entity|null}

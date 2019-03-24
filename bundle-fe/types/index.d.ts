@@ -1,4 +1,12 @@
 export as namespace nk2;
+// Interfaces/Types
+//
+export interface Entity {
+
+}
+export interface Container {
+
+}
 // Namespaces
 export namespace Math {
     export interface Point {
@@ -247,23 +255,6 @@ export namespace Time {
         StartAF(_force?: boolean): void;
         Stop(): void;
     }
-    declare class ServerTicker {
-        constructor(_onProcess: Function, _rate?: number, _halt?: boolean);
-        onProcess: Function;
-        intervalId: number | null;
-        delta: number;
-        then: number;
-        now: number;
-        desiredRate: number;
-        static get LOG(): boolean;
-        static set LOG(_value: boolean);
-        Process(): void;
-        ComputeDelta(): number;
-        GetTPS(): number;
-        SetDesiredRate(_rate?: number): void;
-        Start(_force?: boolean): void;
-        Stop(): void;
-    }
 }
 export const CharacterSets: string[];
 export namespace Ease {
@@ -364,6 +355,9 @@ export namespace Collision {
     }
 }
 export namespace Geom {
+    export interface Shape {
+
+    }
     export namespace PolygonConstruction {
         export namespace Butterfly2D {
             export namespace C {
@@ -414,7 +408,7 @@ export namespace Geom {
             _n1?: number, _n2?: number, _n3: number
         ): Polygon2D;
     }
-    declare class AABB2D {
+    declare class AABB2D implements Shape {
         constructor(_tlx: number, _tly: number, _brx: number, _bry: number);
         tl: Vector2D;
         br: Vector2D;
@@ -440,7 +434,7 @@ export namespace Geom {
         ContainsAABB2D(_aabb: AABB2D): boolean;
         GetQuadrant(_quadrant: string): AABB2D;
     }
-    declare class Line2D {
+    declare class Line2D implements Shape {
         constructor(_sx: number, _sy: number, _ex: number, _ey: number);
         s: Vector2D;
         e: Vector2D;
@@ -466,7 +460,7 @@ export namespace Geom {
     declare class Ray2D extends Line2D {
 
     }
-    declare class Polygon2D {
+    declare class Polygon2D implements Shape {
         constructor(_vertices?: Array<object | Vector2D | Math.Point>);
         vertices: Vector2D[];
         normals: Vector2D[];
@@ -494,7 +488,7 @@ export namespace Geom {
         ComputePerimeterMidPoints(): this;
         IntersectsPoint2D(_p: object | Vector2D | Math.Point): boolean;
     }
-    declare class Circle {
+    declare class Circle implements Shape {
         constructor(_x: number, _y: number, _radius: number);
         center: Vector2D;
         diameter: number;
@@ -546,7 +540,10 @@ export namespace Packing {
     }
 }
 export namespace Path {
-    declare class AABB2D extends Geom.AABB2D {
+    export interface Path2D {
+
+    }
+    declare class AABB2D extends Geom.AABB2D implements Path2D {
         constructor(_tlx: number, _tly: number, _brx: number, _bry: number, _style?: object);
         programController: Controller.GLProgramController | null;
         style: object;
@@ -556,7 +553,7 @@ export namespace Path {
         UseProgramController(_pc: Controller.GLProgramController): this;
         LinkStyle(): this;
     }
-    declare class Circle extends Geom.Circle {
+    declare class Circle extends Geom.Circle implements Path2D {
         constructor(_x: number, _y: number, _radius: number, _style?: object);
         programController: Controller.GLProgramController | null;
         style: object;
@@ -566,7 +563,7 @@ export namespace Path {
         UseProgramController(_pc: Controller.GLProgramController): this;
         LinkStyle(): this;
     }
-    declare class Line2D extends Geom.Line2D {
+    declare class Line2D extends Geom.Line2D implements Path2D {
         constructor(_sx: number, _sy: number, _ex: number, _ey: number, _style?: object);
         programController: Controller.GLProgramController | null;
         style: object;
@@ -576,7 +573,7 @@ export namespace Path {
         UseProgramController(_pc: Controller.GLProgramController): this;
         LinkStyle(): this;
     }
-    declare class Pixel extends Vector2D {
+    declare class Pixel extends Vector2D implements Path2D {
         constructor(_x: number, _y: number, _style?: object);
         style: object;
         color: Color;
@@ -589,7 +586,7 @@ export namespace Path {
         GetBufferData(): number[];
         UpdateInBuffer(_buffer: Float32Array, _index: number): void
     }
-    declare class Polygon2D extends Geom.Polygon2D {
+    declare class Polygon2D extends Geom.Polygon2D implements Path2D {
         constructor(_vertices: Vector2D[], _style?: object);
         Render(_rc: CanvasRenderingContext2D): void;
     }
@@ -721,7 +718,10 @@ export namespace Load {
     }
 }
 export namespace Controller {
-    declare class GLProgramController {
+    export interface GLProgramController {
+
+    }
+    declare class GLProgramController implements GLProgramController {
         constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
         gl: WebGLRenderingContext | WebGL2RenderingContext;
         data: object;
@@ -974,7 +974,7 @@ export namespace Particle {
             lifespan: number;
             lifespanTotal: number;
             dead: boolean;
-            entity: object | null;
+            entity: Enity;
             system: System | null;
             oscillation: Oscillation | null;
             oscillationOffset: number;
@@ -1190,7 +1190,6 @@ export namespace Event {
         Remove(): void;
     }
 }
-
 // Classes
 declare class Pool {
     constructor();
@@ -1415,71 +1414,405 @@ declare class Vector2D {
     GetMinMaxDot(_Vectors: Vector2D[]): Vector2D;
 }
 declare class Matrix2D {
-
+    constructor();
+    array: Float32Array;
+    a: number;
+    b: number;
+    c: number;
+    d: number;
+    e: number;
+    f: number;
+    Identity(): void;
+    Copy(): Matrix2D;
+    Set(_a: number, _b: number, _c: number, _d: number, _e: number, _f: number): this;
+    SetTransform(
+        _x?: number, _y?: number, 
+        _sx?: number, _sy?: number, 
+        _r?: number, _skx?: number, _sky?: number, 
+        _px?: number, _py?: number
+    ): this;
+    Translate(_x: number, _y: number): this;
+    TranslateTo(_x: number, _y: number): this;
+    ApplyTranslation(_x: number, _y: number): this;
+    ApplyScale(_x: number, _y: number): this;
+    Scale(_x: number, _y: number): this;
+    Rotate(_angle: number): this;
+    Decompose(_transform: Transform2D): this;
+    ApplyToContext(_rc: CanvasRenderingContext2D): this;
+    AsArray(_transpost?: boolean): Float32Array;
 }
 declare class Transform2D {
-
+    constructor(_x: number, _y: number);
+    position: Vector2D;
+    scale: Vector2D;
+    skew: Vector2D;
+    pivot: Vector2D;
+    localTransform: Matrix2D;
+    globalTransform: Matrix2D;
+    rotation: number;
+    skewCX: number;
+    skewSX: number;
+    skewCY: number;
+    skewSY: number;
+    SetMatrix(_matrix: Matrix2D): this;
+    UpdateLocal(): this;
+    UpdateGlobal(_transform: Transform2D): this;
+    UpdateSkew(): this;
+    ApplyGlobal(_rc: CanvasRenderingContext2D): this;
 }
 declare class Bounds2D {
-
+    constructor();
+    local: Geom.AABB2D | null;
+    localDirty: boolean;
+    global: Geom.AABB2D | null;
+    globalDirty: boolean;
+    ComputeLocal(
+        _x: number, _y: number, _w: number, _h: number,
+        _anchor: object | Vector2D | Math.Point, _owner: object | any
+    ): Geom.AABB2D;
+    ComputeGlobal(
+        _x: number, _y: number, _w: number, _h: number,
+        _anchor: object | Vector2D | Math.Point, _owner: object | any,
+        _matrix: Matrix2D
+    ): Geom.AABB2D;
 }
 declare class QuadtreeNode {
-
+    constructor(_aabb: Geom.AABB2D, _level: number, _objCap: number, _levelCap: number);
+    nodes: object;
+    objects: Geom.AABB2D[];
+    convergence: Geom.AABB2D[];
+    objectCap: number;
+    levelCap: number;
+    level: number;
+    aabb: Geom.AABB2D | null;
+    hasSplit: boolean;
+    static get pool(): Pool;
+    static get USE_POOL(): boolean;
+    static set USE_POOL(_value: boolean);
+    Set(_aabb: Geom.AABB2D, _level: number, _objCap: number, _levelCap: number): this;
+    FromPool(_aabb: Geom.AABB2D, _level: number, _objCap: number, _levelCap: number): QuadtreeNode;
+    Store(): void;
+    Add(_object: Geom.AABB2D): void;
+    Converge(_object: Geom.AABB2D): Geom.AABB2D[];
+    Split(): void;
+    Dump(): void;
+    Marking(_object: Geom.AABB2D): string | null;
+    ConcatNodes(_nodeList?: []): QuadtreeNode[];
 }
-declare class CoreEntity2D {
-
+declare class CoreEntity2D implements Entity {
+    constructor(_x: number, _y: number);
+    transform: Transform2D;
+    data: object;
+    w: number;
+    h: number;
+    bounds: Bounds2D;
+    globalPosition: Vector2D | null;
+    transformShouldUpdate: boolean;
+    transformAutomaticUpdate: boolean;
+    render: boolean;
+    motionManager: Motion.Manager | null;
+    arrayHandler: ArrayHandler | null;
+    __inside__: boolean | null;
+    get rotation(): number;
+    set rotation(_value: number);
+    get scale(): Vector2D;
+    get position(): Vector2D;
+    get pivot(): Vector2D;
+    get x(): number;
+    set x(_value: number);
+    get y(): number;
+    set y(_value: number);
+    get width(): number;
+    set width(_value: number);
+    get height(): number;
+    set height(_value: number);
+    UpdateTransform(_parent: any): void;
+    ProcessTransform(_parent: any): void;
+    RequestTransformUpdate(): this;
+    ComputeGlobalPosition(): Vector2D;
+    ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;
+    ComputeGlobalBounds(_anchor: Vector2D, _matrix: Matrix2D): Geom.AABB2D;
+    AHCreate(): this;
+    AHIn(_id: string): this;
+    AHOut(_id: string): this;
 }
-declare class Container2D {
-
+declare class Container2D extends CoreEntity2D implements Container {
+    constructor(_x: number, _y: number);
+    parent: Entity;
+    children: Entity[];
+    Render(): void;
+    RenderChildren(): void;
+    AddChild(_child: Entity): Entity;
+    AddChildren(_children: Entity[]): this;
+    Mount(_children: Entity[]): this;
+    AddSbling(_sibling: Entity): Entity;
+    RemoveChild(_child: Entity): Entity;
+    RemoveChildren(_children: Entity[]): Entity[];
+    Unmount(_children: Entity[]): Entity[];
+    Swap(_withIndex: number): this;
+    SendToFront(): this;
+    SendToBack(): this;
+    Dump(): this;
+    Destroy(): this;
+    AttachTo(_parent: Container): this;
+    Detach(): Entity | null;
+    GetChildClosestTo(_object: Entity | Vector2D | object, _filter?: Function): Entity | null;
+    GetChildFurthestFrom(_object: Entity | Vector2D | object, _filter?: Function): Entity | null;
+    ClusterBind(): this;
 }
-declare class VisualContainer2D {
-
+declare class VisualContainer2D extends Container2D {
+    constructor(_x: number, _y: number);
+    interactive: boolean;
+    display: boolean;
+    abstract PreRender(): void;
+    abstract GLPreRender(): void;
+    abstract PostRender(): void;
+    abstract GLPostRender(): void;
+    Render(_rc: CanvasRenderingContext2D): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    RenderChildren(_rc: CanvasRenderingContext2D): void;
+    GLRenderChildren(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
 }
-declare class BatchableContainer2D {
-
+declare class BatchableContainer2D extends VisualContainer2D {
+    constructor(_x: number, _y: number);
+    isBatchParent: boolean;
+    childDataBuffer: Float32Array | null;
+    bufferData: number[] | null;
+    programController: Controller.GLProgramController;
+    bufferStartIndex: number;
+    bufferEndIndex: number; 
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    GLBatchRenderChildren(): void;
+    ComputeBatchBuffer(_getBufferData?: Function): void;
+    abstract UpdateInBuffer(): void;
+    abstract GetBufferData(): void;
+    UseAsBatchParent(_pc: Controller.GLProgramController): void;
 }
-declare class TextureEntity2D {
-
+declare class TextureEntity2D extends BatchableContainer2D {
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramControllerm, _unitId?: number);
+    anchor: Vector2D;
+    shape: Geom.Shape;
+    clip: Geom.AABB2D;
+    textureTransformation: Matrix2D;
+    textureTranslation: Matrix2D;
+    originalShape: Geom.Shape;
+    tint: Color;
+    texture: Texture.BasicTexture2D | null;
+    gco: string;
+    get alpha(): number;
+    set alpha(_value: number);
+    Render(_rc: CanvasRenderingContext2D): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    UpdateTextureTransform(): void;
+    UpdateShape(_newShape: Geom.Shape): void;
+    ClipReconfigure(
+        _x: number, _y: number, _w: number, _h: number,
+        _offsetX: number, _offsetY: number, _originW: number, _originH: number
+    ): void;
+    SetTexture(_texture: Texture.BasicTexture2D): void;
+    GetBufferData(): number[];
+    UpdateInBuffer(): void;
+    IntersectsPoint2D(_p: object | Vector2D | Math.Point ): boolean;
 }
-declare class Stage2D {
-
+declare class Stage2D extends VisualContainer2D {
+    constructor(_options: object);
+    canvas: HTMLCanvasElement;
+    id: string | null;
+    backgroundColor: string;
+    clear: boolean;
+    fill: boolean;
+    usingWebGL: boolean;
+    canvasManager: CanvasManager | null;
+    mouse: Input.Mouse | null;
+    touch: Input.Touch | null;
+    keyboard: Input.Keyboard | null;
+    PreRender(_rc: CanvasRenderingContext2D): void;
+    GLConfig(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    GLPreRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    Process(_delta: number): void;
+    GLProcess(_delta: number): void;
+    MixedProcess(_delta: number): void;
+    SetFramebuffer(_gl: WebGLRenderingContext | WebGL2RenderingContext, _buffer: Controller.GLRendertextureProgramController): void;
+    Destroy(): this;
 }
 declare class Stadium {
-
+    constructor(_options?: object);
+    stages: Stage2D[];
+    currentStage: Stage2D | null;
+    onlyCurrent: boolean;
+    options: object | null;
+    ticker: Time.Ticker;
+    SetOptions(_options?: object): this;
+    CreateStage2D(_options?: object): Stage2D;
+    GetStages(): Stage2D[];
+    Process(_delta: number): void;
+    Destroy(): this;
 }
-declare class Graphic2D {
-
+declare class Graphic2D extends BatchableContainer2D {
+    constructor(_x: number, _y: number, _path: Path.Path2D);
+    anchor: Vector2D;
+    alpha: number;
+    Render(_rc: CanvasRenderingContext2D): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    GetBufferData(): number[];
+    UpdateInBuffer(): void;
+    IntersectsPoint2D(_p: object | Vector2D | Math.Point ): boolean;
+    SetPath(_path: Path.Path2D): void;
 }
-declare class Sprite {
-    
+declare class Sprite extends TextureEntity2D {
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramController, _unitId?: number);
+    animationController: Animator.Controller | null;
+    static BUILD_DEFAULT_TEXTURE(_onLoad: Function): void;
+    static get DEFAULT_TEXTURE(): Texture.BasicTexture2D | null;
+    CreateAnimation(_data: object): Animator.Animation;
+    PlayAnimation(_id: string | any, _frameIndex?: number): this;
+    StopCurrentAnimation(): this;
 }
-declare class Tilesprite {
-
+declare class Tilesprite extends TextureEntity2D {
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramController, _unitId?: number);
+    pattern: any;
+    patternOffset: Vector2D;
+    static BUILD_DEFAULT_TEXTURE(_onLoad: Function): void;
+    static get DEFAULT_TEXTURE(): Texture.BasicTexture2D | null;
+    Render(_rc: CanvasRenderingContext2D): void;
+    GeneratePattern(_rc: CanvasRenderingContext2D, _w: number, _h: number): void;
+    OffsetPattern(_x: number, _y: number): void;
+    SetPatternOffset(_x: number, _y: number): void;
+    GetPatternOffset(): Vector2D;
 }
-declare class Tile {
-
+declare class Tile extends CoreEntity2D {
+    constructor(
+        _index: number, _x: number, _y: number,
+        _clipX: number, _clipY: number, _H: boolean, _V: boolean, _D: boolean,
+        _w: number, _h: number, _tscaleX: number, _tscaleY: number
+    );
+    index: number;
+    clipX: number;
+    clipY: number;
+    textureTranslation: Matrix2D;
+    textureTransformation: Matrix2D;
 }
-declare class Tilemap {
-
+declare class Tilemap extends TextureEntity2D {
+    constructor(_x: number, _y: number, _tilset: Texture.Tileset, _layerIndex: number, _unitId?: number);
+    tileW: number;
+    tileH: number;
+    columns: number;
+    cull: boolean;
+    tiles: Tile[];
+    tileset: Texture.Tileset;
+    Config(_mapData: object): void;
+    SetMapLayer(_layer: object): void;
+    Cull(_culler: Culler2D): void;
+    SetOrthogonal(_data: object): void;
+    Render(_rc: CanvasRenderingContext2D): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    CullRender(_rc: CanvasRenderingContext2D): void;
+    NoCullRender(_rc: CanvasRenderingContext2D): void;
+    GLCullRender(): void;
+    GLNoCullRender(): void;
 }
-declare class Char {
-
+declare class Char extends CoreEntity2D {
+    constructor(_x: number, _y: number, _data?: object);
+    id: number;
+    cx: number;
+    cy: number;
+    xoffset: number;
+    yoffset: number;
+    xadvance: number;
+    yadvance: number;
+    kernings: any[];
+    translation: Matrix2D;
+    transformation: Matrix2D;
+    static get pool(): Pool;
+    Render(_rc: CanvasRenderingContext2D, _image: Image): void;
+    SetData(_data: object): this;
+    GLRenderAuto(_pc: Controller.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
+    GLRender(_pc: Controller.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
+    ApplyKernings(_kernings: object): this;
+    Crunch(_prevChar: Char): this;
+    UpdateMatrices(): this;
+    Store(): this;
 }
-declare class BitmapText {
-
+declare class BitmapText extends TextureEntity2D {
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D, _data: object, _text?: string, _unitId?: number);
+    fontData: object;
+    lineHeight: number;
+    chars: Char[];
+    maxWidth: number;
+    text: string;
+    autoUpdateChars: boolean;
+    Render(_rc: CanvasRenderingContext2D): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
+    RenderText(_rc: CanvasRenderingContext2D): void;
+    GLRenderText(): void;
+    ComputeText(): void;
+    UpdateChars(): void;
+    GetCharDataById(_id: string): object;
+    StoreAllChars(): this;
 }
-declare class Text {
-
+declare class Text extends VisualContainer2D {
+    constructor(_x: number, _y: number, _text: string, _style?: object);
+    text: string;
+    style: object;
+    maxWidth: number | undefined;
+    alpha: number;
+    gco: string;
+    Render(_rc: CanvasRenderingContext2D): void;
+    IntersectsPoint2D(): boolean;
 }
-declare class Camera2D {
-
+declare class Camera2D extends VisualContainer2D {
+    constructor(_focus: Vector2D, _target: Vector2D);
+    focus: Vector2D;
+    target: Vector2D;
+    velocity: Vector2D;
+    force: Vector2D;
+    maxX: number | null;
+    maxY: number | null;
+    minX: number | null;
+    minY: number | null;
+    stopRadiusSq: number;
+    EPSILON: number;
+    Process(): void;
+    SetTarget(_target: Vector2D): this;
+    SetMax(_x: number, _y: number): this;
+    SetMin(_x: number, _y: number): this;
 }
-declare class GLEntity2D {
-
+declare class GLEntity2D extends CoreEntity2D {
+    constructor(_x: number, _y: number, _pc: Controller.GLProgramController);
+    programController: Controller.GLProgramController;
+    time: number;
+    timeInc: number;
+    abstract GLPreRender(): void;
+    abstract GLPostRender(): void;
+    GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
 }
 declare class Culler2D {
-
+    constructor(_tlx: number, _tly: number, _brx: number, _bry: number);
+    bounds: Geom.AABB2D;
+    container: Container;
+    entities: Entity[];
+    rootMatrix: Matrix2D;
+    onOut: Event.Dispatcher;
+    onIn: Event.Dispatcher;
+    BindContainer(_container: Container): this;
+    SetRootMatrix(_matrix: Matrix2D): this;
+    Process(): void;
 }
 declare class Draw {
-
+    constructor(_defaultOptions: object);
+    PreDrawBase(_options: object): this;
+    PreDrawText(_options: object): this;
+    PreDrawStroke(_options: object): this;
+    Rectangle(_options: object): this;
+    RoundRectangle(_options: object): this;
+    AABB(_options: object): this;
+    Circle(_options: object): this;
+    Ellipse(_options: object): this;
+    Line(_options: object): this;
+    LineChain(_options: object): this;
+    Arc(_options: object): this;
+    EllipticArc(_options: object): this;
+    Curve(_options: object): this;
+    BezierCurve(_options: object): this;
+    QuadraticCurve(_options: object): this;
 }

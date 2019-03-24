@@ -11,7 +11,7 @@ export class Polygon2D {
 
   /**
    * 
-   * @param {Array<Object|Vector2D|Point>?} _vertices 
+   * @param {Array<object|Vector2D|Point>?} _vertices 
    */
   constructor ( _vertices ) {
 
@@ -169,7 +169,7 @@ export class Polygon2D {
 
   /**
    * 
-   * @param {Array<Object|Vector2D|Point|Number>} _vertices 
+   * @param {Array<object|Vector2D|Point|Number>} _vertices 
    * 
    * @return {this}
    */

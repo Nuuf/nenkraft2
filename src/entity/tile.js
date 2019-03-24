@@ -15,10 +15,10 @@ export class Tile extends CoreEntity2D {
    * @param {number}  _y 
    * @param {number}  _clipX 
    * @param {number}  _clipY 
-   * @param {number}  _H 
+   * @param {boolean} _H 
    * @param {boolean} _V 
    * @param {boolean} _D 
-   * @param {boolean} _w 
+   * @param {number}  _w 
    * @param {number}  _h 
    * @param {number}  _tscaleX 
    * @param {number}  _tscaleY 

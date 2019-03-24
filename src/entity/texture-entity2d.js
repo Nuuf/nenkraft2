@@ -17,10 +17,10 @@ export class TextureEntity2D extends BatchableContainer2D {
 
   /**
    * 
-   * @param {number}         _x 
-   * @param {number}         _y 
-   * @param {BasicTexture2D} _texture 
-   * @param {integer?}       _unitId 
+   * @param {number}                             _x 
+   * @param {number}                             _y 
+   * @param {BasicTexture2D | ProgramController} _texture 
+   * @param {integer?}                           _unitId 
    */
   constructor ( _x, _y, _texture, _unitId ) {
 
@@ -35,7 +35,6 @@ export class TextureEntity2D extends BatchableContainer2D {
     this.tint = new Color( 1, 1, 1, 1 );
     this.texture = null;
     this.gco = DEFAULT;
-    this.programController = null;
 
     if ( _texture instanceof GLTexture2DProgramController ) {
 
@@ -78,8 +77,6 @@ export class TextureEntity2D extends BatchableContainer2D {
   /**
    * 
    * @param {number} _value 
-   * 
-   * @return {void}
    */
   set alpha ( _value ) {
 
@@ -222,14 +219,14 @@ export class TextureEntity2D extends BatchableContainer2D {
 
   /**
    * 
-   * @param {Numer} _x 
-   * @param {Numer} _y 
-   * @param {Numer} _w 
-   * @param {Numer} _h 
-   * @param {Numer} _offsetX 
-   * @param {Numer} _offsetY 
-   * @param {Numer} _originW 
-   * @param {Numer} _originH 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {number} _w 
+   * @param {number} _h 
+   * @param {number} _offsetX 
+   * @param {number} _offsetY 
+   * @param {number} _originW 
+   * @param {number} _originH 
    * 
    * @return {void}
    */
@@ -386,7 +383,7 @@ export class TextureEntity2D extends BatchableContainer2D {
   
   /**
    * 
-   * @param {Vector2D|Object} _p 
+   * @param {Vector2D|object} _p 
    * 
    * @return {boolean}
    */
