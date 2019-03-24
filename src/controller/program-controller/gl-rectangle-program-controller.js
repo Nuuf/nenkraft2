@@ -52,11 +52,11 @@ export class GLRectangleProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Matrix2D} _projection 
-   * @param {number}   _x 
-   * @param {number}   _y 
-   * @param {number}   _w 
-   * @param {number}   _h 
+   * @param {Float32Array} _projection 
+   * @param {number}       _x 
+   * @param {number}       _y 
+   * @param {number}       _w 
+   * @param {number}       _h 
    * 
    * @return {void}
    */

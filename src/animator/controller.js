@@ -8,7 +8,7 @@ export class Controller {
 
   /**
    * 
-   * @param {Sprite} _sprite 
+   * @param {Sprite?} _sprite 
    */
   constructor ( _sprite ) {
 
@@ -21,9 +21,9 @@ export class Controller {
 
   /**
    * 
-   * @param {any}      _id 
-   * @param {integer?} _frameDuration 
-   * @param {boolean?} _dynamicSize 
+   * @param {string|any} _id 
+   * @param {integer?}   _frameDuration 
+   * @param {boolean?}   _dynamicSize 
    * 
    * @return {Animation}
    */
@@ -52,9 +52,9 @@ export class Controller {
 
   /**
    * 
-   * @param {any} _id 
+   * @param {string|any} _id 
    * 
-   * @return {Animation|Null}
+   * @return {Animation|null}
    */
   GetAnimationById ( _id ) {
 
@@ -73,8 +73,8 @@ export class Controller {
 
   /**
    * 
-   * @param {any}      _id 
-   * @param {integer?} _frameIndex 
+   * @param {string|any} _id 
+   * @param {integer?}   _frameIndex 
    * 
    * @return {void}
    */

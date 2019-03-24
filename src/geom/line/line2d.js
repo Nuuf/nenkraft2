@@ -144,7 +144,7 @@ export class Line2D {
   /**
    * 
    * @param {Vector2D[]} _cuts 
-   * @param {Array?}          _points 
+   * @param {Array?}     _points 
    * 
    * @return {Vector2D[]}
    */

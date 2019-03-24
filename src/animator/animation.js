@@ -10,7 +10,7 @@ export class Animation {
   /**
    * 
    * @param {Controller} _controller 
-   * @param {any?}       _id 
+   * @param {string|any?} _id 
    * @param {integer?}   _frameDuration 
    * @param {boolean?}   _dynamicSize 
    */
@@ -137,10 +137,10 @@ export class Animation {
 
   /**
    * 
-   * @param {any}      _id 
-   * @param {boolean?} _returnIndex
+   * @param {string|any} _id 
+   * @param {boolean?}   _returnIndex
    * 
-   * @return {Frame}
+   * @return {Frame|null}
    */
   GetFrameById ( _id, _returnIndex ) {
 

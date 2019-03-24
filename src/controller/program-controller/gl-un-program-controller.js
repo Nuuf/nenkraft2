@@ -44,12 +44,12 @@ export class GLUnProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Matrix2D} _projection 
-   * @param {number}   _x 
-   * @param {number}   _y 
-   * @param {number}   _w 
-   * @param {number}   _h 
-   * @param {number}   _time 
+   * @param {Float32Array} _projection 
+   * @param {number}       _x 
+   * @param {number}       _y 
+   * @param {number}       _w 
+   * @param {number}       _h 
+   * @param {number}       _time 
    * 
    * @return {void}
    */

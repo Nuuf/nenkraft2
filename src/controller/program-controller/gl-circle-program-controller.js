@@ -52,10 +52,10 @@ export class GLCircleProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Matrix2D} _projection 
-   * @param {number}   _x 
-   * @param {number}   _y 
-   * @param {number}   _radius 
+   * @param {Float32Array} _projection 
+   * @param {number}       _x 
+   * @param {number}       _y 
+   * @param {number}       _radius 
    * 
    * @return {void}
    */

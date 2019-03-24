@@ -11,7 +11,7 @@ export class Motion {
   /**
    * 
    * @param {string}        _id 
-   * @param {object|Entity} _target 
+   * @param {object}        _target 
    * @param {string}        _propertyString 
    * @param {number}        _value 
    * @param {number}        _duration 

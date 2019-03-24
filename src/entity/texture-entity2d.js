@@ -287,7 +287,7 @@ export class TextureEntity2D extends BatchableContainer2D {
 
   /**
    * 
-   * @return {Number[]}
+   * @return {number[]}
    */
   GetBufferData () {
 

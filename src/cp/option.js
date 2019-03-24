@@ -26,7 +26,7 @@ export class Option {
 
   /**
    * 
-   * @param {Array}   _dataStrs 
+   * @param {[]}      _dataStrs 
    * @param {object}  _data 
    * @param {object?} _staticData 
    * 

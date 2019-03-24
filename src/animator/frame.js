@@ -6,16 +6,16 @@ export class Frame {
 
   /**
    * 
-   * @param {integer}  _x 
-   * @param {integer}  _y 
-   * @param {integer}  _w 
-   * @param {integer}  _h 
-   * @param {integer}  _duration 
-   * @param {any?}     _id 
-   * @param {integer?} _offsetX 
-   * @param {integer?} _offsetY 
-   * @param {integer?} _originW 
-   * @param {integer?} _originH 
+   * @param {integer}     _x 
+   * @param {integer}     _y 
+   * @param {integer}     _w 
+   * @param {integer}     _h 
+   * @param {integer}     _duration 
+   * @param {string|any?} _id 
+   * @param {integer?}    _offsetX 
+   * @param {integer?}    _offsetY 
+   * @param {integer?}    _originW 
+   * @param {integer?}    _originH 
    */
   constructor ( _x, _y, _w, _h, _duration, _id, _offsetX, _offsetY, _originW, _originH ) {
 

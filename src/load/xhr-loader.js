@@ -195,7 +195,7 @@ export class XHRLoader {
    * 
    * @param {any} _id
    * 
-   * @return {XMLHttpRequest} 
+   * @return {XMLHttpRequest|null} 
    */
   GetXHRById ( _id ) {
 
@@ -207,7 +207,7 @@ export class XHRLoader {
    * 
    * @param {any} _id
    * 
-   * @return {object} 
+   * @return {object|null} 
    */
   GetDataById ( _id ) {
 
@@ -219,9 +219,9 @@ export class XHRLoader {
    * 
    * @param {any} _id
    * 
-   * @return {object} 
+   * @return {object|null} 
    */
-  GetClonedDataById ( _id ) {
+  CloneDataById ( _id ) {
 
     return DeepClone( this.GetDataById( _id ) );
 

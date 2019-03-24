@@ -38,6 +38,14 @@ html, body {
     width: 150px;
   }
 }
+@media (max-width: 620px) {
+    #buttons {
+    width: 90%;
+  }
+  #buttons input[type='button'] {
+    width: calc(100% - 4px);
+  }
+}
 
 #buttons input:active {
   outline: none;

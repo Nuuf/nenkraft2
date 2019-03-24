@@ -45,7 +45,7 @@ export class Char extends CoreEntity2D {
    */
   static get pool () {
 
-    return PS_POOL;
+    return PS_pool;
   
   }
 
@@ -232,7 +232,7 @@ export class Char extends CoreEntity2D {
    */
   Store () {
 
-    PS_POOL.Store( this );
+    PS_pool.Store( this );
 
     return this;
   
@@ -241,9 +241,9 @@ export class Char extends CoreEntity2D {
 }
 
 // Private Static ----->
-const PS_POOL = new Pool();
+const PS_pool = new Pool();
 
-PS_POOL.Retrieve = function ( _data ) {
+PS_pool.Retrieve = function ( _data ) {
 
   this.PreRetrieve();
 
@@ -251,7 +251,7 @@ PS_POOL.Retrieve = function ( _data ) {
 
 };
 
-PS_POOL.Flood( () => {
+PS_pool.Flood( () => {
 
   return new Char( 0, 0 );
 

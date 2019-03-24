@@ -65,9 +65,7 @@ export class AABB2D {
    */
   SetC ( _aabb2d ) {
 
-    this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
-
-    return this;
+    return this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
   
   }
 
@@ -184,7 +182,7 @@ export class AABB2D {
    * 
    * @return {boolean}
    */
-  ContainsPoint ( _p ) {
+  ContainsPoint2D ( _p ) {
 
     return !( 
       _p.x <= this.tl.x ||

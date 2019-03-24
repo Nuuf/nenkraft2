@@ -27,8 +27,8 @@ export default () => {
       new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
     );
     const scene = new nk2.VisualContainer2D( HW, HH );
-    const particleSystem = new nk2.Particle.Particle2D.System( 0, 0 );
-    const pdata = window.testData.xhrloader.GetClonedDataById( 'particleExplosion' );
+    const particleSystem = new nk2.Particle.P2D.System( 0, 0 );
+    const pdata = window.testData.xhrloader.CloneDataById( 'particleExplosion' );
     const ptimer = new nk2.Time.Timer( 10 );
     const positions = new nk2.Geom.Polygon2D();
 

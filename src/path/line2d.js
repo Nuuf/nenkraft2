@@ -7,6 +7,14 @@ import { SSa } from '../style';
 
 export class Line2D extends Line2DGeom {
 
+  /**
+   * 
+   * @param {number}  _sx 
+   * @param {number}  _sy 
+   * @param {number}  _ex 
+   * @param {number}  _ey 
+   * @param {object?} _style 
+   */
   constructor ( _sx, _sy, _ex, _ey, _style ) {
 
     super( _sx, _sy, _ex, _ey );

@@ -88,7 +88,7 @@ export class Registry {
    * @param {string}  _str 
    * @param {object?} _staticData 
    * 
-   * @return {String|null}
+   * @return {string|null}
    */
   Parse ( _str, _staticData ) {
 

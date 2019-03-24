@@ -114,6 +114,13 @@ export class Pixel extends Vector2D {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _buffer 
+   * @param {integer}      _index 
+   * 
+   * @return {void}
+   */
   UpdateInBuffer ( _buffer, _index ) {
 
     const color = this.color;

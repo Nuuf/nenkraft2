@@ -105,7 +105,7 @@ export class Graphic2D extends BatchableContainer2D {
 
   /**
    * 
-   * @return {Number[]}
+   * @return {number[]}
    */
   GetBufferData () {
 

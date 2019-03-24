@@ -37,6 +37,19 @@ export namespace Math {
     }
 }
 export function Assert(_data: any, _compare: string, _value: any, _noSelfAssert: boolean): void;
+export namespace Assert {
+    export const IS: string;
+    export const IS_NOT: string;
+    export const IS_SAME_TYPE: string;
+    export const IS_NOT_SAME_TYPE: string;
+    export const IS_INSTANCE_OF: string;
+    export const IS_NOT_INSTANCE_OF: string;
+    export const IS_LESS_THAN: string;
+    export const IS_GREATER_THAN: string;
+    export const IS_LESS_THAN_OR_EQUAL: string;
+    export const IS_GREATER_THAN_OR_EQUAL: string;
+    export function Assign(_g: object): void;
+}
 export namespace Utility {
     export function RandomInteger(_min: number, _max: number): number;
     export function RandomIntegerAvoid(_min: number, _max: number, _amin: number, _amax: number): number;
@@ -60,7 +73,7 @@ export namespace Utility {
     export function RandomInArray(_array: any[]): any;
     export function MinMaxOrValue(_options: object, _other?: string): object | any;
     export function UUID(_length?: number, _parts?: number, _charSetIndex?: number, _separator?: string): string;
-    export function ApplyProperties(_object: object, _props: object); void;
+    export function ApplyProperties(_object: object, _props: object): void;
     export function Nested(
         _object: object, _string: string, _getObjectHolding: boolean,
         _set: boolean, _value: any, _splitter?: string
@@ -201,12 +214,12 @@ export namespace Time {
         isRunning: boolean;
         canResume: boolean;
         count: number;
-        onStop: Dispatcher;
-        onFinish: Dispatcher;
-        onStart: Dispatcher;
-        onReset: Dispatcher;
-        onPause: Dispatcher;
-        onResume: Dispatcher;
+        onStop: Event.Dispatcher;
+        onFinish: Event.Dispatcher;
+        onStart: Event.Dispatcher;
+        onReset: Event.Dispatcher;
+        onPause: Event.Dispatcher;
+        onResume: Event.Dispatcher;
         Reset(): this;
         Start(_stopTime?: number): this;
         Stop(): this;
@@ -266,19 +279,320 @@ export namespace Ease {
     export function CircInOut(_time: number, _startValue: number, _amplitude: number, _duration: number): number;
 }
 export namespace Collision {
-
+    declare class Body2D {
+        constructor(_shape: Shape);
+        shape: Shape;
+        mass: number;
+        relative: Vector2D | null;
+        velocity: Vector2D;
+        offset: Vector2D;
+        SetMass(_n: number): this;
+        SetOffset(_x: number, _y: number): this;
+        SetVelocity(_x: number, _y: number): this;
+        SetVelocityV(_v: object | Vector2D | Math.Point): this;
+        GetPosition(): Vector2D;
+        SetPosition(_x: number, _y: number): this;
+        SetPositionV(_v: object | Vector2D | Math.Point): this;
+        SetRelative(_v: Vector2D): this;
+    }
+    export namespace AABB2DvsAABB2D {
+        declare class Result {
+            constructor();
+            mtv: Vector2D;
+            occured: boolean;
+            Reset(): void;
+        }
+        export function Collide(_a: Body2D, _b: Body2D, _result: Result): boolean;
+        export function SeparatingResponse(_a: Body2D, _b: Body2D, _result: Result): void;
+    }
+    export namespace AABB2DvsLine2D {
+        declare class Result {
+            constructor();
+            poc: object;
+            top: boolean;
+            right: boolean;
+            bottom: boolean;
+            left: boolean;
+            Reset(): void;
+        }
+        export function Collide(_a: Body2D, _b: Body2D, _result: Result): boolean;
+    }
+    export namespace CirclevsCircle {
+        declare class Result {
+            constructor();
+            mtv: Vector2D;
+            poc: object;
+            mtd: number;
+            delta: Vector2D;
+            occured: boolean;
+            Reset(): void;
+        }
+        export function Collide(_a: Body2D, _b: Body2D, _result: Result): boolean;
+        export function ElasticResponse(_a: Body2D, _b: Body2D, _result: Result): void;
+    }
+    export namespace CirclevsLine2D {
+        declare class Result {
+            constructor();
+            mtv: Vector2D;
+            cp: Vector2D;
+            sOrE: number;
+            occured: boolean;
+            Reset(): void;
+        }
+        export function Collide(_a: Body2D, _b: Body2D, _result: Result): boolean;
+        export function ReflectingResponse(_a: Body2D, _b: Body2D, _result: Result): void;
+    }
+    export namespace Line2DvsLine2D {
+        export function Line2DLine2DCollision(
+            _startA: Vector2D, _endA: Vector2D,
+            _startB: Vector2D, _endB: Vector2D,
+            _p: Vector2D
+        ): boolean;
+    }
+    export namespace Polygon2DvsPolygon2D {
+        declare class Result {
+            constructor();
+            mtv: Vector2D;
+            olAxis: Vector2D;
+            mtd: number;
+            occured: boolean;
+            Reset(): void;
+        }
+        export function Collide(_a: Body2D, _b: Body2D, _result: Result): boolean;
+        export function AxisSeparates(_a: Body2D, _b: Body2D, _axis: Vector2D, _result: Result);
+        export function SeparatingResponse(_a: Body2D, _b: Body2D, _result: Result): void;
+    }
 }
 export namespace Geom {
-    
+    export namespace PolygonConstruction {
+        export namespace Butterfly2D {
+            export namespace C {
+                export let _1: number;
+                export let _2: number;
+                export let _3: number;
+                export let _4: number;
+                export let _5: number; 
+            }
+        }
+        export namespace Supershape2D {
+            export namespace C {
+                export let _A: number;
+                export let _B: number;
+            }
+        }
+        export function Rectangular2D(
+            _polygon: Polygon2D, _x: number, _y: number, 
+            _w: number, _h: number
+        ): Polygon2D;
+        export function Isosceles2D(
+            _polygon: Polygon2D, _x: number, _y: number, 
+            _w: number, _h: number
+        ): Polygon2D; 
+        export function Cyclic2D(
+            _polygon: Polygon2D, _x: number, _y: number, 
+            _radius: number, _accuracy: number
+        ): Polygon2D;
+        export function Equilateral2D(
+            _polygon: Polygon2D, _x: number, _y: number, 
+            _side: number
+        ): Polygon2D;
+        export function Star2D(
+            _polygon: Polygon2D, _x: number, _y: number, 
+            _outerRadius: number, _innerRadius: number, _corners: number
+        ): Polygon2D;
+        export function Butterfly2D(
+            _polygon: Polygon2D, _x: number, _y: number,
+            _n: number, _radius: number
+        ): Polygon2D;
+        export function Rose2D(
+            _polygon: Polygon2D, _x: number, _y: number,
+            _radius: number, _k: number, _accuracy: number, _loops: number
+        ): Polygon2D;
+        export function Supershape2D(
+            _polygon: Polygon2D, _x: number, _y: number,
+            _radius: number, _accuracy: number, _m: number, 
+            _n1?: number, _n2?: number, _n3: number
+        ): Polygon2D;
+    }
+    declare class AABB2D {
+        constructor(_tlx: number, _tly: number, _brx: number, _bry: number);
+        tl: Vector2D;
+        br: Vector2D;
+        w: number;
+        h: number;
+        hw: number;
+        hh: number;
+        area: number;
+        belongsTo: object | any;
+        TYPE: number;
+        static get TYPE(): number;
+        Set(_tlx: number, _tly: number, _brx: number, _bry: number): this;
+        SetC(_aabb2d: AABB2D): this;
+        SetXYWH(_x: number, _y: number, _w: number, _h: number): this;
+        SetPosition( _x: number, _y: number): this;
+        GetPosition(): Vector2D;
+        Scale(_x: number, _y: number, _notl?: boolean): this;
+        ScaleV(_p: object | Vector2D | Math.Point, _notl?: boolean): this;
+        ComputeWH(): this;
+        IntersectsPoint2D(_p: object | Vector2D | Math.Point): boolean;
+        ContainsPoint2D(_p: object | Vector2D | Math.Point): boolean;
+        IntersectsAABB2D(_aabb: AABB2D): boolean;
+        ContainsAABB2D(_aabb: AABB2D): boolean;
+        GetQuadrant(_quadrant: string): AABB2D;
+    }
+    declare class Line2D {
+        constructor(_sx: number, _sy: number, _ex: number, _ey: number);
+        s: Vector2D;
+        e: Vector2D;
+        epsilon: number;
+        belongsTo: object | any;
+        TYPE: number;
+        static get TYPE(): number;
+        Set(_sx: number, _sy: number, _ex: number, _ey: number): this;
+        SetC(_line2d: Line2D): this;
+        SetPosition(_x: number, y: number): this;
+        GetPosition(): Vector2D;
+        Stretch(_magnitude: number): this;
+        Rotate(_angle: number, _anchorX?: number, _anchorY?: number): this;
+        Cut(_cuts: Vector2D[], _points?: []): Vector2D[];
+        GetLength(): number;
+        GetLengthSquared(): number;
+        IntersectsPoint2D(_p: object | Vector2D | Math.Point): boolean;
+        IntersectsLine2D(_line: Line2D): boolean;
+        GetClosestPoint2DTo(_p: Vector2D): Vector2D;
+        GetNormalA(): Vector2D;
+        GetNormalB(): Vector2D;
+    }
+    declare class Ray2D extends Line2D {
+
+    }
+    declare class Polygon2D {
+        constructor(_vertices?: Array<object | Vector2D | Math.Point>);
+        vertices: Vector2D[];
+        normals: Vector2D[];
+        perimeterMidPoints: Vector2D[];
+        centroid: Vector2D;
+        aabb: AABB2D;
+        dirtyBounds: boolean;
+        dirtyCentroid: boolean;
+        belongsTo: object | any;
+        TYPE: number;
+        static get TYPE(): number;
+        Copy(): Polygon2D;
+        SetC(_polygon: Polygon2D): this;
+        ExtractSegments(_segments?: []): Line2D[];
+        GenerateRandomPoints(_amount: number, _int?: boolean, _outside?: boolean): Vector2D[];
+        AddVertex(_vertex: Vector2D): this;
+        AddVertices(_vertices: Array<object | Vector2D | Math.Point>): this;
+        Recreate(_vertices?: Vector2D[]): this;
+        ComputeBounds(): this;
+        Rotate(_angle: number, _anchorX?: number, _anchorY?: number): this;
+        SetPosition(_x: number, _y: number): this;
+        ComputeCentroid(): this;
+        ComputeNormalsA(): this;
+        ComputeNormalsB(): this;
+        ComputePerimeterMidPoints(): this;
+        IntersectsPoint2D(_p: object | Vector2D | Math.Point): boolean;
+    }
+    declare class Circle {
+        constructor(_x: number, _y: number, _radius: number);
+        center: Vector2D;
+        diameter: number;
+        w: number;
+        h: number;
+        radiusSquared: number;
+        radiusUnsquared: number;
+        area: number;
+        belongsTo: object | any;
+        TYPE: number;
+        static get TYPE(): number;
+        Set(_x: number, _y: number, _radius: number): this;
+        SetC(_circle: Circle): this;
+        SetPosition(_x: number, _y: number): this;
+        GetPosition(): Vector2D;
+        Scale(_scale: number): this;
+        IntersectsCircle(_circle: Circle): boolean;
+        ContainsCircle(_circle: Circle): boolean;
+        IntersectsPoint2D(_p: Vector2D): boolean;
+        GenerateRandomPoints(_amount: number, _int?: boolean, _outside?: boolean): Vector2D[];
+        GeneratePerimeterPoints(_amount: number, _margin: number): Vector2D[];
+        get x(): number;
+        set x(_value: number);
+        get y(): number;
+        set y(_value: number);
+        get radius(): number;
+        set radius(_value: number);
+    }
 }
 export namespace Packing {
-
+    declare class RectanglePacker {
+        constructor(_w: number, _h: number);
+        root: Geom.AABB2D | null;
+        propW: string;
+        propH: string;
+        w: number;
+        h: number;
+        __dynamic: boolean;
+        padding: Vector2D;
+        Pack(_objects: object[], _suppress: boolean): object[];
+        PackDynamic(_objects: object[], _suppress: boolean): object[];
+        Find(_node: Geom.AABB2D, _w: number, _h: number): Geom.AABB2D | null;
+        Partition(_node: Geom.AABB2D, _w: number, _h: number): Geom.AABB2D;
+        Extend(_w: number, _h: number): Geom.AABB2D | null;
+        ExtendAxis(_w: number, _h: number, _vertical?: boolean): Geom.AABB2D | null;
+        UseProp(_w: string, _h: string): this;
+        SetSize(_w: number, _h: number): this;
+        SetPadding(_x: number, _y: number): this;
+    }
 }
 export namespace Path {
-
-}
-export namespace Draw {
-
+    declare class AABB2D extends Geom.AABB2D {
+        constructor(_tlx: number, _tly: number, _brx: number, _bry: number, _style?: object);
+        programController: Controller.GLProgramController | null;
+        style: object;
+        Render(_rc: CanvasRenderingContext2D): void;
+        GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
+        LinkProgramController(_pc: Controller.GLProgramController): this;
+        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkStyle(): this;
+    }
+    declare class Circle extends Geom.Circle {
+        constructor(_x: number, _y: number, _radius: number, _style?: object);
+        programController: Controller.GLProgramController | null;
+        style: object;
+        Render(_rc: CanvasRenderingContext2D): void;
+        GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
+        LinkProgramController(_pc: Controller.GLProgramController): this;
+        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkStyle(): this;
+    }
+    declare class Line2D extends Geom.Line2D {
+        constructor(_sx: number, _sy: number, _ex: number, _ey: number, _style?: object);
+        programController: Controller.GLProgramController | null;
+        style: object;
+        Render(_rc: CanvasRenderingContext2D): void;
+        GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
+        LinkProgramController(_pc: Controller.GLProgramController): this;
+        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkStyle(): this;
+    }
+    declare class Pixel extends Vector2D {
+        constructor(_x: number, _y: number, _style?: object);
+        style: object;
+        color: Color;
+        programController: Controller.GLProgramController | null;
+        bufferData: number[];
+        GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
+        LinkProgramController(_pc: Controller.GLProgramController): this;
+        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkStyle(): this;
+        GetBufferData(): number[];
+        UpdateInBuffer(_buffer: Float32Array, _index: number): void
+    }
+    declare class Polygon2D extends Geom.Polygon2D {
+        constructor(_vertices: Vector2D[], _style?: object);
+        Render(_rc: CanvasRenderingContext2D): void;
+    }
 }
 export namespace Shader {
     export namespace SNIPPETS {
@@ -326,7 +640,85 @@ export namespace Shader {
     export const WT: object;
 }
 export namespace Load {
-
+    declare class ImageLoader {
+        constructor(_objects?: object[], _createTextures?: boolean, _onComplete?: Function);
+        imageCache: Cache;
+        basicTextureCache: Cache;
+        onImageLoaded: Event.Dispatcher;
+        onComplete: Event.Dispatcher;
+        onError: Event.Dispatcher;
+        toLoadCount: number;
+        loadedCount: number;
+        loading: boolean;
+        createTexture: boolean;
+        Load(_objects?: object[], _createTextures?: boolean): void;
+        OnLoad(_event: any): void;
+        OnError(_event: any): void;
+        GetImageById(_id: any): Image | null;
+        GetBasicTextureById(_id: any): Texture.BasicTexture2D | null;
+    } 
+    declare class XHRLoader {
+        constructor(_objects?: object[], _onComplete?: Function);
+        XHRCache: Cache;
+        dataCache: Cache;
+        onXHRLoaded: Event.Dispatcher;
+        onComplete: Event.Dispatcher;
+        onNetworkError: Event.Dispatcher;
+        onLoadError: Event.Dispatcher;
+        toLoadCount: number;
+        loadedCount: number;
+        loading: boolean;
+        Load(_objects?: object[]): void;
+        OnDataLoaded(_event: any): void;
+        OnLoadXML(_event: any): void;
+        OnLoadJSON(_event: any): void;
+        OnNetworkError(_event: any): void;
+        GetXHRById(_id: any): XMLHttpRequest | null;
+        GetDataById(_id: any): object | null;
+        CloneDataById(_id: any): object | null;
+    }
+    declare class SpritesheetLoader {
+        constructor(_objects?: object[], _onComplete?: Function);
+        spritesheetCache: Cache;
+        xhrLoader: XHRLoader;
+        imageLoader: ImageLoader;
+        onComplete: Event.Dispatcher;
+        onSpritesheetLoaded: Event.Dispatcher;
+        toLoadCount: number;
+        loadedCount: number;
+        loading: boolean;
+        Load(_objects?: object[]): void;
+        OnSpritesheetLoaded(_id: any): void;
+        OnPartXHRLoaded(_event: any): void;
+        OnPartImageLoaded(_event: any): void;
+        GetSpritesheetById(_id: any): Texture.Spritesheet | null;
+    }
+    declare class TilesetLoader {
+        constructor(_objects?: object[], _onComplete?: Function);
+        tilesetCache: Cache;
+        mapDataLoader: XHRLoader;
+        setDataLoader: XHRLoader;
+        imageLoader: ImageLoader;
+        onComplete: Event.Dispatcher;
+        onTilesetLoaded: Event.Dispatcher;
+        toLoadCount: number;
+        loadedCount: number;
+        loading: boolean;
+        Load(_objects?: object[]): void;
+        OnTilesetLoaded(_id: any): void;
+        OnPartMapDataLoaded(_event: any): void;
+        OnPartSetDataLoaded(_event: any): void;
+        OnPartImageLoaded(_event: any): void;
+        GetTilesetById(_id: any): Texture.Tileset | null;
+    }
+    declare class LoaderCombiner {
+        constructor(_loaders: any[], _onComplete?: Function);
+        loaders: any[];
+        loaderCount: number;
+        onComplete: Event.Dispatcher;
+        Load(): void;
+        OnLoaderComplete(): void;
+    }
 }
 export namespace Controller {
     declare class GLProgramController {
@@ -352,29 +744,451 @@ export namespace Controller {
         outlineColor: Color;
         outline: number;
         Initialise(): void;
-        Execute(_projection: Matrix2D, _x: number, _y: number, _radius: number): void;
+        Execute(_projection: Float32Array, _x: number, _y: number, _radius: number): void;
+    }
+    declare class GLDynamixTexture2DProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _units: number);
+        units: number;
+        originalTextures: Texture.BasicTexture2D[];
+        texture: WebGLTexture[];
+        essenceBuffer: WebGLBuffer[];
+        lastUnitUsed: number;
+        Initialise(): void;
+        BindBasicTexture(_texture: Texture.BasicTexture2D, _unitId?: number, _param?: number): void;
+        BindUnit(_gl: WebGLRenderingContext | WebGL2RenderingContext, _uniforms: object, _attributes: object, _unitId: number): void;
+        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array, _unitId: number): void;
+    }
+    declare class GLLine2DProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+        essenceBuffer: WebGLBuffer;
+        vertices: Float32Array;
+        color: Color;
+        Initialise(): void;
+        Execute(_projection: Float32Array, _s: Vector2D, _e: Vector2D): void;
+    }
+    declare class GLPixelBatchProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+        dataBuffer: WebGLBuffer;
+        previousNumberOfElement: number;
+        Initialise(): void;
+        Execute(_data: Float32Array, _numElement: number): void;
+    }
+    declare class GLRectangleProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+        essenceBuffer: WebGLBuffer;
+        vertices: Float32Array;
+        fillColor: Color;
+        outlineColor: Color;
+        outline: number;
+        Initialise(): void;
+        Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number): void;
+    }
+    declare class GLRendertextureProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
+        essenceBuffer: WebGLBuffer;
+        frameBuffer: WebGLFramebuffer;
+        renderBuffer: WebGLRenderbuffer;
+        texture: WebGLTexture;
+        Initialise(): void;
+        Config(
+            _w: number, _h: number, _param?: number, 
+            _ex?: number, _ey?: number, _ew?: number, _eh?: number
+        ): void;
+        ExecuteClean(): void;
+        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array): void;
+    }
+    declare class GLTexture2DBatchProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+        originalTexture: Texture.BasicTexture2D;
+        texture: WebGLTexture;
+        essenceBuffer: WebGLBuffer;
+        dataBuffer: WebGLBuffer;
+        previousNumberOfElements: number;
+        Initialise(): void;
+        BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
+        Execute(_data: Float32Array, _numberOfElements: number): void;
+    }
+    declare class GLTexture2DProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+        originalTexture: Texture.BasicTexture2D;
+        texture: WebGLTexture;
+        essenceBuffer: WebGLBuffer;
+        Initialise(): void;
+        BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
+        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array): void;
+    }
+    declare class GLUnProgramController extends GLProgramController {
+        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
+        essenceBuffer: WebGLBuffer;
+        vertices: Float32Array;
+        Initialise(): void;
+        Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number, _time: number): void;
     }
 }
 export namespace CP {
-
+    declare class Command {
+        constructor(
+            _id: string, _handle: Function,
+            _info?: boolean, _continueToPrime?: boolean,
+            _filterNull?: boolean, _optionPrefix?: string
+        );
+        id: string[];
+        handle: Function;
+        info: string | null;
+        data: object;
+        options: Option[] | null;
+        registry: Registry | null;
+        optionPrefix: string;
+        dataSeparator: string;
+        fullInfo: string | null;
+        continueToPrime: boolean;
+        filterNull: boolean;
+        jsonPrefix: string;
+        static get OPTION_PREFIX(): string;
+        static set OPTION_PREFIX(_value: string);
+        Execute(_dataStrs: [], _data: object, _staticData?: object): void;
+        AddOption(
+            _id: string, _handle: Function,
+            _info?: string, _priority?: number,
+            _breakIfExecuted?: boolean, _optionPrefix?: string
+        ): this;
+        HandleData(_dataStrs: [], _data: object): void;
+        HandleOptions(_dataStrs: [], _data: object, _staticData?: object): boolean;
+        GetOptionById(_id: string): Option | null;
+        GetAllOptionIds(): string[];
+        GetAndRemoveMatchingOptionIds(_dataStrs: []): string[];
+        GenerateInfoString(): string;
+    }
+    declare class Option {
+        constructor(
+            _id: string, _handle: Function,
+            _info?: string, _priority?: number, _breakIfExecuted?: boolean
+        );
+        id: string[];
+        handle: Function;
+        info: string | null;
+        priority: number;
+        breakIfExecuted: boolean;
+        data: object;
+        command: Command | null;
+        Execute(_dataStrs: [], _data: object, _staticData?: object): boolean;
+    }
+    declare class Registry {
+        constructor();
+        commands: Command[];
+        splitter: string;
+        AddCommand(_command: Command): Command;
+        RemoveCommand(_command: Command): Command;
+        GetCommandById(_id: string): Command | null;
+        Parse(_str: string, _staticData?: object): string | null;
+    }
 }
 export namespace Motion {
-
+    declare class Manager {
+        constructor(_target: object);
+        motions: Motion[];
+        target: object;
+        Create(
+            _id: string, _propertyString: string, 
+            _value: number, _duration: number, _easing?: string
+        ): Motion | null;
+        Add(_motion: Motion): void;
+        Start(_id: string): Motion | null;
+        StartMultiple(_ids: string): void;
+        Stop(_id: string): Motion | null;
+        StopMultiple(_ids: string): void;
+        Reset(_id: string): Motion | null;
+        ResetMultiple(_ids: string): void;
+        Process(): void;
+        GetMotionById(_id: string): Motion | null;
+    }
+    declare class Motion {
+        constructor(
+            _id: string, _target: object, _propertyString: string,
+            _value: number, _duration: number, _easing?: string
+        );
+        id: string;
+        target: object;
+        propertyString: string;
+        value: number;
+        duration: number;
+        easing: Function;
+        time: number;
+        startValue: number;
+        change: number;
+        property: string | null;
+        propertyObject: object | null;
+        running: boolean;
+        onStart: Event.Dispatcher;
+        onEnd: Event.Dispatcher;
+        onStop: Event.Dispatcher;
+        onReconfigure: Event.Dispatcher;
+        onReset: Event.Dispatcher;
+        Start(): void;
+        Stop(): void;
+        Process(): void;
+        Reconfigure(_propertyString: string, _value: number, _duration: number, _easing?: string): void;
+        NewValue(_value: number): void;
+        Reset(): void;
+    }
 }
 export namespace Particle {
-
+    export namespace P2D {
+        declare class OscillatingObject {
+            constructor(_from: number, _to: number, _amplitude: number);
+            from: number;
+            to: number;
+            amplitude: number;
+            active: boolean;
+            Set(_from: number, _to: number, _amplitude: number): void;
+            Inactivate(): void;
+        }
+        declare class Oscillation {
+            constructor();
+            velocityX: OscillatingObject | null;
+            velocityY: OscillatingObject | null;
+            torque: OscillatingObject | null;
+            accelerationX: OscillatingObject | null;
+            accelerationY: OscillatingObject | null;
+            spin: OscillatingObject | null;
+            growthX: OscillatingObject | null;
+            growthY: OscillatingObject | null;
+            gravityX: OscillatingObject | null;
+            gravityY: OscillatingObject | null;
+            active: boolean;
+            CreateOscillatingObject(_key: string, _from: number, _to: number, _amplitude: number): void;
+            SetOscillatingObject(_key: string, _from: number, _to: number, _amplitude: number): void;
+            Nullify(_key: string): void;
+        }
+        declare class Particle {
+            constructor(_options: object, _index?: number);
+            velocity: Vector2D;
+            torque: number;
+            spin: number;
+            growth: Vector2D;
+            acceleration: Vector2D;
+            initialScale: Vector2D;
+            fade: boolean;
+            deflate: boolean;
+            gravity: Vector2D;
+            lifespan: number;
+            lifespanTotal: number;
+            dead: boolean;
+            entity: object | null;
+            system: System | null;
+            oscillation: Oscillation | null;
+            oscillationOffset: number;
+            static get USE_POOL(): boolean;
+            static set USE_POOL(_value: boolean);
+            static get pool(): Pool;
+            Process(): void;
+            Renew(_options: object, _index?: number): void;
+            RenewVector(_object: object, _vector: Vector2D, _index?: number, _rx?: number, _ry?: number): void;
+            SetLifespan(_value: number): void;
+            ResetEntity(_unitId?: number): void;
+            Destroy(_idDead?: boolean): boolean;
+        }
+        declare class System {
+            constructor(_x: number, _y: number);
+            particles: Particle[];
+            deletionTimer: Time.Timer;
+            Process(): void;
+            HandleParticles(): void;
+            HandleParticleDeletion(): void;
+            AddParticle(_particle: Particle): Particle;
+            RemoveParticle(_particle: Particle): Particle;
+            Emit(_options: object): void;
+        }
+    }
 }
 export namespace Texture {
-
+    declare class BasicTexture2D {
+        constructor(
+            _image: Image, _id?: string | any,
+            _w?: number, _h?: number,
+            _fullWidth?: number, _fullHeight?: number
+        );
+        image: Image;
+        id: string | any | null;
+        w: number;
+        h: number;
+        fw: number;
+        fh: number;
+        uniformId: number;
+    }
+    declare class Spritesheet {
+        constructor(_basicTexture: BasicTexture2D, _data: object);
+        id: string | any | null;
+        basicTexture: BasicTexture2D;
+        data: object;
+        frameCache: Cache;
+        GenerateFrames(): void;
+        GetFrameById(_id: string): Animator.Frame;
+    }
+    declare class Tileset {
+        constructor(_basicTexture: BasicTexture2D, _mapData: object, _setData: object);
+        id: string | any | null;
+        basicTexture: BasicTexture2D;
+        mapData: object;
+        setData: object;
+        pc: Controller.GLProgramController | null;
+    }
 }
 export namespace Animator {
-
+    declare class Animation {
+        constructor(_controller: Controller, _id?: string | any, _frameDuration?: number, _dynamicSize?: boolean);
+        frames: Frame[];
+        controller: Controller;
+        sprite: Sprite;
+        id: string | any;
+        onEnd: Event.Dispatcher;
+        onStart: Event.Dispatcher;
+        currentFrame: number;
+        currentFrameIndex: number;
+        playing: boolean;
+        frameDuration: number;
+        timer: number;
+        reverse: boolean;
+        overrideFrameTimer: boolean;
+        loop: boolean;
+        dynamicSize: boolean;
+        CreateFrame(
+            _x: number, _y: number, _w: number, y: number, _duration: number,
+            _offsetX?: number, _offsetY?: number, _originW?: number, _originH?: number
+        ): void;
+        AddFrame(_frame: Frame): void;
+        GenerateFrames(
+            _frameWidth: number, _frameHeight: number,
+            _imageWidth: number, _imageHeight: number,
+            _amount: number, _data?: object
+        ): void;
+        SetFrame(_index: number): void;
+        GetFrameById(_id: string | any): Frame | null;
+        SetFrameById(_id: string | any): void;
+        Start(_index?: number): void;
+        Stop(): void;
+        Process(): void;
+        NextFrame(): void;
+        Clear(): void;
+        Reset(): void;
+        ResetAllFrames(): void;
+    }
+    declare class Controller {
+        constructor(_sprite: Sprite);
+        animations: Animation[];
+        sprite: Sprite | null;
+        currentAnimation: Animation | null;
+        CreateAnimation(_id: string | any, _frameDuration?: number, _dynamicSize?: boolean): Animation;
+        AddAnimation(_animation: Animation): void;
+        GetAnimationById(_id: string | any): Animation | null;
+        PlayAnimation(_id: string | any, _frameIndex?: number): void;
+        StopCurrentAnimation(): void;
+        Process(): void;
+    }
+    declare class Frame {
+        constructor(
+            _x: number, _y: number, _w: number, _y: number, _duration: number,
+            _id?: string | any, _offsetX?: number, _offsetY?: number,
+            _originW?: number, _originH?: number
+        );
+        duration: number;
+        timer: number;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+        offsetX: number;
+        offsetY: number;
+        originW: number;
+        originH: number;
+        id: string | any;
+        Copy(): Frame;
+        Process(): boolean;
+        Apply(_sprite: Sprite, _dynamicSize?: boolean): this;
+        FullApply(_sprite: Sprite): this;
+        Reset(): this;
+    }
 }
 export namespace Input {
-
+    declare class Keyboard {
+        constructor(_element: DOMElement);
+        element: DOMElement;
+        onDown: Event.Dispatcher;
+        onUp: Event.Dispatcher;
+        OnKeyDown(_event: any): void;
+        OnKeyUP(_event: any): void;
+        Destroy(): this;
+    }
+    declare class Mouse {
+        constructor(_element: DOMElement, _offsetX: number, _offsetY: number);
+        element: DOMElement;
+        position: Vector2D;
+        scale: Vector2D;
+        offset: Vector2D;
+        eventData: object;
+        offsets: Vector2D[];
+        onMove: Event.Dispatcher;
+        onDown: Event.Dispatcher;
+        onUp: Event.Dispatcher;
+        onLeave: Event.Dispatcher;
+        onWheel: Event.Dispatcher;
+        get x(): number;
+        get y(): number;
+        OnMove(_event: any): boolean;
+        OnDown(_event: any): void;
+        OnUp(_event: any): void;
+        OnLeave(_event: any): void;
+        OnWheel(_event: any): void;
+        CalculatePosition(_x: number, _y: number): void;
+        AddOffset(_offset: Vector2D): this;
+        Destroy(): this;
+    }
+    declare class Touch {
+        constructor(_element: DOMElement, _offsetX: number, _offsetY: number);
+        element: DOMElement;
+        position: Vector2D;
+        scale: Vector2D;
+        offset: Vector2D;
+        eventData: object;
+        offsets: Vector2D[];
+        onMove: Event.Dispatcher;
+        onStart: Event.Dispatcher;
+        onEnd: Event.Dispatcher;
+        onCancel: Event.Dispatcher
+        get x(): number;
+        get y(): number;
+        OnMove(_event: any): boolean;
+        OnStart(_event: any): void;
+        OnEnd(_event: any): void;
+        OnCancel(_event: any): void;
+        CalculatePosition(_x: number, _y: number): void;
+        AddOffset(_offset: Vector2D): this;
+        Destroy(): this;
+    }
 }
 export namespace Event {
-
+    declare class Dispatcher {
+        constructor();
+        listeners: Listener[];
+        stopPropagation: boolean;
+        target: object | any | null;
+        data: object | any | null;
+        GetListenerIndex(_handle: Function, _context?: any): number;
+        Add(_handle: Function, _context?: any, _removeOnNextCall?: boolean): void;
+        Once(_handle: Function, _context?: any): void;
+        Remove(_handle: Function, _context?: any): void;
+        Dump(_context?: any): void;
+        Dispatch(_target?: any, _data?: any): void;
+    }
+    declare class Listener {
+        constructor(_holderContext: any, _listenerContext: any, _handle: Function, _removeOnNextCall?: boolean);
+        context: any;
+        holderContext: any;
+        handle: Function;
+        removeOnNextCall: boolean;
+        Execute(): void;
+        Remove(): void;
+    }
 }
 
 // Classes
@@ -534,71 +1348,71 @@ declare class Vector2D {
     Copy(): Vector2D;
     FromPool(_x: number, _y: number): Vector2D;
     AbsoluteCopy(): Vector2D;
-    SetV(_p: object | vector2D | Point): this;
+    SetV(_p: object | Vector2D | Math.Point): this;
     Set(_x: number, _y: number): this;
     SetSame(_value: number): this;
     Is0(): boolean;
-    AddVC(_p: object | vector2D | Point): this;
-    AddV(_p: object | vector2D | Point): this;
+    AddVC(_p: object | Vector2D | Math.Point): this;
+    AddV(_p: object | Vector2D | Math.Point): this;
     Add(_x: number, _y: number): this;
-    SubtractVC(_p: object | vector2D | Point): this;
-    SubtractV(_p: object | vector2D | Point): this;
+    SubtractVC(_p: object | Vector2D | Math.Point): this;
+    SubtractV(_p: object | Vector2D | Math.Point): this;
     Subtract(_x: number, _y: number): this;
-    MultiplyVC(_p: object | vector2D | Point): this;
-    MultiplyV(_p: object | vector2D | Point): this;
+    MultiplyVC(_p: object | Vector2D | Math.Point): this;
+    MultiplyV(_p: object | Vector2D | Math.Point): this;
     Multiply(_x: number, _y: number): this;
-    DivideVC(_p: object | vector2D | Point): this;
-    DivideV(_p: object | vector2D | Point): this;
+    DivideVC(_p: object | Vector2D | Math.Point): this;
+    DivideV(_p: object | Vector2D | Math.Point): this;
     Divide(_x: number, _y: number): this;
     Normalize(): this;
     Positive(): this;
     Negative(): this;
     Invert(): this;
     Rotate(_angle: number): this;
-    RotateAroundV(_p: object | vector2D | Point, _angle: number): this;
+    RotateAroundV(_p: object | Vector2D | Math.Point, _angle: number): this;
     RotateAround(_x: number, _y: number, _angle: number): this;
     RotateAbsolute(_angle: number): this;
-    RotateAbsoluteAroundV(_p: object | vector2D | Point, angle: number): this;
+    RotateAbsoluteAroundV(_p: object | Vector2D | Math.Point, angle: number): this;
     RotateAbsoluteAround(_x: number, _y: number, _angle: number): this;
-    PushFromV(_p: object | vector2D | Point, _magnitude: number): this;
+    PushFromV(_p: object | Vector2D | Math.Point, _magnitude: number): this;
     PushFrom(_x: number, _y: number, _magnitude: number): this;
-    GetWeightedAverageV(_p: object | vector2D | Point, _percentage: number): Vector2D;
+    GetWeightedAverageV(_p: object | Vector2D | Math.Point, _percentage: number): Vector2D;
     GetWeightedAverage(_x: number, _y: number, _percentage: number): Vector2D;
     GetAngle(): number;
-    GetAngleBetweenV(_p: object | vector2D | Point): number;
+    GetAngleBetweenV(_p: object | Vector2D | Math.Point): number;
     GetAngleBetween(_x: number, _y: number): number;
-    GetDotV(_p: object | vector2D | Point): number;
+    GetDotV(_p: object | Vector2D | Math.Point): number;
     GetDot(_x: number, _y: number): number;
-    GetCrossV(_p: object | vector2D | Point): number;
+    GetCrossV(_p: object | Vector2D | Math.Point): number;
     GetCross(_x: number, _y: number): number;
     GetMagnitudeSquared(): number;
     GetMagnitude(): number;
-    GetDistanceSquaredV(_p: object | vector2D | Point): number;
+    GetDistanceSquaredV(_p: object | Vector2D | Math.Point): number;
     GetDistanceSquared(_x: number, _y: number): number;
-    GetDistanceV(_p: object | vector2D | Point): number;
+    GetDistanceV(_p: object | Vector2D | Math.Point): number;
     GetDistance(_x: number, _y: number): number;
-    GetPerpendicularCCWV(_p: object | vector2D | Point): Vector2D;
+    GetPerpendicularCCWV(_p: object | Vector2D | Math.Point): Vector2D;
     GetPerpendicularCCW(_x: number, _y: number): Vector2D;
-    GetPerpendicularCWV(_p: object | vector2D | Point): Vector2D;
+    GetPerpendicularCWV(_p: object | Vector2D | Math.Point): Vector2D;
     GetPerpendicularCW(_x: number, _y: number): Vector2D;
-    GetNormalAV(_p: object | vector2D | Point): Vector2D;
+    GetNormalAV(_p: object | Vector2D | Math.Point): Vector2D;
     GetNormalA(_x: number, _y: number): Vector2D;
-    GetNormalBV(_p: object | vector2D | Point): Vector2D;
+    GetNormalBV(_p: object | Vector2D | Math.Point): Vector2D;
     GetNormalB(_x: number, _y: number): Vector2D;
-    GetMidPointV(_p: object | vector2D | Point): Vector2D;
+    GetMidPointV(_p: object | Vector2D | Math.Point): Vector2D;
     GetMidPoint(_x: number, _y: number): Vector2D;
-    IsEqualToV(_p: object | vector2D | Point): boolean;
+    IsEqualToV(_p: object | Vector2D | Math.Point): boolean;
     IsEqualTo(_x: number, _y: number): boolean;
-    GetProjectionOntoV(_p: object | vector2D | Point): Vector2D;
+    GetProjectionOntoV(_p: object | Vector2D | Math.Point): Vector2D;
     GetProjectionOnto(_x: number, _y: number): Vector2D;
-    GetReflectionV(_p: object | vector2D | Point): Vector2D;
+    GetReflectionV(_p: object | Vector2D | Math.Point): Vector2D;
     GetReflection(_x: number, _y: number): Vector2D;
     Store(): this;
-    AddTo(_vectors: Vector2D[]): this;
+    AddTo(_Vectors: Vector2D[]): this;
     Floor(): this;
     Ceil(): this;
     Round(): this;
-    GetMinMaxDot(_vectors: Vector2D[]): Vector2D;
+    GetMinMaxDot(_Vectors: Vector2D[]): Vector2D;
 }
 declare class Matrix2D {
 
@@ -664,5 +1478,8 @@ declare class GLEntity2D {
 
 }
 declare class Culler2D {
+
+}
+declare class Draw {
 
 }

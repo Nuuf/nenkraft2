@@ -8,7 +8,7 @@ export class Manager {
 
   /**
    * 
-   * @param {object|Entity} _target 
+   * @param {object} _target 
    */
   constructor ( _target ) {
 

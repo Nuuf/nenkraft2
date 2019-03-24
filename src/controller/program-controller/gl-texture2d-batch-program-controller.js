@@ -20,7 +20,6 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
     this.texture = null;
     this.essenceBuffer = null;
     this.dataBuffer = null;
-    this.indexBuffer = null;
     this.previousNumberOfElements = 0;
     this.Initialise();
   
@@ -87,8 +86,8 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Array}   _data 
-   * @param {integer} _numberOfElements 
+   * @param {Float32Array} _data 
+   * @param {integer}      _numberOfElements 
    * 
    * @return {void}
    */

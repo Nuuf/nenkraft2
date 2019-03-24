@@ -77,10 +77,10 @@ export class GLTexture2DProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Matrix2D} _projection 
-   * @param {Matrix2D} _translation 
-   * @param {Matrix2D} _transformation 
-   * @param {Color}    _tint 
+   * @param {Float32Array} _projection 
+   * @param {Float32Array} _translation 
+   * @param {Float32Array} _transformation 
+   * @param {Float32Array} _tint 
    * 
    * @return {void}
    */

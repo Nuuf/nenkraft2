@@ -41,8 +41,8 @@ export class GLPixelBatchProgramController extends GLProgramController {
 
   /**
    * 
-   * @param {Array}   _data 
-   * @param {integer} _numElements 
+   * @param {Float32Array}   _data 
+   * @param {integer}        _numElements 
    * 
    * @return {void}
    */

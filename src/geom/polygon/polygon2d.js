@@ -157,9 +157,9 @@ export class Polygon2D {
    * 
    * @return {this}
    */
-  AddVertex ( _vector2d ) {
+  AddVertex ( _vertex ) {
 
-    this.vertices.push( _vector2d );
+    this.vertices.push( _vertex );
     this.dirtyBounds = true;
     this.dirtyCentroid = true;
 
@@ -250,9 +250,9 @@ export class Polygon2D {
 
   /**
    * 
-   * @param {number} _angle 
-   * @param {number} _anchorX 
-   * @param {number} _anchorY 
+   * @param {number}  _angle 
+   * @param {number?} _anchorX 
+   * @param {number?} _anchorY 
    * 
    * @return {this}
    */

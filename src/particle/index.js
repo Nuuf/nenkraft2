@@ -1,2 +1,2 @@
-import * as Particle2D from './particle2d';
-export { Particle2D };
+import * as P2D from './p2d';
+export { P2D };

@@ -55,9 +55,9 @@ export class Command {
   
   /**
    * 
-   * @param {Array}   _dataStrs 
-   * @param {object}  _data 
-   * @param {object?} _staticData 
+   * @param {[]}       _dataStrs 
+   * @param {object}   _data 
+   * @param {object?}  _staticData 
    * 
    * @return {void}
    */
@@ -125,7 +125,7 @@ export class Command {
   
   /**
    * 
-   * @param {Array}  _dataStrs 
+   * @param {[]}     _dataStrs 
    * @param {object} _data 
    * 
    * @return {void}
@@ -170,7 +170,7 @@ export class Command {
   
   /**
    * 
-   * @param {Array}   _dataStrs 
+   * @param {[]]}     _dataStrs 
    * @param {object}  _data 
    * @param {object?} _staticData 
    * 
@@ -224,7 +224,7 @@ export class Command {
   
   /**
    * 
-   * @return {String[]}
+   * @return {string[]}
    */
   GetAllOptionIds () {
   
@@ -243,9 +243,9 @@ export class Command {
   
   /**
    * 
-   * @param {Array} _dataStrs 
+   * @param {[]} _dataStrs 
    * 
-   * @return {String[]}
+   * @return {string[]}
    */
   GetAndRemoveMatchingOptionIds ( _dataStrs ) {
   

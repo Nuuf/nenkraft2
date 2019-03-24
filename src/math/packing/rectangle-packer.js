@@ -265,8 +265,8 @@ export class RectanglePacker {
 
   /**
    * 
-   * @param {number} _w 
-   * @param {number} _h 
+   * @param {string} _w 
+   * @param {string} _h 
    * 
    * @return {this}
    */
