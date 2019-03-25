@@ -9,18 +9,19 @@ export class ServerTicker {
   /**
    * 
    * @param {Function} _onProcess 
-   * @param {number}   _rate 
-   * @param {boolean}  _halt 
+   * @param {number?}  _rate 
+   * @param {boolean?} _halt 
    */
   constructor ( _onProcess, _rate, _halt ) {
 
-    this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
     this.intervalId = null;
     this.delta = 0;
     this.then = 0;
     this.now = 0;
     this.desiredRate = 0;
+
+    this.SetDesiredRate( _rate );
 
     if ( !_halt ) {
 
@@ -109,6 +110,7 @@ export class ServerTicker {
       if ( _force === true ) {
   
         this.Stop();
+        this.now = this.then = Date.now();
         this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
         Log( 'Ticker: Starting interval!' );
         
@@ -121,7 +123,8 @@ export class ServerTicker {
       
     }
     else {
-  
+      
+      this.now = this.then = Date.now();
       this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
       Log( 'Ticker: Starting interval!' );
       

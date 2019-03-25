@@ -14,7 +14,6 @@ export class Ticker {
    */
   constructor ( _onProcess, _rate, _halt ) {
 
-    this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
     this.intervalId = null;
     this.afId = null;
@@ -22,6 +21,8 @@ export class Ticker {
     this.then = 0;
     this.now = 0;
     this.desiredRate = 0;
+
+    this.SetDesiredRate( _rate );
 
     if ( !_halt ) {
 
@@ -130,6 +131,7 @@ export class Ticker {
       if ( _force === true ) {
   
         this.Stop();
+        this.now = this.then = Date.now();
         this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
         Log( '%cTicker: Starting interval!', 'color:#0F0;'.concat( PS_LOG_CSS ) );
         
@@ -143,6 +145,7 @@ export class Ticker {
     }
     else {
   
+      this.now = this.then = Date.now();
       this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
       Log( '%cTicker: Starting interval!', 'color:#0F0;'.concat( PS_LOG_CSS ) );
       
@@ -171,6 +174,7 @@ export class Ticker {
       if ( _force === true ) {
   
         this.Stop();
+        this.now = this.then = Date.now();
         this.ProcessAF = this.ProcessAF.bind( this );
         this.afId = requestAnimationFrame( this.ProcessAF );
         Log( '%cTicker: Starting RAF!', 'color:#0F0;'.concat( PS_LOG_CSS ) );
@@ -185,6 +189,7 @@ export class Ticker {
     }
     else {
   
+      this.now = this.then = Date.now();
       this.ProcessAF = this.ProcessAF.bind( this );
       this.afId = requestAnimationFrame( this.ProcessAF );
       Log( '%cTicker: Starting RAF!', 'color:#0F0;'.concat( PS_LOG_CSS ) );
