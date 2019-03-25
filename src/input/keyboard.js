@@ -6,6 +6,10 @@ import { Dispatcher } from '../event/dispatcher';
 
 export class Keyboard {
 
+  /**
+   * 
+   * @param {DOMElement} _element 
+   */
   constructor ( _element ) {
 
     this.element = _element;
@@ -33,6 +37,12 @@ export class Keyboard {
 
   }
 
+  /**
+   * 
+   * @param {KeyboardEvent} _event 
+   * 
+   * @return {void}
+   */
   OnKeyDown ( _event ) {
 
     _event.stopPropagation();
@@ -40,6 +50,12 @@ export class Keyboard {
   
   }
 
+  /**
+   * 
+   * @param {KeyboardEvent} _event 
+   * 
+   * @return {void}
+   */
   OnKeyUp ( _event ) {
 
     _event.stopPropagation();
@@ -47,10 +63,16 @@ export class Keyboard {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     this.element.removeEventListener( 'keydown', this.___bound___OnKeyDown );
     this.element.removeEventListener( 'keyup', this.___bound___OnKeyUp );
+
+    return this;
   
   }
 

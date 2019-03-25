@@ -6,6 +6,9 @@ import { IsArray } from '.';
 
 export class Glob {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.functions = {};
@@ -17,54 +20,92 @@ export class Glob {
 
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get FUNCTION () {
 
     return PS_FUNCTION;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get VALUE () {
 
     return PS_VALUE;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get CONSTANT () {
 
     return PS_CONSTANT;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get COMPONENT () {
 
     return PS_COMPONENT;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get OBJECT () {
 
     return PS_OBJECT;
   
   }
 
+  /**
+   * 
+   * @return {string}
+   */
   static get LIST () {
 
     return PS_LIST;
 
   }
 
+  /**
+   * 
+   * @return {boolean}
+   */
   static get AllowGetNullUndefined () {
 
     return PS_AllowGetNullUndefined;
   
   }
 
+  /**
+   *
+   * @param {boolean} _value
+   */
   static set AllowGetNullUndefined ( _value ) {
 
     PS_AllowGetNullUndefined = !!_value;
   
   }
 
+  /**
+   * 
+   * @param {object} _g 
+   * 
+   * @return {void}
+   */
   static Assign ( _g ) {
 
     if ( window && !_g ) {
@@ -94,6 +135,12 @@ export class Glob {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {void}
+   */
   static Create ( _id ) {
 
     const window = window || null;
@@ -122,6 +169,14 @@ export class Glob {
   
   }
 
+  /**
+   * 
+   * @param {string} _type 
+   * @param {string} _id 
+   * @param {any}    _value 
+   * 
+   * @return {void}
+   */
   Define ( _type, _id, _value ) {
 
     this.Mark( _type, _id );
@@ -129,6 +184,13 @@ export class Glob {
   
   }
   
+  /**
+   * 
+   * @param {string} _type 
+   * @param {string} _id
+   * 
+   * @return {void} 
+   */
   Mark ( _type, _id ) {
 
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
@@ -138,7 +200,11 @@ export class Glob {
 
     if ( _type === PS_CONSTANT || _type === PS_COMPONENT ) {
 
-      if ( this[ _type ][ _id ] !== undefined ) throw new Error( 'Constants cannot be reassigned!' );
+      if ( this[ _type ][ _id ] !== undefined ) {
+
+        throw new Error( 'Constants cannot be reassigned!' );
+      
+      }
 
     }
 
@@ -146,6 +212,13 @@ export class Glob {
   
   }
 
+  /**
+   * 
+   * @param {string} _type 
+   * @param {string} _id
+   * 
+   * @return {any} 
+   */
   Get ( _type, _id ) {
 
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
@@ -163,6 +236,14 @@ export class Glob {
   
   }
 
+  /**
+   * 
+   * @param {string} _type 
+   * @param {string} _id 
+   * @param {any}    _value 
+   * 
+   * @return {void}
+   */
   Set ( _type, _id, _value ) {
 
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );

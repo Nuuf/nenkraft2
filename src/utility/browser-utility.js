@@ -6,7 +6,21 @@ import { IsObjectEmpty } from '.';
 
 const Ceil = Math.ceil;
 
-export function GenerateSimpleBase64PNG ( _renderFunction, _backgroundColor, _forceWidth, _forceHeight ) {
+/**
+ * 
+ * @param {Function} _renderFunction 
+ * @param {string?}  _backgroundColor 
+ * @param {number?}  _forceWidth 
+ * @param {number?}  _forceHeight 
+ * 
+ * @return {string}
+ */
+export function GenerateSimpleBase64PNG ( 
+  _renderFunction,
+  _backgroundColor,
+  _forceWidth,
+  _forceHeight
+) {
 
   const drawable = _renderFunction();
 
@@ -50,6 +64,15 @@ export function GenerateSimpleBase64PNG ( _renderFunction, _backgroundColor, _fo
 
 }
 
+/**
+ * 
+ * @param {string}   _url 
+ * @param {Function} _onLoad 
+ * @param {number?}  _w 
+ * @param {number?}  _h
+ * 
+ * @return {Image} 
+ */
 export function ImageFromDataURL ( _url, _onLoad, _w, _h ) {
 
   const image = new Image();
@@ -63,6 +86,13 @@ export function ImageFromDataURL ( _url, _onLoad, _w, _h ) {
 
 }
 
+/**
+ * 
+ * @param {object}   _xml 
+ * @param {boolean?} _deleteWhitespace 
+ * 
+ * @return {object}
+ */
 export function ParsedXMLToJSON ( _xml, _deleteWhitespace ) {
 
   let i;
@@ -157,6 +187,13 @@ export function ParsedXMLToJSON ( _xml, _deleteWhitespace ) {
 
 }
 
+/**
+ * 
+ * @param {string}   _xml 
+ * @param {boolean?} _deleteWhitespace 
+ * 
+ * @return {object}
+ */
 export function XMLToJSON ( _xml, _deleteWhitespace ) {
 
   if ( PS_dparser == null ) {
@@ -169,6 +206,13 @@ export function XMLToJSON ( _xml, _deleteWhitespace ) {
 
 }
 
+/**
+ * 
+ * @param {object|any} _obj 
+ * @param {string}     _fileName 
+ * 
+ * @return {void}
+ */
 export function DownloadAsJSON ( _obj, _fileName ) {
 
   const url = 'data:text/json;charset=utf-8,' + encodeURIComponent( JSON.stringify( _obj ) );

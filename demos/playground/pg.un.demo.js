@@ -24,7 +24,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
 
     stage.gl.clearColor( 0.9, 0.9, 0.9, 1.0 );
@@ -43,7 +45,9 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    const pc = new nk2.Controller.ProgramController.GLUnProgramController( stage.gl, nk2.Shader.UN );
+    const pc = new nk2.Controller.ProgramController.GLUnProgramController( 
+      stage.gl, nk2.Shader.UN
+    );
     let i = 1;
 
     while ( i-- ) {

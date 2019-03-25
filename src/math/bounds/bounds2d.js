@@ -8,6 +8,9 @@ const Abs = Math.abs;
 
 export class Bounds2D {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.local = null;
@@ -17,6 +20,17 @@ export class Bounds2D {
   
   }
 
+  /**
+   * 
+   * @param {number}                _x 
+   * @param {number}                _y 
+   * @param {number}                _w 
+   * @param {number}                _h 
+   * @param {object|Vector2D|Point} _anchor 
+   * @param {object|any}            _owner 
+   * 
+   * @return {AABB2D}
+   */
   ComputeLocal ( _x, _y, _w, _h, _anchor, _owner ) {
 
     if ( _anchor != null ) {
@@ -53,6 +67,18 @@ export class Bounds2D {
   
   }
 
+  /**
+   * 
+   * @param {number}                _x 
+   * @param {number}                _y 
+   * @param {number}                _w 
+   * @param {number}                _h 
+   * @param {object|Vector2D|Point} _anchor 
+   * @param {object|any}            _owner 
+   * @param {Matrix2D}              _matrix
+   * 
+   * @return {AABB2D}
+   */
   ComputeGlobal ( _x, _y, _w, _h, _anchor, _owner, _matrix ) {
 
     if ( _matrix != null ) {

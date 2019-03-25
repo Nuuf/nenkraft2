@@ -10,6 +10,11 @@ const Sin = Math.sin;
 
 export class Camera2D extends VisualContainer2D {
 
+  /**
+   * 
+   * @param {Vector2D} _focus 
+   * @param {Vector2D} _target 
+   */
   constructor ( _focus, _target ) {
 
     super( 0, 0 );
@@ -27,6 +32,10 @@ export class Camera2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     const target = this.target;
@@ -100,7 +109,13 @@ export class Camera2D extends VisualContainer2D {
     }
   
   }
-
+ 
+  /**
+   * 
+   * @param {Vector2D} _target 
+   * 
+   * @return {this}
+   */
   SetTarget ( _target ) {
 
     this.target = _target;
@@ -109,6 +124,13 @@ export class Camera2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   SetMax ( _x, _y ) {
 
     this.maxX = _x;
@@ -118,6 +140,13 @@ export class Camera2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   SetMin ( _x, _y ) {
 
     this.minX = _x;

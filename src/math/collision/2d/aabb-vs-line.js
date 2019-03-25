@@ -7,6 +7,9 @@ import { Line2DLine2DCollision } from './line-vs-line';
 
 export class Result {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.poc = {
@@ -22,6 +25,10 @@ export class Result {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     this.poc.a.SetSame( 0 );
@@ -37,6 +44,14 @@ export class Result {
 
 }
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result 
+ * 
+ * @return {void}
+ */
 export const Collide = function ( _a, _b, _result ) {
 
   const sa = _a.shape;

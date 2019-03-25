@@ -8,6 +8,13 @@ import { FFSa } from '../style';
 
 export class Circle extends CircleGeom {
 
+  /**
+   * 
+   * @param {number}  _x 
+   * @param {number}  _y 
+   * @param {number}  _radius 
+   * @param {object?} _style 
+   */
   constructor ( _x, _y, _radius, _style ) {
 
     super( _x, _y, _radius );
@@ -17,6 +24,12 @@ export class Circle extends CircleGeom {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     const style = this.style;
@@ -42,6 +55,13 @@ export class Circle extends CircleGeom {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {Transform2D}                                  _transform2d 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
@@ -55,6 +75,12 @@ export class Circle extends CircleGeom {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   LinkProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -64,6 +90,12 @@ export class Circle extends CircleGeom {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -72,6 +104,10 @@ export class Circle extends CircleGeom {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   LinkStyle () {
 
     const pc = this.programController;

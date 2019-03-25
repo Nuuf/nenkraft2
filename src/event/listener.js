@@ -4,6 +4,13 @@
 
 export class Listener {
 
+  /**
+   * 
+   * @param {any}      _holderContext 
+   * @param {any}      _listenerContext 
+   * @param {Function} _handle 
+   * @param {boolean?} _removeOnNextCall 
+   */
   constructor ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
 
     this.context = _listenerContext;
@@ -13,6 +20,10 @@ export class Listener {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Execute () {
 
     this.handle.apply( this.context, arguments );
@@ -25,6 +36,10 @@ export class Listener {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Remove () {
 
     this.holderContext.Remove( this.handle, this.context );

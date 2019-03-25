@@ -7,6 +7,10 @@ import { Stage2D } from './stage2d';
 
 export class Stadium {
 
+  /**
+   * 
+   * @param {object?} _options 
+   */
   constructor ( _options ) {
 
     this.stages = [];
@@ -19,6 +23,12 @@ export class Stadium {
 
   }
 
+  /**
+   * 
+   * @param {object?} _options 
+   * 
+   * @return {this}
+   */
   SetOptions ( _options ) {
       
     if ( _options != null ) {
@@ -26,9 +36,17 @@ export class Stadium {
       this.options = _options; 
       
     }
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {object?} _options 
+   * 
+   * @return {Stage2D}
+   */
   CreateStage2D ( _options ) {
 
     let id;
@@ -60,6 +78,9 @@ export class Stadium {
     _options.canvas = canvas;
     _options.noTicker = true;
     _options.halt = true;
+    _options.noMouse = true;
+    _options.noKeyboard = true;
+    _options.noTouch = true;
 
     const stage = new Stage2D( _options );
 
@@ -72,6 +93,10 @@ export class Stadium {
   
   }
 
+  /**
+   * 
+   * @return {Stage2D[]}
+   */
   GetStages () {
 
     const stages = this.stages;
@@ -95,6 +120,12 @@ export class Stadium {
   
   }
 
+  /**
+   * 
+   * @param {number} _delta 
+   * 
+   * @return {void}
+   */
   Process ( _delta ) {
 
     const stages = this.stages;
@@ -107,6 +138,10 @@ export class Stadium {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     const stages = this.stages;
@@ -118,6 +153,8 @@ export class Stadium {
     }
 
     this.ticker.Stop();
+
+    return this;
 
   }
 

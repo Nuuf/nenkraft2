@@ -4,6 +4,15 @@
 
 export class BasicTexture2D {
 
+  /**
+   * 
+   * @param {Image}        _image 
+   * @param {string?|any?} _id 
+   * @param {number?}      _w 
+   * @param {number?}      _h 
+   * @param {number?}      _fullWidth 
+   * @param {number?}      _fullHeight 
+   */
   constructor ( _image, _id, _w, _h, _fullWidth, _fullHeight ) {
 
     this.image = _image;

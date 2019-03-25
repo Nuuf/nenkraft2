@@ -6,6 +6,10 @@ import { ApplyProperties } from '../utility';
 
 export class ShadowStyle {
 
+  /**
+   * 
+   * @param {object?} _props 
+   */
   constructor ( _props ) {
 
     this.color = '#c89664';
@@ -17,6 +21,12 @@ export class ShadowStyle {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Apply ( _rc ) {
 
     _rc.shadowColor = this.color;

@@ -13,6 +13,16 @@ const Abs = Math.abs;
 const Pow = Math.pow;
 const Exp = Math.exp;
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _w 
+ * @param {number}    _h 
+ * 
+ * @return {Polygon2D}
+ */
 export const Rectangular2D = function ( _polygon, _x, _y, _w, _h ) {
 
   const tl = new Vector2D( _x, _y );
@@ -28,6 +38,16 @@ export const Rectangular2D = function ( _polygon, _x, _y, _w, _h ) {
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _w 
+ * @param {number}    _h 
+ * 
+ * @return {Polygon2D}
+ */
 export const Isosceles2D = function ( _polygon, _x, _y, _w, _h ) {
 
   const tm = new Vector2D( _x, _y );
@@ -42,6 +62,16 @@ export const Isosceles2D = function ( _polygon, _x, _y, _w, _h ) {
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _radius 
+ * @param {number}    _accuracy 
+ * 
+ * @return {Polygon2D}
+ */
 export const Cyclic2D = function ( _polygon, _x, _y, _radius, _accuracy ) {
 
   let i = 0;
@@ -69,6 +99,15 @@ export const Cyclic2D = function ( _polygon, _x, _y, _radius, _accuracy ) {
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _side 
+ * 
+ * @return {Polygon2D}
+ */
 export const Equilateral2D = function ( _polygon, _x, _y, _side ) {
 
   let x;
@@ -93,6 +132,17 @@ export const Equilateral2D = function ( _polygon, _x, _y, _side ) {
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _outerRadius 
+ * @param {number}    _innerRadius 
+ * @param {number}    _corners 
+ * 
+ * @return {Polygon2D}
+ */
 export const Star2D = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _corners ) {
 
   let i = 0;
@@ -122,6 +172,16 @@ export const Star2D = function ( _polygon, _x, _y, _outerRadius, _innerRadius, _
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _n 
+ * @param {number}    _radius 
+ * 
+ * @return {Polygon2D}
+ */
 export const Butterfly2D = function ( _polygon, _x, _y, _n, _radius ) {
 
   let i = 0;
@@ -135,8 +195,14 @@ export const Butterfly2D = function ( _polygon, _x, _y, _n, _radius ) {
   for ( i; i < _n; ++i ) {
 
     u = i * c._1 * PI / _n;
-    x = Cos( u ) * ( Exp( Cos( u ) ) - c._2 * Cos( c._3 * u ) - Pow( Sin( u / c._4 ), c._5 ) ) * _radius;
-    y = Sin( u ) * ( Exp( Cos( u ) ) - c._2 * Cos( c._3 * u ) - Pow( Sin( u / c._4 ), c._5 ) ) * _radius;
+    
+    x = 
+      Cos( u ) * ( Exp( Cos( u ) ) - c._2 * 
+      Cos( c._3 * u ) - Pow( Sin( u / c._4 ), c._5 ) ) * _radius;
+    y = 
+      Sin( u ) * ( Exp( Cos( u ) ) - c._2 * 
+      Cos( c._3 * u ) - Pow( Sin( u / c._4 ), c._5 ) ) * _radius;
+
     _polygon.AddVertex( new Vector2D( _x + x, _y + y ) );
     
   }
@@ -156,6 +222,18 @@ Butterfly2D.C = {
   _5: 5
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _radius 
+ * @param {number}    _k 
+ * @param {number}    _accuracy 
+ * @param {number}    _loops 
+ * 
+ * @return {Polygon2D}
+ */
 export const Rose2D = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loops ) {
 
   let i = 0;
@@ -185,6 +263,20 @@ export const Rose2D = function ( _polygon, _x, _y, _radius, _k, _accuracy, _loop
 
 };
 
+/**
+ * 
+ * @param {Polygon2D} _polygon 
+ * @param {number}    _x 
+ * @param {number}    _y 
+ * @param {number}    _radius 
+ * @param {number}    _accuracy 
+ * @param {number}    _m 
+ * @param {number?}   _n1 
+ * @param {number?}   _n2 
+ * @param {number?}   _n3 
+ * 
+ * @return {Polygon2D}
+ */
 export const Supershape2D = function ( _polygon, _x, _y, _radius, _accuracy, _m, _n1, _n2, _n3 ) {
 
   let i = 0;

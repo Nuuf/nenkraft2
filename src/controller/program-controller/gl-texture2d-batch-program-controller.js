@@ -8,6 +8,10 @@ import { TriRectArray } from '../../math';
 
 export class GLTexture2DBatchProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   */
   constructor ( _gl ) {
 
     super( _gl, TEXTURE_2D_BATCH );
@@ -16,12 +20,15 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
     this.texture = null;
     this.essenceBuffer = null;
     this.dataBuffer = null;
-    this.indexBuffer = null;
     this.previousNumberOfElements = 0;
     this.Initialise();
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -45,6 +52,13 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {BasicTexture2D} _texture 
+   * @param {integer?}       _param 
+   * 
+   * @return {void}
+   */
   BindBasicTexture ( _texture, _param ) {
 
     const gl = this.gl;
@@ -70,6 +84,13 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _data 
+   * @param {integer}      _numberOfElements 
+   * 
+   * @return {void}
+   */
   Execute ( _data, _numberOfElements ) {
 
     const gl = this.gl;
@@ -99,6 +120,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
     if ( _numberOfElements !== this.previousNumberOfElements ) {
 
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
+      this.previousNumberOfElements = _numberOfElements;
     
     } else {
 

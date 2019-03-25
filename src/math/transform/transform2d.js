@@ -10,6 +10,11 @@ const Sin = Math.sin;
 
 export class Transform2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     this.position = new Vector2D( _x, _y );
@@ -26,13 +31,25 @@ export class Transform2D {
   
   }
 
+  /**
+   * 
+   * @param {Matrix2D} _matrix 
+   * 
+   * @return {this}
+   */
   SetMatrix ( _matrix ) {
 
     _matrix.Decompose( this );
     this.UpdateSkew();
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   UpdateLocal () {
 
     const localTransform = this.localTransform;
@@ -47,9 +64,17 @@ export class Transform2D {
 
     localTransform.e = position.x - pivot.x * localTransform.a + pivot.y * localTransform.c;
     localTransform.f = position.y - pivot.y * localTransform.b + pivot.y * localTransform.d;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {Transform2D} _transform 
+   * 
+   * @return {this}
+   */
   UpdateGlobal ( _transform ) {
 
     const localTransform = this.localTransform;
@@ -70,11 +95,19 @@ export class Transform2D {
     globalTransform.b = localTransform.a * _transform.b + localTransform.b * _transform.d;
     globalTransform.c = localTransform.c * _transform.a + localTransform.d * _transform.c;
     globalTransform.d = localTransform.c * _transform.b + localTransform.d * _transform.d;
-    globalTransform.e = localTransform.e * _transform.a + localTransform.f * _transform.c + _transform.e;
-    globalTransform.f = localTransform.e * _transform.b + localTransform.f * _transform.d + _transform.f;
+    globalTransform.e = 
+      localTransform.e * _transform.a + localTransform.f * _transform.c + _transform.e;
+    globalTransform.f = 
+      localTransform.e * _transform.b + localTransform.f * _transform.d + _transform.f;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   UpdateSkew () {
 
     const skew = this.skew;
@@ -84,12 +117,22 @@ export class Transform2D {
     this.skewSX = Sin( rotation + skew.y );
     this.skewCY = -Sin( rotation - skew.x );
     this.skewSY = Cos( rotation - skew.x );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {this}
+   */
   ApplyGlobal ( _rc ) {
 
     this.globalTransform.ApplyToContext( _rc );
+
+    return this;
   
   }
 

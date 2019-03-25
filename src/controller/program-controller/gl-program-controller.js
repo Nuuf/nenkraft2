@@ -4,6 +4,11 @@
 
 export class GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {object}                                       _shader 
+   */
   constructor ( _gl, _shader ) {
 
     this.gl = _gl;
@@ -20,18 +25,33 @@ export class GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {GLProgramController}
+   */
   static get LAST_USED_CONTROLLER () {
 
     return PS_LAST_USED_CONTROLLER;
   
   }
 
+  /**
+   * 
+   * @param {GLProgramController} _value
+   */
   static set LAST_USED_CONTROLLER ( _value ) {
 
     PS_LAST_USED_CONTROLLER = _value;
   
   }
 
+  /**
+   * 
+   * @param {string} _vs 
+   * @param {string} _fs 
+   * 
+   * @return {void}
+   */
   Init ( _vs, _fs ) {
 
     const gl = this.gl;
@@ -60,6 +80,13 @@ export class GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {string}  _script 
+   * @param {integer} _type 
+   * 
+   * @return {WebGLShader}
+   */
   CreateShader ( _script, _type ) {
 
     const gl = this.gl;
@@ -80,18 +107,34 @@ export class GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {string} _attribute 
+   * 
+   * @return {void}
+   */
   AssignAttribute ( _attribute ) {
 
     this.attributes[ _attribute ] = this.gl.getAttribLocation( this.program, _attribute );
   
   }
 
+  /**
+   * 
+   * @param {string} _uniform 
+   * 
+   * @return {void}
+   */
   AssignUniform ( _uniform ) {
 
     this.uniforms[ _uniform ] = this.gl.getUniformLocation( this.program, _uniform );
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Execute () {
 
     return;

@@ -11,12 +11,28 @@ const VERSION = require( '../../package.json' ).version;
 const Random = Math.random;
 const Clz32 = Math.clz32;
 
+/**
+ * 
+ * @param {number} _min 
+ * @param {number} _max
+ * 
+ * @return {integer}; 
+ */
 export function RandomInteger ( _min, _max ) {
 
   return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
 
 }
 
+/**
+ * 
+ * @param {number} _min 
+ * @param {number} _max 
+ * @param {number} _amin 
+ * @param {number} _amax 
+ * 
+ * @return {integer}
+ */
 export function RandomIntegerAvoid ( _min, _max, _amin, _amax ) {
 
   let value = RandomInteger( _min, _max );
@@ -33,12 +49,28 @@ export function RandomIntegerAvoid ( _min, _max, _amin, _amax ) {
 
 }
 
+/**
+ * 
+ * @param {number} _min 
+ * @param {number} _max
+ * 
+ * @return {number} 
+ */
 export function RandomFloat ( _min, _max ) {
 
   return Random() * ( _max - _min ) + _min;
   
 }
 
+/**
+ * 
+ * @param {number} _min 
+ * @param {number} _max 
+ * @param {number} _amin 
+ * @param {number} _amax
+ * 
+ * @return {number} 
+ */
 export function RandomFloatAvoid ( _min, _max, _amin, _amax ) {
 
   let value = RandomFloat( _min, _max );
@@ -55,24 +87,49 @@ export function RandomFloatAvoid ( _min, _max, _amin, _amax ) {
 
 }
 
+/**
+ * 
+ * @param {any} _value
+ * 
+ * @return {boolean} 
+ */
 export function IsInteger ( _value ) {
 
   return Number( _value ) === _value && _value % 1 === 0;
 
 }
 
+/**
+ * 
+ * @param {any} _value
+ * 
+ * @return {boolean} 
+ */
 export function IsFloat ( _value ) {
 
   return Number( _value ) === _value && _value % 1 !== 0;
 
 }
 
+/**
+ * 
+ * @param {any} _value
+ * 
+ * @return {boolean} 
+ */
 export function IsArray ( _value ) {
 
   return Object.prototype.toString.call( _value ) === '[object Array]';
 
 }
 
+/**
+ * 
+ * @param {number}   _value 
+ * @param {boolean?} _1If0 
+ * 
+ * @return {number}
+ */
 export function Sign ( _value, _1If0 ) {
 
   if ( _value === 0 ) {
@@ -93,30 +150,66 @@ export function Sign ( _value, _1If0 ) {
 
 }
 
+/**
+ * 
+ * @param {integer} _bit 
+ * @param {number}  _n
+ * 
+ * @return {boolean} 
+ */
 export function IsBitSet ( _bit, _n ) {
 
   return ( ( _n & ( 1 << _bit ) ) !== 0 );
 
 }
 
+/**
+ * 
+ * @param {integer} _bit 
+ * @param {number}  _n
+ * 
+ * @return {number} 
+ */
 export function SetBit ( _bit, _n ) {
 
   return ( _n | ( 1 << _bit ) );
 
 }
 
+/**
+ * 
+ * @param {integer} _bit 
+ * @param {number}  _n
+ * 
+ * @return {number} 
+ */
 export function ClearBit ( _bit, _n ) {
 
   return ( _n & ~( 1 << _bit ) );
 
 }
 
+/**
+ * 
+ * @param {integer} _bit 
+ * @param {number}  _n
+ * 
+ * @return {number} 
+ */
 export function ToggleBit ( _bit, _n ) {
 
   return ( _n ^ ( 1 << _bit ) );
 
 }
 
+/**
+ * 
+ * @param {number} _value 
+ * @param {number} _min 
+ * @param {number} _max 
+ * 
+ * @return {number}
+ */
 export function Clamp ( _value, _min, _max ) {
 
   if ( _value < _min ) return _min;
@@ -126,6 +219,14 @@ export function Clamp ( _value, _min, _max ) {
 
 }
 
+/**
+ * 
+ * @param {number} _value 
+ * @param {number} _min 
+ * @param {number} _max 
+ * 
+ * @return {number}
+ */
 export function InverseClamp ( _value, _min, _max ) {
 
   if ( _value < _min ) return _max;
@@ -135,32 +236,66 @@ export function InverseClamp ( _value, _min, _max ) {
 
 }
 
-export function FlipACoin ( _x, _y ) {
+/**
+ * 
+ * @param {any} _a 
+ * @param {any} _b 
+ * 
+ * @return {any}
+ */
+export function FlipACoin ( _a, _b ) {
 
-  if ( RandomInteger( 1, 2 ) === 1 ) return _x;
+  if ( RandomInteger( 1, 2 ) === 1 ) return _a;
 
-  return _y;
+  return _b;
 
 }
 
+/**
+ * 
+ * @param {number} _n
+ * 
+ * @return {number} 
+ */
 export function NearestPow2Floor ( _n ) {
 
   return ( 1 << 31 - Clz32( _n ) );
 
 }
 
+/**
+ * 
+ * @param {number} _n
+ * 
+ * @return {number} 
+ */
 export function NearestPow2Ceil ( _n ) {
 
   return ( 1 << 31 - Clz32( _n * 2 ) );
 
 }
 
+/**
+ * 
+ * @param {number} _n
+ * 
+ * @return {number} 
+ */
 export function NearestPow2Round ( _n ) {
 
   return ( 1 << 31 - Clz32( _n * 1.5 ) );
 
 }
 
+/**
+ * 
+ * @param {number} _from 
+ * @param {number} _to 
+ * @param {number} _interval 
+ * @param {number} _precision 
+ * 
+ * @return {number[]}
+ */
 export function GenerateSequence ( _from, _to, _interval, _precision ) {
 
   const sequence = [];
@@ -175,12 +310,25 @@ export function GenerateSequence ( _from, _to, _interval, _precision ) {
 
 }
 
+/**
+ * 
+ * @param {any[]} _array 
+ * 
+ * @return {any}
+ */
 export function RandomInArray ( _array ) {
 
   return _array[ RandomInteger( 0, _array.length - 1 ) ];
 
 }
 
+/**
+ * 
+ * @param {object}  _options 
+ * @param {string?} _other
+ * 
+ * @return {object|any} 
+ */
 export function MinMaxOrValue ( _options, _other ) {
 
   if ( _options.min != null && _options.max != null ) {
@@ -201,6 +349,15 @@ export function MinMaxOrValue ( _options, _other ) {
 
 }
 
+/**
+ * 
+ * @param {integer?} _length 
+ * @param {integer?} _parts 
+ * @param {integer?} _charSetIndex 
+ * @param {string?}  _separator 
+ * 
+ * @return {string}
+ */
 export function UUID ( _length, _parts, _charSetIndex, _separator ) {
 
   let at;
@@ -232,6 +389,13 @@ export function UUID ( _length, _parts, _charSetIndex, _separator ) {
 
 }
 
+/**
+ * 
+ * @param {object} _object 
+ * @param {object} _props
+ * 
+ * @return {void} 
+ */
 export function ApplyProperties ( _object, _props ) {
 
   if ( _props !== undefined ) {
@@ -248,6 +412,17 @@ export function ApplyProperties ( _object, _props ) {
 
 }
 
+/**
+ * 
+ * @param {object}  _object 
+ * @param {string}  _string 
+ * @param {boolean} _getObjectHolding 
+ * @param {boolean} _set 
+ * @param {any}     _value 
+ * @param {string?} _splitter 
+ * 
+ * @return {any}
+ */
 export function Nested ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
   if ( typeof _string === 'string' ) {
@@ -305,6 +480,13 @@ export function Nested ( _object, _string, _getObjectHolding, _set, _value, _spl
 
 }
 
+/**
+ * 
+ * @param {any[]}   _array 
+ * @param {integer} _amount
+ * 
+ * @return {any} 
+ */
 export function ArrayGetRandom ( _array, _amount ) {
 
   const array = [];
@@ -329,6 +511,12 @@ export function ArrayGetRandom ( _array, _amount ) {
 
 }
 
+/**
+ * 
+ * @param {any[]} _array
+ * 
+ * @return {void} 
+ */
 export function ArrayShuffle ( _array ) {
 
   let temp;
@@ -345,18 +533,36 @@ export function ArrayShuffle ( _array ) {
 
 }
 
+/**
+ * 
+ * @param {string|number} _value
+ * 
+ * @return {integer} 
+ */
 export function Base16ToBase10 ( _value ) {
 
   return parseInt( _value, 16 );
 
 }
 
+/**
+ * 
+ * @param {string|number} _value
+ * 
+ * @return {integer} 
+ */
 export function Base2ToBase10 ( _value ) {
 
   return parseInt( _value, 2 );
 
 }
 
+/**
+ * 
+ * @param {object} _object
+ * 
+ * @return {boolean} 
+ */
 export function IsObjectEmpty ( _object ) {
 
   let key;
@@ -375,6 +581,12 @@ export function IsObjectEmpty ( _object ) {
 
 }
 
+/**
+ * 
+ * @param {object} _object 
+ * 
+ * @return {object}
+ */
 export function DeepClone ( _object ) {
 
   let r = null;
@@ -429,6 +641,14 @@ export function DeepClone ( _object ) {
 
 }
 
+/**
+ * 
+ * @param {string[]} _args 
+ * @param {string}   _pre 
+ * @param {string}   _post
+ * 
+ * @return {any[]} 
+ */
 export function CreateIteratorArgs ( _args, _pre, _post ) {
 
   let arg;
@@ -477,6 +697,14 @@ export function CreateIteratorArgs ( _args, _pre, _post ) {
 
 }
 
+/**
+ * 
+ * @param {object}   _object 
+ * @param {string[]} _args 
+ * @param {string}   _pre
+ * 
+ * @return {void} 
+ */
 export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
   let arg;
@@ -499,6 +727,13 @@ export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
 }
 
+/**
+ * 
+ * @param {object} _o1 
+ * @param {object} _o2
+ * 
+ * @return {void} 
+ */
 export function AssignIfUndefined ( _o1, _o2 ) {
 
   let key;
@@ -519,15 +754,24 @@ export function AssignIfUndefined ( _o1, _o2 ) {
 
 }
 
+/**
+ * 
+ * @param {boolean} _server
+ * 
+ * @return {void} 
+ */
 export function PRINT_VERSION ( _server ) {
 
   if ( !_server ) {
 
     console.log(
       '%cnenkraft2 %cversion %c' + VERSION,
-      'color:#c89664;background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#c89664;background-color:#5078a0;font-family:Arial;font-size:18px;font-weight:900;padding:5px;',
-      'color:#c89664;background-color:#6496c8;font-family:Arial;font-size:18px;font-weight:900;padding:5px;'
+      'color:#c89664;background-color:#304860;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#5078a0;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;',
+      'color:#c89664;background-color:#6496c8;font-family' + 
+      ':Arial;font-size:18px;font-weight:900;padding:5px;'
     );
   
   } else {

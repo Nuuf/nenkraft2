@@ -6,6 +6,11 @@ import { VisualContainer2D } from './visual-container2d';
 
 export class BatchableContainer2D extends VisualContainer2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   */
   constructor ( _x, _y ) {
 
     super( _x, _y );
@@ -19,26 +24,12 @@ export class BatchableContainer2D extends VisualContainer2D {
 
   }
 
-  Render ( _rc ) {
-
-    this.PreRender( _rc );
-
-    if ( this.render === true ) {
-
-      this.ProcessTransform( this.parent );
-
-      if ( this.children.length > 0 && this.display === true ) {
-
-        this.RenderChildren( _rc );
-      
-      }
-    
-    }
-
-    this.PostRender( _rc );
-  
-  }
-
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -67,6 +58,10 @@ export class BatchableContainer2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GLBatchRenderChildren () {
 
     if ( this.childDataBuffer != null && this.programController != null ) {
@@ -77,6 +72,12 @@ export class BatchableContainer2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Function?} _getBufferData 
+   * 
+   * @return {void}
+   */
   ComputeBatchBuffer ( _getBufferData ) {
 
     let child;
@@ -108,18 +109,32 @@ export class BatchableContainer2D extends VisualContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateInBuffer () {
 
     throw new Error( PS_ACCESS_BUFFER_ERROR_MSG );
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   GetBufferData () {
 
     throw new Error( PS_ACCESS_BUFFER_ERROR_MSG );
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {void}
+   */
   UseAsBatchParent ( _pc ) {
 
     this.isBatchParent = true;

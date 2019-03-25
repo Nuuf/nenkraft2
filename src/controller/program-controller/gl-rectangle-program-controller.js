@@ -9,6 +9,10 @@ import { TriRectArray } from '../../math';
 
 export class GLRectangleProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   */
   constructor ( _gl ) {
 
     super( _gl, RECTANGLE );
@@ -22,6 +26,10 @@ export class GLRectangleProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -42,6 +50,16 @@ export class GLRectangleProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _projection 
+   * @param {number}       _x 
+   * @param {number}       _y 
+   * @param {number}       _w 
+   * @param {number}       _h 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _x, _y, _w, _h ) {
 
     const gl = this.gl;
@@ -65,8 +83,20 @@ export class GLRectangleProgramController extends GLProgramController {
     gl.enableVertexAttribArray( attributes.aPosition );
     gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
-    gl.uniform4f( uniforms.uFillColor, fillChannel[ 0 ], fillChannel[ 1 ], fillChannel[ 2 ], fillChannel[ 3 ] );
-    gl.uniform4f( uniforms.uOutlineColor, outlineChannel[ 0 ], outlineChannel[ 1 ], outlineChannel[ 2 ], outlineChannel[ 3 ] );
+    gl.uniform4f( 
+      uniforms.uFillColor,
+      fillChannel[ 0 ],
+      fillChannel[ 1 ],
+      fillChannel[ 2 ],
+      fillChannel[ 3 ]
+    );
+    gl.uniform4f( 
+      uniforms.uOutlineColor,
+      outlineChannel[ 0 ],
+      outlineChannel[ 1 ],
+      outlineChannel[ 2 ],
+      outlineChannel[ 3 ]
+    );
     gl.uniform1f( uniforms.uOutline, this.outline );
     gl.uniform2f( uniforms.uSize, _w, _h );
     gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );

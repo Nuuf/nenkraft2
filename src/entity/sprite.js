@@ -5,12 +5,22 @@
 import { TextureEntity2D } from './texture-entity2d';
 import { Controller as AnimationController } from '../animator/controller';
 import { BasicTexture2D } from '../texture/basic-texture2d';
-import { ImageFromDataURL, GenerateSimpleBase64PNG } from '../utility/browser-utility';
+import { 
+  ImageFromDataURL,
+  GenerateSimpleBase64PNG
+} from '../utility/browser-utility';
 import { Polygon2D } from '../path/polygon2d';
 import { Graphic2D } from './graphic2d';
 
 export class Sprite extends TextureEntity2D {
 
+  /**
+   * 
+   * @param {number}         _x 
+   * @param {number}         _y 
+   * @param {BasicTexture2D} _texture 
+   * @param {number?}        _unitId 
+   */
   constructor ( _x, _y, _texture, _unitId ) {
 
     super( _x, _y, _texture, _unitId );
@@ -25,6 +35,12 @@ export class Sprite extends TextureEntity2D {
 
   }
 
+  /**
+   * 
+   * @param {Function} _onLoad 
+   * 
+   * @return {void}
+   */
   static BUILD_DEFAULT_TEXTURE ( _onLoad ) {
 
     if ( PS_DEFAULT_TEXTURE_BUILT === true ) {
@@ -64,12 +80,22 @@ export class Sprite extends TextureEntity2D {
 
   }
 
+  /**
+   * 
+   * @return {BasicTexture2D|null}
+   */
   static get DEFAULT_TEXTURE () {
 
     return PS_DEFAULT_TEXTURE;
   
   }
 
+  /**
+   * 
+   * @param {object} _data 
+   * 
+   * @return {Animation}
+   */
   CreateAnimation ( _data ) {
 
     if ( this.animationController === null ) {
@@ -79,7 +105,11 @@ export class Sprite extends TextureEntity2D {
     }
   
     let i;
-    const animation = this.animationController.CreateAnimation( _data.id, _data.frameDuration, _data.dynamicSize );
+    const animation = this.animationController.CreateAnimation( 
+      _data.id,
+      _data.frameDuration,
+      _data.dynamicSize
+    );
   
     if ( _data.spritesheet != null ) {
 
@@ -87,7 +117,9 @@ export class Sprite extends TextureEntity2D {
   
       for ( i = 0; i < _data.frames.length; ++i ) {
 
-        frame = _data.spritesheet.GetFrameById( _data.frames[ i ].id || _data.frames[ i ] );
+        frame = _data.spritesheet.GetFrameById( 
+          _data.frames[ i ].id || _data.frames[ i ]
+        );
   
         animation.CreateFrame( 
           frame.x, frame.y,
@@ -117,15 +149,30 @@ export class Sprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {any}      _id 
+   * @param {integer?} _frameIndex 
+   * 
+   * @return {this}
+   */
   PlayAnimation ( _id, _frameIndex ) {
 
     this.animationController.PlayAnimation( _id, _frameIndex );
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   StopCurrentAnimation () {
 
     this.animationController.StopCurrentAnimation();
+
+    return this;
 
   }
 

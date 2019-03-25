@@ -6,6 +6,10 @@ import { Assert } from './assert';
 
 export class Cache {
 
+  /**
+   * 
+   * @param {any} _type 
+   */
   constructor ( _type ) {
 
     this.type = _type;
@@ -13,6 +17,12 @@ export class Cache {
   
   }
 
+  /**
+   * 
+   * @param {object} _item 
+   * 
+   * @return {boolean}
+   */
   Store ( _item ) {
 
     let valid = false;
@@ -21,7 +31,7 @@ export class Cache {
 
       console.warn( 'Item is null.' );
 
-      return null;
+      return false;
       
     }
   
@@ -53,6 +63,12 @@ export class Cache {
 
   }
 
+  /**
+   * 
+   * @param {object} _item 
+   * 
+   * @return {boolean}
+   */
   StoreSafe ( _item ) {
 
     if ( this.type != null ) {
@@ -80,7 +96,15 @@ export class Cache {
   
   }
 
+  /**
+   * 
+   * @param {string|any} _id
+   * 
+   * @return {object|null} 
+   */
   GetById ( _id ) {
+
+    if ( !_id ) throw new Error( 'ID Null or Undefined' );
 
     const items = this.items;
     let item = items[ 0 ];
@@ -90,7 +114,7 @@ export class Cache {
       if ( item != null ) {
   
         if ( item.id === _id || ( item.data != null && item.data.id === _id ) ) {
-  
+
           return item;
           
         }
@@ -103,7 +127,16 @@ export class Cache {
   
   }
 
+  /**
+   * 
+   * @param {object|null} _item 
+   * @param {string|any?}  _id
+   * 
+   * @return {boolean}
+   */
   Contains ( _item, _id ) {
+
+    if ( !_id ) throw new Error( 'ID Null or Undefined' );
 
     const items = this.items;
     let item = items[ 0 ];

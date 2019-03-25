@@ -8,6 +8,11 @@ import { TriRectArray } from '../../math';
 
 export class GLDynamicTexture2DProgramController extends GLProgramController {
 
+  /**
+   *
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {integer}                                      _units 
+   */
   constructor ( _gl, _units ) {
 
     if ( _gl.getParameter( _gl.MAX_VERTEX_ATTRIBS ) * 0.5 < _units ) {
@@ -27,6 +32,10 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   *
+   * @return {void}
+   */
   Initialise () {
 
     for ( var i = 0; i < this.units; ++i ) {
@@ -45,6 +54,14 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {BasicTexture2D} _texture 
+   * @param {integer?}       _unitId 
+   * @param {integer?}       _param 
+   * 
+   * @return {void}
+   */
   BindBasicTexture ( _texture, _unitId, _param ) {
 
     const gl = this.gl;
@@ -73,6 +90,15 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {object}                                       _uniforms 
+   * @param {object}                                       _attributes 
+   * @param {integer}                                      _unitId 
+   * 
+   * @return {void}
+   */
   BindUnit ( _gl, _uniforms, _attributes, _unitId ) {
 
     if ( this.textures[ _unitId ] == null ) return;
@@ -87,6 +113,16 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _projection 
+   * @param {Float32Array} _translation 
+   * @param {Float32Array} _transformation 
+   * @param {Float32Array} _tint 
+   * @param {integer}      _unitId 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _translation, _transformation, _tint, _unitId ) {
 
     const gl = this.gl;

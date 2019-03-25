@@ -8,6 +8,21 @@ import { Matrix2D } from '../math/matrix/matrix2d';
 
 export class Tile extends CoreEntity2D {
 
+  /**
+   * 
+   * @param {number}  _index 
+   * @param {number}  _x 
+   * @param {number}  _y 
+   * @param {number}  _clipX 
+   * @param {number}  _clipY 
+   * @param {boolean} _H 
+   * @param {boolean} _V 
+   * @param {boolean} _D 
+   * @param {number}  _w 
+   * @param {number}  _h 
+   * @param {number}  _tscaleX 
+   * @param {number}  _tscaleY 
+   */
   constructor ( _index, _x, _y, _clipX, _clipY, _H, _V, _D, _w, _h, _tscaleX, _tscaleY ) {
 
     super( _x, _y );

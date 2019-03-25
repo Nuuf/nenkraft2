@@ -7,6 +7,12 @@ import { Dispatcher } from '../event/dispatcher';
 
 export class Mouse {
 
+  /**
+   * 
+   * @param {DOMElement} _element 
+   * @param {number}     _offsetX 
+   * @param {number}     _offsetY 
+   */
   constructor ( _element, _offsetX, _offsetY ) {
 
     this.element = _element;
@@ -36,18 +42,32 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get x () {
 
     return this.position.x;
   
   }
 
+  /**
+   * 
+   * @return {number}
+   */
   get y () {
 
     return this.position.y;
   
   }
 
+  /**
+   *
+   * @param {MouseEvent} _event 
+   * 
+   * @return {boolean}
+   */
   OnMove ( _event ) {
 
     this.CalculatePosition( _event.clientX, _event.clientY );
@@ -58,6 +78,12 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {MouseEvent} _event 
+   * 
+   * @return {void}
+   */
   OnDown ( _event ) {
 
     _event.stopPropagation();
@@ -67,6 +93,12 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {MouseEvent} _event 
+   * 
+   * @return {void}
+   */
   OnUp ( _event ) {
 
     _event.stopPropagation();
@@ -76,6 +108,12 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {MouseEvent} _event 
+   * 
+   * @return {void}
+   */
   OnLeave ( _event ) {
 
     _event.stopPropagation();
@@ -85,6 +123,12 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {MouseEvent} _event 
+   * 
+   * @return {void}
+   */
   OnWheel ( _event ) {
 
     _event.stopPropagation();
@@ -94,6 +138,13 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {void}
+   */
   CalculatePosition ( _x, _y ) {
 
     const offsets = this.offsets;
@@ -114,6 +165,12 @@ export class Mouse {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D} _offset 
+   * 
+   * @return {this}
+   */
   AddOffset ( _offset ) {
 
     this.offsets.push( _offset );
@@ -122,6 +179,10 @@ export class Mouse {
 
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   Destroy () {
 
     this.element.removeEventListener( 'mousemove', this.___bound___OnMove );
@@ -129,6 +190,8 @@ export class Mouse {
     this.element.removeEventListener( 'mouseup', this.___bound___OnUp );
     this.element.removeEventListener( 'mouseleave', this.___bound___OnLeave );
     this.element.removeEventListener( 'wheel', this.___bound___OnWheel );
+
+    return this;
   
   }
 

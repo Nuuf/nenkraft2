@@ -2,6 +2,11 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
+/**
+ * @param {integer} index
+ * 
+ * @return {any}
+ */
 Array.prototype.indexPop = function ( index ) {
 
   const last = this.length - 1;
@@ -21,6 +26,12 @@ Array.prototype.indexPop = function ( index ) {
   
 };
 
+/**
+ * 
+ * @param {integer} index
+ * 
+ * @return {any}
+ */
 Array.prototype.indexShift = function ( index ) {
   
   if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
@@ -38,6 +49,12 @@ Array.prototype.indexShift = function ( index ) {
   
 };
 
+/**
+ * 
+ * @param {integer} index
+ * 
+ * @return {any}
+ */
 Array.prototype.popSplice = function ( index ) {
 
   const l = this.length - 1;
@@ -58,6 +75,12 @@ Array.prototype.popSplice = function ( index ) {
   
 };
 
+/**
+ * 
+ * @param {integer} index
+ * 
+ * @return {any}
+ */
 Array.prototype.shiftSplice = function ( index ) {
 
   if ( this.length < 1 ) return;
@@ -76,6 +99,12 @@ Array.prototype.shiftSplice = function ( index ) {
   
 };
 
+/**
+ * 
+ * @param {integer} index
+ * 
+ * @return {any}
+ */
 Array.prototype.fickleSplice = function ( index ) {
 
   if ( index > ( this.length * 0.5 ) | 0 ) {

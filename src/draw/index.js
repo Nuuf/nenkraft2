@@ -7,12 +7,22 @@ import { AssignIfUndefined } from '../utility';
 
 export class Draw {
 
+  /**
+   * 
+   * @param {object} _defaultOptions 
+   */
   constructor ( _defaultOptions ) {
 
     this.defaultOptions = _defaultOptions;
   
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   PreDrawBase ( _options ) {
 
     if ( this.defaultOptions ) {
@@ -26,17 +36,27 @@ export class Draw {
     if ( _options.identity ) rc.setTransform( 1, 0, 0, 1, 0, 0 );
   
     rc.fillStyle = _options.fillStyle ? _options.fillStyle : 'rgb(100, 150, 200)';
+    
     rc.globalAlpha = _options.globalAlpha ? _options.globalAlpha : 0.7;
     rc.shadowOffsetX = _options.shadowOffsetX ? _options.shadowOffsetX : 0;
     rc.shadowOffsetY = _options.shadowOffsetY ? _options.shadowOffsetY : 0;
     rc.shadowBlur = _options.shadowBlur ? _options.shadowBlur : 12;
-    rc.globalCompositeOperation = _options.globalCompositeOperation ? _options.globalCompositeOperation : 'source-over';
-    rc.imageSmoothingEnabled = _options.imageSmoothingEnabled ? _options.imageSmoothingEnabled : 'true';
+
+    rc.globalCompositeOperation = 
+      _options.globalCompositeOperation ? _options.globalCompositeOperation : 'source-over';
+    rc.imageSmoothingEnabled = 
+      _options.imageSmoothingEnabled ? _options.imageSmoothingEnabled : 'true';
 
     return this;
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   PreDrawText ( _options ) {
 
     const rc = _options.rc;
@@ -50,6 +70,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   PreDrawStroke ( _options ) {
 
     const rc = _options.rc;
@@ -66,6 +92,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Rectangle ( _options ) {
 
     this.PreDrawBase( _options );
@@ -84,6 +116,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   RoundRectangle ( _options ) {
 
     this.PreDrawBase( _options );
@@ -116,6 +154,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   AABB ( _options ) {
 
     this.PreDrawBase( _options );
@@ -139,6 +183,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Circle ( _options ) {
 
     this.PreDrawBase( _options );
@@ -168,6 +218,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Ellipse ( _options ) {
 
     this.PreDrawBase( _options );
@@ -198,6 +254,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Line ( _options ) {
 
     this.PreDrawBase( _options );
@@ -220,6 +282,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   LineChain ( _options ) {
 
     this.PreDrawBase( _options );
@@ -247,6 +315,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Arc ( _options ) {
 
     this.PreDrawBase( _options );
@@ -278,6 +352,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   EllipticArc ( _options ) {
 
     this.PreDrawBase( _options );
@@ -310,6 +390,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   Curve ( _options ) {
 
     this.PreDrawBase( _options );
@@ -341,6 +427,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   BezierCurve ( _options ) {
 
     this.PreDrawBase( _options );
@@ -373,6 +465,12 @@ export class Draw {
 
   }
 
+  /**
+   * 
+   * @param {object} _options 
+   * 
+   * @return {this}
+   */
   QuadraticCurve ( _options ) {
 
     this.PreDrawBase( _options );

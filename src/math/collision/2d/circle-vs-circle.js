@@ -8,6 +8,9 @@ const Sqrt = Math.sqrt;
 
 export class Result {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.mtv = new Vector2D( 0, 0 );
@@ -22,6 +25,10 @@ export class Result {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     this.poc.a.SetSame( 0 );
@@ -36,6 +43,14 @@ export class Result {
 
 }
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result 
+ * 
+ * @return {boolean}
+ */
 export const Collide = function ( _a, _b, _result ) {
 
   const sa = _a.shape;
@@ -84,6 +99,14 @@ export const Collide = function ( _a, _b, _result ) {
 
 };
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result
+ * 
+ * @return {void} 
+ */
 export const ElasticResponse = function ( _a, _b, _result ) {
 
   PS_n.SetV( _result.delta ).Normalize();

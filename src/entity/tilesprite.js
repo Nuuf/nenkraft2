@@ -11,6 +11,13 @@ import { Graphic2D } from './graphic2d';
 
 export class Tilesprite extends TextureEntity2D {
 
+  /**
+   * 
+   * @param {number}         _x 
+   * @param {number}         _y 
+   * @param {BasicTexture2D} _texture 
+   * @param {integer?}       _unitId 
+   */
   constructor ( _x, _y, _texture, _unitId ) {
 
     super( _x, _y, _texture == null ? PS_DEFAULT_TEXTURE : _texture, _unitId );
@@ -20,6 +27,12 @@ export class Tilesprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {Function} _onLoad 
+   * 
+   * @return {void}
+   */
   static BUILD_DEFAULT_TEXTURE ( _onLoad ) {
 
     if ( PS_DEFAULT_TEXTURE_BUILT === true ) {
@@ -60,12 +73,22 @@ export class Tilesprite extends TextureEntity2D {
 
   }
 
+  /**
+   * 
+   * @return {BasicTexture2D|null}
+   */
   static get DEFAULT_TEXTURE () {
 
     return PS_DEFAULT_TEXTURE;
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -101,6 +124,14 @@ export class Tilesprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * @param {number}                   _w 
+   * @param {number}                   _h 
+   * 
+   * @return {void}
+   */
   GeneratePattern ( _rc, _w, _h ) {
 
     if ( this.programController == null ) {
@@ -120,6 +151,13 @@ export class Tilesprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {void}
+   */
   OffsetPattern ( _x, _y ) {
 
     this.patternOffset.Add( _x, _y );
@@ -127,6 +165,13 @@ export class Tilesprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {void}
+   */
   SetPatternOffset ( _x, _y ) {
 
     this.patternOffset.Set( _x, _y );
@@ -134,6 +179,10 @@ export class Tilesprite extends TextureEntity2D {
   
   }
 
+  /**
+   * 
+   * @return {Vector2D}
+   */
   GetPatternOffset () {
 
     return this.patternOffset;

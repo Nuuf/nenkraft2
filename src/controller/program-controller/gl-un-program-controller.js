@@ -7,6 +7,11 @@ import { TriRectArray } from '../../math';
 
 export class GLUnProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {object}                                       _un 
+   */
   constructor ( _gl, _un ) {
 
     super( _gl, _un );
@@ -17,6 +22,10 @@ export class GLUnProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -33,6 +42,17 @@ export class GLUnProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _projection 
+   * @param {number}       _x 
+   * @param {number}       _y 
+   * @param {number}       _w 
+   * @param {number}       _h 
+   * @param {number}       _time 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _x, _y, _w, _h, _time ) {
 
     const gl = this.gl;

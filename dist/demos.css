@@ -1,69 +1,95 @@
 /**
 * @package     Nenkraft2
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.9.3
+* @version     2.0.0
 * @copyright   (C) 2018-2019 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft2/blob/master/LICENSE}
 */
 html, body {
-    padding: 0;
-    margin: 0;
-    background-color: rgb(25, 75, 125);
-  }
-  
+  padding: 0;
+  margin: 0;
+  background-color: rgb(25, 75, 125);
+}
+
+#buttons {
+  width: 1200px;
+  display: block;
+  height: auto;
+  font-size: 0;
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgb(75, 125, 175);
+  padding: 2px;
+  margin-top: 60px;
+}
+    
+#buttons input[type='button'] {
+  display: inline-block;
+  background-color: rgb(100, 150, 200);
+  color: white;
+  padding: 8px 3px;
+  cursor: pointer;
+  width: 200px;
+  border: none;
+  margin: 2px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1200px) {
   #buttons {
-    width: 70%;
-    display: block;
-    height: auto;
-    font-size: 0;
-    text-align: center;
-    margin: 0 auto;
-    background-color: rgb(75, 125, 175);
-    padding: 2px;
-    margin-top: 60px;
+    width: 600px;
   }
-      
   #buttons input[type='button'] {
-    display: inline-block;
-    background-color: rgb(100, 150, 200);
-    color: white;
-    padding: 15px;
-    cursor: pointer;
-    width: auto;
-    border: none;
-    margin: 2px;
-  }
-  #buttons input:active {
-    outline: none;
-  }
-  #buttons input:hover {
-    background-color: rgb(50, 100, 150);
-  }
-  #back-button {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    position: fixed;
-    z-index: 999;
-    background-color: rgb(200, 150, 100, 0.8);
-    color: white;
-    padding: 15px;
-    border: none;
-    cursor: pointer;
     width: 150px;
   }
-  canvas {
-    background-color: #000;
-    display: none;
+}
+@media (max-width: 620px) {
+    #buttons {
+    width: 90%;
   }
-  :focus {
-    outline: none;
+  #buttons input[type='button'] {
+    width: calc(100% - 4px);
   }
-  .mcnvs {
-    background-color: rgba(20, 19, 19, 0.3);
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+}
+
+#buttons input:active {
+  outline: none;
+}
+
+#buttons input:hover {
+  background-color: rgb(50, 100, 150);
+}
+
+#back-button {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  z-index: 999;
+  background-color: rgb(200, 150, 100, 0.8);
+  color: white;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+}
+
+canvas {
+  background-color: #000;
+  display: none;
+}
+
+:focus {
+  outline: none;
+}
+
+.mcnvs {
+  background-color: rgba(20, 19, 19, 0.3);
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

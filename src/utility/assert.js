@@ -4,6 +4,15 @@
 
 'use strict';
 
+/**
+ * 
+ * @param {any}      _data 
+ * @param {string}   _compare 
+ * @param {any}      _value 
+ * @param {boolean?} _noSelfAssert 
+ * 
+ * @return {void}
+ */
 export function Assert ( _data, _compare, _value, _noSelfAssert ) {
 
   if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
@@ -63,6 +72,14 @@ export function Assert ( _data, _compare, _value, _noSelfAssert ) {
 
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function Is ( _data, _value, _compare ) {
 
   let failed = false;
@@ -77,6 +94,14 @@ function Is ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsNot ( _data, _value, _compare ) {
 
   let failed = false;
@@ -91,6 +116,14 @@ function IsNot ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsSameType ( _data, _value, _compare ) {
 
   let failed = false;
@@ -133,6 +166,14 @@ function IsSameType ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsNotSameType ( _data, _value, _compare ) {
 
   let failed = false;
@@ -175,6 +216,14 @@ function IsNotSameType ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsInstanceOf ( _data, _value, _compare ) {
 
   let failed = false;
@@ -189,6 +238,14 @@ function IsInstanceOf ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsNotInstanceOf ( _data, _value, _compare ) {
 
   let failed = false;
@@ -203,6 +260,14 @@ function IsNotInstanceOf ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsLessThan ( _data, _value, _compare ) {
 
   let failed = false;
@@ -217,6 +282,14 @@ function IsLessThan ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsGreaterThan ( _data, _value, _compare ) {
 
   let failed = false;
@@ -231,6 +304,14 @@ function IsGreaterThan ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsLessThanOrEqual ( _data, _value, _compare ) {
 
   let failed = false;
@@ -245,6 +326,14 @@ function IsLessThanOrEqual ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function IsGreaterThanOrEqual ( _data, _value, _compare ) {
 
   let failed = false;
@@ -259,6 +348,14 @@ function IsGreaterThanOrEqual ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function Check ( _failed, _data, _value, _compare ) {
 
   if ( _failed ) {
@@ -274,6 +371,14 @@ function Check ( _failed, _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function ErrorInfo ( _data, _value, _compare ) {
 
   switch ( _compare ) {
@@ -317,6 +422,14 @@ function ErrorInfo ( _data, _value, _compare ) {
   
 }
 
+/**
+ * 
+ * @param {any}    _data 
+ * @param {amy}    _value 
+ * @param {string} _compare 
+ * 
+ * @return {void}
+ */
 function SuccessLog ( _data, _value, _compare ) {
 
   console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );
@@ -339,6 +452,12 @@ Assert.IS_GREATER_THAN = 'IGT';
 Assert.IS_LESS_THAN_OR_EQUAL = 'ILTOE';
 Assert.IS_GREATER_THAN_OR_EQUAL = 'IGTOE';
 
+/**
+ * 
+ * @param {object} _g
+ * 
+ * @return {void}
+ */
 Assert.Assign = function ( _g ) {
 
   if ( window && !_g ) {

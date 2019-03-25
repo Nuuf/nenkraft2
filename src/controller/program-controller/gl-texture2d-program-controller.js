@@ -8,6 +8,10 @@ import { TriRectArray } from '../../math';
 
 export class GLTexture2DProgramController extends GLProgramController {
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   */
   constructor ( _gl ) {
 
     super( _gl, TEXTURE_2D );
@@ -19,6 +23,10 @@ export class GLTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Initialise () {
 
     const gl = this.gl;
@@ -36,6 +44,13 @@ export class GLTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {BasicTexture2D} _texture 
+   * @param {integer?}       _param 
+   * 
+   * @return {void}
+   */
   BindBasicTexture ( _texture, _param ) {
 
     const gl = this.gl;
@@ -60,6 +75,15 @@ export class GLTexture2DProgramController extends GLProgramController {
   
   }
 
+  /**
+   * 
+   * @param {Float32Array} _projection 
+   * @param {Float32Array} _translation 
+   * @param {Float32Array} _transformation 
+   * @param {Float32Array} _tint 
+   * 
+   * @return {void}
+   */
   Execute ( _projection, _translation, _transformation, _tint ) {
 
     const gl = this.gl;

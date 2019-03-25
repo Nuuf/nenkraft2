@@ -1,0 +1,50 @@
+{ "frames": {
+   "aseprite-tiles 0.ase": {
+    "frame": { "x": 5, "y": 5, "w": 66, "h": 66 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 66, "h": 66 },
+    "sourceSize": { "w": 66, "h": 66 },
+    "duration": 100
+   },
+   "aseprite-tiles 1.ase": {
+    "frame": { "x": 76, "y": 5, "w": 66, "h": 66 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 66, "h": 66 },
+    "sourceSize": { "w": 66, "h": 66 },
+    "duration": 100
+   },
+   "aseprite-tiles 2.ase": {
+    "frame": { "x": 147, "y": 5, "w": 66, "h": 66 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 66, "h": 66 },
+    "sourceSize": { "w": 66, "h": 66 },
+    "duration": 100
+   },
+   "aseprite-tiles 3.ase": {
+    "frame": { "x": 218, "y": 5, "w": 66, "h": 66 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 66, "h": 66 },
+    "sourceSize": { "w": 66, "h": 66 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.9-x64",
+  "image": "C:\\Users\\Admin\\Documents\\Wurkwurk\\nenkraft2\\assets\\images\\aseprite-tiles.png",
+  "format": "RGBA8888",
+  "size": { "w": 289, "h": 76 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

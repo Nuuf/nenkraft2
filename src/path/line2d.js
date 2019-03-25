@@ -7,6 +7,14 @@ import { SSa } from '../style';
 
 export class Line2D extends Line2DGeom {
 
+  /**
+   * 
+   * @param {number}  _sx 
+   * @param {number}  _sy 
+   * @param {number}  _ex 
+   * @param {number}  _ey 
+   * @param {object?} _style 
+   */
   constructor ( _sx, _sy, _ex, _ey, _style ) {
 
     super( _sx, _sy, _ex, _ey );
@@ -16,6 +24,12 @@ export class Line2D extends Line2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     const s = this.s;
@@ -37,6 +51,13 @@ export class Line2D extends Line2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * @param {Transform2D}                                  _transform2d 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl, _transform2d ) {
 
     if ( this.programController !== null ) {
@@ -50,6 +71,12 @@ export class Line2D extends Line2DGeom {
     
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   LinkProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -59,6 +86,12 @@ export class Line2D extends Line2DGeom {
   
   }
 
+  /**
+   * 
+   * @param {ProgramController} _pc 
+   * 
+   * @return {this}
+   */
   UseProgramController ( _pc ) {
 
     this.programController = _pc;
@@ -67,6 +100,10 @@ export class Line2D extends Line2DGeom {
   
   }
 
+  /**
+   *
+   * @return {this}
+   */
   LinkStyle () {
 
     const pc = this.programController;

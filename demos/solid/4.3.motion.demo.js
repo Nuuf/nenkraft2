@@ -53,8 +53,16 @@ export default () => {
         const newEndL = this.path.e.SubtractVC( this.path.s );
         const newEndR = newEndL.Copy();
 
-        newEndL.Rotate( nk2.Math.RADIAN * 50 + nk2.Utility.RandomFloat( -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20 ) );
-        newEndR.Rotate( -nk2.Math.RADIAN * 50 + nk2.Utility.RandomFloat( -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20 ) );
+        newEndL.Rotate( 
+          nk2.Math.RADIAN * 50 + nk2.Utility.RandomFloat( 
+            -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20
+          )
+        );
+        newEndR.Rotate( 
+          -nk2.Math.RADIAN * 50 + nk2.Utility.RandomFloat( 
+            -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20
+          )
+        );
         newEndL.Multiply( 0.67, 0.67 );
         newEndR.Multiply( 0.67, 0.67 );
         newEndL.AddV( this.path.e );
@@ -84,7 +92,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, H );
 
     scene.scale.Set( 1, -1 );

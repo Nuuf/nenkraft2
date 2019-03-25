@@ -4,24 +4,45 @@
 
 export class ArrayHandler {
 
+  /**
+   * 
+   * @param {object} _object 
+   */
   constructor ( _object ) {
 
     this.object = _object;
 
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {[]}
+   */
   static Get ( _id ) {
 
     return PS_ARRAYS[ _id ];
   
   }
 
+  /**
+   * 
+   * @return {object}
+   */
   static GetAll () {
 
     return PS_ARRAYS;
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * @param {[]}     _array 
+   * 
+   * @return {this}
+   */
   static Add ( _id, _array ) {
 
     PS_ARRAYS[ _id ] = _array;
@@ -30,6 +51,12 @@ export class ArrayHandler {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {this}
+   */
   In ( _id ) {
 
     const index = PS_ARRAYS[ _id ].indexOf( this.object );
@@ -44,6 +71,10 @@ export class ArrayHandler {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   InAll () {
 
     let index = 0;
@@ -64,6 +95,12 @@ export class ArrayHandler {
   
   }
 
+  /**
+   * 
+   * @param {string} _id
+   * 
+   * @return {this} 
+   */
   Out ( _id ) {
 
     const index = PS_ARRAYS[ _id ].indexOf( this.object );
@@ -78,6 +115,10 @@ export class ArrayHandler {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   OutAll () {
 
     let index = 0;

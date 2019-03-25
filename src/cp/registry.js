@@ -4,6 +4,9 @@
 
 export class Registry {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.commands = [];
@@ -11,6 +14,12 @@ export class Registry {
   
   }
 
+  /**
+   * 
+   * @param {Command} _command 
+   * 
+   * @return {Command}
+   */
   AddCommand ( _command ) {
 
     if ( _command.registry == null ) {
@@ -24,6 +33,12 @@ export class Registry {
   
   }
 
+  /**
+   * 
+   * @param {Command} _command 
+   * 
+   * @return {Command}
+   */
   RemoveCommand ( _command ) {
 
     const commands = this.commands;
@@ -39,6 +54,12 @@ export class Registry {
   
   }
 
+  /**
+   * 
+   * @param {string} _id 
+   * 
+   * @return {Command|null}
+   */
   GetCommandById ( _id ) {
 
     const commands = this.commands;
@@ -62,6 +83,13 @@ export class Registry {
   
   }
 
+  /**
+   * 
+   * @param {string}  _str 
+   * @param {object?} _staticData 
+   * 
+   * @return {string|null}
+   */
   Parse ( _str, _staticData ) {
 
     const strs = String( _str ).split( this.splitter );

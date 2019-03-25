@@ -7,6 +7,10 @@ import { ALIGN_LEFT, BASELINE_TOP } from './text_conf';
 
 export class TextStyle {
 
+  /**
+   * 
+   * @param {object?} _props 
+   */
   constructor ( _props ) {
 
     this.fillColor = '#6496c8';
@@ -23,6 +27,12 @@ export class TextStyle {
 
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Apply ( _rc ) {
     
     _rc.fillStyle = this.fillColor;
@@ -34,6 +44,10 @@ export class TextStyle {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   ConcatFont () {
 
     this.font = this.fontSize + 'px ' + this.fontFamily;

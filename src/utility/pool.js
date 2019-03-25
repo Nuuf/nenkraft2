@@ -4,22 +4,34 @@
 
 export class Pool {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.objects = [];
     this.floodFunction = null;
     this.floodAmount = null;
     this.context = null;
-    this.arguments = null;
 
   }
 
+  /**
+   * 
+   * @param {object} _object 
+   * 
+   * @return {void}
+   */
   Store ( _object ) {
 
     this.objects.push( _object );
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   PreRetrieve () {
 
     if ( this.objects.length === 0 ) {
@@ -30,6 +42,10 @@ export class Pool {
   
   }
 
+  /**
+   * 
+   * @return {object}
+   */
   Retrieve () {
 
     this.PreRetrieve();
@@ -38,6 +54,14 @@ export class Pool {
   
   }
 
+  /**
+   * 
+   * @param {Function?} _function 
+   * @param {integer?}  _amount 
+   * @param {any?}      _context 
+   * 
+   * @return {void}
+   */
   Flood ( _function, _amount, _context ) {
 
     if ( _function ) this.floodFunction = _function;
@@ -52,12 +76,20 @@ export class Pool {
   
   } 
 
+  /**
+   * 
+   * @return {void}
+   */
   Flush () {
 
     this.objects.length = 0;
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Clean () {
 
     const amount = this.objects.length;

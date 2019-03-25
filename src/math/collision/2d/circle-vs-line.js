@@ -9,6 +9,9 @@ const Sqrt = Math.sqrt;
 
 export class Result {
 
+  /**
+   * 
+   */
   constructor () {
 
     this.mtv = new Vector2D( 0, 0 );
@@ -18,6 +21,10 @@ export class Result {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     this.mtv.SetSame( 0 );
@@ -29,6 +36,14 @@ export class Result {
 
 }
 
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result 
+ * 
+ * @return {boolean}
+ */
 export const Collide = function ( _a, _b, _result ) {
 
   const sa = _a.shape;
@@ -66,13 +81,21 @@ export const Collide = function ( _a, _b, _result ) {
 
 };
 
-export const ReflectingResponse = function ( _obj1, _obj2, _result ) {
+/**
+ * 
+ * @param {Body2D} _a 
+ * @param {Body2D} _b 
+ * @param {Result} _result
+ * 
+ * @return {void} 
+ */
+export const ReflectingResponse = function ( _a, _b, _result ) {
 
   let n;
   let refl;
-  const lshape = _obj2.shape;
-  const cvel = _obj1.velocity;
-  const cpos = _obj1.relative;
+  const lshape = _b.shape;
+  const cvel = _a.velocity;
+  const cpos = _a.relative;
   const cp = _result.cp;
 
   if ( _result.sOrE !== 0 ) {

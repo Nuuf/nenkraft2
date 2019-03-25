@@ -24,7 +24,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
 
     camera.force.SetSame( 5 );
@@ -63,7 +65,10 @@ export default () => {
         p.style.pixel.size = nk2.Utility.RandomFloat( 1, 5 );
         const g = new nk2.Graphic2D( 0, 0, p );
 
-        g.data.velocity = new nk2.Vector2D( nk2.Utility.RandomFloat( -2, 2 ), nk2.Utility.RandomFloat( -2, 2 ) );
+        g.data.velocity = new nk2.Vector2D( 
+          nk2.Utility.RandomFloat( -2, 2 ), 
+          nk2.Utility.RandomFloat( -2, 2 )
+        );
         g.data.torque = nk2.Utility.RandomFloat( -nk2.Math.RADIAN * 20, nk2.Math.RADIAN * 20 );
         bp.Mount( g );
 

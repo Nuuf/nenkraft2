@@ -24,7 +24,9 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
 
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
@@ -51,7 +53,7 @@ export default () => {
       0, 0,
       pc,
       window.testData.xhrloader.GetDataById( 'fontdataxml' ),
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      window.testData.lorem
     );
 
     bitmapText.scale.SetSame( 0.3 );

@@ -52,7 +52,9 @@ export default () => {
 
     stage.mouse.onDown.Add( ( event ) => {
 
-      var obj = new nk2.Graphic2D( event.data.position.x, event.data.position.y, new nk2.Path.AABB2D( 0, 0, 10, 10 ) );
+      var obj = new nk2.Graphic2D( 
+        event.data.position.x, event.data.position.y, new nk2.Path.AABB2D( 0, 0, 10, 10 )
+      );
 
       obj.ComputeLocalBounds( obj.anchor );
       stage.AddChild( obj );
@@ -63,6 +65,9 @@ export default () => {
         rootNode.Add( obj.bounds.local );
       
       } );
+
+      console.log( rootNode.Converge( bounds ) );
+
       nodes.length = 0;
       rootNode.ConcatNodes( nodes );
     

@@ -9,6 +9,10 @@ import { AABB2D } from '../aabb/aabb2d';
 
 export class Polygon2D {
 
+  /**
+   * 
+   * @param {Array<object|Vector2D|Point>?} _vertices 
+   */
   constructor ( _vertices ) {
 
     this.vertices = [];
@@ -29,6 +33,20 @@ export class Polygon2D {
 
   }
 
+  /**
+   *
+   * @return {integer}
+   */
+  static get TYPE () {
+
+    return PS_TYPE;
+  
+  }
+
+  /**
+   * 
+   * @return {Polygon2D}
+   */
   Copy () {
 
     const p = new Polygon2D();
@@ -47,6 +65,12 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {Polygon2D} _polygon 
+   * 
+   * @return {this}
+   */
   SetC ( _polygon ) {
 
     const vertices = _polygon.vertices;
@@ -64,6 +88,12 @@ export class Polygon2D {
 
   }
 
+  /**
+   * 
+   * @param {Array?} _segments 
+   * 
+   * @return {Line2D[]}
+   */
   ExtractSegments ( _segments ) {
 
     const vertices = this.vertices;
@@ -83,6 +113,14 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {number}   _amount 
+   * @param {boolean?} _int 
+   * @param {boolean?} _outside 
+   * 
+   * @return {Vector2D[]}
+   */
   GenerateRandomPoints ( _amount, _int, _outside ) {
 
     this.ComputeBounds();
@@ -113,9 +151,15 @@ export class Polygon2D {
   
   }
 
-  AddVertex ( _vector2d ) {
+  /**
+   * 
+   * @param {Vector2D} _vector2d 
+   * 
+   * @return {this}
+   */
+  AddVertex ( _vertex ) {
 
-    this.vertices.push( _vector2d );
+    this.vertices.push( _vertex );
     this.dirtyBounds = true;
     this.dirtyCentroid = true;
 
@@ -123,6 +167,12 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {Array<object|Vector2D|Point|Number>} _vertices 
+   * 
+   * @return {this}
+   */
   AddVertices ( _vertices ) {
 
     if ( _vertices[ 0 ] instanceof Vector2D ) {
@@ -151,6 +201,12 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {Array<Vector2D>?} _vertices 
+   * 
+   * @return {this}
+   */
   Recreate ( _vertices ) {
 
     this.vertices.length = 0;
@@ -162,6 +218,10 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeBounds () {
 
     let mix = Infinity;
@@ -188,6 +248,14 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {number}  _angle 
+   * @param {number?} _anchorX 
+   * @param {number?} _anchorY 
+   * 
+   * @return {this}
+   */
   Rotate ( _angle, _anchorX, _anchorY ) {
 
     if ( this.dirtyBounds === true ) {
@@ -217,9 +285,18 @@ export class Polygon2D {
 
     this.dirtyCentroid = true;
     this.dirtyBounds = true;
+
+    return this;
   
   }
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * 
+   * @return {this}
+   */
   SetPosition ( _x, _y ) {
 
     if ( this.dirtyCentroid === true ) {
@@ -244,6 +321,10 @@ export class Polygon2D {
 
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeCentroid () {
 
     const vertices = this.vertices;
@@ -265,6 +346,10 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputeNormalsA () {
 
     const vertices = this.vertices;
@@ -285,6 +370,10 @@ export class Polygon2D {
   
   }
   
+  /**
+   * 
+   * @return {this}
+   */
   ComputeNormalsB () {
 
     const vertices = this.vertices;
@@ -305,6 +394,10 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @return {this}
+   */
   ComputePerimeterMidPoints () {
 
     const vertices = this.vertices;
@@ -325,6 +418,12 @@ export class Polygon2D {
   
   }
 
+  /**
+   * 
+   * @param {object|Vector2D|Point} _p 
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D ( _p ) {
 
     if ( this.dirtyBounds === true ) this.ComputeBounds();
@@ -344,7 +443,10 @@ export class Polygon2D {
 
       if (
         ( ( vertexi.y > y ) !== ( vertexj.y > y ) ) &&
-        ( x < ( vertexj.x - vertexi.x ) * ( y - vertexi.y ) / ( vertexj.y - vertexi.y ) + vertexi.x )
+        ( 
+          x < ( vertexj.x - vertexi.x ) * ( y - vertexi.y ) /
+          ( vertexj.y - vertexi.y ) + vertexi.x
+        )
       ) {
 
         intersects = !intersects;

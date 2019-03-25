@@ -4,6 +4,19 @@
 
 export class Frame {
 
+  /**
+   * 
+   * @param {integer}     _x 
+   * @param {integer}     _y 
+   * @param {integer}     _w 
+   * @param {integer}     _h 
+   * @param {integer}     _duration 
+   * @param {string|any?} _id 
+   * @param {integer?}    _offsetX 
+   * @param {integer?}    _offsetY 
+   * @param {integer?}    _originW 
+   * @param {integer?}    _originH 
+   */
   constructor ( _x, _y, _w, _h, _duration, _id, _offsetX, _offsetY, _originW, _originH ) {
 
     this.duration = this.timer = _duration;
@@ -19,6 +32,10 @@ export class Frame {
   
   }
 
+  /**
+   *
+   * @return {Frame}
+   */
   Copy () {
 
     return new Frame( 
@@ -32,6 +49,10 @@ export class Frame {
   
   }
 
+  /**
+   *
+   * @return {boolean}
+   */
   Process () {
 
     if ( this.timer-- <= 0 ) {
@@ -46,6 +67,13 @@ export class Frame {
   
   }
 
+  /**
+   *
+   * @param {Sprite}   _sprite 
+   * @param {boolean?} _dynamicSize 
+   * 
+   * @return {this}
+   */
   Apply ( _sprite, _dynamicSize ) {
 
     if ( _dynamicSize === true ) {
@@ -66,6 +94,12 @@ export class Frame {
   
   }
 
+  /**
+   *
+   * @param {Sprite} _sprite 
+   * 
+   * @return {this}
+   */
   FullApply ( _sprite ) {
 
     this.Apply( _sprite );
@@ -77,6 +111,10 @@ export class Frame {
   
   }
 
+  /**
+   *
+   * @return {this}
+   */
   Reset () {
 
     this.timer = this.duration;

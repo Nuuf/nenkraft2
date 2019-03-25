@@ -4,6 +4,16 @@
 
 import { Vector2D } from '../../vector/vector2d';
 
+/**
+ * 
+ * @param {Vector2D} _startA 
+ * @param {Vector2D} _endA 
+ * @param {Vector2D} _startB 
+ * @param {Vector2D} _endB 
+ * @param {Vector2D} _p 
+ * 
+ * @return {boolean}
+ */
 export function Line2DLine2DCollision ( _startA, _endA, _startB, _endB, _p ) {
 
   _p.SetV( _endA ).SubtractV( _startA );

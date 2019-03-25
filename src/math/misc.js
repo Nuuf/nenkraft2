@@ -6,6 +6,15 @@ import { Vector2D } from './vector/vector2d';
 
 'use strict';
 
+/**
+ * 
+ * @param {Vector2D} _startA 
+ * @param {Vector2D} _endA 
+ * @param {Vector2D} _startB 
+ * @param {Vector2D} _endB
+ * 
+ * @return {boolean} 
+ */
 export function Line2DLine2DIntersection ( _startA, _endA, _startB, _endB ) {
 
   R_V1.SetV( _endA ).SubtractV( _startA );
@@ -27,10 +36,20 @@ export function Line2DLine2DIntersection ( _startA, _endA, _startB, _endB ) {
 
 }
 
+/**
+ * 
+ * @param {Vector2D} _start 
+ * @param {Vector2D} _end 
+ * @param {Vector2D} _point 
+ * 
+ * @return {Vector2D}
+ */
 export function ClosestPoint2DOnLine2D ( _start, _end, _point ) {
 
-  const delta = _end.SubtractVC( _start );
-  const u = ( ( _point.x - _start.x ) * delta.x + ( _point.y - _start.y ) * delta.y ) / delta.GetMagnitudeSquared();
+  const delta = R_V1.SetV( _end ).SubtractV( _start );
+  const u = 
+    ( ( _point.x - _start.x ) * delta.x + ( _point.y - _start.y ) * delta.y ) /
+    delta.GetMagnitudeSquared();
 
   if ( u < 0 ) {
 

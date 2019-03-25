@@ -7,6 +7,12 @@ import { Vector2D } from '../math/vector/vector2d';
 
 export class Graphic2D extends BatchableContainer2D {
 
+  /**
+   * 
+   * @param {number} _x 
+   * @param {number} _y 
+   * @param {Path2D} _path 
+   */
   constructor ( _x, _y, _path ) {
 
     super( _x, _y );
@@ -17,6 +23,12 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} _rc 
+   * 
+   * @return {void}
+   */
   Render ( _rc ) {
 
     this.PreRender( _rc );
@@ -49,6 +61,12 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {WebGLRenderingContext|WebGL2RenderingContext} _gl 
+   * 
+   * @return {void}
+   */
   GLRender ( _gl ) {
 
     this.GLPreRender( _gl );
@@ -85,6 +103,10 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {number[]}
+   */
   GetBufferData () {
 
     this.UpdateTransform( this.parent );
@@ -120,6 +142,10 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   UpdateInBuffer () {
 
     this.UpdateTransform( this.parent );
@@ -146,6 +172,12 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Vector2D|object} _p 
+   * 
+   * @return {boolean}
+   */
   IntersectsPoint2D ( _p ) {
 
     if ( this.interactive === false ) return false;
@@ -156,6 +188,12 @@ export class Graphic2D extends BatchableContainer2D {
   
   }
 
+  /**
+   * 
+   * @param {Path2D} _path 
+   * 
+   * @return {void}
+   */
   SetPath ( _path ) {
 
     if ( _path !== undefined ) {

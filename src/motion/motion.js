@@ -8,6 +8,15 @@ import { Nested } from '../utility';
 
 export class Motion {
 
+  /**
+   * 
+   * @param {string}        _id 
+   * @param {object}        _target 
+   * @param {string}        _propertyString 
+   * @param {number}        _value 
+   * @param {number}        _duration 
+   * @param {string?}       _easing 
+   */
   constructor ( _id, _target, _propertyString, _value, _duration, _easing ) {
 
     this.id = _id;
@@ -30,6 +39,10 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Start () {
 
     const property = this.propertyString.split( '.' );
@@ -44,6 +57,10 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Stop () {
 
     this.property = null;
@@ -56,11 +73,17 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Process () {
 
     if ( this.running === true ) {
 
-      this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
+      this.propertyObject[ this.property ] = this.easing( 
+        this.time, this.startValue, this.change, this.duration
+      );
   
       if ( ++this.time >= this.duration ) {
   
@@ -74,6 +97,15 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @param {string}  _propertyString 
+   * @param {number}  _value 
+   * @param {number}  _duration 
+   * @param {string?} _easing 
+   * 
+   * @return {void}
+   */
   Reconfigure ( _propertyString, _value, _duration, _easing ) {
 
     if ( _propertyString != null ) this.propertyString = _propertyString;
@@ -84,6 +116,12 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @param {number} _value 
+   * 
+   * @return {void}
+   */
   NewValue ( _value ) {
       
     this.value = _value;
@@ -91,6 +129,10 @@ export class Motion {
   
   }
 
+  /**
+   * 
+   * @return {void}
+   */
   Reset () {
 
     if ( this.propertyObject == null || this.property == null ) return false;

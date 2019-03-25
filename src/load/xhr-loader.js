@@ -9,6 +9,11 @@ import { DeepClone } from '../utility';
 
 export class XHRLoader {
 
+  /**
+   * 
+   * @param {object[]?} _objects 
+   * @param {Function?} _onComplete 
+   */
   constructor ( _objects, _onComplete ) {
 
     this.XHRcache = new Cache( XMLHttpRequest );
@@ -17,9 +22,9 @@ export class XHRLoader {
     this.onComplete = new Dispatcher();
     this.onNetworkError = new Dispatcher();
     this.onLoadError = new Dispatcher();
-    this.count = 0;
+    this.toLoadCount = 0;
+    this.loadedCount = 0;
     this.loading = false;
-    this.toLoad = null;
 
     if ( _onComplete != null ) {
 
@@ -31,26 +36,28 @@ export class XHRLoader {
   
   }
 
+  /**
+   * 
+   * @param {object[]?} _objects 
+   * 
+   * @return {void}
+   */
   Load ( _objects ) {
-
-    if ( this.toLoad === null ) this.toLoad = [];
-    this.toLoad.push.apply( this.toLoad, _objects );
-
+  
     if ( this.loading === false ) {
 
-      this.count = 0;
       this.loading = true;
-      this.Haul( this.count );
+      this.loadedCount = 0;
+      this.toLoadCount = 0;
     
     }
-  
-  }
 
-  Haul ( _count ) {
+    const l = _objects.length;
+    let item = _objects[ 0 ];
 
-    const item = this.toLoad[ _count ];
+    this.toLoadCount += l;
 
-    if ( item != null ) {
+    for ( var i = 0; i < _objects.length; item = _objects[ ++i ] ) {
 
       const xhr = new XMLHttpRequest();
 
@@ -75,25 +82,47 @@ export class XHRLoader {
       
       } else {
 
-        xhr.data = {
-          id: item.id
-        };
+        xhr.data = Object.create( null );
+        xhr.data.id = item.id;
       
       }
 
       xhr.send();
-    
-    } else {
 
-      this.count = 0;
-      this.loading = false;
-      this.toLoad = null;
-      this.onComplete.Dispatch( this, { XHRcache: this.XHRcache, dataCache: this.dataCache } );
-    
     }
-  
+
   }
 
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
+  OnDataLoaded ( _event ) {
+
+    const t = _event.currentTarget;
+
+    this.onXHRLoaded.Dispatch( t, { loadedCount: ++this.loadedCount } );
+    
+    if ( this.loadedCount === this.toLoadCount ) {
+
+      this.loading = false;
+      this.onComplete.Dispatch( this, { 
+        XHRcache: this.XHRcache,
+        dataCache: this.dataCache
+      } );
+    
+    }
+
+  }
+
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
   OnLoadXML ( _event ) {
 
     const t = _event.currentTarget;
@@ -107,8 +136,7 @@ export class XHRLoader {
         id: t.data.id,
         data: XMLToJSON( t.responseText, true )
       } );
-      this.onXHRLoaded.Dispatch( t, { count: this.count } );
-      this.Haul( ++this.count );
+      this.OnDataLoaded( _event );
 
       t.abort();
     
@@ -120,6 +148,12 @@ export class XHRLoader {
   
   }
 
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
   OnLoadJSON ( _event ) {
 
     const t = _event.currentTarget;
@@ -133,8 +167,7 @@ export class XHRLoader {
         id: t.data.id,
         data: JSON.parse( t.responseText )
       } );
-      this.onXHRLoaded.Dispatch( t, { count: this.count } );
-      this.Haul( ++this.count );
+      this.OnDataLoaded( _event );
 
       t.abort();
     
@@ -146,25 +179,49 @@ export class XHRLoader {
   
   }
 
+  /**
+   * 
+   * @param {Event} _event
+   * 
+   * @return {void} 
+   */
   OnNetworkError ( _event ) {
 
     this.onNetworkError.Dispatch( null, _event );
   
   }
 
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {XMLHttpRequest|null} 
+   */
   GetXHRById ( _id ) {
 
     return this.XHRcache.GetById( _id );
   
   }
 
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {object|null} 
+   */
   GetDataById ( _id ) {
 
     return this.dataCache.GetById( _id ).data;
   
   }
 
-  GetClonedDataById ( _id ) {
+  /**
+   * 
+   * @param {any} _id
+   * 
+   * @return {object|null} 
+   */
+  CloneDataById ( _id ) {
 
     return DeepClone( this.GetDataById( _id ) );
 

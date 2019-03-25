@@ -3,7 +3,7 @@ import * as nk2 from '../../src/fe.index';
 
 export default () => {
 
-  CreateDemo( 'Utilities', ( conf ) => {
+  CreateDemo( 'Utilities', () => {
 
     class Something {
 
@@ -163,7 +163,11 @@ export default () => {
 
     console.log( parser );
 
-    parser.Parse( 'myCommand --anopt someData=myData someString --op2 (JSON)myJsonData={"someJsonData":"value"}', { someStatic: 'data' } );
+    parser.Parse( 
+      'myCommand --anopt someData=myData someString --op2' + 
+      ' (JSON)myJsonData={"someJsonData":"value"}',
+      { someStatic: 'data' }
+    );
 
     if ( parser.Parse( 'what?' ) != null ) {
 
@@ -231,6 +235,20 @@ export default () => {
     console.log( flagList.Holds( colors.RED ) );
     console.log( flagList.Holds( colors.GREEN ) );
     console.log( flagList.Holds( colors.BLUE ) );
+
+    {
+
+      const notations = [];
+
+      for ( var i = 0; i < 30; ++i ) {
+
+        notations.push( nk2.Math.IntegerNotation( i, 10, '.' ) );
+      
+      }
+
+      console.log( notations );
+    
+    }
 
   } );
 

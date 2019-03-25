@@ -24,14 +24,18 @@ export default () => {
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
-    const camera = new nk2.Camera2D( new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) } );
+    const camera = new nk2.Camera2D( 
+      new nk2.Vector2D( 0, 0 ), { position: new nk2.Vector2D( 0, 0 ) }
+    );
     const scene = new nk2.VisualContainer2D( HW, HH );
     const bscene = new nk2.VisualContainer2D( HW, HH );
     const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
 
     tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
 
-    const rtpc = new nk2.Controller.ProgramController.GLRendertextureProgramController( stage.gl, nk2.Shader.RENDERTEXTURE_INVERT );
+    const rtpc = new nk2.Controller.ProgramController.GLRendertextureProgramController(
+      stage.gl, nk2.Shader.RENDERTEXTURE_INVERT 
+    );
 
     rtpc.Config( W, H, stage.gl.LINEAR );
     const sprite1 = new nk2.Sprite( 0, 0, tpc );
