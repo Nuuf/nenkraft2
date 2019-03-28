@@ -19,7 +19,8 @@ export default () => {
 
     const options = {
       canvas: c,
-      halt: false
+      halt: false,
+      mode: 'webgl2'
     };
     const stage = conf.stage = new nk2.Stage2D( options );
     const root = new nk2.VisualContainer2D( 0, 0 );
@@ -51,16 +52,29 @@ export default () => {
     } );
     ptimer.Start();
 
-    pdata.texture = nk2.Sprite.DEFAULT_TEXTURE;
+    const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
+
+    tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
+
+    pdata.texture = tpc;
     pdata.position = {
       points: positions.vertices,
       moduloWrapper: positions.vertices.length,
       indexGap: 8
-    };
+    }; 
     pdata.velocity = {
       points: velocities.vertices,
       moduloWrapper: positions.vertices.length,
-      indexGap: 4
+      indexGap: 4,
+      scalar: { xy: { min: 0.1, max: 1.9 } }
+    }; 
+    pdata.oscillation = {
+      velocity: {
+        x: { from: -20, to: 20, amplitude: 5 }
+      },
+      torque: {
+        from: -0.5, to: 0.5, amplitude: 0.1
+      }
     };
 
     camera.force.SetSame( 0.1 );

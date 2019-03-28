@@ -68,10 +68,6 @@
           "after": true
         }
       ],
-      "multiline-comment-style": [
-        "error",
-        "starred-block"
-      ],
       "eol-last": [
         "error",
         "always"

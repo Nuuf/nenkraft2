@@ -718,111 +718,113 @@ export namespace Load {
     }
 }
 export namespace Controller {
-    export interface GLProgramController {
+    export namespace ProgramController {
+        export interface GLProgramController {
 
-    }
-    declare class GLProgramController implements GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        gl: WebGLRenderingContext | WebGL2RenderingContext;
-        data: object;
-        program: WebGLProgram;
-        attributes: object;
-        uniforms: object;
-        static get LAST_USED_CONTROLLER(): GLProgramController;
-        static set LAST_USED_CONTROLLER(_value: GLProgramController);
-        Init(_vs: string, _fs: string): void;
-        CreateShader(_script: string, _type: number): WebGLShader;
-        AssignAttribute(_attribute: string): void;
-        AssignUniform(_uniform: string): void;
-        abstract Execute(): void;
-    }
-    declare class GLCircleProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        essenceBuffer: WebGLBuffer;
-        vertices: Float32Array;
-        fillColor: Color;
-        outlineColor: Color;
-        outline: number;
-        Initialise(): void;
-        Execute(_projection: Float32Array, _x: number, _y: number, _radius: number): void;
-    }
-    declare class GLDynamixTexture2DProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _units: number);
-        units: number;
-        originalTextures: Texture.BasicTexture2D[];
-        texture: WebGLTexture[];
-        essenceBuffer: WebGLBuffer[];
-        lastUnitUsed: number;
-        Initialise(): void;
-        BindBasicTexture(_texture: Texture.BasicTexture2D, _unitId?: number, _param?: number): void;
-        BindUnit(_gl: WebGLRenderingContext | WebGL2RenderingContext, _uniforms: object, _attributes: object, _unitId: number): void;
-        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array, _unitId: number): void;
-    }
-    declare class GLLine2DProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        essenceBuffer: WebGLBuffer;
-        vertices: Float32Array;
-        color: Color;
-        Initialise(): void;
-        Execute(_projection: Float32Array, _s: Vector2D, _e: Vector2D): void;
-    }
-    declare class GLPixelBatchProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        dataBuffer: WebGLBuffer;
-        previousNumberOfElement: number;
-        Initialise(): void;
-        Execute(_data: Float32Array, _numElement: number): void;
-    }
-    declare class GLRectangleProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        essenceBuffer: WebGLBuffer;
-        vertices: Float32Array;
-        fillColor: Color;
-        outlineColor: Color;
-        outline: number;
-        Initialise(): void;
-        Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number): void;
-    }
-    declare class GLRendertextureProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
-        essenceBuffer: WebGLBuffer;
-        frameBuffer: WebGLFramebuffer;
-        renderBuffer: WebGLRenderbuffer;
-        texture: WebGLTexture;
-        Initialise(): void;
-        Config(
-            _w: number, _h: number, _param?: number, 
-            _ex?: number, _ey?: number, _ew?: number, _eh?: number
-        ): void;
-        ExecuteClean(): void;
-        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array): void;
-    }
-    declare class GLTexture2DBatchProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        originalTexture: Texture.BasicTexture2D;
-        texture: WebGLTexture;
-        essenceBuffer: WebGLBuffer;
-        dataBuffer: WebGLBuffer;
-        previousNumberOfElements: number;
-        Initialise(): void;
-        BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
-        Execute(_data: Float32Array, _numberOfElements: number): void;
-    }
-    declare class GLTexture2DProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
-        originalTexture: Texture.BasicTexture2D;
-        texture: WebGLTexture;
-        essenceBuffer: WebGLBuffer;
-        Initialise(): void;
-        BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
-        Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array): void;
-    }
-    declare class GLUnProgramController extends GLProgramController {
-        constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
-        essenceBuffer: WebGLBuffer;
-        vertices: Float32Array;
-        Initialise(): void;
-        Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number, _time: number): void;
+        }
+        declare class GLProgramController implements GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            gl: WebGLRenderingContext | WebGL2RenderingContext;
+            data: object;
+            program: WebGLProgram;
+            attributes: object;
+            uniforms: object;
+            static get LAST_USED_CONTROLLER(): GLProgramController;
+            static set LAST_USED_CONTROLLER(_value: GLProgramController);
+            Init(_vs: string, _fs: string): void;
+            CreateShader(_script: string, _type: number): WebGLShader;
+            AssignAttribute(_attribute: string): void;
+            AssignUniform(_uniform: string): void;
+            abstract Execute(): void;
+        }
+        declare class GLCircleProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            essenceBuffer: WebGLBuffer;
+            vertices: Float32Array;
+            fillColor: Color;
+            outlineColor: Color;
+            outline: number;
+            Initialise(): void;
+            Execute(_projection: Float32Array, _x: number, _y: number, _radius: number): void;
+        }
+        declare class GLDynamicTexture2DProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _units: number);
+            units: number;
+            originalTextures: Texture.BasicTexture2D[];
+            texture: WebGLTexture[];
+            essenceBuffer: WebGLBuffer[];
+            lastUnitUsed: number;
+            Initialise(): void;
+            BindBasicTexture(_texture: Texture.BasicTexture2D, _unitId?: number, _param?: number): void;
+            BindUnit(_gl: WebGLRenderingContext | WebGL2RenderingContext, _uniforms: object, _attributes: object, _unitId: number): void;
+            Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array, _unitId: number): void;
+        }
+        declare class GLLine2DProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            essenceBuffer: WebGLBuffer;
+            vertices: Float32Array;
+            color: Color;
+            Initialise(): void;
+            Execute(_projection: Float32Array, _s: Vector2D, _e: Vector2D): void;
+        }
+        declare class GLPixelBatchProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            dataBuffer: WebGLBuffer;
+            previousNumberOfElement: number;
+            Initialise(): void;
+            Execute(_data: Float32Array, _numElement: number): void;
+        }
+        declare class GLRectangleProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            essenceBuffer: WebGLBuffer;
+            vertices: Float32Array;
+            fillColor: Color;
+            outlineColor: Color;
+            outline: number;
+            Initialise(): void;
+            Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number): void;
+        }
+        declare class GLRendertextureProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
+            essenceBuffer: WebGLBuffer;
+            frameBuffer: WebGLFramebuffer;
+            renderBuffer: WebGLRenderbuffer;
+            texture: WebGLTexture;
+            Initialise(): void;
+            Config(
+                _w: number, _h: number, _param?: number, 
+                _ex?: number, _ey?: number, _ew?: number, _eh?: number
+            ): void;
+            ExecuteClean(): void;
+            Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array): void;
+        }
+        declare class GLTexture2DBatchProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            originalTexture: Texture.BasicTexture2D;
+            texture: WebGLTexture;
+            essenceBuffer: WebGLBuffer;
+            dataBuffer: WebGLBuffer;
+            previousNumberOfElements: number;
+            Initialise(): void;
+            BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
+            Execute(_data: Float32Array, _numberOfElements: number): void;
+        }
+        declare class GLTexture2DProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext);
+            originalTexture: Texture.BasicTexture2D;
+            texture: WebGLTexture;
+            essenceBuffer: WebGLBuffer;
+            Initialise(): void;
+            BindBasicTexture(_texture: Texture.BasicTexture2D, _param?: number): void;
+            Execute(_projection: Float32Array, _translation: Float32Array, _transformation: Float32Array, _tint: Float32Array): void;
+        }
+        declare class GLUnProgramController extends GLProgramController {
+            constructor(_gl: WebGLRenderingContext | WebGL2RenderingContext, _un: object);
+            essenceBuffer: WebGLBuffer;
+            vertices: Float32Array;
+            Initialise(): void;
+            Execute(_projection: Float32Array, _x: number, _y: number, _w: number, _h: number, _time: number): void;
+        }   
     }
 }
 export namespace CP {
@@ -1617,6 +1619,8 @@ declare class TextureEntity2D extends BatchableContainer2D {
 declare class Stage2D extends VisualContainer2D {
     constructor(_options: object);
     canvas: HTMLCanvasElement;
+    gl: WebGLRenderingContext | WebGL2RenderingContext | null;
+    rc: CanvasRenderingContext2D | null;
     id: string | null;
     backgroundColor: string;
     clear: boolean;

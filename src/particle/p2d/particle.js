@@ -383,9 +383,9 @@ export class Particle {
 
         osc.SetOscillatingObject( 
           'torque', 
-          optOsc.torque.from,
-          optOsc.torque.to,
-          optOsc.torque.amplitude
+          MinMaxOrValue( optOsc.torque.from ),
+          MinMaxOrValue( optOsc.torque.to ),
+          MinMaxOrValue( optOsc.torque.amplitude )
         );
         
       } else {
@@ -398,9 +398,9 @@ export class Particle {
 
         osc.SetOscillatingObject( 
           'spin', 
-          optOsc.spin.from,
-          optOsc.spin.to,
-          optOsc.spin.amplitude
+          MinMaxOrValue( optOsc.spin.from ),
+          MinMaxOrValue( optOsc.spin.to ),
+          MinMaxOrValue( optOsc.spin.amplitude )
         );
         
       } else {
@@ -415,9 +415,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'velocityX', 
-            optOsc.velocity.x.from,
-            optOsc.velocity.x.to,
-            optOsc.velocity.x.amplitude
+            MinMaxOrValue( optOsc.velocity.x.from ),
+            MinMaxOrValue( optOsc.velocity.x.to ),
+            MinMaxOrValue( optOsc.velocity.x.amplitude )
           );
 
         }
@@ -431,9 +431,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'velocityY', 
-            optOsc.velocity.y.from,
-            optOsc.velocity.y.to,
-            optOsc.velocity.y.amplitude
+            MinMaxOrValue( optOsc.velocity.y.from ),
+            MinMaxOrValue( optOsc.velocity.y.to ),
+            MinMaxOrValue( optOsc.velocity.y.amplitude )
           );
 
         }
@@ -451,9 +451,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'gravityX', 
-            optOsc.gravity.x.from,
-            optOsc.gravity.x.to,
-            optOsc.gravity.x.amplitude
+            MinMaxOrValue( optOsc.gravity.x.from ),
+            MinMaxOrValue( optOsc.gravity.x.to ),
+            MinMaxOrValue( optOsc.gravity.x.amplitude )
           );
 
         } else {
@@ -466,9 +466,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'gravityY', 
-            optOsc.gravity.y.from,
-            optOsc.gravity.y.to,
-            optOsc.gravity.y.amplitude
+            MinMaxOrValue( optOsc.gravity.y.from ),
+            MinMaxOrValue( optOsc.gravity.y.to ),
+            MinMaxOrValue( optOsc.gravity.y.amplitude )
           );
 
         } else {
@@ -485,9 +485,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'accelerationX', 
-            optOsc.acceleration.x.from,
-            optOsc.acceleration.x.to,
-            optOsc.acceleration.x.amplitude
+            MinMaxOrValue( optOsc.acceleration.x.from ),
+            MinMaxOrValue( optOsc.acceleration.x.to ),
+            MinMaxOrValue( optOsc.acceleration.x.amplitude )
           );
 
         } else {
@@ -500,9 +500,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'accelerationY', 
-            optOsc.acceleration.y.from,
-            optOsc.acceleration.y.to,
-            optOsc.acceleration.y.amplitude
+            MinMaxOrValue( optOsc.acceleration.y.from ),
+            MinMaxOrValue( optOsc.acceleration.y.to ),
+            MinMaxOrValue( optOsc.acceleration.y.amplitude )
           );
 
         } else {
@@ -519,9 +519,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'growthX', 
-            optOsc.growth.x.from,
-            optOsc.growth.x.to,
-            optOsc.growth.x.amplitude
+            MinMaxOrValue( optOsc.growth.x.from ),
+            MinMaxOrValue( optOsc.growth.x.to ),
+            MinMaxOrValue( optOsc.growth.x.amplitude )
           );
 
         } else {
@@ -534,9 +534,9 @@ export class Particle {
 
           osc.SetOscillatingObject( 
             'growthY', 
-            optOsc.growth.y.from,
-            optOsc.growth.y.to,
-            optOsc.growth.y.amplitude
+            MinMaxOrValue( optOsc.growth.y.from ),
+            MinMaxOrValue( optOsc.growth.y.to ),
+            MinMaxOrValue( optOsc.growth.y.amplitude )
           );
 
         } else {
@@ -610,6 +610,33 @@ export class Particle {
         } else {
 
           _vector.y = _ry;
+        
+        }
+      
+      }
+
+      if ( _object.scalar != null ) {
+
+        if ( _object.scalar.xy != null ) {
+          
+          _vector.Multiply( 
+            MinMaxOrValue( _object.scalar.xy ), 
+            MinMaxOrValue( _object.scalar.xy )
+          );
+
+        } else {
+
+          if ( _object.scalar.x != null ) {
+
+            _vector.x *= MinMaxOrValue( _object.scalar.x );
+          
+          }
+
+          if ( _object.scalar.y != null ) {
+
+            _vector.y *= MinMaxOrValue( _object.scalar.y );
+
+          }
         
         }
       
