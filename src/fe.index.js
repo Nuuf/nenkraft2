@@ -8,7 +8,7 @@ import * as Collision from './math/collision';
 import * as Geom from './geom';
 import * as Path from './path';
 import * as Style from './style';
-import * as Time from './time/time.fe';
+import * as Time from './time';
 import * as Shader from './shader/';
 import * as Load from './load';
 import * as Controller from './controller';

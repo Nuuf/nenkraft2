@@ -5,7 +5,7 @@ import * as Cipher from './utility/cipher';
 import * as Ease from './math/ease';
 import * as Collision from './math/collision';
 import * as Geom from './geom';
-import * as Time from './time/time.be';
+import * as Time from './time';
 import * as CP from './cp';
 import * as Motion from './motion';
 import * as Packing from './math/packing';

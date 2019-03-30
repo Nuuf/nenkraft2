@@ -2,7 +2,7 @@
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-import { Ticker } from '../time/ticker/ticker';
+import { Ticker } from '../time/ticker';
 import { Stage2D } from './stage2d';
 
 export class Stadium {

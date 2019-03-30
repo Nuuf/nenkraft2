@@ -123,21 +123,7 @@ export namespace Time {
         Process(): void;
     }
     declare class ServerTicker {
-        constructor(_onProcess: Function, _rate?: number, _halt?: boolean);
-        onProcess: Function;
-        intervalId: number | null;
-        delta: number;
-        then: number;
-        now: number;
-        desiredRate: number;
-        static get LOG(): boolean;
-        static set LOG(_value: boolean);
-        Process(): void;
-        ComputeDelta(): number;
-        GetTPS(): number;
-        SetDesiredRate(_rate?: number): void;
-        Start(_force?: boolean): void;
-        Stop(): void;
+
     }
 }
 export const CharacterSets: string[];

@@ -118,7 +118,7 @@ export default () => {
 
     }, timer );
 
-    ticker.Start();
+    ticker.StartAccurate();
     timer.Start( 120 );
 
     function Update () {

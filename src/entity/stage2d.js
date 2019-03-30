@@ -4,7 +4,7 @@
 
 import { VisualContainer2D } from './visual-container2d';
 import { Dispatcher } from '../event/dispatcher';
-import { Ticker } from '../time/ticker/ticker';
+import { Ticker } from '../time/ticker';
 import { DEFAULT } from '../style/gco';
 import { Keyboard, Mouse, Touch } from '../input';
 
