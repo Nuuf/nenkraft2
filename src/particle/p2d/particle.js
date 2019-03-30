@@ -619,10 +619,9 @@ export class Particle {
 
         if ( _object.scalar.xy != null ) {
           
-          _vector.Multiply( 
-            MinMaxOrValue( _object.scalar.xy ), 
-            MinMaxOrValue( _object.scalar.xy )
-          );
+          const scalar = MinMaxOrValue( _object.scalar.xy );
+
+          _vector.Multiply( scalar, scalar );
 
         } else {
 

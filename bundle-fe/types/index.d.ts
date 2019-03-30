@@ -1636,6 +1636,7 @@ declare class Stage2D extends VisualContainer2D {
     mouse: Input.Mouse | null;
     touch: Input.Touch | null;
     keyboard: Input.Keyboard | null;
+    ticker: Time.Ticker;
     PreRender(_rc: CanvasRenderingContext2D): void;
     GLConfig(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
     GLPreRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
