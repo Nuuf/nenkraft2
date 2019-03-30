@@ -238,21 +238,27 @@ export namespace Time {
     declare class Ticker {
         constructor(_onProcess: Function, _rate?: number, _halt?: boolean);
         onProcess: Function;
-        intervalId: number | null;
-        afId: number | null;
+        intervalId: any | null;
+        afId: any | null;
+        immediateId: any | null;
+        timeoutId: any | null;
         delta: number;
         then: number;
         now: number;
         desiredRate: number;
+        type: string;
+        issuedStop: boolean;
         static get LOG(): boolean;
         static set LOG(_value: boolean);
         Process(): void;
+        ProcessAccurate(): void;
         ProcessAF(): void;
         ComputeDelta(): number;
         GetTPS(): number;
         SetDesiredRate(_rate?: number): void;
-        Start(_force?: boolean): void;
-        StartAF(_force?: boolean): void;
+        Start(): void;
+        StartAccurate(): void;
+        StartAF(): void;
         Stop(): void;
     }
 }

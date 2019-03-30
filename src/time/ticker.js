@@ -24,6 +24,7 @@ export class Ticker {
     this.now = 0;
     this.desiredRate = 0;
     this.type = null;
+    this.issuedStop = false;
 
     this.ProcessAccurate = this.ProcessAccurate.bind( this );
 
@@ -72,6 +73,8 @@ export class Ticker {
    * @return {void}
    */
   ProcessAccurate () {
+
+    if ( this.issuedStop === true ) return;
 
     this.now = Date.now();
 
@@ -181,6 +184,8 @@ export class Ticker {
 
     if ( this.IsRunning() ) return null;
 
+    this.issuedStop = false;
+
     this.now = this.then = Date.now();
     this.timeoutId = setTimeout( this.ProcessAccurate );
     this.type = PS_ACCURATE_INTERVAL;
@@ -245,6 +250,8 @@ export class Ticker {
     
     }
 
+    this.issuedStop = true;
+
     this.type = null;
   
   }
@@ -252,10 +259,10 @@ export class Ticker {
 }
 
 // Private Static ----->
+let PS_LOG = true;
 const PS_RAF = 'RAF';
 const PS_INTERVAL = 'INTERVAL';
 const PS_ACCURATE_INTERVAL = 'ACCURATE INTERVAL';
-const PS_LOG = true;
 const PS_LOG_CSS = 
   'background-color:#304860;font-family:Arial;font-size:18px;font-weight:900;padding:5px;';
 const Log = function () {
