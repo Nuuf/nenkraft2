@@ -14,6 +14,7 @@ module.exports = function () {
       path: path.resolve( __dirname, '../dev' ),
       filename: '[name].js'
     },
+    devtool: 'source-map',
     externals: {
 
     },

@@ -3,6 +3,7 @@
  */
 
 import { VisualContainer2D } from './visual-container2d';
+import { Matrix2D } from '../math/matrix/matrix2d';
 import { Dispatcher } from '../event/dispatcher';
 import { Ticker } from '../time/ticker';
 import { DEFAULT } from '../style/gco';
@@ -32,6 +33,7 @@ export class Stage2D extends VisualContainer2D {
     this.clear = true;
     this.fill = true;
     this.usingWebGL = false;
+    this.glConvMatrix = new Matrix2D();
     this.canvasManager = null;
     this.mouse = null;
     this.touch = null;
@@ -193,6 +195,10 @@ export class Stage2D extends VisualContainer2D {
     this.position.Set( -1, 1 );
     this.scale.Set( 2 / this.w, -2 / this.h );
     this.UpdateTransform();
+    this.glConvMatrix.SetTransform(
+      this.w / 2, this.h / 2, 
+      1 / this.scale.x, 1 / this.scale.y
+    );
     _gl.viewport( 0, 0, this.w, this.h );
     _gl.enable( _gl.BLEND );
     _gl.disable( _gl.DEPTH_TEST );
@@ -297,10 +303,10 @@ export class Stage2D extends VisualContainer2D {
   Destroy () {
 
     this.Dump();
-    if ( this.keyboard !== null ) this.keyboard.Destroy();
-    if ( this.mouse !== null ) this.mouse.Destroy();
-    if ( this.touch !== null ) this.touch.Destroy();
-    if ( this.ticker !== null ) this.ticker.Stop();
+    if ( this.keyboard != null ) this.keyboard.Destroy();
+    if ( this.mouse != null ) this.mouse.Destroy();
+    if ( this.touch != null ) this.touch.Destroy();
+    if ( this.ticker != null ) this.ticker.Stop();
 
     return this;
   

@@ -129,6 +129,26 @@ export class Matrix2D {
 
   /**
    * 
+   * @param {Matrix2D} _matrixA
+   * @param {Matrix2D} _matrixB
+   * 
+   * @return {this}
+   */
+  Multiply ( _matrixA, _matrixB ) {
+
+    this.a = _matrixA.a * _matrixB.a + _matrixA.b * _matrixB.c;
+    this.b = _matrixA.a * _matrixB.b + _matrixA.b * _matrixB.d;
+    this.c = _matrixA.c * _matrixB.a + _matrixA.d * _matrixB.c;
+    this.d = _matrixA.c * _matrixB.b + _matrixA.d * _matrixB.d;
+    this.e = _matrixA.e * _matrixB.a + _matrixA.f * _matrixB.c + _matrixB.e;
+    this.f = _matrixA.e * _matrixB.b + _matrixA.f * _matrixB.d + _matrixB.f;
+
+    return this;
+
+  }
+
+  /**
+   * 
    * @param {number} _x 
    * @param {number} _y 
    * 
@@ -336,5 +356,5 @@ export class Matrix2D {
 }
 
 // Private Static ----->
-const PS_EPSILON = 0.00001;
+const PS_EPSILON = 0.01;
 // <----- Private Static

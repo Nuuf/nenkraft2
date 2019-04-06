@@ -71,11 +71,11 @@ export class Transform2D {
 
   /**
    * 
-   * @param {Transform2D} _transform 
+   * @param {Matrix2D} _matrix 
    * 
    * @return {this}
    */
-  UpdateGlobal ( _transform ) {
+  UpdateGlobal ( _matrix ) {
 
     const localTransform = this.localTransform;
     const globalTransform = this.globalTransform;
@@ -91,14 +91,14 @@ export class Transform2D {
     localTransform.e = position.x - pivot.x * localTransform.a + pivot.y * localTransform.c;
     localTransform.f = position.y - pivot.y * localTransform.b + pivot.y * localTransform.d;
 
-    globalTransform.a = localTransform.a * _transform.a + localTransform.b * _transform.c;
-    globalTransform.b = localTransform.a * _transform.b + localTransform.b * _transform.d;
-    globalTransform.c = localTransform.c * _transform.a + localTransform.d * _transform.c;
-    globalTransform.d = localTransform.c * _transform.b + localTransform.d * _transform.d;
+    globalTransform.a = localTransform.a * _matrix.a + localTransform.b * _matrix.c;
+    globalTransform.b = localTransform.a * _matrix.b + localTransform.b * _matrix.d;
+    globalTransform.c = localTransform.c * _matrix.a + localTransform.d * _matrix.c;
+    globalTransform.d = localTransform.c * _matrix.b + localTransform.d * _matrix.d;
     globalTransform.e = 
-      localTransform.e * _transform.a + localTransform.f * _transform.c + _transform.e;
+      localTransform.e * _matrix.a + localTransform.f * _matrix.c + _matrix.e;
     globalTransform.f = 
-      localTransform.e * _transform.b + localTransform.f * _transform.d + _transform.f;
+      localTransform.e * _matrix.b + localTransform.f * _matrix.d + _matrix.f;
 
     return this;
   

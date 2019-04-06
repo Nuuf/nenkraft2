@@ -3,11 +3,14 @@
  */
 
 import { Transform2D } from '../math/transform/transform2d';
+import { Matrix2D } from '../math/matrix/matrix2d';
 import { Vector2D } from '../math/vector/vector2d';
 import { Bounds2D } from '../math/bounds/bounds2d';
 import { ArrayHandler } from '../utility/array-handler';
 
 const Abs = Math.abs;
+const Cos = Math.cos;
+const Sin = Math.sin;
 
 export class CoreEntity2D {
 
@@ -247,8 +250,8 @@ export class CoreEntity2D {
     return this.bounds.ComputeLocal( 
       this.x,
       this.y,
-      this.width,
-      this.height,
+      Abs( this.width ),
+      Abs( this.height ),
       _anchor,
       this
     );
@@ -257,23 +260,37 @@ export class CoreEntity2D {
 
   /**
    * 
-   * @param {Vector2D} _anchor 
-   * @param {Matrix2D} _matrix 
+   * @param {Vector2D} _anchor
+   * @param {Matrix2D} _conversion
    * 
    * @return {AABB2D}
    */
-  ComputeGlobalBounds ( _anchor, _matrix ) {
+  ComputeGlobalBounds ( _anchor, _conversion ) {
 
-    const gt = this.transform.globalTransform;
+    if ( _conversion ) {
+
+      PS_M.Multiply( this.transform.globalTransform, _conversion );
+      PS_M.Decompose( PS_T );
+    
+    } else {
+
+      this.transform.globalTransform.Decompose( PS_T );
+    
+    }
+
+    const r = PS_T.rotation;
+    const pos = PS_T.position;
+    const scale = PS_T.scale;
 
     return this.bounds.ComputeGlobal( 
-      gt.e,
-      gt.f,
-      Abs( this.w * gt.a ),
-      Abs( this.h * gt.d ),
+      pos.x,
+      pos.y,
+      Abs( this.w * scale.x * Cos( r ) ) + 
+      Abs( this.h * scale.y * Sin( r ) ),
+      Abs( this.w * scale.x * Sin( r ) ) +
+      Abs( this.h * scale.y * Cos( r ) ),
       _anchor,
-      this,
-      _matrix
+      this
     );
   
   }
@@ -322,4 +339,6 @@ export class CoreEntity2D {
 
 // Private Static ----->
 const PS_NULL_TRANSFORM = new Transform2D();
+const PS_T = new Transform2D();
+const PS_M = new Matrix2D();
 // <----- Private Static

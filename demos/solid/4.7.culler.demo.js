@@ -29,6 +29,11 @@ export default () => {
     );
     const scene = new nk2.VisualContainer2D( HW, HH );
     const culler = new nk2.Culler2D( 0, 0, W, H );
+
+    culler.conversionMatrix = stage.glConvMatrix;
+    const dragStart = new nk2.Vector2D( 0, 0 );
+    const dragOffset = new nk2.Vector2D( 0, 0 );
+    let mouseIsDown = false;
     const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
 
     tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
@@ -38,7 +43,6 @@ export default () => {
     sprite.UpdateTextureTransform();
 
     culler.BindContainer( scene );
-    culler.SetRootMatrix( stage.transform.globalTransform );
     culler.onIn.Add( ( event ) => {
 
       event.target.display = true;
@@ -70,18 +74,34 @@ export default () => {
 
     console.log( culler );
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
+    // stage.mouse.AddOffset( scene ).AddOffset( camera );
 
     stage.onProcess.Add( () => {
 
-      camera.Process();
+      // camera.Process();
       culler.Process();
     
     } );
 
     stage.mouse.onDown.Add( ( event ) => {
 
-      camera.target.position.SetV( event.data.position );
+      mouseIsDown = true;
+      dragStart.SetV( event.data.position );
+      dragOffset.SetV( camera.position );
+    
+    } );
+    stage.mouse.onUp.Add( () => {
+
+      mouseIsDown = false;
+    
+    } );
+    stage.mouse.onMove.Add( ( event ) => {
+
+      if ( mouseIsDown ) {
+
+        camera.position.SetV( event.data.position ).AddV( dragOffset ).SubtractV( dragStart );
+      
+      }
 
     } );
 

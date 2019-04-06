@@ -844,7 +844,7 @@ declare class CoreEntity2D implements Entity {
     RequestTransformUpdate(): this;
     ComputeGlobalPosition(): Vector2D;
     ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;
-    ComputeGlobalBounds(_anchor: Vector2D, _matrix: Matrix2D): Geom.AABB2D;
+    ComputeGlobalBounds(_anchor: Vector2D, _conversion: Matrix2D): Geom.AABB2D;
     AHCreate(): this;
     AHIn(_id: string): this;
     AHOut(_id: string): this;
@@ -878,10 +878,10 @@ declare class Culler2D {
     bounds: Geom.AABB2D;
     container: Container;
     entities: Entity[];
-    rootMatrix: Matrix2D;
+    conversionMatrix: Matrix2D | null;
     onOut: Event.Dispatcher;
     onIn: Event.Dispatcher;
     BindContainer(_container: Container): this;
-    SetRootMatrix(_matrix: Matrix2D): this;
+    SetConversionMatrix(_matrix: Matrix2D): this;
     Process(): void;
 }

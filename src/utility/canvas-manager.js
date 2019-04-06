@@ -165,8 +165,8 @@ export class CanvasManager {
   BindCuller ( _culler ) {
 
     this.culler = _culler;
-    this.cullerAabbOrig = new AABB2D( 0, 0, 0, 0 );
-    this.cullerAabbOrig.SetC( _culler.bounds );
+    this.cullerAabbOrig = new AABB2D( 0, 0, 0, 0 )
+      .SetC( _culler.bounds );
 
     return this;
 

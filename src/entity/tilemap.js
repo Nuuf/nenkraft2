@@ -237,49 +237,27 @@ export class Tilemap extends TextureEntity2D {
     const tileW = this.tileW;
     const tileH = this.tileH;
     const culler = this.culler;
-    const cBoundsTL = culler.bounds.tl;
-    const cBoundsBR = culler.bounds.br;
-    const rme = culler.rootMatrix.e;
-    const rmf = culler.rootMatrix.f;
-    const rma = culler.rootMatrix.a;
-    const rmd = culler.rootMatrix.d;
+    const cBounds = culler.bounds;
+    const cm = culler.conversionMatrix;
     let tile = tiles[ 0 ];
-    let tgpos = null;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 
       tile.ProcessTransform( this );
 
-      tgpos = tile.ComputeGlobalPosition();
+      if ( cBounds.IntersectsAABB2D( tile.ComputeGlobalBounds( null, cm ) ) ) {
 
-      tgpos.Subtract( rme, rmf );
-      tgpos.Divide( rma, rmd );
+        tile.transform.ApplyGlobal( _rc );
 
-      /*
-       * w & h are disposed as a simple performance "boost"
-       * and should be applied in the culler bounds
-       */
-
-      if ( 
-        tgpos.x > cBoundsBR.x ||
-        tgpos.y > cBoundsBR.y ||
-        tgpos.x < cBoundsTL.x ||
-        tgpos.y < cBoundsTL.y
-      ) {
-
-        continue;
+        _rc.drawImage(
+          image, 
+          tile.clipX, tile.clipY,
+          tileW, tileH,
+          tile.textureTranslation.e, tile.textureTranslation.f,
+          tileW, tileH
+        );
       
       }
-
-      tile.transform.ApplyGlobal( _rc );
-
-      _rc.drawImage(
-        image, 
-        tile.clipX, tile.clipY,
-        tileW, tileH,
-        tile.textureTranslation.e, tile.textureTranslation.f,
-        tileW, tileH
-      );
 
     }
   
@@ -329,42 +307,25 @@ export class Tilemap extends TextureEntity2D {
     const tint = this.tint.channel;
     const tiles = this.tiles;
     const culler = this.culler;
-    const cBoundsTL = culler.bounds.tl;
-    const cBoundsBR = culler.bounds.br;
-    const rme = culler.rootMatrix.e;
-    const rmf = culler.rootMatrix.f;
-    const rma = culler.rootMatrix.a;
-    const rmd = culler.rootMatrix.d;
+    const cBounds = culler.bounds;
+    const cm = culler.conversionMatrix;
     let tile = tiles[ 0 ];
-    let tgpos = null;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 
       tile.ProcessTransform( this );
 
-      tgpos = tile.ComputeGlobalPosition(); 
+      if ( cBounds.IntersectsAABB2D( tile.ComputeGlobalBounds( null, cm ) ) ) {
 
-      tgpos.Subtract( rme, rmf );
-      tgpos.Divide( rma, rmd );
-
-      if ( 
-        tgpos.x > cBoundsBR.x ||
-        tgpos.y > cBoundsBR.y ||
-        tgpos.x < cBoundsTL.x ||
-        tgpos.y < cBoundsTL.y
-      ) {
-
-        continue;
+        pc.Execute(
+          tile.transform.globalTransform.AsArray( true ),
+          tile.textureTranslation.AsArray( true ),
+          tile.textureTransformation.AsArray( true ),
+          tint,
+          uniformId
+        );
       
       }
-
-      pc.Execute(
-        tile.transform.globalTransform.AsArray( true ),
-        tile.textureTranslation.AsArray( true ),
-        tile.textureTransformation.AsArray( true ),
-        tint,
-        uniformId
-      );
 
     }
   

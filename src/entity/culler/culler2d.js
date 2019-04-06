@@ -15,11 +15,11 @@ export class Culler2D {
    * @param {number} _bry 
    */
   constructor ( _tlx, _tly, _brx, _bry ) {
-  
+
     this.bounds = new AABB2D( _tlx, _tly, _brx, _bry );
     this.container = null;
     this.entities = null;
-    this.rootMatrix = null;
+    this.conversionMatrix = null;
     this.onOut = new Dispatcher();
     this.onIn = new Dispatcher();
 
@@ -42,16 +42,16 @@ export class Culler2D {
 
   /**
    * 
-   * @param {Matrix2D} _matrix 
+   * @param {Matrix2D} _matrix
    * 
-   * @return {this}
+   * @return {this} 
    */
-  SetRootMatrix ( _matrix ) {
+  SetConversionMatrix ( _matrix ) {
 
-    this.rootMatrix = _matrix;
+    this.conversionMatrix = _matrix;
 
     return this;
-
+  
   }
 
   /**
@@ -63,13 +63,13 @@ export class Culler2D {
     const entities = this.entities;
     let entity = entities[ 0 ];
     const bounds = this.bounds;
-    const rm = this.rootMatrix;
+    const cm = this.conversionMatrix;
 
     for ( var i = 0; i < entities.length; entity = entities[ ++i ] ) {
-    
-      entity.ComputeGlobalBounds( entity.anchor, rm );
 
-      if ( bounds.IntersectsAABB2D( entity.bounds.global ) === false ) {
+      if ( bounds.IntersectsAABB2D( 
+        entity.ComputeGlobalBounds( entity.anchor, cm )
+      ) === false ) {
 
         if ( entity.__inside__ !== false ) {
 

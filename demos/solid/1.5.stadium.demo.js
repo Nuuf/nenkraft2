@@ -57,8 +57,6 @@ export default () => {
 
       child.position.AddV( child.data.velocity );
       child.data.velocity.Rotate( child.data.torque );
-
-      // console.log( child.position.y );
     
     }
 
