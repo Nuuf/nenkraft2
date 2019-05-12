@@ -66,6 +66,8 @@ export namespace Utility {
     export function IsInteger(_value: any): boolean;
     export function IsFloat(_value: any): boolean;
     export function IsArray(_value: any): boolean;
+    export function IsArray(_value: any): boolean;
+    export function IsObject(_value: any): boolean;
     export function Sign(_value: number, _1if0?: boolean): number;
     export function IsBitSet(_bit: number, _n: number): boolean;
     export function SetBit(_bit: number, _n: number): number;
@@ -978,6 +980,7 @@ export namespace Particle {
             initialScale: Vector2D;
             fade: boolean;
             deflate: boolean;
+            decelerate: boolean;
             gravity: Vector2D;
             lifespan: number;
             lifespanTotal: number;
@@ -1123,9 +1126,89 @@ export namespace Input {
         element: DOMElement;
         onDown: Event.Dispatcher;
         onUp: Event.Dispatcher;
+        keys: Key[];
+        keysToProcess: Key[];
         OnKeyDown(_event: any): void;
         OnKeyUP(_event: any): void;
         Destroy(): this;
+        Process(): void;
+        KeyCodeBeingCaptured(_code: number): boolean;
+        KeyCodeBeingProcessed(_code: number): boolean;
+        GetKey(_code: number): Key;
+        Capture(...arguments: Key): void;
+        NoProcessCapture(...arguments: Key): void;
+        Release(...arguments: Key): void;
+        ReleaseAll(): void;
+    }
+    declare class Key {
+        constructor(_code: number);
+        code: number;
+        duration: number;
+        isDown: boolean;
+        repetitions: number;
+        repetitionsTimer: number;
+        repetitionsSpeed: number;
+        static get ARROW_LEFT: number;
+        static get ARROW_UP: number;
+        static get ARROW_RIGHT: number;
+        static get ARROW_BOTTOM: number;
+        static get SHIFT: number;
+        static get SPACEBAR: number;
+        static get BACKSPACE: number;
+        static get ESCAPE: number;
+        static get ENTER: number;
+        static get TAB: number;
+        static get ALT: number;
+        static get CONTROL: number;
+        static get FUNCTION1: number;
+        static get FUNCTION2: number;
+        static get FUNCTION3: number;
+        static get FUNCTION4: number;
+        static get FUNCTION5: number;
+        static get FUNCTION6: number;
+        static get FUNCTION7: number;
+        static get FUNCTION8: number;
+        static get FUNCTION9: number;
+        static get FUNCTION10: number;
+        static get FUNCTION11: number;
+        static get FUNCTION12: number;
+        static get A: number;
+        static get B: number;
+        static get C: number;
+        static get D: number;
+        static get E: number;
+        static get F: number;
+        static get G: number;
+        static get H: number;
+        static get I: number;
+        static get J: number;
+        static get K: number;
+        static get L: number;
+        static get M: number;
+        static get N: number;
+        static get O: number;
+        static get P: number;
+        static get Q: number;
+        static get R: number;
+        static get S: number;
+        static get T: number;
+        static get U: number;
+        static get V: number;
+        static get W: number;
+        static get X: number;
+        static get Y: number;
+        static get Z: number;
+        static get NUM0: number;
+        static get NUM1: number;
+        static get NUM2: number;
+        static get NUM3: number;
+        static get NUM4: number;
+        static get NUM5: number;
+        static get NUM6: number;
+        static get NUM7: number;
+        static get NUM8: number;
+        static get NUM9: number;
+        Reset(): void;
     }
     declare class Mouse {
         constructor(_element: DOMElement, _offsetX: number, _offsetY: number);
@@ -1139,6 +1222,7 @@ export namespace Input {
         onDown: Event.Dispatcher;
         onUp: Event.Dispatcher;
         onLeave: Event.Dispatcher;
+        onEnter: Event.Dispatcher;
         onWheel: Event.Dispatcher;
         get x(): number;
         get y(): number;
@@ -1146,6 +1230,7 @@ export namespace Input {
         OnDown(_event: any): void;
         OnUp(_event: any): void;
         OnLeave(_event: any): void;
+        OnEnter(_event: any): void;
         OnWheel(_event: any): void;
         CalculatePosition(_x: number, _y: number): void;
         AddOffset(_offset: Vector2D): this;
@@ -1415,11 +1500,11 @@ declare class Vector2D {
     GetReflectionV(_p: object | Vector2D | Math.Point): Vector2D;
     GetReflection(_x: number, _y: number): Vector2D;
     Store(): this;
-    AddTo(_Vectors: Vector2D[]): this;
+    AddTo(_vectors: Vector2D[]): this;
     Floor(): this;
     Ceil(): this;
     Round(): this;
-    GetMinMaxDot(_Vectors: Vector2D[]): Vector2D;
+    GetMinMaxDot(_vectors: Vector2D[]): Vector2D;
 }
 declare class Matrix2D {
     constructor();
@@ -1434,10 +1519,10 @@ declare class Matrix2D {
     Copy(): Matrix2D;
     Set(_a: number, _b: number, _c: number, _d: number, _e: number, _f: number): this;
     SetTransform(
-        _x?: number, _y?: number, 
-        _sx?: number, _sy?: number, 
-        _r?: number, _skx?: number, _sky?: number, 
-        _px?: number, _py?: number
+         _x?: number,   _y?: number, 
+        _sx?: number,  _sy?: number, 
+         _r?: number, _skx?: number, _sky?: number, 
+        _px?: number,  _py?: number
     ): this;
     Translate(_x: number, _y: number): this;
     TranslateTo(_x: number, _y: number): this;
@@ -1534,8 +1619,8 @@ declare class CoreEntity2D implements Entity {
     set width(_value: number);
     get height(): number;
     set height(_value: number);
-    UpdateTransform(_parent: any): void;
-    ProcessTransform(_parent: any): void;
+    UpdateTransform(_parent: Entity): void;
+    ProcessTransform(_parent: Entity): void;
     RequestTransformUpdate(): this;
     ComputeGlobalPosition(): Vector2D;
     ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;
@@ -1650,8 +1735,6 @@ declare class Stage2D extends VisualContainer2D {
 declare class Stadium {
     constructor(_options?: object);
     stages: Stage2D[];
-    currentStage: Stage2D | null;
-    onlyCurrent: boolean;
     options: object | null;
     ticker: Time.Ticker;
     SetOptions(_options?: object): this;

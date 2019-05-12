@@ -8,7 +8,7 @@ export class QuadtreeNode {
 
   /**
    * 
-   * @param {AABB2D} _aabb 
+   * @param {AABB2D}  _aabb 
    * @param {integer} _level 
    * @param {integer} _objCap 
    * @param {integer} _levelCap 
@@ -60,7 +60,7 @@ export class QuadtreeNode {
 
   /**
    * 
-   * @param {AABB2D} _aabb 
+   * @param {AABB2D}  _aabb 
    * @param {integer} _level 
    * @param {integer} _objCap 
    * @param {integer} _levelCap 

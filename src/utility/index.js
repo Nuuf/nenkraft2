@@ -125,6 +125,30 @@ export function IsArray ( _value ) {
 
 /**
  * 
+ * @param {any} _value
+ * 
+ * @return {boolean} 
+ */
+export function IsObject ( _value ) {
+
+  return Object.prototype.toString.call( _value ) === '[object Object]';
+
+}
+
+/**
+ * 
+ * @param {any} _value
+ * 
+ * @return {boolean} 
+ */
+export function IsFunction ( _value ) {
+
+  return Object.prototype.toString.call( _value ) === '[object Function]';
+
+}
+
+/**
+ * 
  * @param {number}   _value 
  * @param {boolean?} _1If0 
  * 
@@ -707,11 +731,9 @@ export function CreateIteratorArgs ( _args, _pre, _post ) {
  */
 export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
-  let arg;
+  let arg = _args[ 0 ];
 
-  for ( var i = 0; i < _args.length; ++i ) {
-
-    arg = _args[ i ];
+  for ( var i = 0; i < _args.length; arg = _args[ ++i ] ) {
 
     if ( typeof arg === 'string' ) {
 
@@ -736,9 +758,7 @@ export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
  */
 export function AssignIfUndefined ( _o1, _o2 ) {
 
-  let key;
-
-  for ( key in _o1 ) {
+  for ( var key in _o1 ) {
 
     if ( _o1.hasOwnProperty( key ) ) {
   
@@ -751,6 +771,50 @@ export function AssignIfUndefined ( _o1, _o2 ) {
     }
       
   }
+
+}
+
+export function ValidateWithSchema ( _obj, _schema ) {
+
+  let valid = true;
+  let key;
+
+  for ( key in _schema ) {
+
+    if ( _schema[ key ] != null ) {
+      
+      if ( _schema[ key ].required === true && _obj[ key ] == null ) {
+
+        console.error( 'Key: ' + key + ' is required!' );
+        valid = false;
+      
+      }
+
+    }
+
+  }
+
+  for ( key in _obj ) {
+
+    if ( _obj[ key ] != null ) {
+
+      if ( _schema[ key ] == null ) {
+
+        console.error( 'Unknown key: ' + key );
+        valid = false;
+    
+      } else if ( _schema[ key ].typeCheck( _obj[ key ] ) === false ) {
+      
+        console.error( 'Type check failed for key: ' + key );
+        valid = false;
+
+      }
+    
+    }
+
+  }
+
+  return valid;
 
 }
 

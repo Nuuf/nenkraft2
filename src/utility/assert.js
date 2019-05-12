@@ -4,6 +4,8 @@
 
 'use strict';
 
+import { IsArray } from './';
+
 /**
  * 
  * @param {any}      _data 
@@ -128,9 +130,9 @@ function IsSameType ( _data, _value, _compare ) {
 
   let failed = false;
 
-  if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+  if ( IsArray( _data ) || IsArray( _value ) ) {
 
-    if ( !Array.isArray( _data ) !== !Array.isArray( _value ) ) {
+    if ( !IsArray( _data ) !== !IsArray( _value ) ) {
 
       failed = true;
 
@@ -178,9 +180,9 @@ function IsNotSameType ( _data, _value, _compare ) {
 
   let failed = false;
 
-  if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+  if ( IsArray( _data ) || IsArray( _value ) ) {
 
-    if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
+    if ( IsArray( _data ) && ( IsArray( _value ) ) ) {
 
       failed = true;
       

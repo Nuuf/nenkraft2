@@ -14,8 +14,6 @@ export class Stadium {
   constructor ( _options ) {
 
     this.stages = [];
-    this.currentStage = null;
-    this.onlyCurrent = false;
     this.options = null;
     this.ticker = new Ticker( this.Process.bind( this ), 60, _options.halt );
   

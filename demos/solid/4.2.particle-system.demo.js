@@ -29,9 +29,11 @@ export default () => {
     );
     const scene = new nk2.VisualContainer2D( HW, HH );
     const particleSystem = new nk2.Particle.P2D.System( 0, 0 );
-    const pdata = window.testData.xhrloader.CloneDataById( 'particleExplosion' );
     const ptimer = new nk2.Time.Timer( 10 );
     const positions = new nk2.Geom.Polygon2D();
+    const colorsTexture = window.testData.imgloader.GetBasicTextureById( 'colors' );
+    let particleExplosionData = window.testData.xhrloader.CloneDataById( 'particleExplosion' );
+    let particleFlareData = window.testData.xhrloader.CloneDataById( 'particleFlare' );
 
     nk2.Geom.PolygonConstruction.Cyclic2D( positions, 0, 0, 400, 72 );
 
@@ -46,29 +48,35 @@ export default () => {
 
     ptimer.onFinish.Add( () => {
 
-      particleSystem.Emit( pdata );
+      particleSystem.Emit( particleExplosionData );
+      particleSystem.Emit( particleFlareData );
       ptimer.Start();
     
     } );
     ptimer.Start();
 
-    const tpc = new nk2.Controller.ProgramController.GLTexture2DProgramController( stage.gl );
+    const tpc = new nk2
+      .Controller
+      .ProgramController
+      .GLDynamicTexture2DProgramController( stage.gl, 2 );
 
-    tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE );
+    tpc.BindBasicTexture( nk2.Sprite.DEFAULT_TEXTURE, 0 );
+    tpc.BindBasicTexture( colorsTexture, 1 );
 
-    pdata.texture = tpc;
-    pdata.position = {
+    particleExplosionData.texture = tpc;
+    particleExplosionData.unitId = 0;
+    particleExplosionData.position = {
       points: positions.vertices,
       moduloWrapper: positions.vertices.length,
       indexGap: 8
     }; 
-    pdata.velocity = {
+    particleExplosionData.velocity = {
       points: velocities.vertices,
       moduloWrapper: positions.vertices.length,
       indexGap: 4,
       scalar: { xy: { min: 0.1, max: 1.9 } }
-    }; 
-    pdata.oscillation = {
+    };
+    particleExplosionData.oscillation = {
       velocity: {
         x: { from: -20, to: 20, amplitude: 5 }
       },
@@ -76,6 +84,23 @@ export default () => {
         from: -0.5, to: 0.5, amplitude: 0.1
       }
     };
+
+    particleFlareData.texture = tpc;
+    particleFlareData.unitId = 1;
+    particleFlareData.position = {
+      x: 0, y: HH
+    };
+    particleFlareData.frames = nk2
+      .Utility
+      .GenerateSequence( 0, 16, 1, 1 )
+      .map( ( val, index ) => {
+
+        return new nk2.Animator.Frame( 64 * index, 0, 64, 64 );
+    
+      } );
+
+    particleExplosionData = nk2.Particle.P2D.Data.Validate( particleExplosionData );
+    particleFlareData = nk2.Particle.P2D.Data.Validate( particleFlareData );
 
     camera.force.SetSame( 0.1 );
     stage

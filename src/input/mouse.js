@@ -26,18 +26,21 @@ export class Mouse {
     this.___bound___OnDown = this.OnDown.bind( this ); 
     this.___bound___OnUp = this.OnUp.bind( this );
     this.___bound___OnLeave = this.OnLeave.bind( this );
+    this.___bound___OnEnter = this.OnEnter.bind( this );
     this.___bound___OnWheel = this.OnWheel.bind( this );
 
     this.element.addEventListener( 'mousemove', this.___bound___OnMove );
     this.element.addEventListener( 'mousedown', this.___bound___OnDown );
     this.element.addEventListener( 'mouseup', this.___bound___OnUp );
     this.element.addEventListener( 'mouseleave', this.___bound___OnLeave );
+    this.element.addEventListener( 'mouseenter', this.___bound___OnEnter );
     this.element.addEventListener( 'wheel', this.___bound___OnWheel, { passive: true } );
 
     this.onMove = new Dispatcher();
     this.onDown = new Dispatcher();
     this.onUp = new Dispatcher();
     this.onLeave = new Dispatcher();
+    this.onEnter = new Dispatcher();
     this.onWheel = new Dispatcher();
   
   }
@@ -121,6 +124,21 @@ export class Mouse {
     this.eventData.native = _event;
     this.onLeave.Dispatch( this.element, this.eventData );
   
+  }
+
+  /**
+   * 
+   * @param {MouseEvent} _event 
+   * 
+   * @return {void}
+   */
+  OnEnter ( _event ) {
+
+    _event.stopPropagation();
+    this.CalculatePosition( _event.clientX, _event.clientY );
+    this.eventData.native = _event;
+    this.onEnter.Dispatch( this.element, this.eventData );
+
   }
 
   /**

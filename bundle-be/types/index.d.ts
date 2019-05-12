@@ -66,6 +66,8 @@ export namespace Utility {
     export function IsInteger(_value: any): boolean;
     export function IsFloat(_value: any): boolean;
     export function IsArray(_value: any): boolean;
+    export function IsObject(_value: any): boolean;
+    export function IsFunction(_value: any): boolean;
     export function Sign(_value: number, _1if0?: boolean): number;
     export function IsBitSet(_bit: number, _n: number): boolean;
     export function SetBit(_bit: number, _n: number): number;
@@ -720,11 +722,11 @@ declare class Vector2D {
     GetReflectionV(_p: object | Vector2D | Math.Point): Vector2D;
     GetReflection(_x: number, _y: number): Vector2D;
     Store(): this;
-    AddTo(_Vectors: Vector2D[]): this;
+    AddTo(_vectors: Vector2D[]): this;
     Floor(): this;
     Ceil(): this;
     Round(): this;
-    GetMinMaxDot(_Vectors: Vector2D[]): Vector2D;
+    GetMinMaxDot(_vectors: Vector2D[]): Vector2D;
 }
 declare class Matrix2D {
     constructor();
@@ -739,10 +741,10 @@ declare class Matrix2D {
     Copy(): Matrix2D;
     Set(_a: number, _b: number, _c: number, _d: number, _e: number, _f: number): this;
     SetTransform(
-        _x?: number, _y?: number, 
-        _sx?: number, _sy?: number, 
-        _r?: number, _skx?: number, _sky?: number, 
-        _px?: number, _py?: number
+         _x?: number,   _y?: number, 
+        _sx?: number,  _sy?: number, 
+         _r?: number, _skx?: number, _sky?: number, 
+        _px?: number,  _py?: number
     ): this;
     Translate(_x: number, _y: number): this;
     TranslateTo(_x: number, _y: number): this;
@@ -839,8 +841,8 @@ declare class CoreEntity2D implements Entity {
     set width(_value: number);
     get height(): number;
     set height(_value: number);
-    UpdateTransform(_parent: any): void;
-    ProcessTransform(_parent: any): void;
+    UpdateTransform(_parent: Entity): void;
+    ProcessTransform(_parent: Entity): void;
     RequestTransformUpdate(): this;
     ComputeGlobalPosition(): Vector2D;
     ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;

@@ -16,13 +16,13 @@ files.forEach( function ( path ) {
 
     if ( err ) {
 
-      console.log( newContent );
-
       console.error( err );
 
       return;
     
     }
+
+    var oldVersion = /\"version":\s?"(.*?)"\,/g.exec( content )[ 1 ];
 
     console.log( 'file loaded -- changing version', path, VERSION );
 
@@ -31,7 +31,7 @@ files.forEach( function ( path ) {
     fs.writeFile( path, newContent, 'utf8', function ( err ) {
 
       if ( err ) console.error( err );
-      else console.log( 'file version changed', path, VERSION );
+      else console.log( 'file version changed', path, oldVersion + ' > ' + v );
 
     } );
 

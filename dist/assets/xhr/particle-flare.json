@@ -1,0 +1,31 @@
+{
+    "anchor": {
+        "x": 0.5,
+        "y": 0.5
+    },
+    "amount": 5,
+    "rotation": {
+        "min": 0,
+        "max": 6.28
+    },
+    "lifespan": {
+        "min": 200,
+        "max": 300
+    },
+    "fade": true,
+    "deflate": true,
+    "decelerate": true,
+    "scale": {
+        "xy": {
+            "min": 0.3,
+            "max": 1.0
+        }
+    },
+    "velocity": {
+        "x": 0,
+        "y": {
+            "min": -6,
+            "max": -5
+        }
+    }
+}

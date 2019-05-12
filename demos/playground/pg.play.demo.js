@@ -54,9 +54,41 @@ export default () => {
 
     stage.ticker.StartAF();
 
+    const Key = nk2.Input.Key;
+    const keyboard = stage.keyboard;
+
+    keyboard.NoProcessCapture( 
+      Key.SHIFT,
+      Key.A,
+      Key.S
+    );
+    keyboard.Capture(
+      Key.G,
+      Key.B
+    );
+
+    const aKey = keyboard.GetKey( Key.A );
+    const sKey = keyboard.GetKey( Key.S );
+    const shiftKey = keyboard.GetKey( Key.SHIFT );
+    const gKey = keyboard.GetKey( Key.G );
+    const bKey = keyboard.GetKey( Key.B );
+    let lock = true;
+
+    keyboard.onDown.Add( () => {
+
+      if ( lock && gKey.repetitions === 3 ) {
+
+        lock = false;
+        gKey.Reset();
+        console.log( 'Unlocked' );
+      
+      }
+    
+    } );
+
     stage.onProcess.Add( () => {
 
-      sprite.rotation += nk2.Math.RADIAN;
+      keyboard.Process();
 
       const b = sprite.ComputeGlobalBounds( sprite.anchor );
       
@@ -64,6 +96,30 @@ export default () => {
         tl: b.tl,
         br: b.br
       } );
+
+      if ( shiftKey.isDown && !lock ) {
+
+        if ( aKey.isDown ) {
+
+          sprite.rotation -= nk2.Math.RADIAN * 10;
+        
+        } else if ( sKey.isDown ) {
+
+          sprite.rotation += nk2.Math.RADIAN * 10;
+        
+        }
+      
+      }
+
+      if ( !lock && bKey.duration >= 30 ) {
+
+        lock = true;
+        bKey.Reset();
+        console.log( 'Locked' );
+        keyboard.ReleaseAll();
+        console.log( 'Throwing away key' );
+      
+      }
     
     } );
 

@@ -36,6 +36,7 @@ nk2.Sprite.BUILD_DEFAULT_TEXTURE( () => {
             { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' },
             { id: 'fontNoK', src: './assets/xhr/fontNoK.xml', type: 'xml' },
             { id: 'particleExplosion', src: './assets/xhr/particle-explosion.json', type: 'json' },
+            { id: 'particleFlare', src: './assets/xhr/particle-flare.json', type: 'json' },
             { id: 'lorem', src: './assets/xhr/lorem.json', type: 'json' }
           ]
         ]

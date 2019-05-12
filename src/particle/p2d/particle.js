@@ -24,8 +24,10 @@ export class Particle {
     this.growth = new Vector2D( 1, 1 );
     this.acceleration = new Vector2D( 1, 1 );
     this.initialScale = new Vector2D( 1, 1 );
+    this.initialVelocity = new Vector2D( 0, 0 );
     this.fade = false;
     this.deflate = false;
+    this.decelerate = false;
     this.gravity = new Vector2D( 0, 0 );
     this.lifespan = 0;
     this.lifespanTotal = 0;
@@ -83,7 +85,7 @@ export class Particle {
       const lifespanPerc = 1 - this.lifespan / this.lifespanTotal;
       const osc = this.oscillation;
 
-      velocity.AddV( this.gravity ).MultiplyV( this.acceleration );
+      velocity.AddV( this.gravity );
 
       if ( this.torque !== 0 ) velocity.Rotate( this.torque );
   
@@ -106,6 +108,19 @@ export class Particle {
 
         entity.scale.MultiplyV( this.growth );
       
+      }
+
+      if ( this.decelerate === true ) {
+
+        velocity.Set(
+          lifespanPerc * this.initialVelocity.x,
+          lifespanPerc * this.initialVelocity.y
+        );
+
+      } else {
+
+        velocity.MultiplyV( this.acceleration );
+
       }
 
       entity.rotation += this.spin;
@@ -237,7 +252,7 @@ export class Particle {
 
   /**
    * 
-   * @param {object}  _options 
+   * @param {object}   _options 
    * @param {integer?} _index 
    * 
    * @return {void}
@@ -254,18 +269,23 @@ export class Particle {
       if ( entity === null ) {
       
         entity = this.entity = new Sprite( 0, 0, _options.texture, _options.unitId );
-        
-        if ( _options.anchor != null ) {
-
-          entity.anchor.SetV( _options.anchor );
-          entity.UpdateTextureTransform();
-        
-        }
 
       } else {
 
         this.ResetEntity( _options.unitId );
     
+      }
+
+      if ( _options.anchor != null ) {
+
+        entity.anchor.SetV( _options.anchor );
+
+        if ( _options.frames == null ) {
+
+          entity.UpdateTextureTransform();
+        
+        }
+        
       }
 
       if ( _options.frames != null ) {
@@ -286,6 +306,8 @@ export class Particle {
 
     this.RenewVector( _options.velocity, this.velocity, _index, 0, 0 );
 
+    this.initialVelocity.SetV( this.velocity );
+
     this.RenewVector( _options.gravity, this.gravity, _index, 0, 0 );
 
     this.RenewVector( _options.acceleration, this.acceleration, _index, 1, 1 );
@@ -294,7 +316,7 @@ export class Particle {
 
     this.RenewVector( _options.scale, entity.scale, _index, 1, 1 );
 
-    this.RenewVector( _options.scale, this.initialScale, _index, 1, 1 );
+    this.initialScale.SetV( entity.scale );
 
     if ( _options.rotation != null ) {
 
@@ -336,25 +358,9 @@ export class Particle {
     
     }
 
-    if ( _options.fade != null ) {
-
-      this.fade = _options.fade;
-    
-    } else {
-
-      this.fade = false;
-    
-    }
-
-    if ( _options.deflate != null ) {
-
-      this.deflate = _options.deflate;
-    
-    } else {
-
-      this.deflate = false;
-    
-    }
+    this.fade = !!_options.fade;
+    this.deflate = !!_options.deflate;
+    this.decelerate = !!_options.decelerate;
 
     if ( _options.oscillation != null ) {
 
@@ -674,7 +680,9 @@ export class Particle {
 
     if ( _unitId != null ) {
 
-      entity.SetTexture( entity.programController[ 'originalTexture' + _unitId ] );
+      entity.SetTexture( 
+        entity.programController.originalTextures[ _unitId ]
+      );
     
     }
 
