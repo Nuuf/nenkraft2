@@ -325,26 +325,14 @@ const ROOT_SCHEMA = {
   }
 };
 
-export class Data {
+/**
+ * 
+ * @param {object} _data 
+ * 
+ * @return {boolean}
+ */
+export function ValidateData ( _data ) {
 
-  constructor ( _options ) {
-
-    if ( ValidateWithSchema( _options, ROOT_SCHEMA ) ) {
-
-      for ( var key in _options ) {
-
-        this[ key ] = _options[ key ];
-      
-      }
-
-    }
-  
-  }
-
-  static Validate ( _options ) {
-
-    return new Data( _options );
-
-  }
+  return ValidateWithSchema( _data, ROOT_SCHEMA );
 
 }

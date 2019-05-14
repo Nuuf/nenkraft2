@@ -1010,6 +1010,7 @@ export namespace Particle {
             RemoveParticle(_particle: Particle): Particle;
             Emit(_options: object): void;
         }
+        export function ValidateData(_data: object): boolean;
     }
 }
 export namespace Texture {

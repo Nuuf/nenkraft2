@@ -774,6 +774,13 @@ export function AssignIfUndefined ( _o1, _o2 ) {
 
 }
 
+/**
+ * 
+ * @param {object} _obj 
+ * @param {object} _schema
+ * 
+ * @return {boolean} 
+ */
 export function ValidateWithSchema ( _obj, _schema ) {
 
   let valid = true;

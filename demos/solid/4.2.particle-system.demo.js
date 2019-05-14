@@ -99,8 +99,14 @@ export default () => {
     
       } );
 
-    particleExplosionData = nk2.Particle.P2D.Data.Validate( particleExplosionData );
-    particleFlareData = nk2.Particle.P2D.Data.Validate( particleFlareData );
+    if ( 
+      !nk2.Particle.P2D.ValidateData( particleExplosionData ) ||
+      !nk2.Particle.P2D.ValidateData( particleFlareData )
+    ) {
+
+      throw new Error( 'Invalid data' );
+    
+    }
 
     camera.force.SetSame( 0.1 );
     stage
