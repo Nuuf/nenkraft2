@@ -7,7 +7,7 @@ import { Pool } from '../../utility/pool';
 import { Oscillation } from './oscillation';
 import { Oscillate } from '../../math';
 import { RandomInteger, MinMaxOrValue, RandomInArray } from '../../utility';
-import { Sprite } from '../../entity/sprite';
+import { TextureEntity2D } from '../../entity/texture-entity2d';
 
 export class Particle {
 
@@ -268,7 +268,7 @@ export class Particle {
 
       if ( entity === null ) {
       
-        entity = this.entity = new Sprite( 0, 0, _options.texture, _options.unitId );
+        entity = this.entity = new TextureEntity2D( 0, 0, _options.texture, _options.unitId );
 
       } else {
 

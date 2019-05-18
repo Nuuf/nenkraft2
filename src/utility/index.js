@@ -5,7 +5,7 @@
 'use strict';
 
 import { PrecisionRound } from '../math';
-import CharacterSets from './character-sets';
+import { CharacterSets } from './character-sets';
 
 const VERSION = require( '../../package.json' ).version;
 const Random = Math.random;
@@ -388,12 +388,13 @@ export function UUID ( _length, _parts, _charSetIndex, _separator ) {
   let ilpdd;
   let id = '';
   const lpd = ( _length / _parts );
-  const charset = CharacterSets[ _charSetIndex ];
 
   _length = _length == null ? 32 : _length;
   _parts = _parts == null ? 4 : _parts;
   _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
   _separator = _separator == null ? '-' : _separator;
+
+  const charset = CharacterSets[ _charSetIndex ];
 
   for ( var i = 0; i < _length; ++i ) {
 

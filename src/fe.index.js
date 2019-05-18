@@ -36,7 +36,7 @@ export { Cipher };
 export { BrowserUtility };
 export { Style };
 export { Time };
-export { default as CharacterSets } from './utility/character-sets';
+export { CharacterSets } from './utility/character-sets';
 export { CanvasManager } from './utility/canvas-manager';
 export { Vector2D } from './math/vector/vector2d';
 export { Matrix2D } from './math/matrix/matrix2d';
