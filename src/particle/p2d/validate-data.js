@@ -272,23 +272,23 @@ const ROOT_SCHEMA = {
     typeCheck: typeCheckPoint
   },
   velocity: {
-    require: false,
+    required: false,
     typeCheck: typeCheckPoint
   },
   gravity: {
-    require: false,
+    required: false,
     typeCheck: typeCheckPoint
   },
   acceleration: {
-    require: false,
+    required: false,
     typeCheck: typeCheckPoint
   },
   growth: {
-    require: false,
+    required: false,
     typeCheck: typeCheckPoint
   },
   scale: {
-    require: false,
+    required: false,
     typeCheck: typeCheckPoint
   },
   rotation: {
