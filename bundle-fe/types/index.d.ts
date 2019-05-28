@@ -32,7 +32,7 @@ export namespace Math {
         _objects: Array<object | Vector2D | Point>,
         _w: number, _marginX: number, _marginY: number, _offsetX: number, _offsetY: number
     ): void
-    export function TriRectArray(_x: number, _y: number, _w: number, _y: number, _array?: number[]): number[];
+    export function TriRectArray(_x: number, _y: number, _w: number, _h: number, _array?: number[]): number[];
     export function GreatestCommonDivisor(_x: number, _y: number): number;
     export function SimplifyAspectRatio(_x: number, _y: number, _array?: number[]): number[];
     export function IntegerNotation(_value: number, _roof: number, _splitter: string): string;
@@ -96,7 +96,7 @@ export namespace Utility {
     export function DeepClone(_object: object): object;
     export function CreateIteratorArgs(_args: string[], _pre: string, _post: string): any[];
     export function ReplaceArgumentWithObjectValue(_object: object, _args: string[], _pre: string): void;
-    export function AssignIfUndefined(_o1: object, _o1: object): void;
+    export function AssignIfUndefined(_o1: object, _o2: object): void;
     export function PRINT_VERSION(_server: boolean): void;
 }
 export namespace Cipher {
@@ -279,8 +279,8 @@ export namespace Ease {
 }
 export namespace Collision {
     declare class Body2D {
-        constructor(_shape: Shape);
-        shape: Shape;
+        constructor(_shape: Geom.Shape);
+        shape: Geom.Shape;
         mass: number;
         relative: Vector2D | null;
         velocity: Vector2D;
@@ -413,7 +413,7 @@ export namespace Geom {
         export function Supershape2D(
             _polygon: Polygon2D, _x: number, _y: number,
             _radius: number, _accuracy: number, _m: number, 
-            _n1?: number, _n2?: number, _n3: number
+            _n1?: number, _n2?: number, _n3?: number
         ): Polygon2D;
     }
     declare class AABB2D implements Shape {
@@ -553,43 +553,43 @@ export namespace Path {
     }
     declare class AABB2D extends Geom.AABB2D implements Path2D {
         constructor(_tlx: number, _tly: number, _brx: number, _bry: number, _style?: object);
-        programController: Controller.GLProgramController | null;
+        programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
         GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
-        LinkProgramController(_pc: Controller.GLProgramController): this;
-        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
+        UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
     }
     declare class Circle extends Geom.Circle implements Path2D {
         constructor(_x: number, _y: number, _radius: number, _style?: object);
-        programController: Controller.GLProgramController | null;
+        programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
         GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
-        LinkProgramController(_pc: Controller.GLProgramController): this;
-        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
+        UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
     }
     declare class Line2D extends Geom.Line2D implements Path2D {
         constructor(_sx: number, _sy: number, _ex: number, _ey: number, _style?: object);
-        programController: Controller.GLProgramController | null;
+        programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
         GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
-        LinkProgramController(_pc: Controller.GLProgramController): this;
-        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
+        UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
     }
     declare class Pixel extends Vector2D implements Path2D {
         constructor(_x: number, _y: number, _style?: object);
         style: object;
         color: Color;
-        programController: Controller.GLProgramController | null;
+        programController: Controller.ProgramController.GLProgramController | null;
         bufferData: number[];
         GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext, _transform2d: Transform2D): void;
-        LinkProgramController(_pc: Controller.GLProgramController): this;
-        UseProgramController(_pc: Controller.GLProgramController): this;
+        LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
+        UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
         GetBufferData(): number[];
         UpdateInBuffer(_buffer: Float32Array, _index: number): void
@@ -985,7 +985,7 @@ export namespace Particle {
             lifespan: number;
             lifespanTotal: number;
             dead: boolean;
-            entity: Enity;
+            entity: Entity;
             system: System | null;
             oscillation: Oscillation | null;
             oscillationOffset: number;
@@ -1043,7 +1043,7 @@ export namespace Texture {
         basicTexture: BasicTexture2D;
         mapData: object;
         setData: object;
-        pc: Controller.GLProgramController | null;
+        pc: Controller.ProgramController.GLProgramController | null;
     }
 }
 export namespace Animator {
@@ -1099,7 +1099,7 @@ export namespace Animator {
     }
     declare class Frame {
         constructor(
-            _x: number, _y: number, _w: number, _y: number, _duration: number,
+            _x: number, _y: number, _w: number, _h: number, _duration: number,
             _id?: string | any, _offsetX?: number, _offsetY?: number,
             _originW?: number, _originH?: number
         );
@@ -1136,9 +1136,9 @@ export namespace Input {
         KeyCodeBeingCaptured(_code: number): boolean;
         KeyCodeBeingProcessed(_code: number): boolean;
         GetKey(_code: number): Key;
-        Capture(...arguments: Key): void;
-        NoProcessCapture(...arguments: Key): void;
-        Release(...arguments: Key): void;
+        Capture(...arguments: Key[]): void;
+        NoProcessCapture(...arguments: Key[]): void;
+        Release(...arguments: Key[]): void;
         ReleaseAll(): void;
     }
     declare class Key {
@@ -1364,7 +1364,7 @@ declare class ArrayHandler {
     object: object;
     static Get(_id: string): [];
     static GetAll(): object;
-    static Add(_id: string, _array: []): this;
+    static Add(_id: string, _array: []): ArrayHandler;
     In(_id: string): this;
     InAll(): this;
     Out(_id: string): this;
@@ -1398,16 +1398,16 @@ declare class Color {
     set a(_value: number);
 }
 declare class CanvasManager {
-    constructor(_canvas: CanvasDOMElement, _w: number, _h: number, _node: string);
+    constructor(_canvas: CanvasDOMElement, _w: number, _h: number, _mode: string);
     canvas: CanvasDOMElement;
     w: number;
     h: number;
     aspectRatio: number[];
-    onChange: Dispacher;
+    onChange: Event.Dispatcher;
     mode: string;
     stage: Stage2D | null;
     culler: Culler2D | null;
-    cullerAabbOrig: AABB2D | null;
+    cullerAabbOrig: Geom.AABB2D | null;
     rootContainer: Container2D | null;
     currentWidth: number;
     currentHeight: number;
@@ -1672,7 +1672,7 @@ declare class BatchableContainer2D extends VisualContainer2D {
     isBatchParent: boolean;
     childDataBuffer: Float32Array | null;
     bufferData: number[] | null;
-    programController: Controller.GLProgramController;
+    programController: Controller.ProgramController.GLProgramController;
     bufferStartIndex: number;
     bufferEndIndex: number; 
     GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
@@ -1680,7 +1680,7 @@ declare class BatchableContainer2D extends VisualContainer2D {
     ComputeBatchBuffer(_getBufferData?: Function): void;
     abstract UpdateInBuffer(): void;
     abstract GetBufferData(): void;
-    UseAsBatchParent(_pc: Controller.GLProgramController): void;
+    UseAsBatchParent(_pc: Controller.ProgramController.GLProgramController): void;
 }
 declare class TextureEntity2D extends BatchableContainer2D {
     constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramControllerm, _unitId?: number);
@@ -1756,7 +1756,7 @@ declare class Graphic2D extends BatchableContainer2D {
     SetPath(_path: Path.Path2D): void;
 }
 declare class Sprite extends TextureEntity2D {
-    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramController, _unitId?: number);
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.ProgramController.GLProgramController, _unitId?: number);
     animationController: Animator.Controller | null;
     static BUILD_DEFAULT_TEXTURE(_onLoad: Function): void;
     static get DEFAULT_TEXTURE(): Texture.BasicTexture2D | null;
@@ -1765,7 +1765,7 @@ declare class Sprite extends TextureEntity2D {
     StopCurrentAnimation(): this;
 }
 declare class Tilesprite extends TextureEntity2D {
-    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.GLProgramController, _unitId?: number);
+    constructor(_x: number, _y: number, _texture: Texture.BasicTexture2D | Controller.ProgramController.GLProgramController, _unitId?: number);
     pattern: any;
     patternOffset: Vector2D;
     static BUILD_DEFAULT_TEXTURE(_onLoad: Function): void;
@@ -1822,8 +1822,8 @@ declare class Char extends CoreEntity2D {
     static get pool(): Pool;
     Render(_rc: CanvasRenderingContext2D, _image: Image): void;
     SetData(_data: object): this;
-    GLRenderAuto(_pc: Controller.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
-    GLRender(_pc: Controller.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
+    GLRenderAuto(_pc: Controller.ProgramController.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
+    GLRender(_pc: Controller.ProgramController.GLProgramController, _tintChannel: Float32Array, _unitId: number): void;
     ApplyKernings(_kernings: object): this;
     Crunch(_prevChar: Char): this;
     UpdateMatrices(): this;
@@ -1874,8 +1874,8 @@ declare class Camera2D extends VisualContainer2D {
     SetMin(_x: number, _y: number): this;
 }
 declare class GLEntity2D extends CoreEntity2D {
-    constructor(_x: number, _y: number, _pc: Controller.GLProgramController);
-    programController: Controller.GLProgramController;
+    constructor(_x: number, _y: number, _pc: Controller.ProgramController.GLProgramController);
+    programController: Controller.ProgramController.GLProgramController;
     time: number;
     timeInc: number;
     abstract GLPreRender(): void;

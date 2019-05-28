@@ -32,7 +32,7 @@ export namespace Math {
         _objects: Array<object | Vector2D | Point>,
         _w: number, _marginX: number, _marginY: number, _offsetX: number, _offsetY: number
     ): void
-    export function TriRectArray(_x: number, _y: number, _w: number, _y: number, _array?: number[]): number[];
+    export function TriRectArray(_x: number, _y: number, _w: number, _h: number, _array?: number[]): number[];
     export function GreatestCommonDivisor(_x: number, _y: number): number;
     export function SimplifyAspectRatio(_x: number, _y: number, _array?: number[]): number[];
     export function IntegerNotation(_value: number, _roof: number, _splitter: string): string;
@@ -96,7 +96,7 @@ export namespace Utility {
     export function DeepClone(_object: object): object;
     export function CreateIteratorArgs(_args: string[], _pre: string, _post: string): any[];
     export function ReplaceArgumentWithObjectValue(_object: object, _args: string[], _pre: string): void;
-    export function AssignIfUndefined(_o1: object, _o1: object): void;
+    export function AssignIfUndefined(_o1: object, _o2: object): void;
     export function PRINT_VERSION(_server: boolean): void;
 }
 export namespace Cipher {
@@ -166,8 +166,8 @@ export namespace Ease {
 }
 export namespace Collision {
     declare class Body2D {
-        constructor(_shape: Shape);
-        shape: Shape;
+        constructor(_shape: Geom.Shape);
+        shape: Geom.Shape;
         mass: number;
         relative: Vector2D | null;
         velocity: Vector2D;
@@ -300,7 +300,7 @@ export namespace Geom {
         export function Supershape2D(
             _polygon: Polygon2D, _x: number, _y: number,
             _radius: number, _accuracy: number, _m: number, 
-            _n1?: number, _n2?: number, _n3: number
+            _n1?: number, _n2?: number, _n3?: number
         ): Polygon2D;
     }
     declare class AABB2D implements Shape {
@@ -645,7 +645,7 @@ declare class ArrayHandler {
     object: object;
     static Get(_id: string): [];
     static GetAll(): object;
-    static Add(_id: string, _array: []): this;
+    static Add(_id: string, _array: []): ArrayHandler;
     In(_id: string): this;
     InAll(): this;
     Out(_id: string): this;
