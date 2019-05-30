@@ -38,6 +38,7 @@ export class Stage2D extends VisualContainer2D {
     this.mouse = null;
     this.touch = null;
     this.ticker = null;
+    this.onProcess = new Dispatcher();
 
     if ( 
       _options.mode != null &&
@@ -133,8 +134,6 @@ export class Stage2D extends VisualContainer2D {
       this.id = _options.id;
     
     }
-
-    this.onProcess = new Dispatcher();
 
     if ( _options.noMouse !== true ) {
 
