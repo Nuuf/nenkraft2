@@ -109,31 +109,35 @@ export const ParseImports = function ( _shader ) {
 };
 
 export const SNIPPETS = {
-  VERTEX_TEXTURE_DEFAULT: Uglify( require( './snippets/vertex/texture.default.snippet' ) ),
-  VERTEX_TEXTURE_TRANSFORM: Uglify( require( './snippets/vertex/texture.transform.snippet' ) ),
-  PI: Uglify( require( './snippets/constants/pi.snippet' ) ),
-  RADIAN: Uglify( require( './snippets/constants/radian.snippet' ) ),
-  RSEEDS: Uglify( require( './snippets/constants/rseeds.snippet' ) ),
-  VRSEEDS: Uglify( require( './snippets/constants/vrseeds.snippet' ) ),
-  mod289: Uglify( require( './snippets/misc/mod289.snippet' ) ),
-  permute: Uglify( require( './snippets/misc/permute.snippet' ) ), 
-  rotate2d: Uglify( require( './snippets/misc/rotate2d.snippet' ) ),
-  scale2d: Uglify( require( './snippets/misc/scale2d.snippet' ) ),
-  plot: Uglify( require( './snippets/misc/plot.snippet' ) ),
-  ridge: Uglify( require( './snippets/misc/ridge.snippet' ) ),
-  pixelate: Uglify( require( './snippets/misc/pixelate.snippet' ) ),
-  random: Uglify( require( './snippets/random/random.snippet' ) ),
-  vrandom: Uglify( require( './snippets/random/vrandom.snippet' ) ),
-  noise: Uglify( require( './snippets/noise/noise.snippet' ) ),
-  gnoise: Uglify( require( './snippets/noise/gnoise.snippet' ) ),
-  snoise: Uglify( require( './snippets/noise/snoise.snippet' ) ),
-  fbm: Uglify( require( './snippets/fbm/fbm.snippet' ) ),
-  abs_fbm: Uglify( require( './snippets/fbm/abs_fbm.snippet' ) ),
-  rot_fbm: Uglify( require( './snippets/fbm/rot_fbm.snippet' ) ),
-  rmf: Uglify( require( './snippets/fbm/rmf.snippet' ) ),
-  aabb: Uglify( require( './snippets/geom/aabb.snippet' ) ),
-  cruciform: Uglify( require( './snippets/geom/cruciform.snippet' ) ),
-  circle: Uglify( require( './snippets/geom/circle.snippet' ) )
+  VERTEX_TEXTURE_DEFAULT: Uglify( 
+    require( './snippets/vertex/texture.default.snippet' ).default
+  ),
+  VERTEX_TEXTURE_TRANSFORM: Uglify( 
+    require( './snippets/vertex/texture.transform.snippet' ).default
+  ),
+  PI: Uglify( require( './snippets/constants/pi.snippet' ).default ),
+  RADIAN: Uglify( require( './snippets/constants/radian.snippet' ).default ),
+  RSEEDS: Uglify( require( './snippets/constants/rseeds.snippet' ).default ),
+  VRSEEDS: Uglify( require( './snippets/constants/vrseeds.snippet' ).default ),
+  mod289: Uglify( require( './snippets/misc/mod289.snippet' ).default ),
+  permute: Uglify( require( './snippets/misc/permute.snippet' ).default ), 
+  rotate2d: Uglify( require( './snippets/misc/rotate2d.snippet' ).default ),
+  scale2d: Uglify( require( './snippets/misc/scale2d.snippet' ).default ),
+  plot: Uglify( require( './snippets/misc/plot.snippet' ).default ),
+  ridge: Uglify( require( './snippets/misc/ridge.snippet' ).default ),
+  pixelate: Uglify( require( './snippets/misc/pixelate.snippet' ).default ),
+  random: Uglify( require( './snippets/random/random.snippet' ).default ),
+  vrandom: Uglify( require( './snippets/random/vrandom.snippet' ).default ),
+  noise: Uglify( require( './snippets/noise/noise.snippet' ).default ),
+  gnoise: Uglify( require( './snippets/noise/gnoise.snippet' ).default ),
+  snoise: Uglify( require( './snippets/noise/snoise.snippet' ).default ),
+  fbm: Uglify( require( './snippets/fbm/fbm.snippet' ).default ),
+  abs_fbm: Uglify( require( './snippets/fbm/abs_fbm.snippet' ).default ),
+  rot_fbm: Uglify( require( './snippets/fbm/rot_fbm.snippet' ).default ),
+  rmf: Uglify( require( './snippets/fbm/rmf.snippet' ).default ),
+  aabb: Uglify( require( './snippets/geom/aabb.snippet' ).default ),
+  cruciform: Uglify( require( './snippets/geom/cruciform.snippet' ).default ),
+  circle: Uglify( require( './snippets/geom/circle.snippet' ).default )
 };
 
 /**
