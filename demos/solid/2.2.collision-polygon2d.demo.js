@@ -42,8 +42,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
@@ -63,6 +61,8 @@ export default () => {
     const result = new nk2.Collision.Polygon2DvsPolygon2D.Result();
 
     scene.Mount( g1, g2 );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.onProcess.Add( () => {
 

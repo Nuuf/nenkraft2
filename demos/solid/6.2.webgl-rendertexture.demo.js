@@ -81,8 +81,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     let a = 0;
 
     stage.onProcess.Add( () => {
@@ -94,6 +92,8 @@ export default () => {
       a += nk2.Math.RADIAN;
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

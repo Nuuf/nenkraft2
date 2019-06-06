@@ -10,17 +10,14 @@ export class Mouse {
   /**
    * 
    * @param {DOMElement} _element 
-   * @param {number}     _offsetX 
-   * @param {number}     _offsetY 
    */
-  constructor ( _element, _offsetX, _offsetY ) {
+  constructor ( _element ) {
 
     this.element = _element;
     this.position = new Vector2D();
-    this.scale = new Vector2D( 1, 1 );
-    this.offset = new Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
-    this.offsets = [];
+    this.coordinateTranslationEntity = null;
+    this.coordinateConversionMatrix = null;
 
     this.___bound___OnMove = this.OnMove.bind( this );
     this.___bound___OnDown = this.OnDown.bind( this ); 
@@ -165,33 +162,35 @@ export class Mouse {
    */
   CalculatePosition ( _x, _y ) {
 
-    const offsets = this.offsets;
     const pos = this.position;
     const rect = this.element.getBoundingClientRect();
 
     pos
       .Set( _x, _y )
-      .Subtract( rect.left, rect.top )
-      .SubtractV( this.offset )
-      .DivideV( this.scale );
+      .Subtract( rect.left, rect.top );
 
-    for ( var i = 0; i < offsets.length; ++i ) {
+    if ( this.coordinateTranslationEntity ) {
 
-      pos.SubtractV( offsets[ i ] );
-    
+      this.coordinateTranslationEntity.GlobalToLocalPoint( 
+        pos, 
+        this.coordinateConversionMatrix
+      );
+
     }
   
   }
 
   /**
    * 
-   * @param {Vector2D} _offset 
+   * @param {Entity}   _entity
+   * @param {Matrix2D} _conversion
    * 
-   * @return {this}
+   * @return {this} 
    */
-  AddOffset ( _offset ) {
+  SetCoordinateTranslationEntity ( _entity, _conversion ) {
 
-    this.offsets.push( _offset );
+    this.coordinateTranslationEntity = _entity;
+    this.coordinateConversionMatrix = _conversion;
 
     return this;
 

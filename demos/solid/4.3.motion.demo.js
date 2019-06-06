@@ -113,8 +113,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     new Branch( new nk2.Vector2D( 0, 0 ), new nk2.Vector2D( 0, 300 ), scene );
 
     const timer = new nk2.Time.Timer( 500 );
@@ -140,6 +138,8 @@ export default () => {
       timer.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 

@@ -1212,13 +1212,12 @@ export namespace Input {
         Reset(): void;
     }
     declare class Mouse {
-        constructor(_element: DOMElement, _offsetX: number, _offsetY: number);
+        constructor(_element: DOMElement);
         element: DOMElement;
         position: Vector2D;
-        scale: Vector2D;
-        offset: Vector2D;
         eventData: object;
-        offsets: Vector2D[];
+        coordinateTranslationEntity: Entity | null;
+        coordinateConversionMatrix: Matrix2D | null;
         onMove: Event.Dispatcher;
         onDown: Event.Dispatcher;
         onUp: Event.Dispatcher;
@@ -1234,17 +1233,16 @@ export namespace Input {
         OnEnter(_event: any): void;
         OnWheel(_event: any): void;
         CalculatePosition(_x: number, _y: number): void;
-        AddOffset(_offset: Vector2D): this;
+        SetCoordinateTranslationEntity(_entity: Entity, _conversion?: Matrix2D): this;
         Destroy(): this;
     }
     declare class Touch {
-        constructor(_element: DOMElement, _offsetX: number, _offsetY: number);
+        constructor(_element: DOMElement);
         element: DOMElement;
         position: Vector2D;
-        scale: Vector2D;
-        offset: Vector2D;
         eventData: object;
-        offsets: Vector2D[];
+        coordinateTranslationEntity: Entity | null;
+        coordinateConversionMatrix: Matrix2D | null;
         onMove: Event.Dispatcher;
         onStart: Event.Dispatcher;
         onEnd: Event.Dispatcher;
@@ -1256,7 +1254,7 @@ export namespace Input {
         OnEnd(_event: any): void;
         OnCancel(_event: any): void;
         CalculatePosition(_x: number, _y: number): void;
-        AddOffset(_offset: Vector2D): this;
+        SetCoordinateTranslationEntity(_entity: Entity, _conversion?: Matrix2D): this;
         Destroy(): this;
     }
 }
@@ -1624,8 +1622,9 @@ declare class CoreEntity2D implements Entity {
     ProcessTransform(_parent: Entity): void;
     RequestTransformUpdate(): this;
     ComputeGlobalPosition(): Vector2D;
+    GlobalToLocalPoint(_point: Vector2D, _conversion?: Matrix2D): Vector2D;
     ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;
-    ComputeGlobalBounds(_anchor: Vector2D, _conversion: Matrix2D): Geom.AABB2D;
+    ComputeGlobalBounds(_anchor: Vector2D, _conversion?: Matrix2D): Geom.AABB2D;
     AHCreate(): this;
     AHIn(_id: string): this;
     AHOut(_id: string): this;

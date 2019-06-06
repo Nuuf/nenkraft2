@@ -53,8 +53,6 @@ export default () => {
 
     scene.AddChild( tilesprite );
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
@@ -62,6 +60,8 @@ export default () => {
       tilesprite.OffsetPattern( 1, 1 );
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

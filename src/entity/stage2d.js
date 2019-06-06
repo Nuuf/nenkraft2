@@ -137,7 +137,7 @@ export class Stage2D extends VisualContainer2D {
 
     if ( _options.noMouse !== true ) {
 
-      this.mouse = new Mouse( _options.canvas, 0, 0 );
+      this.mouse = new Mouse( _options.canvas );
     
     }
 
@@ -149,7 +149,7 @@ export class Stage2D extends VisualContainer2D {
 
     if ( _options.noTouch !== true ) {
 
-      this.touch = new Touch( _options.canvas, 0, 0 );
+      this.touch = new Touch( _options.canvas );
 
     }
 

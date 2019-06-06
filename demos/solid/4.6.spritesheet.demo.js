@@ -66,14 +66,14 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
       sprite2.animationController.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 

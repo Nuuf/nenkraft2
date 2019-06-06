@@ -82,8 +82,6 @@ export default () => {
     
     }
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
@@ -92,7 +90,7 @@ export default () => {
 
     stage.mouse.onDown.Add( ( event ) => {
 
-      camera.target.position.SetV( event.data.position );
+      camera.target.position.SetV( scene.GlobalToLocalPoint( event.data.position ) );
 
     } );
 

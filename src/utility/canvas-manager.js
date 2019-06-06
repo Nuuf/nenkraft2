@@ -198,18 +198,6 @@ export class CanvasManager {
       this.stage.w = _w;
       this.stage.h = _h;
 
-      if ( this.stage.mouse ) {
-
-        this.stage.mouse.scale.Set( scaleX, scaleY );
-      
-      } 
-
-      if ( this.stage.touch ) {
-
-        this.stage.touch.scale.Set( scaleX, scaleY );
-      
-      }
-
       if ( this.stage.usingWebGL === true ) {
         
         this.stage.GLConfig();

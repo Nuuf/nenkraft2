@@ -47,8 +47,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     const pc = new nk2.Controller.ProgramController.GLDynamicTexture2DProgramController(
       stage.gl, 3
     );
@@ -110,6 +108,8 @@ export default () => {
       sprite3.animationController.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

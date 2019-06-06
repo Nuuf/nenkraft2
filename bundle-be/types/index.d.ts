@@ -845,8 +845,9 @@ declare class CoreEntity2D implements Entity {
     ProcessTransform(_parent: Entity): void;
     RequestTransformUpdate(): this;
     ComputeGlobalPosition(): Vector2D;
+    GlobalToLocalPoint(_point: Vector2D, _conversion?: Matrix2D): Vector2D;
     ComputeLocalBounds(_anchor: Vector2D): Geom.AABB2D;
-    ComputeGlobalBounds(_anchor: Vector2D, _conversion: Matrix2D): Geom.AABB2D;
+    ComputeGlobalBounds(_anchor: Vector2D, _conversion?: Matrix2D): Geom.AABB2D;
     AHCreate(): this;
     AHIn(_id: string): this;
     AHOut(_id: string): this;

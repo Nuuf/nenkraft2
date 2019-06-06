@@ -72,13 +72,8 @@ export default () => {
       .BindCuller( culler )
       .Trigger();
 
-    console.log( culler );
-
-    // stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
-      // camera.Process();
       culler.Process();
     
     } );

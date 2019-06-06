@@ -75,14 +75,6 @@ export default () => {
 
     scene.AddChild( tm );
 
-    // /stage.mouse.AddOffset( scene ).AddOffset( camera );
-
-    stage.onProcess.Add( () => {
-
-      // camera.Process();
-    
-    } );
-
     stage.mouse.onDown.Add( ( event ) => {
 
       mouseIsDown = true;

@@ -80,8 +80,6 @@ export default () => {
     
     }
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
@@ -99,6 +97,8 @@ export default () => {
       }
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

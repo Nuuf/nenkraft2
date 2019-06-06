@@ -63,13 +63,13 @@ export default () => {
 
     scene.AddChild( bitmapText );
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

@@ -42,8 +42,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
@@ -64,6 +62,8 @@ export default () => {
       camera.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 

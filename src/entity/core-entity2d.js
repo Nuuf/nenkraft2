@@ -241,6 +241,35 @@ export class CoreEntity2D {
 
   /**
    * 
+   * @param {Vector2D}  _point
+   * @param {Matrix2D?} _conversion
+   * 
+   * @return {Vector2D}
+   */
+  GlobalToLocalPoint ( _point, _conversion ) {
+
+    if ( _conversion ) {
+
+      PS_M.Multiply( this.transform.globalTransform, _conversion );
+      PS_M.Decompose( PS_T );
+    
+    } else {
+
+      this.transform.globalTransform.Decompose( PS_T );
+    
+    }
+
+    _point
+      .SubtractV( PS_T.position )
+      .DivideV( PS_T.scale )
+      .Rotate( -PS_T.rotation );
+
+    return _point;
+  
+  }
+
+  /**
+   * 
    * @param {Vector2D} _anchor 
    * 
    * @return {AABB2D}
@@ -260,8 +289,8 @@ export class CoreEntity2D {
 
   /**
    * 
-   * @param {Vector2D} _anchor
-   * @param {Matrix2D} _conversion
+   * @param {Vector2D}  _anchor
+   * @param {Matrix2D?} _conversion
    * 
    * @return {AABB2D}
    */

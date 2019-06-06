@@ -71,14 +71,14 @@ export default () => {
     
     } );
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
       animation.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 

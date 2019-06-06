@@ -33,14 +33,14 @@ export default () => {
       .AddChild( rootContainer )
       .AddChild( sprite );
 
-    stage.mouse.AddOffset( camera );
-
     stage.ticker.StartAF();
     stage.onProcess.Add( () => {
 
       camera.Process();
 
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( camera );
 
     stage.mouse.onDown.Add( ( event ) => {
 

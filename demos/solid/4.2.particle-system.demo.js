@@ -122,8 +122,6 @@ export default () => {
       .BindRootContainer( root )
       .Trigger();
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     stage.onProcess.Add( () => {
 
       camera.Process();
@@ -131,6 +129,8 @@ export default () => {
       ptimer.Process();
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 

@@ -95,8 +95,6 @@ export default () => {
 
     scene.Mount( polygons.concat( rays ) );
 
-    stage.mouse.AddOffset( scene ).AddOffset( camera );
-
     const contactPoint = new nk2.Vector2D( 0, 0 );
 
     stage.onProcess.Add( () => {
@@ -161,6 +159,8 @@ export default () => {
       }
     
     } );
+
+    stage.mouse.SetCoordinateTranslationEntity( scene );
 
     stage.mouse.onDown.Add( ( event ) => {
 
