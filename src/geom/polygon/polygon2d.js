@@ -49,19 +49,9 @@ export class Polygon2D {
    */
   Copy () {
 
-    const p = new Polygon2D();
-    const vertices = this.vertices;
+    const o = new Polygon2D();
 
-    for ( var i = 0; i < vertices.length; ++i ) {
-
-      p.AddVertex( vertices[ i ].Copy() );
-    
-    }
-
-    p.ComputeBounds();
-    p.ComputeCentroid();
-
-    return p;
+    return o.SetC( this );
   
   }
 

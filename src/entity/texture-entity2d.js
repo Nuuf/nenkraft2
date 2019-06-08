@@ -200,7 +200,7 @@ export class TextureEntity2D extends BatchableContainer2D {
 
   /**
    * 
-   * @param {Shape} _newShape 
+   * @param {Shape?} _newShape 
    * 
    * @return {void}
    */
@@ -208,11 +208,15 @@ export class TextureEntity2D extends BatchableContainer2D {
 
     if ( _newShape != null ) {
 
-      this.originalShape = _newShape;
+      this.originalShape = _newShape.Copy();
+      this.shape = _newShape;
       
+    } else {
+
+      this.shape.SetC( this.originalShape );
+    
     }
-  
-    this.shape.SetC( this.originalShape );
+
     this.shape.Scale( this.scale.x, this.scale.y );
   
   }
@@ -277,8 +281,8 @@ export class TextureEntity2D extends BatchableContainer2D {
       0, 0,
       _texture.w, _texture.h
     );
-    this.shape.SetC( this.clip );
-    this.originalShape.SetC( this.shape );
+    this.shape = this.clip.Copy();
+    this.originalShape = this.shape.Copy();
   
   }
 

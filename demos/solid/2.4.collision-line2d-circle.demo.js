@@ -47,8 +47,8 @@ export default () => {
     let dragger = null;
     const a = new nk2.Collision.Body2D( new nk2.Geom.Circle( 0, 0, 50 ) );
     const b = new nk2.Collision.Body2D( new nk2.Geom.Line2D( 0, 0, 100, 100 ) );
-    const g1 = new nk2.Graphic2D( 0, 0, new nk2.Path.Circle( 0, 0, 0 ).SetC( a.shape ) );
-    const g2 = new nk2.Graphic2D( 0, 0, new nk2.Path.Line2D( 0, 0, 0, 0 ).SetC( b.shape ) );
+    const g1 = new nk2.Graphic2D( 0, 0, new nk2.Path.Circle().SetShape( a.shape.Copy() ) );
+    const g2 = new nk2.Graphic2D( 0, 0, new nk2.Path.Line2D().SetShape( b.shape.Copy() ) );
 
     a.SetRelative( g1.position );
     const COLLIDE = nk2.Collision.CirclevsLine2D.Collide;

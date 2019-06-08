@@ -5,7 +5,7 @@
 import { Line2D as Line2DGeom } from '../geom/line/line2d';
 import { SSa } from '../style';
 
-export class Line2D extends Line2DGeom {
+export class Line2D {
 
   /**
    * 
@@ -17,8 +17,7 @@ export class Line2D extends Line2DGeom {
    */
   constructor ( _sx, _sy, _ex, _ey, _style ) {
 
-    super( _sx, _sy, _ex, _ey );
-
+    this.shape = new Line2DGeom( _sx, _sy, _ex, _ey );
     this.programController = null;
     this.style = SSa( _style );
   
@@ -32,8 +31,8 @@ export class Line2D extends Line2DGeom {
    */
   Render ( _rc ) {
 
-    const s = this.s;
-    const e = this.e;
+    const s = this.shape.s;
+    const e = this.shape.e;
     const style = this.style;
     
     _rc.beginPath();
@@ -64,7 +63,7 @@ export class Line2D extends Line2DGeom {
 
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),
-        this.s, this.e
+        this.shape.s, this.shape.e
       );
       
     }
@@ -117,6 +116,18 @@ export class Line2D extends Line2DGeom {
 
     return this;
   
+  }
+
+  /**
+   * 
+   * @param {Geom.Line2D} _shape 
+   */
+  SetShape ( _shape ) {
+
+    this.shape = _shape;
+
+    return this;
+
   }
 
 }

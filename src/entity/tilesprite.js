@@ -59,7 +59,7 @@ export class Tilesprite extends TextureEntity2D {
             0, 64
           ] );
 
-          path.ComputeBounds();
+          path.shape.ComputeBounds();
         
           path.style.stroke.lineWidth = 3;
 

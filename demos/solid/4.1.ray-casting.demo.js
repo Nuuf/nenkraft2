@@ -54,14 +54,14 @@ export default () => {
         const p = new nk2.Path.Polygon2D();
 
         nk2.Geom.PolygonConstruction.Cyclic2D(
-          p,
+          p.shape,
           nk2.Utility.RandomInteger( -W, W ),
           nk2.Utility.RandomInteger( -H, H ),
           nk2.Utility.RandomInteger( 30, 60 ),
           nk2.Utility.RandomInteger( 3, 8 )
         );
 
-        p.Rotate( nk2.Utility.RandomFloat( 0, nk2.Math.PII ) );
+        p.shape.Rotate( nk2.Utility.RandomFloat( 0, nk2.Math.PII ) );
         const g = new nk2.Graphic2D( 0, 0, p );
 
         polygons.push( g );
@@ -103,10 +103,12 @@ export default () => {
 
       rays.forEach( function ( ray ) {
 
-        ray.path.s.SetV( stage.mouse.position );
-        ray.path.e.SetV( ray.path.s );
-        ray.path.e.Add( ray.data.r, ray.data.r );
-        ray.path.e.RotateAroundV( ray.path.s, ray.data.angle );
+        const shape = ray.path.shape;
+
+        shape.s.SetV( stage.mouse.position );
+        shape.e.SetV( shape.s );
+        shape.e.Add( ray.data.r, ray.data.r );
+        shape.e.RotateAroundV( shape.s, ray.data.angle );
       
       } );
 
@@ -132,23 +134,23 @@ export default () => {
         for ( ; j < pl; polygon = polygons[ ++j ] ) {
 
           k = 0;
-          pvl = polygon.path.vertices.length;
+          pvl = polygon.path.shape.vertices.length;
           kk = pvl - 1;
 
           for ( ; k < pvl; kk = k++ ) {
 
-            vertexA = polygon.path.vertices[ k ];
-            vertexB = polygon.path.vertices[ kk ];
+            vertexA = polygon.path.shape.vertices[ k ];
+            vertexB = polygon.path.shape.vertices[ kk ];
 
             if ( nk2.Collision.Line2DvsLine2D.Line2DLine2DCollision(
-              ray.path.s,
-              ray.path.e,
+              ray.path.shape.s,
+              ray.path.shape.e,
               vertexA,
               vertexB,
               contactPoint
             ) ) {
 
-              rays[ i ].path.e.SetV( contactPoint );
+              rays[ i ].path.shape.e.SetV( contactPoint );
             
             }
 

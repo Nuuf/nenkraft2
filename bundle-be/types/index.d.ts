@@ -315,6 +315,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): AABB2D;
         Set(_tlx: number, _tly: number, _brx: number, _bry: number): this;
         SetC(_aabb2d: AABB2D): this;
         SetXYWH(_x: number, _y: number, _w: number, _h: number): this;
@@ -337,6 +338,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): Line2D;
         Set(_sx: number, _sy: number, _ex: number, _ey: number): this;
         SetC(_line2d: Line2D): this;
         SetPosition(_x: number, y: number): this;
@@ -395,6 +397,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): Circle;
         Set(_x: number, _y: number, _radius: number): this;
         SetC(_circle: Circle): this;
         SetPosition(_x: number, _y: number): this;

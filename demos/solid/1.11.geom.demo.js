@@ -23,9 +23,9 @@ export default () => {
     const polygon = new nk2.Path.Polygon2D();
     const rose = new nk2.Path.Polygon2D();
 
-    nk2.Geom.PolygonConstruction.Butterfly2D( butterfly, 0, 0, 1000, 50 );
-    nk2.Geom.PolygonConstruction.Star2D( polygon, 0, 0, 100, 50, 5 );
-    nk2.Geom.PolygonConstruction.Rose2D( rose, 0, 0, 100, 7 / 9, 1000, 9 );
+    nk2.Geom.PolygonConstruction.Butterfly2D( butterfly.shape, 0, 0, 1000, 50 );
+    nk2.Geom.PolygonConstruction.Star2D( polygon.shape, 0, 0, 100, 50, 5 );
+    nk2.Geom.PolygonConstruction.Rose2D( rose.shape, 0, 0, 100, 7 / 9, 1000, 9 );
 
     const g1 = new nk2.Graphic2D( 100, 100, circle );
     const g2 = new nk2.Graphic2D( 200, 100, rectangle );

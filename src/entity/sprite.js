@@ -65,10 +65,13 @@ export class Sprite extends TextureEntity2D {
             64, 64,
             32, 32,
             0, 64
-          ] );
+          ], {
+            stroke: {
+              lineWidth: 3
+            }
+          } );
 
-          path.ComputeBounds();
-          path.style.stroke.lineWidth = 3;
+          path.shape.ComputeBounds();
 
           return new Graphic2D( 0, 0, path );
         

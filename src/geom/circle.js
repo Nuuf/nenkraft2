@@ -45,6 +45,18 @@ export class Circle {
 
   /**
    * 
+   * @return {Circle}
+   */
+  Copy () {
+
+    const o = new Circle();
+
+    return o.SetC( this );
+  
+  }
+
+  /**
+   * 
    * @param {number} _x 
    * @param {number} _y 
    * @param {number} _radius 

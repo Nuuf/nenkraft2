@@ -5,7 +5,7 @@
 import { AABB2D as AABB2DGeom } from '../geom/aabb/aabb2d';
 import { FFSa } from '../style';
 
-export class AABB2D extends AABB2DGeom {
+export class AABB2D {
 
   /**
    * 
@@ -17,8 +17,7 @@ export class AABB2D extends AABB2DGeom {
    */
   constructor ( _tlx, _tly, _brx, _bry, _style ) {
 
-    super( _tlx, _tly, _brx, _bry );
-    
+    this.shape = new AABB2DGeom( _tlx, _tly, _brx, _bry );
     this.programController = null;
     this.style = FFSa( _style );
   
@@ -32,8 +31,8 @@ export class AABB2D extends AABB2DGeom {
    */
   Render ( _rc ) {
 
-    const tl = this.tl;
-    const br = this.br;
+    const tl = this.shape.tl;
+    const br = this.shape.br;
     const style = this.style;
 
     _rc.beginPath();
@@ -72,9 +71,11 @@ export class AABB2D extends AABB2DGeom {
 
     if ( this.programController !== null ) {
 
+      const shape = this.shape;
+
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),
-        this.tl.x, this.tl.y, this.w, this.h
+        shape.tl.x, shape.tl.y, shape.w, shape.h
       );
       
     }
@@ -130,6 +131,18 @@ export class AABB2D extends AABB2DGeom {
 
     return this;
   
+  }
+
+  /**
+   * 
+   * @param {Geom.AABB2D} _shape 
+   */
+  SetShape ( _shape ) {
+
+    this.shape = _shape;
+
+    return this;
+
   }
 
 }

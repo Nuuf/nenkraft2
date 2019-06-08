@@ -1,6 +1,6 @@
 {
   "name": "nenkraft2",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "A small rendering tool",
   "main": "./bundle-fe/nk2.js",
   "devDependencies": {
@@ -17,8 +17,8 @@
     "raw-loader": "^3.0.0",
     "rimraf": "^2.6.2",
     "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-cli": "^3.3.3",
+    "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
     "build-prod": "webpack --env production --mode production",

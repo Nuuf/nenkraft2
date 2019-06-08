@@ -130,7 +130,7 @@ export default () => {
     
     } );
 
-    stage.mouse.SetCoordinateTranslationEntity( scene );
+    stage.mouse.SetCoordinateTranslationEntity( scene, stage.glConvMatrix );
 
     stage.mouse.onDown.Add( ( event ) => {
 

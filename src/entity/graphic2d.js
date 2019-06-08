@@ -184,7 +184,7 @@ export class Graphic2D extends BatchableContainer2D {
     PS_TP.SetV( _p );
     PS_TP.SubtractV( this.position );
 
-    return this.path.IntersectsPoint2D( PS_TP );
+    return this.path.shape.IntersectsPoint2D( PS_TP );
   
   }
 
@@ -196,20 +196,22 @@ export class Graphic2D extends BatchableContainer2D {
    */
   SetPath ( _path ) {
 
-    if ( _path !== undefined ) {
+    const shape = _path.shape;
 
-      if ( _path.w !== undefined && _path.h !== undefined ) {
+    if ( shape !== undefined ) {
 
-        this.w = _path.w;
-        this.h = _path.h;
+      if ( shape.w !== undefined && shape.h !== undefined ) {
+
+        this.w = shape.w;
+        this.h = shape.h;
       
       }
-      else if ( _path.GetLength !== undefined ) this.w = this.h = _path.GetLength();
-      else if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
-      else if ( _path.aabb !== undefined ) {
+      else if ( shape.GetLength !== undefined ) this.w = this.h = shape.GetLength();
+      else if ( shape.diameter !== undefined ) this.w = this.h = shape.diameter;
+      else if ( shape.aabb !== undefined ) {
 
-        this.w = _path.aabb.w;
-        this.h = _path.aabb.h;
+        this.w = shape.aabb.w;
+        this.h = shape.aabb.h;
       
       }
 

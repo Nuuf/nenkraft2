@@ -45,14 +45,14 @@ export default () => {
     const dragStart = new nk2.Vector2D( 0, 0 );
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
-    const a = new nk2.Collision.Body2D( new nk2.Path.Polygon2D() );
-    const b = new nk2.Collision.Body2D( new nk2.Path.Polygon2D() );
+    const a = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
+    const b = new nk2.Collision.Body2D( new nk2.Geom.Polygon2D() );
 
     nk2.Geom.PolygonConstruction.Cyclic2D( a.shape, 0, 0, 60, 6 );
     nk2.Geom.PolygonConstruction.Cyclic2D( b.shape, 0, 0, 60, 4 );
 
-    const g1 = new nk2.Graphic2D( 0, 0, a.shape );
-    const g2 = new nk2.Graphic2D( 0, 0, b.shape );
+    const g1 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetShape( a.shape.Copy() ) );
+    const g2 = new nk2.Graphic2D( 0, 0, new nk2.Path.Polygon2D().SetShape( b.shape.Copy() ) );
 
     a.SetRelative( g1.position );
     b.SetRelative( g2.position );

@@ -6,7 +6,7 @@ import { Circle as CircleGeom } from '../geom/circle';
 import { PII } from '../math';
 import { FFSa } from '../style';
 
-export class Circle extends CircleGeom {
+export class Circle {
 
   /**
    * 
@@ -17,8 +17,7 @@ export class Circle extends CircleGeom {
    */
   constructor ( _x, _y, _radius, _style ) {
 
-    super( _x, _y, _radius );
-    
+    this.shape = new CircleGeom( _x, _y, _radius );
     this.programController = null;
     this.style = FFSa( _style );
   
@@ -33,9 +32,10 @@ export class Circle extends CircleGeom {
   Render ( _rc ) {
 
     const style = this.style;
+    const shape = this.shape;
     
     _rc.beginPath();
-    _rc.arc( this.x, this.y, this.radius, 0, PII, false );
+    _rc.arc( shape.x, shape.y, shape.radius, 0, PII, false );
 
     if ( style.shadow.applied === true ) style.shadow.Apply( _rc );
 
@@ -66,9 +66,11 @@ export class Circle extends CircleGeom {
 
     if ( this.programController !== null ) {
 
+      const shape = this.shape;
+
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),
-        this.x, this.y, this.radius
+        shape.x, shape.y, shape.radius
       );
       
     }
@@ -124,6 +126,18 @@ export class Circle extends CircleGeom {
 
     return this;
   
+  }
+
+  /**
+   * 
+   * @param {Geom.Circle} _shape 
+   */
+  SetShape ( _shape ) {
+
+    this.shape = _shape;
+
+    return this;
+
   }
 
 }

@@ -47,8 +47,8 @@ export default () => {
     let dragger = null;
     const a = new nk2.Collision.Body2D( new nk2.Geom.AABB2D( 0, 0, 50, 200 ) );
     const b = new nk2.Collision.Body2D( new nk2.Geom.AABB2D( 0, 0, 100, 200 ) );
-    const g1 = new nk2.Graphic2D( 100, 0, new nk2.Path.AABB2D( 0, 0, 0, 0 ).SetC( a.shape ) );
-    const g2 = new nk2.Graphic2D( 0, 100, new nk2.Path.AABB2D( 0, 0, 0, 0 ).SetC( b.shape ) );
+    const g1 = new nk2.Graphic2D( 100, 0, new nk2.Path.AABB2D().SetShape( a.shape.Copy() ) );
+    const g2 = new nk2.Graphic2D( 0, 100, new nk2.Path.AABB2D().SetShape( b.shape.Copy() ) );
 
     a.SetRelative( g1.position );
     b.SetRelative( g2.position );

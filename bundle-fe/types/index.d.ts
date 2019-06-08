@@ -428,6 +428,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): AABB2D;
         Set(_tlx: number, _tly: number, _brx: number, _bry: number): this;
         SetC(_aabb2d: AABB2D): this;
         SetXYWH(_x: number, _y: number, _w: number, _h: number): this;
@@ -450,6 +451,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): Line2D;
         Set(_sx: number, _sy: number, _ex: number, _ey: number): this;
         SetC(_line2d: Line2D): this;
         SetPosition(_x: number, y: number): this;
@@ -508,6 +510,7 @@ export namespace Geom {
         belongsTo: object | any;
         TYPE: number;
         static get TYPE(): number;
+        Copy(): Circle;
         Set(_x: number, _y: number, _radius: number): this;
         SetC(_circle: Circle): this;
         SetPosition(_x: number, _y: number): this;
@@ -551,8 +554,9 @@ export namespace Path {
     export interface Path2D {
 
     }
-    declare class AABB2D extends Geom.AABB2D implements Path2D {
+    declare class AABB2D implements Path2D {
         constructor(_tlx: number, _tly: number, _brx: number, _bry: number, _style?: object);
+        shape: Geom.AABB2D;
         programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
@@ -560,9 +564,11 @@ export namespace Path {
         LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
+        SetShape(_shape: Geom.AABB2D): this;
     }
-    declare class Circle extends Geom.Circle implements Path2D {
+    declare class Circle implements Path2D {
         constructor(_x: number, _y: number, _radius: number, _style?: object);
+        shape: Geom.Circle;
         programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
@@ -570,9 +576,11 @@ export namespace Path {
         LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
+        SetShape(_shape: Geom.Circle): this;
     }
-    declare class Line2D extends Geom.Line2D implements Path2D {
+    declare class Line2D implements Path2D {
         constructor(_sx: number, _sy: number, _ex: number, _ey: number, _style?: object);
+        shape: Geom.Line2D;
         programController: Controller.ProgramController.GLProgramController | null;
         style: object;
         Render(_rc: CanvasRenderingContext2D): void;
@@ -580,9 +588,11 @@ export namespace Path {
         LinkProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         UseProgramController(_pc: Controller.ProgramController.GLProgramController): this;
         LinkStyle(): this;
+        SetShape(_shape: Geom.Line2D): this;
     }
-    declare class Pixel extends Vector2D implements Path2D {
+    declare class Pixel implements Path2D {
         constructor(_x: number, _y: number, _style?: object);
+        shape: Vector2D;
         style: object;
         color: Color;
         programController: Controller.ProgramController.GLProgramController | null;
@@ -593,10 +603,15 @@ export namespace Path {
         LinkStyle(): this;
         GetBufferData(): number[];
         UpdateInBuffer(_buffer: Float32Array, _index: number): void
+        SetShape(_shape: Vector2D): this;
     }
-    declare class Polygon2D extends Geom.Polygon2D implements Path2D {
+    declare class Polygon2D implements Path2D {
         constructor(_vertices: Vector2D[], _style?: object);
+        shape: Geom.Polygon2D;
+        programController: Controller.ProgramController.GLProgramController | null;
+        style: object;
         Render(_rc: CanvasRenderingContext2D): void;
+        SetShape(_shape: Geom.Polygon2D): this;
     }
 }
 export namespace Shader {
@@ -1697,7 +1712,7 @@ declare class TextureEntity2D extends BatchableContainer2D {
     Render(_rc: CanvasRenderingContext2D): void;
     GLRender(_gl: WebGLRenderingContext | WebGL2RenderingContext): void;
     UpdateTextureTransform(): void;
-    UpdateShape(_newShape: Geom.Shape): void;
+    UpdateShape(_newShape?: Geom.Shape): void;
     ClipReconfigure(
         _x: number, _y: number, _w: number, _h: number,
         _offsetX: number, _offsetY: number, _originW: number, _originH: number

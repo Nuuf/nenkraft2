@@ -41,6 +41,18 @@ export class AABB2D {
 
   /**
    * 
+   * @return {AABB2D}
+   */
+  Copy () {
+
+    const o = new AABB2D();
+
+    return o.SetC( this );
+  
+  }
+
+  /**
+   * 
    * @param {number} _tlx 
    * @param {number} _tly 
    * @param {number} _brx 

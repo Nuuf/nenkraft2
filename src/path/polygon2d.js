@@ -5,7 +5,7 @@
 import { Polygon2D as Polygon2DGeom } from '../geom/polygon/polygon2d';
 import { FFSa } from '../style';
 
-export class Polygon2D extends Polygon2DGeom {
+export class Polygon2D {
 
   /**
    * 
@@ -14,8 +14,7 @@ export class Polygon2D extends Polygon2DGeom {
    */
   constructor ( _vertices, _style ) {
 
-    super( _vertices );
-    
+    this.shape = new Polygon2DGeom( _vertices );
     this.programController = null;
     this.style = FFSa( _style );
   
@@ -29,7 +28,7 @@ export class Polygon2D extends Polygon2DGeom {
    */
   Render ( _rc ) {
 
-    const vertices = this.vertices;
+    const vertices = this.shape.vertices;
     const style = this.style;
 
     _rc.beginPath();
@@ -82,5 +81,17 @@ export class Polygon2D extends Polygon2DGeom {
    * LinkStyle () {
    * }
    */
+
+  /**
+   * 
+   * @param {Geom.Polygon2D} _shape 
+   */
+  SetShape ( _shape ) {
+
+    this.shape = _shape;
+
+    return this;
+
+  }
 
 }

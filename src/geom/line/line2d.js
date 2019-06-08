@@ -38,6 +38,18 @@ export class Line2D {
 
   /**
    * 
+   * @return {Line2D}
+   */
+  Copy () {
+
+    const o = new Line2D();
+
+    return o.SetC( this );
+  
+  }
+
+  /**
+   * 
    * @param {number} _sx 
    * @param {number} _sy 
    * @param {number} _ex 

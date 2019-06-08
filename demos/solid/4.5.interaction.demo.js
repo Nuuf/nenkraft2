@@ -38,9 +38,9 @@ export default () => {
     const dragOffset = new nk2.Vector2D( 0, 0 );
     let dragger = null;
 
-    nk2.Geom.PolygonConstruction.Cyclic2D( polygon.path, 0, 0, 50, 5 );
+    nk2.Geom.PolygonConstruction.Cyclic2D( polygon.path.shape, 0, 0, 50, 5 );
 
-    line.path.Rotate( 23 / 180 * Math.PI );
+    line.path.shape.Rotate( 23 / 180 * Math.PI );
 
     camera.force.SetSame( 5 );
 

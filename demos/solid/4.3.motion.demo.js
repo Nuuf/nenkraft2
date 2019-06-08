@@ -50,7 +50,7 @@ export default () => {
 
       Grow () {
 
-        const newEndL = this.path.e.SubtractVC( this.path.s );
+        const newEndL = this.path.shape.e.SubtractVC( this.path.shape.s );
         const newEndR = newEndL.Copy();
 
         newEndL.Rotate( 
@@ -65,10 +65,10 @@ export default () => {
         );
         newEndL.Multiply( 0.67, 0.67 );
         newEndR.Multiply( 0.67, 0.67 );
-        newEndL.AddV( this.path.e );
-        newEndR.AddV( this.path.e );
-        new Branch( this.path.e, newEndL, this.parent );
-        new Branch( this.path.e, newEndR, this.parent );
+        newEndL.AddV( this.path.shape.e );
+        newEndR.AddV( this.path.shape.e );
+        new Branch( this.path.shape.e, newEndL, this.parent );
+        new Branch( this.path.shape.e, newEndR, this.parent );
       
       }
     
