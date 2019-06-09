@@ -41,7 +41,7 @@ export class Registry {
    */
   RemoveCommand ( _command ) {
 
-    const commands = this.commands;
+    const { commands } = this;
     const ix = commands.indexOf( _command );
 
     if ( ix !== -1 ) {
@@ -62,8 +62,8 @@ export class Registry {
    */
   GetCommandById ( _id ) {
 
-    const commands = this.commands;
-    let command = commands[ 0 ];
+    const { commands } = this;
+    let [ command ] = commands;
 
     for ( var i = 0; i < commands.length; command = commands[ ++i ] ) {
 

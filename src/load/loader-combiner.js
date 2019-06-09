@@ -31,8 +31,8 @@ export class LoaderCombiner {
    */
   Load () {
 
-    const loaders = this.loaders;
-    let loader = loaders[ 0 ];
+    const { loaders } = this;
+    let [ loader ] = loaders;
 
     for ( var i = 0; i < loaders.length; loader = loaders[ ++i ] ) {
 
@@ -51,8 +51,8 @@ export class LoaderCombiner {
 
     if ( ++this.loaderCount === this.loaders.length ) {
 
-      const loaders = this.loaders;
-      let loader = loaders[ 0 ];
+      const { loaders } = this;
+      let [ loader ] = loaders;
 
       for ( var i = 0; i < loaders.length; loader = loaders[ ++i ] ) {
 

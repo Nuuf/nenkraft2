@@ -41,7 +41,7 @@ export class System extends VisualContainer2D {
    */
   HandleParticles () {
 
-    const particles = this.particles;
+    const { particles } = this;
 
     for ( var i = 0; i < particles.length; ++i ) {
 
@@ -57,8 +57,8 @@ export class System extends VisualContainer2D {
    */
   HandleParticleDeletion () {
 
-    const particles = this.particles;
-    let particle = particles[ 0 ];
+    const { particles } = this;
+    let [ particle ] = particles;
 
     for ( var i = 0; i < particles.length; particle = particles[ ++i ] ) {
 
@@ -102,7 +102,7 @@ export class System extends VisualContainer2D {
    */
   RemoveParticle ( _particle ) {
 
-    const particles = this.particles;
+    const { particles } = this;
     const ix = particles.indexOf( _particle );
 
     if ( ix !== -1 ) {

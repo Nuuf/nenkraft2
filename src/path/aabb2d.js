@@ -31,9 +31,9 @@ export class AABB2D {
    */
   Render ( _rc ) {
 
-    const tl = this.shape.tl;
-    const br = this.shape.br;
-    const style = this.style;
+    const { tl } = this.shape;
+    const { br } = this.shape;
+    const { style } = this;
 
     _rc.beginPath();
     _rc.moveTo( tl.x, tl.y );
@@ -71,7 +71,7 @@ export class AABB2D {
 
     if ( this.programController !== null ) {
 
-      const shape = this.shape;
+      const { shape } = this;
 
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),

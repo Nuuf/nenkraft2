@@ -63,7 +63,7 @@ export class Polygon2D {
    */
   SetC ( _polygon ) {
 
-    const vertices = _polygon.vertices;
+    const { vertices } = _polygon;
 
     for ( var i = 0; i < vertices.length; ++i ) {
 
@@ -86,7 +86,7 @@ export class Polygon2D {
    */
   ExtractSegments ( _segments ) {
 
-    const vertices = this.vertices;
+    const { vertices } = this;
     const l = vertices.length - 1;
 
     if ( _segments == null ) _segments = [];
@@ -117,8 +117,8 @@ export class Polygon2D {
     _outside = !!_outside;
 
     let randFunc = RandomFloat;
-    const tl = this.aabb.tl;
-    const br = this.aabb.br;
+    const { tl } = this.aabb;
+    const { br } = this.aabb;
     const points = [];
 
     if ( _int === true ) randFunc = RandomInteger;
@@ -219,7 +219,7 @@ export class Polygon2D {
     let miy = mix;
     let may = -mix;
     let vertex;
-    const vertices = this.vertices;
+    const { vertices } = this;
 
     for ( var i = 0; i < vertices.length; ++i ) {
 
@@ -256,9 +256,9 @@ export class Polygon2D {
 
     let i = 0;
     let vertex;
-    const aabb = this.aabb;
+    const { aabb } = this;
     const ap = aabb.tl.Copy();
-    const vertices = this.vertices;
+    const { vertices } = this;
     const l = vertices.length;
 
     _anchorX = _anchorX == null ? 0.5 : _anchorX;
@@ -295,8 +295,8 @@ export class Polygon2D {
     
     }
 
-    const vertices = this.vertices;
-    const centroid = this.centroid;
+    const { vertices } = this;
+    const { centroid } = this;
 
     for ( var i = 0; i < vertices.length; ++i ) {
 
@@ -317,8 +317,8 @@ export class Polygon2D {
    */
   ComputeCentroid () {
 
-    const vertices = this.vertices;
-    const centroid = this.centroid;
+    const { vertices } = this;
+    const { centroid } = this;
 
     centroid.Set( 0, 0 );
 
@@ -342,9 +342,9 @@ export class Polygon2D {
    */
   ComputeNormalsA () {
 
-    const vertices = this.vertices;
+    const { vertices } = this;
     const l = vertices.length - 1;
-    const normals = this.normals;
+    const { normals } = this;
 
     normals.length = 0;
 
@@ -366,9 +366,9 @@ export class Polygon2D {
    */
   ComputeNormalsB () {
 
-    const vertices = this.vertices;
+    const { vertices } = this;
     const l = vertices.length - 1;
-    const normals = this.normals;
+    const { normals } = this;
 
     normals.length = 0;
 
@@ -390,9 +390,9 @@ export class Polygon2D {
    */
   ComputePerimeterMidPoints () {
 
-    const vertices = this.vertices;
+    const { vertices } = this;
     const l = vertices.length - 1;
-    const perimeterMidPoints = this.perimeterMidPoints;
+    const { perimeterMidPoints } = this;
 
     perimeterMidPoints.length = 0;
 
@@ -422,9 +422,9 @@ export class Polygon2D {
     let vertexi;
     let vertexj;
     let intersects = false;
-    const vertices = this.vertices;
-    const x = _p.x;
-    const y = _p.y;
+    const { vertices } = this;
+    const { x } = _p;
+    const { y } = _p;
 
     for ( var i = 0, j = vertices.length - 1; i < vertices.length; j = i++ ) {
 

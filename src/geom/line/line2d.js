@@ -202,8 +202,8 @@ export class Line2D {
    */
   IntersectsPoint2D ( _p ) {
 
-    const s = this.s;
-    const e = this.e;
+    const { s } = this;
+    const { e } = this;
     const cross = ( _p.y - s.y ) * ( e.x - s.x ) - ( _p.x - s.x ) * ( e.y - s.y );
 
     if ( Math.abs( cross ) > this.epsilon ) {

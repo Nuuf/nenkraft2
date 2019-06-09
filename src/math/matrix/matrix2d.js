@@ -7,7 +7,7 @@ const Sin = Math.sin;
 const Atan2 = Math.atan2;
 const Sqrt = Math.sqrt;
 const Abs = Math.abs;
-const PI = Math.PI;
+const { PI } = Math;
 
 export class Matrix2D {
 
@@ -243,9 +243,9 @@ export class Matrix2D {
 
     const sa = Sin( _angle );
     const ca = Cos( _angle );
-    const a = this.a;
-    const c = this.c;
-    const e = this.e;
+    const { a } = this;
+    const { c } = this;
+    const { e } = this;
 
     this.a = a * ca - this.b * sa;
     this.b = a * sa + this.b * ca;
@@ -266,10 +266,10 @@ export class Matrix2D {
    */
   Decompose ( _transform ) {
 
-    const a = this.a;
-    const b = this.b;
-    const c = this.c;
-    const d = this.d;
+    const { a } = this;
+    const { b } = this;
+    const { c } = this;
+    const { d } = this;
     const skx = -Atan2( -c, d );
     const sky = Atan2( b, a );
     const delta = Abs( skx + sky );
@@ -321,7 +321,7 @@ export class Matrix2D {
    */
   AsArray ( _transpose ) {
 
-    const array = this.array;
+    const { array } = this;
 
     if ( _transpose === true ) {
 

@@ -144,7 +144,7 @@ export class Animation {
    */
   GetFrameById ( _id, _returnIndex ) {
 
-    const frames = this.frames;
+    const { frames } = this;
 
     for ( var i = 0; i < frames.length; ++i ) {
 
@@ -249,7 +249,7 @@ export class Animation {
   NextFrame () {
 
     let done = false;
-    const frames = this.frames;
+    const { frames } = this;
     const fsl = frames.length;
 
     if ( this.reverse === false ) {
@@ -343,7 +343,7 @@ export class Animation {
    */
   ResetAllFrames () {
 
-    const frames = this.frames;
+    const { frames } = this;
 
     for ( var i = 0; i < frames.length; ++i ) {
 

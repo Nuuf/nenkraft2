@@ -58,7 +58,7 @@ export class Tilemap extends TextureEntity2D {
    */
   SetMapLayer ( _layer ) {
 
-    const data = _layer.data;
+    const { data } = _layer;
 
     if ( _layer.width * _layer.height !== data.length ) {
 
@@ -98,14 +98,14 @@ export class Tilemap extends TextureEntity2D {
    */
   SetOrthogonal ( _data ) {
 
-    const attributes = this.tileset.setData.tileset.attributes;
+    const { attributes } = this.tileset.setData.tileset;
     const l = _data.length;
-    const tileW = this.tileW;
-    const tileH = this.tileH;
+    const { tileW } = this;
+    const { tileH } = this;
     const texColumns = attributes.columns;
     const spacing = parseInt( attributes.spacing );
     const margin = parseInt( attributes.margin );
-    const columns = this.columns;
+    const { columns } = this;
     const tscaleX = tileW / this.texture.fw;
     const tscaleY = tileH / this.texture.fh;
     let tileIndex = 0;
@@ -232,14 +232,14 @@ export class Tilemap extends TextureEntity2D {
    */
   CullRender ( _rc ) {
 
-    const image = this.texture.image;
-    const tiles = this.tiles;
-    const tileW = this.tileW;
-    const tileH = this.tileH;
-    const culler = this.culler;
+    const { image } = this.texture;
+    const { tiles } = this;
+    const { tileW } = this;
+    const { tileH } = this;
+    const { culler } = this;
     const cBounds = culler.bounds;
     const cm = culler.conversionMatrix;
-    let tile = tiles[ 0 ];
+    let [ tile ] = tiles;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 
@@ -271,11 +271,11 @@ export class Tilemap extends TextureEntity2D {
    */
   NoCullRender ( _rc ) {
 
-    const image = this.texture.image;
-    const tiles = this.tiles;
-    const tileW = this.tileW;
-    const tileH = this.tileH;
-    let tile = tiles[ 0 ];
+    const { image } = this.texture;
+    const { tiles } = this;
+    const { tileW } = this;
+    const { tileH } = this;
+    let [ tile ] = tiles;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 
@@ -303,13 +303,13 @@ export class Tilemap extends TextureEntity2D {
   GLCullRender () {
 
     const pc = this.programController;
-    const uniformId = this.texture.uniformId;
+    const { uniformId } = this.texture;
     const tint = this.tint.channel;
-    const tiles = this.tiles;
-    const culler = this.culler;
+    const { tiles } = this;
+    const { culler } = this;
     const cBounds = culler.bounds;
     const cm = culler.conversionMatrix;
-    let tile = tiles[ 0 ];
+    let [ tile ] = tiles;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 
@@ -339,10 +339,10 @@ export class Tilemap extends TextureEntity2D {
   GLNoCullRender () {
 
     const pc = this.programController;
-    const uniformId = this.texture.uniformId;
+    const { uniformId } = this.texture;
     const tint = this.tint.channel;
-    const tiles = this.tiles;
-    let tile = tiles[ 0 ];
+    const { tiles } = this;
+    let [ tile ] = tiles;
 
     for ( var i = 0; i < tiles.length; tile = tiles[ ++i ] ) {
 

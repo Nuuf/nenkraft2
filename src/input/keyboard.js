@@ -51,9 +51,9 @@ export class Keyboard {
 
     _event.stopPropagation();
 
-    const keyCode = _event.keyCode;
-    const keys = this.keys;
-    let key = keys[ 0 ];
+    const { keyCode } = _event;
+    const { keys } = this;
+    let [ key ] = keys;
 
     for ( var i = 0; i < keys.length; key = keys[ ++i ] ) {
 
@@ -82,9 +82,9 @@ export class Keyboard {
 
     _event.stopPropagation();
 
-    const keyCode = _event.keyCode;
-    const keys = this.keys;
-    let key = keys[ 0 ];
+    const { keyCode } = _event;
+    const { keys } = this;
+    let [ key ] = keys;
 
     for ( var i = 0; i < keys.length; key = keys[ ++i ] ) {
 
@@ -121,7 +121,7 @@ export class Keyboard {
   Process () {
     
     const keys = this.keysToProcess;
-    let key = keys[ 0 ];
+    let [ key ] = keys;
 
     for ( var i = 0; i < keys.length; key = keys[ ++i ] ) {
 
@@ -150,7 +150,7 @@ export class Keyboard {
    */
   KeyCodeBeingCaptured ( _code ) {
 
-    const keys = this.keys;
+    const { keys } = this;
 
     for ( var i = 0; i < keys.length; ++i ) {
 
@@ -190,7 +190,7 @@ export class Keyboard {
    */
   GetKey ( _code ) {
 
-    const keys = this.keys;
+    const { keys } = this;
 
     for ( var i = 0; i < keys.length; ++i ) {
 

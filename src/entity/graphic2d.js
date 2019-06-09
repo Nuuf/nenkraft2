@@ -39,7 +39,7 @@ export class Graphic2D extends BatchableContainer2D {
 
       this.transform.ApplyGlobal( _rc );
 
-      const path = this.path;
+      const { path } = this;
 
       if ( path && path.Render && this.display === true ) {
 
@@ -75,7 +75,7 @@ export class Graphic2D extends BatchableContainer2D {
 
       this.ProcessTransform( this.parent );
 
-      const path = this.path;
+      const { path } = this;
 
       if ( path && path.GLRender && this.display === true ) {
 
@@ -119,9 +119,10 @@ export class Graphic2D extends BatchableContainer2D {
     
     }
 
-    const bufferData = this.bufferData;
+    const { bufferData } = this;
 
     bufferData.length = 0;
+    /* eslint-disable */
     bufferData[ 0 ] = transformData[ 0 ];
     bufferData[ 1 ] = transformData[ 1 ];
     bufferData[ 2 ] = transformData[ 2 ];
@@ -131,6 +132,7 @@ export class Graphic2D extends BatchableContainer2D {
     bufferData[ 6 ] = transformData[ 6 ];
     bufferData[ 7 ] = transformData[ 7 ];
     bufferData[ 8 ] = transformData[ 8 ];
+    /* eslint-enable */
 
     if ( this.path && this.path.GetBufferData ) {
 
@@ -154,6 +156,7 @@ export class Graphic2D extends BatchableContainer2D {
     const buffer = this.parent.childDataBuffer;
     const index = this.bufferStartIndex;
 
+    /* eslint-disable */
     buffer[ index ] = transformData[ 0 ];
     buffer[ index + 1 ] = transformData[ 1 ];
     buffer[ index + 2 ] = transformData[ 2 ];
@@ -163,6 +166,7 @@ export class Graphic2D extends BatchableContainer2D {
     buffer[ index + 6 ] = transformData[ 6 ];
     buffer[ index + 7 ] = transformData[ 7 ];
     buffer[ index + 8 ] = transformData[ 8 ];
+    /* eslint-enable */
 
     if ( this.path && this.path.UpdateInBuffer ) {
 
@@ -196,7 +200,7 @@ export class Graphic2D extends BatchableContainer2D {
    */
   SetPath ( _path ) {
 
-    const shape = _path.shape;
+    const { shape } = _path;
 
     if ( shape !== undefined ) {
 

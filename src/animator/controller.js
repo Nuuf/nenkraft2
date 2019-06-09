@@ -58,8 +58,8 @@ export class Controller {
    */
   GetAnimationById ( _id ) {
 
-    const animations = this.animations;
-    let animation = animations[ 0 ];
+    const { animations } = this;
+    let [ animation ] = animations;
 
     for ( var i = 0; i < animations.length; animation = animations[ ++i ] ) {
 

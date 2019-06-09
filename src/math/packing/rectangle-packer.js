@@ -38,7 +38,7 @@ export class RectanglePacker {
     const ph = this.propH;
     const px = this.padding.x;
     const py = this.padding.y;
-    let obj = _objects[ 0 ];
+    let [ obj ] = _objects;
     let ow = obj[ pw ] + px;
     let oh = obj[ ph ] + py;
     let node = null;
@@ -93,7 +93,7 @@ export class RectanglePacker {
     const prh = this.propH;
     const px = this.padding.x;
     const py = this.padding.y;
-    let obj = _objects[ 0 ];
+    let [ obj ] = _objects;
     let ow = obj[ prw ] + px;
     let oh = obj[ prh ] + py;
     let node = null;

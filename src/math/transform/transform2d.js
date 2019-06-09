@@ -52,10 +52,10 @@ export class Transform2D {
    */
   UpdateLocal () {
 
-    const localTransform = this.localTransform;
-    const position = this.position;
-    const scale = this.scale;
-    const pivot = this.pivot;
+    const { localTransform } = this;
+    const { position } = this;
+    const { scale } = this;
+    const { pivot } = this;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;
@@ -77,11 +77,11 @@ export class Transform2D {
    */
   UpdateGlobal ( _matrix ) {
 
-    const localTransform = this.localTransform;
-    const globalTransform = this.globalTransform;
-    const position = this.position; 
-    const scale = this.scale; 
-    const pivot = this.pivot;
+    const { localTransform } = this;
+    const { globalTransform } = this;
+    const { position } = this; 
+    const { scale } = this; 
+    const { pivot } = this;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;
@@ -110,8 +110,8 @@ export class Transform2D {
    */
   UpdateSkew () {
 
-    const skew = this.skew;
-    const rotation = this.rotation;
+    const { skew } = this;
+    const { rotation } = this;
 
     this.skewCX = Cos( rotation + skew.y );
     this.skewSX = Sin( rotation + skew.y );

@@ -309,7 +309,7 @@ export class CoreEntity2D {
 
     const r = PS_T.rotation;
     const pos = PS_T.position;
-    const scale = PS_T.scale;
+    const { scale } = PS_T;
 
     return this.bounds.ComputeGlobal( 
       pos.x,

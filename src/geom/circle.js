@@ -6,7 +6,7 @@ import { Vector2D } from '../math/vector/vector2d';
 import { DegreesToRadians } from '../math';
 import { RandomFloat, RandomInteger } from '../utility';
 
-const PI = Math.PI;
+const { PI } = Math;
 const Sin = Math.sin;
 const Cos = Math.cos;
 

@@ -100,13 +100,14 @@ export class TextureEntity2D extends BatchableContainer2D {
 
       if ( this.display === true ) {
 
-        const clip = this.clip;
-        const tl = clip.tl;
-        const br = clip.br;
+        const { clip } = this;
+        const { tl } = clip;
+        const { br } = clip;
         const ttl = this.textureTranslation;
 
         this.transform.ApplyGlobal( _rc );
 
+        // eslint-disable-next-line
         _rc.globalAlpha = this.tint.channel[ 3 ];
         _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
@@ -238,8 +239,8 @@ export class TextureEntity2D extends BatchableContainer2D {
 
     const tscaleX = _w / this.texture.fw;
     const tscaleY = _h / this.texture.fh;
-    const width = this.width;
-    const height = this.height;
+    const { width } = this;
+    const { height } = this;
 
     this.clip.Set( _x, _y, _w, _h );
     this.w = _w;
@@ -305,9 +306,10 @@ export class TextureEntity2D extends BatchableContainer2D {
     
     }
 
-    const bufferData = this.bufferData;
+    const { bufferData } = this;
 
     bufferData.length = 0;
+    /* eslint-disable */
     bufferData[ 0 ] = transformData[ 0 ];
     bufferData[ 1 ] = transformData[ 1 ];
     bufferData[ 2 ] = transformData[ 2 ];
@@ -335,6 +337,7 @@ export class TextureEntity2D extends BatchableContainer2D {
     bufferData[ 24 ] = textureTransformationData[ 6 ];
     bufferData[ 25 ] = textureTransformationData[ 7 ];
     bufferData[ 26 ] = textureTransformationData[ 8 ];
+    /* eslint-enable */
 
     return bufferData;
   
@@ -355,6 +358,7 @@ export class TextureEntity2D extends BatchableContainer2D {
     const buffer = this.parent.childDataBuffer;
     const index = this.bufferStartIndex;
 
+    /* eslint-disable */
     buffer[ index ] = transformData[ 0 ];
     buffer[ index + 1 ] = transformData[ 1 ];
     buffer[ index + 2 ] = transformData[ 2 ];
@@ -382,6 +386,7 @@ export class TextureEntity2D extends BatchableContainer2D {
     buffer[ index + 24 ] = textureTransformationData[ 6 ];
     buffer[ index + 25 ] = textureTransformationData[ 7 ];
     buffer[ index + 26 ] = textureTransformationData[ 8 ];
+    /* eslint-enable */
   
   }
   

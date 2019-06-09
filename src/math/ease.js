@@ -5,7 +5,7 @@
 const Sin = Math.sin;
 const Cos = Math.cos;
 const Sqrt = Math.sqrt;
-const PI = Math.PI;
+const { PI } = Math;
 
 /**
  * 

@@ -732,7 +732,7 @@ export function CreateIteratorArgs ( _args, _pre, _post ) {
  */
 export function ReplaceArgumentWithObjectValue ( _object, _args, _pre ) {
 
-  let arg = _args[ 0 ];
+  let [ arg ] = _args;
 
   for ( var i = 0; i < _args.length; arg = _args[ ++i ] ) {
 

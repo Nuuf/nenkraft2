@@ -97,8 +97,8 @@ export class Command {
     if ( this.options == null ) this.options = [];
     _priority = _priority == null ? 0 : _priority;
   
-    const options = this.options;
-    let option = options[ 0 ];
+    const { options } = this;
+    let [ option ] = options;
     const opt = new Option( _id, _handle, _info, _priority, _breakIfExecuted );
   
     opt.command = this;
@@ -135,12 +135,12 @@ export class Command {
     let data;
     const dsep = this.dataSeparator;
     const dsCopy = PS_DS_COPY;
-    const jsonPrefix = this.jsonPrefix;
+    const { jsonPrefix } = this;
     const jsonPrefixL = jsonPrefix.length;
 
     dsCopy.push.apply( dsCopy, _dataStrs );
 
-    let str = dsCopy[ 0 ];
+    let [ str ] = dsCopy;
   
     for ( var i = 0; i < dsCopy.length; str = dsCopy[ ++i ] ) {
   
@@ -156,6 +156,7 @@ export class Command {
 
         } else {
 
+          // eslint-disable-next-line
           _data[ data[ 0 ] ] = data[ 1 ];
         
         }
@@ -209,8 +210,8 @@ export class Command {
    */
   GetOptionById ( _id ) {
   
-    const options = this.options;
-    let option = options[ 0 ];
+    const { options } = this;
+    let [ option ] = options;
   
     for ( var i = 0; i < options.length; option = options[ ++i ] ) {
   
@@ -228,7 +229,7 @@ export class Command {
    */
   GetAllOptionIds () {
   
-    const options = this.options;
+    const { options } = this;
     const allOptionIds = [];
 
     for ( var i = 0; i < options.length; ++i ) {
@@ -249,7 +250,7 @@ export class Command {
    */
   GetAndRemoveMatchingOptionIds ( _dataStrs ) {
   
-    const allOptionIds = this.allOptionIds;
+    const { allOptionIds } = this;
   
     if ( allOptionIds == null ) return null;
   
@@ -279,8 +280,8 @@ export class Command {
   GenerateInfoString () {
   
     let str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
-    const options = this.options;
-    let option = options[ 0 ];
+    const { options } = this;
+    let [ option ] = options;
   
     for ( var i = 0; i < options.length; option = options[ ++i ] ) {
   

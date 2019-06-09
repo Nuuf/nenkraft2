@@ -45,7 +45,7 @@ export class Text extends VisualContainer2D {
 
       if ( this.display === true ) {
 
-        const style = this.style;
+        const { style } = this;
 
         if ( style.shadow.applied === true ) {
 

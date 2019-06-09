@@ -4,7 +4,7 @@
 
 'use strict';
 
-const PI = Math.PI;
+const { PI } = Math;
 const Sin = Math.sin;
 const Cos = Math.cos;
 const Pow = Math.pow;
@@ -138,7 +138,7 @@ export function LikeASquareGrid ( _objects, _w, _marginX, _marginY, _offsetX, _o
   _offsetY = _offsetY ? _offsetY : 0;
 
   const columns = ( _w / _marginX ) | 0;
-  let object = _objects[ 0 ];
+  let [ object ] = _objects;
  
   for ( var i = 0 ; i < _objects.length; object = _objects[ ++i ] ) {
 

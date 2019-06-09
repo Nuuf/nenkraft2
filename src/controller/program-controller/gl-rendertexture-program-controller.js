@@ -32,7 +32,7 @@ export class GLRendertextureProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.essenceBuffer = gl.createBuffer();
     this.frameBuffer = gl.createFramebuffer();
@@ -65,7 +65,7 @@ export class GLRendertextureProgramController extends GLProgramController {
     this.w = _w;
     this.h = _h;
 
-    const gl = this.gl;
+    const { gl } = this;
     let essence;
 
     if ( _ex != null && _ey != null && _ew != null && _eh != null ) {
@@ -113,8 +113,8 @@ export class GLRendertextureProgramController extends GLProgramController {
    */
   ExecuteClean () {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
+    const { gl } = this;
+    const { attributes } = this;
 
     if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 
@@ -147,9 +147,9 @@ export class GLRendertextureProgramController extends GLProgramController {
    */
   Execute ( _projection, _translation, _transformation ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
+    const { gl } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
 
     if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 

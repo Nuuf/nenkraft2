@@ -27,7 +27,7 @@ export class GLPixelBatchProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.dataBuffer = gl.createBuffer();
     this.AssignAttribute( 'aProjection1' );
@@ -48,8 +48,8 @@ export class GLPixelBatchProgramController extends GLProgramController {
    */
   Execute ( _data, _numElements ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
+    const { gl } = this;
+    const { attributes } = this;
 
     if ( GLProgramController.LAST_USED_CONTROLLER !== this ) {
 

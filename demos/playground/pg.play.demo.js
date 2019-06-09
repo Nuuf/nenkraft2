@@ -54,8 +54,8 @@ export default () => {
 
     stage.ticker.StartAF();
 
-    const Key = nk2.Input.Key;
-    const keyboard = stage.keyboard;
+    const { Key } = nk2.Input;
+    const { keyboard } = stage;
 
     keyboard.NoProcessCapture( 
       Key.SHIFT,

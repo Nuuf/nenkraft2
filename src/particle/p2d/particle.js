@@ -80,8 +80,8 @@ export class Particle {
 
     if ( this.lifespan++ < this.lifespanTotal ) {
 
-      const entity = this.entity;
-      const velocity = this.velocity;
+      const { entity } = this;
+      const { velocity } = this;
       const lifespanPerc = 1 - this.lifespan / this.lifespanTotal;
       const osc = this.oscillation;
 
@@ -262,7 +262,7 @@ export class Particle {
     if ( _options == null ) return;
 
     this.dead = false;
-    let entity = this.entity;
+    let { entity } = this;
 
     if ( _options.texture != null ) {
 
@@ -676,7 +676,7 @@ export class Particle {
    */
   ResetEntity ( _unitId ) {
 
-    const entity = this.entity;
+    const { entity } = this;
 
     if ( _unitId != null ) {
 

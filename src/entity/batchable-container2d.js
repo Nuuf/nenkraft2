@@ -82,7 +82,7 @@ export class BatchableContainer2D extends VisualContainer2D {
 
     let child;
     let childData;
-    const children = this.children;
+    const { children } = this;
     const childDataBuffer = [];
 
     for ( var i = 0; i < children.length; ++i ) {

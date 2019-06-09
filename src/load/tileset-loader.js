@@ -58,7 +58,7 @@ export class TilesetLoader {
     }
 
     const l = _objects.length;
-    let item = _objects[ 0 ];
+    let [ item ] = _objects;
 
     this.toLoadCount += l;
 
@@ -117,7 +117,7 @@ export class TilesetLoader {
    */
   OnPartMapDataLoaded ( _event ) {
 
-    const id = _event.target.data.id;
+    const { id } = _event.target.data;
 
     if ( 
       this.imageLoader.imageCache.Contains( null, id ) &&
@@ -138,7 +138,7 @@ export class TilesetLoader {
    */
   OnPartSetDataLoaded ( _event ) {
 
-    const id = _event.target.data.id;
+    const { id } = _event.target.data;
 
     if ( 
       this.imageLoader.imageCache.Contains( null, id ) &&
@@ -159,7 +159,7 @@ export class TilesetLoader {
    */
   OnPartImageLoaded ( _event ) {
 
-    const id = _event.target.id;
+    const { id } = _event.target;
 
     if ( 
       this.mapDataLoader.dataCache.Contains( null, id ) &&

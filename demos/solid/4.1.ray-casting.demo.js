@@ -103,7 +103,7 @@ export default () => {
 
       rays.forEach( function ( ray ) {
 
-        const shape = ray.path.shape;
+        const { shape } = ray.path;
 
         shape.s.SetV( stage.mouse.position );
         shape.e.SetV( shape.s );

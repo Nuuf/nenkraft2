@@ -28,7 +28,7 @@ export class Dispatcher {
   GetListenerIndex ( _handle, _context ) {
 
     let listener;
-    const listeners = this.listeners;
+    const { listeners } = this;
 
     if ( listeners.length === 0 ) return -1;
 
@@ -103,7 +103,7 @@ export class Dispatcher {
   Dump ( _context ) {
 
     let listener;
-    const listeners = this.listeners;
+    const { listeners } = this;
 
     if ( _context !== undefined ) {
 

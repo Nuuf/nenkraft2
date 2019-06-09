@@ -182,6 +182,12 @@
           "comments": 100,
           "tabWidth": 4
         }
-      ]
+      ],
+      "prefer-destructuring": ["error", {
+        "array": true,
+        "object": true
+      }, {
+        "enforceForRenamedProperties": false
+      }]
     }
   }

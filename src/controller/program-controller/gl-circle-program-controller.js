@@ -32,7 +32,7 @@ export class GLCircleProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( TriRectArray( 0, 0, 1, 1 ) );
@@ -61,10 +61,10 @@ export class GLCircleProgramController extends GLProgramController {
    */
   Execute ( _projection, _x, _y, _radius ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
-    const vertices = this.vertices;
+    const { gl } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
+    const { vertices } = this;
     const fillChannel = this.fillColor.channel;
     const outlineChannel = this.outlineColor.channel;
     

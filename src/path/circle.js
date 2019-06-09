@@ -31,8 +31,8 @@ export class Circle {
    */
   Render ( _rc ) {
 
-    const style = this.style;
-    const shape = this.shape;
+    const { style } = this;
+    const { shape } = this;
     
     _rc.beginPath();
     _rc.arc( shape.x, shape.y, shape.radius, 0, PII, false );
@@ -66,7 +66,7 @@ export class Circle {
 
     if ( this.programController !== null ) {
 
-      const shape = this.shape;
+      const { shape } = this;
 
       this.programController.Execute(
         _transform2d.globalTransform.AsArray( true ),

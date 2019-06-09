@@ -54,7 +54,7 @@ export class GLProgramController {
    */
   Init ( _vs, _fs ) {
 
-    const gl = this.gl;
+    const { gl } = this;
     const vShader = this.CreateShader( _vs, gl.VERTEX_SHADER );
     const fShader = this.CreateShader( _fs, gl.FRAGMENT_SHADER );
     const program = this.program = gl.createProgram();
@@ -89,7 +89,7 @@ export class GLProgramController {
    */
   CreateShader ( _script, _type ) {
 
-    const gl = this.gl;
+    const { gl } = this;
     const shader = gl.createShader( _type );
 
     gl.shaderSource( shader, _script );

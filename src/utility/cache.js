@@ -106,8 +106,8 @@ export class Cache {
 
     if ( !_id ) throw new Error( 'ID Null or Undefined' );
 
-    const items = this.items;
-    let item = items[ 0 ];
+    const { items } = this;
+    let [ item ] = items;
 
     for ( var i = 0; i < items.length; item = items[ ++i ] ) {
 
@@ -138,8 +138,8 @@ export class Cache {
 
     if ( !_id ) throw new Error( 'ID Null or Undefined' );
 
-    const items = this.items;
-    let item = items[ 0 ];
+    const { items } = this;
+    let [ item ] = items;
 
     for ( var i = 0 ; i < items.length; item = items[ ++i ] ) {
 

@@ -97,7 +97,7 @@ export class Stadium {
    */
   GetStages () {
 
-    const stages = this.stages;
+    const { stages } = this;
     const rStages = [];
 
     for ( var i = 0; i < stages.length; ++i ) {
@@ -126,7 +126,7 @@ export class Stadium {
    */
   Process ( _delta ) {
 
-    const stages = this.stages;
+    const { stages } = this;
 
     for ( var i = 0; i < stages.length; ++i ) {
 
@@ -142,7 +142,7 @@ export class Stadium {
    */
   Destroy () {
 
-    const stages = this.stages;
+    const { stages } = this;
 
     for ( var i = 0; i < stages.length; ++i ) {
 

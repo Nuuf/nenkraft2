@@ -94,10 +94,10 @@ export class Maker {
     let f;
     let args;
     let ias;
-    const orders = this.orders;
+    const { orders } = this;
     const isArray = IsArray( _args );
     const isString = typeof _function === 'string';
-    let order = orders[ 0 ];
+    let [ order ] = orders;
 
     if ( isArray === true ) {
 
@@ -156,7 +156,7 @@ export class Maker {
    */
   Cast ( _key, _value ) {
 
-    const orders = this.orders;
+    const { orders } = this;
     const isString = typeof _value === 'string';
 
     for ( var i = 0 ; i < orders.length; ++i ) {

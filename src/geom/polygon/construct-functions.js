@@ -6,7 +6,7 @@ import { Vector2D } from '../../math/vector/vector2d';
 
 'use strict';
 
-const PI = Math.PI;
+const { PI } = Math;
 const Cos = Math.cos;
 const Sin = Math.sin;
 const Abs = Math.abs;

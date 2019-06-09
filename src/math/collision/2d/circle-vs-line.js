@@ -96,7 +96,7 @@ export const ReflectingResponse = function ( _a, _b, _result ) {
   const lshape = _b.shape;
   const cvel = _a.velocity;
   const cpos = _a.relative;
-  const cp = _result.cp;
+  const { cp } = _result;
 
   if ( _result.sOrE !== 0 ) {
 

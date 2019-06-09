@@ -29,7 +29,7 @@ export class GLLine2DProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( [ -1, 0, 1, 0 ] );
@@ -53,11 +53,11 @@ export class GLLine2DProgramController extends GLProgramController {
    */
   Execute ( _projection, _s, _e ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
-    const vertices = this.vertices;
-    const channel = this.color.channel;
+    const { gl } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
+    const { vertices } = this;
+    const { channel } = this.color;
 
     vertices[ 0 ] = _s.x;
     vertices[ 1 ] = _s.y;

@@ -63,6 +63,7 @@ export const ParseImports = function ( _shader ) {
       
   }
 
+  // eslint-disable-next-line
   snippet = imp[ 1 ].match( /\'(.[\s\S]*?)\'/ )[ 1 ];
 
   rsnippet = SNIPPETS[ snippet ];

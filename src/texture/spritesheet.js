@@ -32,9 +32,9 @@ export class Spritesheet {
     let frameTag;
     let sSource;
     let source;
-    const data = this.data;
-    const frames = data.frames;
-    const frameTags = data.meta.frameTags;
+    const { data } = this;
+    const { frames } = data;
+    const { frameTags } = data.meta;
 
     for ( var i = 0; i < frames.length; ++i ) {
 

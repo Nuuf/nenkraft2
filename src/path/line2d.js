@@ -31,9 +31,9 @@ export class Line2D {
    */
   Render ( _rc ) {
 
-    const s = this.shape.s;
-    const e = this.shape.e;
-    const style = this.style;
+    const { s } = this.shape;
+    const { e } = this.shape;
+    const { style } = this;
     
     _rc.beginPath();
     _rc.moveTo( s.x, s.y );

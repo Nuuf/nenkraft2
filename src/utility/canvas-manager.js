@@ -255,6 +255,7 @@ export class CanvasManager {
 
     if ( w <= this.w ) {
 
+      // eslint-disable-next-line
       w = this.w;
       
     }
@@ -276,6 +277,7 @@ export class CanvasManager {
 
     if ( w >= this.w ) {
 
+      // eslint-disable-next-line
       w = this.w;
       
     }

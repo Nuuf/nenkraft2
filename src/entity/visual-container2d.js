@@ -119,7 +119,7 @@ export class VisualContainer2D extends Container2D {
    */
   RenderChildren ( _rc ) {
 
-    const children = this.children;
+    const { children } = this;
 
     for ( var i = 0 ; i < children.length; ++i ) {
 
@@ -137,7 +137,7 @@ export class VisualContainer2D extends Container2D {
    */
   GLRenderChildren ( _gl ) {
 
-    const children = this.children;
+    const { children } = this;
 
     for ( var i = 0; i < children.length; ++i ) {
 

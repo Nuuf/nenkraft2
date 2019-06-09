@@ -21,10 +21,10 @@ export default () => {
 
       const path = new nk2.Path.Polygon2D();
 
-      nk2.Geom.PolygonConstruction.Supershape2D( path, 0, 0, 100, 100, 6, 0.3, 0.3, 0.3 );
+      nk2.Geom.PolygonConstruction.Supershape2D( path.shape, 0, 0, 100, 100, 6, 0.3, 0.3, 0.3 );
 
       return new nk2.Graphic2D( 
-        Math.abs( path.aabb.tl.x ), Math.abs( path.aabb.tl.y ), path
+        Math.abs( path.shape.aabb.tl.x ), Math.abs( path.shape.aabb.tl.y ), path
       );
 
     }
@@ -35,7 +35,9 @@ export default () => {
 
       const sprite = new nk2.Sprite( HW, HH, new nk2.Texture.BasicTexture2D( img ) );
 
-      sprite.anchor.Set( 0.5, 0.5 );
+      sprite.anchor.SetSame( 0.5 );
+
+      sprite.UpdateTextureTransform();
 
       sprite.Render( c.getContext( '2d' ) );
 

@@ -31,7 +31,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.texture = gl.createTexture();
     this.essenceBuffer = gl.createBuffer();
@@ -61,7 +61,7 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
    */
   BindBasicTexture ( _texture, _param ) {
 
-    const gl = this.gl;
+    const { gl } = this;
     const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
 
     _param = _param != null ? _param : gl.LINEAR;
@@ -93,10 +93,10 @@ export class GLTexture2DBatchProgramController extends GLProgramController {
    */
   Execute ( _data, _numberOfElements ) {
 
-    const gl = this.gl;
-    const aia = this.aia;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
+    const { gl } = this;
+    const { aia } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
 
     if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 

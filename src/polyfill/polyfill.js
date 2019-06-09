@@ -36,7 +36,7 @@ Array.prototype.indexShift = function ( index ) {
   
   if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
   
-    const temp = this[ 0 ];
+    const [ temp ] = this;
 
     this[ 0 ] = this[ index ];
     this[ index ] = temp;

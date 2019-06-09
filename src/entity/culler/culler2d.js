@@ -60,9 +60,9 @@ export class Culler2D {
    */
   Process () {
 
-    const entities = this.entities;
-    let entity = entities[ 0 ];
-    const bounds = this.bounds;
+    const { entities } = this;
+    let [ entity ] = entities;
+    const { bounds } = this;
     const cm = this.conversionMatrix;
 
     for ( var i = 0; i < entities.length; entity = entities[ ++i ] ) {

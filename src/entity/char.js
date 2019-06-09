@@ -142,6 +142,7 @@ export class Char extends CoreEntity2D {
 
     for ( var i = 0; i < _kernings.length; ++i ) {
 
+      // eslint-disable-next-line
       attributes = _kernings[ i ].attributes;
   
       if ( parseInt( attributes.first ) === this.id ) {
@@ -177,7 +178,7 @@ export class Char extends CoreEntity2D {
 
       if ( _prevChar.kernings && _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
 
-        const kernings = this.kernings;
+        const { kernings } = this;
 
         for ( var i = 0; i < kernings.length; i += 3 ) {
 
@@ -208,7 +209,7 @@ export class Char extends CoreEntity2D {
 
     if ( this.parent != null ) {
 
-      const texture = this.parent.texture;
+      const { texture } = this.parent;
       const tscaleX = this.width / texture.fw;
       const tscaleY = this.height / texture.fh;
 

@@ -56,7 +56,7 @@ export class SpritesheetLoader {
     }
 
     const l = _objects.length;
-    let item = _objects[ 0 ];
+    let [ item ] = _objects;
 
     this.toLoadCount += l;
 
@@ -111,7 +111,7 @@ export class SpritesheetLoader {
    */
   OnPartXHRLoaded ( _event ) {
 
-    const id = _event.target.data.id;
+    const { id } = _event.target.data;
 
     if ( this.imageLoader.imageCache.Contains( null, id ) ) {
 
@@ -129,7 +129,7 @@ export class SpritesheetLoader {
    */
   OnPartImageLoaded ( _event ) {
   
-    const id = _event.target.id;
+    const { id } = _event.target;
 
     if ( this.xhrLoader.dataCache.Contains( null, id ) ) {
 

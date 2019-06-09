@@ -101,6 +101,7 @@ export class Tilesprite extends TextureEntity2D {
 
         this.transform.ApplyGlobal( _rc );
 
+        // eslint-disable-next-line
         _rc.globalAlpha = this.tint.channel[ 3 ];
         _rc.globalCompositeOperation = this.gco;
         _rc.fillStyle = this.pattern;

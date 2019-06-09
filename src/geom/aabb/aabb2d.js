@@ -253,8 +253,8 @@ export class AABB2D {
    */
   GetQuadrant ( _quadrant ) {
 
-    const tl = this.tl;
-    const br = this.br;
+    const { tl } = this;
+    const { br } = this;
 
     switch ( _quadrant ) {
 

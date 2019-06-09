@@ -121,8 +121,8 @@ export class BitmapText extends TextureEntity2D {
    */
   RenderText ( _rc ) {
 
-    const chars = this.chars;
-    const image = this.texture.image;
+    const { chars } = this;
+    const { image } = this.texture;
 
     for ( var i = 0; i < chars.length; ++i ) {
 
@@ -138,7 +138,7 @@ export class BitmapText extends TextureEntity2D {
    */
   GLRenderText () {
 
-    const chars = this.chars;
+    const { chars } = this;
 
     if ( this.autoUpdateChars === true ) {
 
@@ -180,8 +180,8 @@ export class BitmapText extends TextureEntity2D {
     let tH = 0;
     let char;
     let prevChar;
-    const chars = this.chars;
-    const text = this.text;
+    const { chars } = this;
+    const { text } = this;
 
     this.UpdateTransform( this.parent );
 
@@ -247,7 +247,7 @@ export class BitmapText extends TextureEntity2D {
    */
   UpdateChars () {
 
-    const chars = this.chars;
+    const { chars } = this;
 
     for ( var i = 0; i < chars.length; ++i ) {
 
@@ -285,7 +285,7 @@ export class BitmapText extends TextureEntity2D {
    */
   StoreAllChars () {
 
-    const chars = this.chars;
+    const { chars } = this;
 
     for ( var i = 0; i < chars.length; ++i ) {
 

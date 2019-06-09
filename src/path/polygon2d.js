@@ -28,8 +28,8 @@ export class Polygon2D {
    */
   Render ( _rc ) {
 
-    const vertices = this.shape.vertices;
-    const style = this.style;
+    const { vertices } = this.shape;
+    const { style } = this;
 
     _rc.beginPath();
     _rc.moveTo( vertices[ 0 ].x, vertices[ 0 ].y );

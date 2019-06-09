@@ -98,8 +98,8 @@ export class Pixel {
     
     }
 
-    const bufferData = this.bufferData;
-    const color = this.color;
+    const { bufferData } = this;
+    const { color } = this;
 
     bufferData[ 0 ] = this.shape.x;
     bufferData[ 1 ] = this.shape.y;
@@ -122,7 +122,7 @@ export class Pixel {
    */
   UpdateInBuffer ( _buffer, _index ) {
 
-    const color = this.color;
+    const { color } = this;
 
     _buffer[ _index ] = this.shape.x;
     _buffer[ _index + 1 ] = this.shape.y;

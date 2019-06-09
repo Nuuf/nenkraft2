@@ -64,7 +64,7 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
    */
   BindBasicTexture ( _texture, _unitId, _param ) {
 
-    const gl = this.gl;
+    const { gl } = this;
     const essence = TriRectArray( 0, 0, _texture.w, _texture.h );
 
     if ( _unitId == null ) _unitId = 0;
@@ -125,9 +125,9 @@ export class GLDynamicTexture2DProgramController extends GLProgramController {
    */
   Execute ( _projection, _translation, _transformation, _tint, _unitId ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
+    const { gl } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
 
     if ( this !== GLProgramController.LAST_USED_CONTROLLER ) {
 

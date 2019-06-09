@@ -28,7 +28,7 @@ export class GLUnProgramController extends GLProgramController {
    */
   Initialise () {
 
-    const gl = this.gl;
+    const { gl } = this;
 
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( TriRectArray( 0, 0, 1, 1 ) );
@@ -55,10 +55,10 @@ export class GLUnProgramController extends GLProgramController {
    */
   Execute ( _projection, _x, _y, _w, _h, _time ) {
 
-    const gl = this.gl;
-    const attributes = this.attributes;
-    const uniforms = this.uniforms;
-    const vertices = this.vertices;
+    const { gl } = this;
+    const { attributes } = this;
+    const { uniforms } = this;
+    const { vertices } = this;
 
     TriRectArray( _x, _y, _w, _h, vertices );
 

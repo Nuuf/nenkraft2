@@ -402,8 +402,8 @@ export class Vector2D {
 
     const sine = Sin( _angle );
     const cosine = Cos( _angle );
-    const x = this.x;
-    const y = this.y;
+    const { x } = this;
+    const { y } = this;
 
     this.x = x * cosine - y * sine;
     this.y = x * sine + y * cosine;

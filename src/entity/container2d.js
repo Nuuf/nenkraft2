@@ -52,7 +52,7 @@ export class Container2D extends CoreEntity2D {
    */
   RenderChildren () {
 
-    const children = this.children;
+    const { children } = this;
 
     for ( var i = 0 ; i < children.length; ++i ) {
 
@@ -70,7 +70,7 @@ export class Container2D extends CoreEntity2D {
    */
   AddChild ( _child ) {
 
-    const parent = _child.parent;
+    const { parent } = _child;
 
     if ( parent != null ) {
 
@@ -95,7 +95,7 @@ export class Container2D extends CoreEntity2D {
 
     if ( IsArray( children[ 0 ] ) ) {
 
-      children = children[ 0 ];
+      [ children ] = children;
     
     }
 
@@ -117,7 +117,7 @@ export class Container2D extends CoreEntity2D {
    */
   AddSibling ( _sibling ) {
 
-    const parent = this.parent;
+    const { parent } = this;
 
     if ( parent != null ) {
 
@@ -137,7 +137,7 @@ export class Container2D extends CoreEntity2D {
    */
   RemoveChild ( _child ) {
 
-    const children = this.children;
+    const { children } = this;
     const index = children.indexOf( _child );
 
     if ( index !== -1 ) {
@@ -162,11 +162,11 @@ export class Container2D extends CoreEntity2D {
 
     if ( IsArray( children[ 0 ] ) ) {
 
-      children = children[ 0 ];
+      [ children ] = children;
     
     }
 
-    const children = this.children;
+    const { children } = this;
     const rChildren = [];
 
     for ( var i = 0; i < aChildren.length; ++i ) {
@@ -251,7 +251,7 @@ export class Container2D extends CoreEntity2D {
    */
   Dump () {
 
-    const children = this.children;
+    const { children } = this;
 
     for ( var i = 0; i < children.length; ++i ) {
 
@@ -317,7 +317,7 @@ export class Container2D extends CoreEntity2D {
     let distance = Infinity;
     let tempDistance;
     let closestChild;
-    const children = this.children;
+    const { children } = this;
 
     if ( children.length !== 0 ) {
 
@@ -363,7 +363,7 @@ export class Container2D extends CoreEntity2D {
     let distance = 0;
     let tempDistance;
     let furthestChild;
-    const children = this.children;
+    const { children } = this;
 
     if ( children.length !== 0 ) {
 
@@ -398,13 +398,13 @@ export class Container2D extends CoreEntity2D {
    */
   ClusterBind () {
 
-    const children = this.children;
-    let child = children[ 0 ];
+    const { children } = this;
+    let [ child ] = children;
     let cBounds;
 
     PS_minmax.Set( 0, 0, 0, 0 );
-    const tl = PS_minmax.tl;
-    const br = PS_minmax.br;
+    const { tl } = PS_minmax;
+    const { br } = PS_minmax;
 
     for ( var i = 0; i < children.length; child = children[ ++i ] ) {
 

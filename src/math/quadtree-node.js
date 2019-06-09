@@ -119,8 +119,8 @@ export class QuadtreeNode {
 
     let i = 0;
     let marking = '';
-    const objects = this.objects;
-    const nodes = this.nodes;
+    const { objects } = this;
+    const { nodes } = this;
 
     if ( this.hasSplit === true ) {
 
@@ -179,8 +179,8 @@ export class QuadtreeNode {
   Converge ( _object ) {
 
     let marking = '';
-    const nodes = this.nodes;
-    const convergence = this.convergence;
+    const { nodes } = this;
+    const { convergence } = this;
 
     convergence.length = 0;
     convergence.push.apply( convergence, this.objects );
@@ -217,8 +217,8 @@ export class QuadtreeNode {
     const nl = this.level + 1;
     const oc = this.objectCap;
     const lc = this.levelCap;
-    const nodes = this.nodes;
-    const aabb = this.aabb;
+    const { nodes } = this;
+    const { aabb } = this;
 
     nodes[ PS_TOP_LEFT ] = this.FromPool(
       aabb.GetQuadrant( PS_TOP_LEFT ),
@@ -246,7 +246,7 @@ export class QuadtreeNode {
    */
   Dump () {
 
-    const nodes = this.nodes;
+    const { nodes } = this;
 
     this.objects.length = 0;
 
@@ -281,7 +281,7 @@ export class QuadtreeNode {
    */
   Marking ( _object ) {
 
-    const nodes = this.nodes;
+    const { nodes } = this;
 
     if ( nodes[ PS_TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
 
@@ -319,7 +319,7 @@ export class QuadtreeNode {
    */
   ConcatNodes ( _nodeList ) {
 
-    const nodes = this.nodes;
+    const { nodes } = this;
 
     if ( _nodeList == null ) _nodeList = [];
     _nodeList.push( this );

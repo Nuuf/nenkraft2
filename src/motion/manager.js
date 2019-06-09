@@ -183,7 +183,7 @@ export class Manager {
    */
   Process () {
 
-    const motions = this.motions;
+    const { motions } = this;
 
     for ( var i = 0; i < motions.length; ++i ) {
 
@@ -201,7 +201,7 @@ export class Manager {
    */
   GetMotionById ( _id ) {
 
-    const motions = this.motions;
+    const { motions } = this;
 
     for ( var i = 0; i < motions.length; ++i ) {
 

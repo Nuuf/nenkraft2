@@ -56,7 +56,7 @@ export class ImageLoader {
     this.createTextures = !!_createTextures;
 
     const l = _objects.length;
-    let item = _objects[ 0 ];
+    let [ item ] = _objects;
 
     this.toLoadCount += l;
 

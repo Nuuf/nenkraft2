@@ -55,7 +55,7 @@ export default () => {
 
     nk2.Glob.Create( 'myGlob' );
 
-    const myGlob = window.myGlob;
+    const { myGlob } = window;
 
     myGlob.Define( nk2.Glob.CONSTANT, 'myConstant', 'someValue' );
     myGlob.Define( nk2.Glob.FUNCTION, 'myFunction', () => {} );

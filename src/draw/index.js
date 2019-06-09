@@ -31,7 +31,7 @@ export class Draw {
 
     }
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( _options.identity ) rc.setTransform( 1, 0, 0, 1, 0, 0 );
   
@@ -59,7 +59,7 @@ export class Draw {
    */
   PreDrawText ( _options ) {
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     rc.font = _options.font ? _options.font : '10px sans-serif';
     rc.textAlign = _options.textAlign ? _options.textAlign : 'start';
@@ -78,7 +78,7 @@ export class Draw {
    */
   PreDrawStroke ( _options ) {
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     rc.strokeStyle = _options.strokeStyle ? _options.strokeStyle : 'rgb(200, 150, 100)';
     rc.lineWidth = _options.lineWidth ? _options.lineWidth : 3;
@@ -103,7 +103,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     rc.beginPath();
 
@@ -127,12 +127,12 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     rc.beginPath();
 
-    const x = _options.x;
-    const y = _options.y;
+    const { x } = _options;
+    const { y } = _options;
     const r = _options.radius;
     const xw = x + _options.w;
     const yh = y + _options.h;
@@ -165,7 +165,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     rc.beginPath();
 
@@ -194,7 +194,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -229,7 +229,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -265,7 +265,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -293,8 +293,8 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
-    const points = _options.points;
+    const { rc } = _options;
+    const { points } = _options;
 
     rc.beginPath();
 
@@ -326,7 +326,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -363,7 +363,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -401,7 +401,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -438,7 +438,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 
@@ -476,7 +476,7 @@ export class Draw {
     this.PreDrawBase( _options );
     if ( _options.stroke ) this.PreDrawStroke( _options );
 
-    const rc = _options.rc;
+    const { rc } = _options;
 
     if ( !_options.continue ) {
 

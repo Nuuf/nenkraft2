@@ -38,7 +38,7 @@ export class Camera2D extends VisualContainer2D {
    */
   Process () {
 
-    const target = this.target;
+    const { target } = this;
 
     if ( target != null ) {
 
