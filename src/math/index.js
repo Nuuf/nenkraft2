@@ -242,5 +242,45 @@ export function IntegerNotation ( _value, _roof, _splitter ) {
   
 }
 
+/**
+ * 
+ * @param {integer} _index 
+ * @param {integer} _width 
+ * 
+ * @return {integer}
+ */
+export function GridRow ( _index, _width ) {
+
+  return ( _index / _width ) | 0;
+
+}
+
+/**
+ * 
+ * @param {integer} _index 
+ * @param {integer} _width 
+ * 
+ * @return {integer}
+ */
+export function GridColumn ( _index, _width ) {
+
+  return _index % _width;
+
+}
+
+/**
+ * 
+ * @param {integer} _column 
+ * @param {integer} _row 
+ * @param {integer} _width 
+ * 
+ * @return {integer}
+ */
+export function GridIndex ( _column, _row, _width ) {
+
+  return ( _row * _width ) + _column;
+
+}
+
 import * as Misc from './misc';
 export { Misc };

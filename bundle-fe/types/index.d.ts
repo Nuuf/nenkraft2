@@ -36,6 +36,9 @@ export namespace Math {
     export function GreatestCommonDivisor(_x: number, _y: number): number;
     export function SimplifyAspectRatio(_x: number, _y: number, _array?: number[]): number[];
     export function IntegerNotation(_value: number, _roof: number, _splitter: string): string;
+    export function GridRow(_index: number, _width: number): number;
+    export function GridColumn(_index: number, _width: number): number;
+    export function GridIndex(_column: number, _row: number, _width: number): number;
     export namespace Misc {
         export function Line2DLine2DIntersection(
             _startA: Vector2D, endA: Vector2D,
