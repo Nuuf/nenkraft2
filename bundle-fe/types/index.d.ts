@@ -1380,7 +1380,7 @@ declare class ArrayHandler {
     object: object;
     static Get(_id: string): [];
     static GetAll(): object;
-    static Add(_id: string, _array: []): ArrayHandler;
+    static Set(_id: string, _array: []): ArrayHandler;
     In(_id: string): this;
     InAll(): this;
     Out(_id: string): this;

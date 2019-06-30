@@ -201,8 +201,8 @@ export default () => {
     const a2 = [];
 
     nk2.ArrayHandler
-      .Add( 'a1', a1 )
-      .Add( 'a2', a2 );
+      .Set( 'a1', a1 )
+      .Set( 'a2', a2 );
 
     const o1 = {};
 

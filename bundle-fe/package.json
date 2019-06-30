@@ -1,6 +1,6 @@
 {
   "name": "@nuuf/nk2-frontend",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "A small rendering tool",
   "main": "./dist/nk2.js",
   "devDependencies": {},

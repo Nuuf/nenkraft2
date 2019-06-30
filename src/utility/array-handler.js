@@ -43,7 +43,7 @@ export class ArrayHandler {
    * 
    * @return {this}
    */
-  static Add ( _id, _array ) {
+  static Set ( _id, _array ) {
 
     PS_ARRAYS[ _id ] = _array;
 
