@@ -14,7 +14,7 @@ export class Mouse {
   constructor ( _element ) {
 
     this.element = _element;
-    this.position = new Vector2D();
+    this.position = new Vector2D( 0, 0 );
     this.eventData = { position: this.position, native: null };
     this.coordinateTranslationEntity = null;
     this.coordinateConversionMatrix = null;
