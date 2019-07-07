@@ -117,7 +117,6 @@ export class QuadtreeNode {
    */
   Add ( _object ) {
 
-    let i = 0;
     let marking = '';
     const { objects } = this;
     const { nodes } = this;
@@ -129,10 +128,10 @@ export class QuadtreeNode {
       if ( marking !== null ) {
 
         nodes[ marking ].Add( _object );
-
-        return;
       
       }
+
+      return;
     
     }
 
@@ -148,21 +147,19 @@ export class QuadtreeNode {
         
         }
 
-        while ( i < objects.length ) {
+        for ( var i = 0; i < objects.length; ++i ) {
 
           marking = this.Marking( objects[ i ] );
 
           if ( marking !== null ) {
 
-            nodes[ marking ].Add( objects.fickleSplice( i ) );
-          
-          } else {
-
-            ++i;
+            nodes[ marking ].Add( objects[ i ] );
           
           }
         
         }
+
+        objects.length = 0;
       
       }
     

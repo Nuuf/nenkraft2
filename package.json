@@ -1,6 +1,6 @@
 {
   "name": "nenkraft2",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "A small rendering tool",
   "main": "./bundle-fe/nk2.js",
   "devDependencies": {
