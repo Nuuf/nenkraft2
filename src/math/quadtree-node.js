@@ -128,41 +128,37 @@ export class QuadtreeNode {
       if ( marking !== null ) {
 
         nodes[ marking ].Add( _object );
+
+        return;
       
       }
-
-      return;
     
     }
 
     objects.push( _object );
 
-    if ( this.level < this.levelCap ) {
+    if ( 
+      this.hasSplit === false && 
+      this.level < this.levelCap && 
+      objects.length > this.objectCap
+    ) {
 
-      if ( objects.length > this.objectCap ) {
+      this.Split();
 
-        if ( this.hasSplit === false ) {
+      for ( var i = 0; i < objects.length; ++i ) {
 
-          this.Split();
-        
-        }
+        marking = this.Marking( objects[ i ] );
 
-        for ( var i = 0; i < objects.length; ++i ) {
+        if ( marking !== null ) {
 
-          marking = this.Marking( objects[ i ] );
-
-          if ( marking !== null ) {
-
-            nodes[ marking ].Add( objects[ i ] );
+          nodes[ marking ].Add( objects[ i ] );
           
-          }
-        
         }
-
-        objects.length = 0;
-      
+        
       }
-    
+
+      objects.length = 0;
+
     }
   
   }
@@ -280,25 +276,25 @@ export class QuadtreeNode {
 
     const { nodes } = this;
 
-    if ( nodes[ PS_TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+    if ( nodes[ PS_TOP_LEFT ].aabb.IntersectsAABB2D( _object ) === true ) {
 
       return PS_TOP_LEFT;
     
     }
 
-    if ( nodes[ PS_TOP_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+    if ( nodes[ PS_TOP_RIGHT ].aabb.IntersectsAABB2D( _object ) === true ) {
 
       return PS_TOP_RIGHT;
     
     }
 
-    if ( nodes[ PS_BOTTOM_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+    if ( nodes[ PS_BOTTOM_LEFT ].aabb.IntersectsAABB2D( _object ) === true ) {
 
       return PS_BOTTOM_LEFT;
     
     }
 
-    if ( nodes[ PS_BOTTOM_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+    if ( nodes[ PS_BOTTOM_RIGHT ].aabb.IntersectsAABB2D( _object ) === true ) {
 
       return PS_BOTTOM_RIGHT;
     
